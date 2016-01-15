@@ -1,5 +1,6 @@
 package directors;
 
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public abstract class Screen {
@@ -13,15 +14,25 @@ public abstract class Screen {
 	//can cause the game to switch to a new screen
 	public Screen(Game game) {
 		this.game = game;
-		this.width = 
+		this.width = game.WIDTH;
+		this.height = game.HEIGHT;
+		screenImage = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
+		//TODO paint on the screen Image
+		Graphics2D g2 = (Graphics2D)screenImage.getGraphics();
+		paintScreen(g2);
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	//this method cannot be overriden
+	public final BufferedImage getScreenImage(){
+		return screenImage;
 	}
-
+	
+	//abstract makes this a required method for classes that extend this one
+	public abstract void paintScreen(Graphics2D g2);
+	
+	
+	
+	
+	
+	
 }
