@@ -1,5 +1,6 @@
 package directors;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -34,6 +35,17 @@ public abstract class Screen {
 	
 	
 	public abstract KeyListener getKeyListener();
+
+	/**
+	 * called by game when this screen is active
+	 */
+	public final void update(){
+		Graphics2D g2 = (Graphics2D) screenImage.getGraphics();
+		g2.setColor(Color.white);
+		g2.fillRect(0, 0, width, height);
+		g2.setColor(Color.black);
+		paintScreen(g2);
+	}
 	
 
 	

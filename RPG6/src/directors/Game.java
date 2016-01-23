@@ -11,7 +11,7 @@ public class Game extends JFrame{
 	//final means that the value can never change
 	public final int WIDTH = 1000;
 	public final int HEIGHT = 800;
-	Screen activeScreen;//whatever Screen we are currently on
+	protected Screen activeScreen;//whatever Screen we are currently on
 	
 	/**
 	 * @param args
