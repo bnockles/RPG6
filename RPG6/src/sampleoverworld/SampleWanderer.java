@@ -2,53 +2,56 @@ package sampleoverworld;
 
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import directors.UtilityMethods;
 
 public class SampleWanderer implements OverworldWanderer{
 
-	BufferedImage image;
+	BufferedImage[] frames;
 	ArrayList<Integer> pressedKeys;//allow for multiple input
 	boolean walking;
 	int count;
-	int spriteX;
-	int spriteY;
-	public static final int MOVE_UNIT = 6;
-	Navigatable map;
+	int spriteWidth;
+	
 	
 	public SampleWanderer() {
-		image = 
+		BufferedImage image0=null;
+		BufferedImage image1=null;
+		BufferedImage image2=null;
+		try {
+			image0 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite0");
+			image1 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite1");
+			image2 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite2");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		frames = new BufferedImage[3];
+		frames[0] = image0;
+		frames[1] = image1;
+		frames[2] = image2;
+		count = 0;
+		walking = false;
 	}
 	
 	public BufferedImage getImage(){
-		return image;
-	}
-
-	public int getX() {
-		return 0;
-	}
-
-	public int getY() {
-		return spriteY;
-	}
-
-	private void checkMotion() {
-		int proposedNewY=spriteY;
-		int proposedNewX=spriteX;
-		
-		if(pressedKeys.contains(KeyEvent.VK_UP) && !pressedKeys.contains(KeyEvent.VK_DOWN)) proposedNewY-=MOVE_UNIT;
-		if(!pressedKeys.contains(KeyEvent.VK_UP) && pressedKeys.contains(KeyEvent.VK_DOWN)) proposedNewY+=MOVE_UNIT;
-		if(pressedKeys.contains(KeyEvent.VK_RIGHT) && !pressedKeys.contains(KeyEvent.VK_LEFT)) proposedNewX+=MOVE_UNIT;
-		
-		if(!pressedKeys.contains(KeyEvent.VK_RIGHT) && pressedKeys.contains(KeyEvent.VK_LEFT)) proposedNewX-=MOVE_UNIT;
-		if(walking)count++;
-		
-		if(!map.isCollision(proposedNewX, proposedNewY)){
-			spriteY=proposedNewY;
-			spriteX=proposedNewX;
+		BufferedImage sprite = frames[0];
+		spriteWidth=60;
+		if(walking && count < 5){
+			sprite = frames[1];
+			spriteWidth=55;
 		}
+		else if (walking){
+			sprite = frames[2];
+			spriteWidth=55;
+		}
+		return sprite;
 		
-	
 	}
+
+
 	
 	public void keyTyped(KeyEvent e) {
 	}
@@ -69,6 +72,16 @@ public class SampleWanderer implements OverworldWanderer{
 			pressedKeys.remove(pressedKeys.indexOf(keyCode));
 		}
 		if(pressedKeys.isEmpty())walking=false;
+	}
+
+
+	public void increaseCount() {
+		count++;
+		if(count>10)count=0;
+	}
+
+	public void setWalking(boolean b) {
+		walking=b;
 	}
 
 }

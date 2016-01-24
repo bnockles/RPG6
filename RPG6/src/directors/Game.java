@@ -3,8 +3,13 @@ package directors;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
+
+import project.directors.Game;
 
 public class Game extends JFrame{
 
@@ -29,7 +34,18 @@ public class Game extends JFrame{
 	private void reset() {
 		Screen startScreen = new StartScreen(this);
 		setScreen(startScreen);
-		repaint();
+		if(activeScreen instanceof Animated){
+			Timer timer = new Timer(30, new ActionListener() {
+
+				public void actionPerformed(ActionEvent e) {
+					activeScreen.update();
+					Game.this.repaint();
+				}
+			});
+			timer.start();
+		}else{
+			repaint();	
+		}
 	}
 
 	

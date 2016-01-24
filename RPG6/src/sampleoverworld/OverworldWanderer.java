@@ -1,12 +1,10 @@
 package sampleoverworld;
 
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-public interface OverworldWanderer extends KeyListener{
+public interface OverworldWanderer{
 
 	public BufferedImage getImage();
-	public int getX();
-	public int getY();
-	
+	public void increaseCount();
+	public void setWalking(boolean b);
 }
