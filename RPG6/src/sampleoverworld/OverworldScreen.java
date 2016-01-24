@@ -58,7 +58,7 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 		for(int r=0; r<gridHeight; r++){
 			for(int c=0; c< gridWidth; c++){
 				try {
-					obstacleGrid[r][c]=UtilityMethods.getImageFromFile(this, "/overworld/"+folder+"/"+area+"obs"+r+"-"+c+".png");
+					obstacleGrid[r][c]=UtilityMethods.getImageFromFile(this, "/overworld/"+folder+"/"+area+"obs"+r+"-"+c+".bmp");
 					backgroundGrid[r][c]=UtilityMethods.getImageFromFile(this, "/overworld/"+folder+"/"+area+"back"+r+"-"+c+".png");
 					foregroundGrid[r][c]=UtilityMethods.getImageFromFile(this, "/overworld/"+folder+"/"+area+"fore"+r+"-"+c+".png");
 				} catch (IOException e) {
@@ -143,6 +143,7 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 		g2.setColor(Color.black);
 		g2.fillRect(0, 0, width, height);
 		checkMotion();
+		sprite.increaseCount();
 		paintScreen(g2);
 	}
 	

@@ -13,7 +13,7 @@ public class SampleWanderer implements OverworldWanderer{
 	ArrayList<Integer> pressedKeys;//allow for multiple input
 	boolean walking;
 	int count;
-	int spriteWidth;
+	final int SPRITE_HEIGHT = 55;
 	
 	
 	public SampleWanderer() {
@@ -21,9 +21,12 @@ public class SampleWanderer implements OverworldWanderer{
 		BufferedImage image1=null;
 		BufferedImage image2=null;
 		try {
-			image0 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite0");
-			image1 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite1");
-			image2 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite2");
+			BufferedImage origimage0 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite0.png");
+			BufferedImage origimage1 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite1.png");
+			BufferedImage origimage2 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite2.png");
+			image0=UtilityMethods.getScaledImage(origimage0,40,SPRITE_HEIGHT);
+			image1=UtilityMethods.getScaledImage(origimage1,35,SPRITE_HEIGHT);
+			image2=UtilityMethods.getScaledImage(origimage2,35,SPRITE_HEIGHT);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,14 +41,12 @@ public class SampleWanderer implements OverworldWanderer{
 	
 	public BufferedImage getImage(){
 		BufferedImage sprite = frames[0];
-		spriteWidth=60;
+
 		if(walking && count < 5){
 			sprite = frames[1];
-			spriteWidth=55;
 		}
 		else if (walking){
 			sprite = frames[2];
-			spriteWidth=55;
 		}
 		return sprite;
 		

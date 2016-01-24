@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import project.directors.Game;
 
 public class Game extends JFrame{
 
@@ -29,23 +28,22 @@ public class Game extends JFrame{
 		applySettings();//display the JFrame the way I want it
 		reset();//starts the game from the beginning
 		setVisible(true);
+		Timer timer = new Timer(30, new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				activeScreen.update();
+				Game.this.repaint();
+			}
+		});
+		timer.start();
 	}
 	
-	private void reset() {
+	public void reset() {
 		Screen startScreen = new StartScreen(this);
 		setScreen(startScreen);
-		if(activeScreen instanceof Animated){
-			Timer timer = new Timer(30, new ActionListener() {
 
-				public void actionPerformed(ActionEvent e) {
-					activeScreen.update();
-					Game.this.repaint();
-				}
-			});
-			timer.start();
-		}else{
 			repaint();	
-		}
+		
 	}
 
 	

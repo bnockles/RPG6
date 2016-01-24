@@ -21,7 +21,11 @@ public abstract class Screen{
 		screenImage = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
 		//TODO paint on the screen Image
 		Graphics2D g2 = (Graphics2D)screenImage.getGraphics();
-		paintScreen(g2);
+		try{
+			paintScreen(g2);
+		}catch(Exception e){
+			//Screen might not paint in sub classes with constructors that initialize 
+		}
 	}
 
 	//this method cannot be overriden
