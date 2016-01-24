@@ -20,25 +20,27 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 	BufferedImage[][] foregroundGrid;
 	int gridColumns;
 	int gridRows;
-	
-	
+
+
 	int currentRow;//index of the cell currently showing
 	int currentColumn;//index of the cell currently showing
-	
+
 	int entranceRow;//the index of the cell where a character always enters from
 	int entraceColumn;
 	int entranceX;//exact location on the cell where the entrance is
 	int entranceY;
-	
+
 	public static final int MOVE_UNIT = 6;
 	ArrayList<Integer> pressedKeys;
 	OverworldWanderer sprite;
 	int spriteX;
 	int spriteY;
-	
-	int mapTileWidth = 1024;
-	int mapTileHeight = 720;
-	
+
+	int mapTileWidth = 368;
+	int mapTileHeight = 240;
+	double scaleFactorX;
+	double scaleFactorY;
+
 	/**
 	 * 
 	 * @param game
@@ -62,6 +64,7 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 					backgroundGrid[r][c]=UtilityMethods.getImageFromFile(this, "/overworld/"+folder+"/"+area+"back"+r+"-"+c+".png");
 					foregroundGrid[r][c]=UtilityMethods.getImageFromFile(this, "/overworld/"+folder+"/"+area+"fore"+r+"-"+c+".png");
 				} catch (IOException e) {
+					System.out.println("Could not find file.");
 					obstacleGrid[r][c]=new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 					backgroundGrid[r][c]=new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 					foregroundGrid[r][c]=new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -69,58 +72,81 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 				}
 			}
 		}
+		scaleFactorX=(double)width/mapTileWidth;
+		scaleFactorY=(double)height/mapTileHeight;
 		currentRow=enterR;
 		currentColumn=enterC;
-		spriteX=enterX;
-		spriteY=enterY;
+		spriteX=(int)(enterX*scaleFactorX);
+		spriteY=(int)(enterY*scaleFactorY);
 		this.sprite=sprite;
 		pressedKeys= new ArrayList<Integer>();
 	}
 
-	
+
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
 		int x = determineOffset(width, currentColumn, spriteX, gridColumns);
 		int y = determineOffset(height, currentRow, spriteY, gridRows);
 		
+
 		//draw background
-		g2.drawImage(backgroundGrid[currentRow][currentColumn], x, y, null);
-		if(x<0){
-			g2.drawImage(backgroundGrid[currentRow][currentColumn+1], x+mapTileWidth, y, null);
-		}
-		if(x>0){
-			g2.drawImage(backgroundGrid[currentRow][currentColumn-1], x-mapTileWidth, y, null);
-		}
-		if(y<0){
-			g2.drawImage(backgroundGrid[currentRow+1][currentColumn], x, y+mapTileHeight, null);
-		}
-		if(y>0){
-			g2.drawImage(backgroundGrid[currentRow][currentColumn-1], x, y - mapTileHeight, null);
-		}
-		//diagonal corners
-		if(x<0 && y<0 && currentRow < gridRows-1 && currentColumn < gridRows - 1){
-			g2.drawImage(backgroundGrid[currentRow+1][currentColumn+1], x+mapTileWidth, y+mapTileHeight, null);
-		}
-		if(x>0 && y<0 && currentRow < gridRows-1 && currentColumn > 0){
-			g2.drawImage(backgroundGrid[currentRow+1][currentColumn-1], x-mapTileWidth, y+mapTileHeight, null);
-		}
-		if(x<0 && y>0 && currentRow > 0 && currentColumn < gridRows - 1){
-			g2.drawImage(backgroundGrid[currentRow-1][currentColumn+1], x+mapTileWidth, y+-mapTileHeight, null);
-		}
-		if(x>0 && y>0 && currentRow > 0 && currentColumn > 0){
-			g2.drawImage(backgroundGrid[currentRow-1][currentColumn-1], x-mapTileWidth, y+-mapTileHeight, null);
-		}
-		
+		drawLayer(g2, backgroundGrid, x, y);
+
+		/**
+		 * when you need to see the obstacle background
+		 */
+		//drawImage(g2, obstacleGrid[currentRow][currentColumn], x, y);
+
 		//draws sprite
 		int spriteDrawX=spriteX;
 		if(x!=0)spriteDrawX=width/2;
 		int spriteDrawY=spriteY;
 		if(y!=0)spriteDrawY=height/2;
 		g2.drawImage(sprite.getImage(),spriteDrawX,spriteDrawY,null);
-		
+
 		//draw foreground
-		g2.drawImage(foregroundGrid[currentRow][currentColumn], x, y, null);
+		drawLayer(g2, foregroundGrid, x, y);
+		
+		//draw top of sprite
+		int w = sprite.getImage().getWidth();
+		int h = (int)(5*sprite.getImage().getHeight()/6);
+		g2.drawImage(sprite.getImage(),spriteDrawX,spriteDrawY,spriteDrawX+w,spriteDrawY+h,0,0,w,h,null);
+	}
+
+
+	private void drawLayer(Graphics2D g2, BufferedImage[][] backgroundGrid, int x, int y){
+		int scaledMapTileWidth = (int)(mapTileWidth*scaleFactorX);
+		drawImage(g2, backgroundGrid[currentRow][currentColumn], x, y);
+		if(x<0){
+			drawImage(g2, backgroundGrid[currentRow][currentColumn+1], x+scaledMapTileWidth, y);
+		}
+		if(x>0){
+			drawImage(g2, backgroundGrid[currentRow][currentColumn-1], x-scaledMapTileWidth, y);
+		}
+		if(y<0){
+			drawImage(g2, backgroundGrid[currentRow+1][currentColumn], x, y+mapTileHeight);
+		}
+		if(y>0){
+			drawImage(g2, backgroundGrid[currentRow][currentColumn-1], x, y - mapTileHeight);
+		}
+		//diagonal corners
+		if(x<0 && y<0 && currentRow < gridRows-1 && currentColumn < gridRows - 1){
+			drawImage(g2, backgroundGrid[currentRow+1][currentColumn+1], x+scaledMapTileWidth, y+mapTileHeight);
+		}
+		if(x>0 && y<0 && currentRow < gridRows-1 && currentColumn > 0){
+			drawImage(g2, backgroundGrid[currentRow+1][currentColumn-1], x-scaledMapTileWidth, y+mapTileHeight);
+		}
+		if(x<0 && y>0 && currentRow > 0 && currentColumn < gridRows - 1){
+			drawImage(g2, backgroundGrid[currentRow-1][currentColumn+1], x+scaledMapTileWidth, y+-mapTileHeight);
+		}
+		if(x>0 && y>0 && currentRow > 0 && currentColumn > 0){
+			drawImage(g2, backgroundGrid[currentRow-1][currentColumn-1], x-scaledMapTileWidth, y+-mapTileHeight);
+		}
+	}
+	
+	private void drawImage(Graphics2D g2, BufferedImage img, int x, int y){
+		g2.drawImage(img, x, y, x+width, y+height, 0, 0, mapTileWidth, mapTileHeight,null);
 	}
 
 	private int determineOffset(int widthOrHeight, int currentColumnOrRow, int xOrY, int gridColumnsorRows) {
@@ -131,7 +157,7 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 		}
 		//if sprite is right of center, offset compensates left, assuming adjacent cell
 		if(xOrY > widthOrHeight/2 && currentColumnOrRow < gridColumnsorRows-1){
-			offset = xOrY - widthOrHeight/2;
+			offset = -xOrY + widthOrHeight/2;
 		}
 		return offset;
 	}
@@ -146,7 +172,7 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 		sprite.increaseCount();
 		paintScreen(g2);
 	}
-	
+
 	public KeyListener getKeyListener() {
 		return this;
 	}
@@ -154,67 +180,81 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 	private void checkMotion() {
 		int proposedNewY=spriteY;
 		int proposedNewX=spriteX;
-		
+
 		if(pressedKeys.contains(KeyEvent.VK_UP) && !pressedKeys.contains(KeyEvent.VK_DOWN)) proposedNewY-=MOVE_UNIT;
-		if(!pressedKeys.contains(KeyEvent.VK_UP) && pressedKeys.contains(KeyEvent.VK_DOWN)) proposedNewY+=MOVE_UNIT;
-		if(pressedKeys.contains(KeyEvent.VK_RIGHT) && !pressedKeys.contains(KeyEvent.VK_LEFT)) proposedNewX+=MOVE_UNIT;
-		
+		if(!pressedKeys.contains(KeyEvent.VK_UP) && pressedKeys.contains(KeyEvent.VK_DOWN)) proposedNewY+=MOVE_UNIT+2;
+		if(pressedKeys.contains(KeyEvent.VK_RIGHT) && !pressedKeys.contains(KeyEvent.VK_LEFT)) proposedNewX+=MOVE_UNIT+2;
+
 		if(!pressedKeys.contains(KeyEvent.VK_RIGHT) && pressedKeys.contains(KeyEvent.VK_LEFT)) proposedNewX-=MOVE_UNIT;
-		
+
 		checkCollisionOrOutOfBounds(proposedNewX, proposedNewY+sprite.getHeight());
-		
+
 	}
 
 
 
 	private void  checkCollisionOrOutOfBounds(int proposedNewX, int proposedNewY) {
 		boolean moves = true;
-		int clr = 0;
-		//check if movement is beyond x boundary
-		if(proposedNewX > mapTileWidth){
+
+		int comparingX = (int)(proposedNewX/scaleFactorX);
+		int comparingY = (int)(proposedNewY/scaleFactorY);
+
+		//scale down to compare to image
+
+		if(comparingX > mapTileWidth){
 			if(currentColumn == gridColumns-1) moves = false;
 			else{
 				currentColumn++;
-				proposedNewX-=mapTileWidth;
-				clr=  backgroundGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY);
+				comparingX-=mapTileWidth;
+				proposedNewX-=width;
 			}
 		}
-		else if(proposedNewX < 0){
+		else if(comparingX < 0){
 			if(currentColumn == 0) moves = false;
 			else{
 				currentColumn--;
-				proposedNewX+=mapTileWidth;
-				clr=  backgroundGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY);
+				comparingX+=mapTileWidth;
+				proposedNewX+=width;
 			}
 		}
-		else if(proposedNewY > mapTileHeight){
+
+
+
+		if(comparingY > mapTileHeight){
 			if(currentRow == gridRows-1) moves = false;
 			else{
 				currentRow++;
-				proposedNewY-=mapTileHeight;
-				clr=  backgroundGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY);
+				comparingY-=mapTileHeight;
+				proposedNewY-=height;
 			}
 		}
-		else if(proposedNewY < 0){
+		else if(comparingY < 0){
 			if(currentRow == 0) moves = false;
 			else{
 				currentColumn--;
-				proposedNewX+=mapTileWidth;
-				clr=  backgroundGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY);
+				comparingY+=mapTileWidth;
+				proposedNewY+=height;
 			}
 		}
-		else clr=  obstacleGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY); 
-		
+
+
+
+		int clr=  obstacleGrid[currentRow][currentColumn].getRGB(comparingX%mapTileWidth,comparingY%mapTileHeight); 
+
+
 		int  red   = (clr & 0x00ff0000) >> 16;
 		int  green = (clr & 0x0000ff00) >> 8;
 		int  blue  =  clr & 0x000000ff;
 		if(red<200 && green < 200 && blue<200)moves = false;
-		
+
 		if(moves){
+
 			spriteY=(proposedNewY-sprite.getHeight());
 			spriteX=(proposedNewX);
 		}
 	}
+
+
 
 
 

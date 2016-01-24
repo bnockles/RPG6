@@ -13,7 +13,7 @@ public class SampleWanderer implements OverworldWanderer{
 	ArrayList<Integer> pressedKeys;//allow for multiple input
 	boolean walking;
 	int count;
-	final int SPRITE_HEIGHT = 55;
+	final int SPRITE_HEIGHT = 170;
 	
 	
 	public SampleWanderer() {
@@ -24,9 +24,9 @@ public class SampleWanderer implements OverworldWanderer{
 			BufferedImage origimage0 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite0.png");
 			BufferedImage origimage1 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite1.png");
 			BufferedImage origimage2 = UtilityMethods.getImageFromFile(this, "/sprites/sample/sprite2.png");
-			image0=UtilityMethods.getScaledImage(origimage0,40,SPRITE_HEIGHT);
-			image1=UtilityMethods.getScaledImage(origimage1,35,SPRITE_HEIGHT);
-			image2=UtilityMethods.getScaledImage(origimage2,35,SPRITE_HEIGHT);
+			image0=UtilityMethods.getScaledImage(origimage0,100,SPRITE_HEIGHT);
+			image1=UtilityMethods.getScaledImage(origimage1,90,SPRITE_HEIGHT);
+			image2=UtilityMethods.getScaledImage(origimage2,90,SPRITE_HEIGHT);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
