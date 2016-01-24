@@ -24,7 +24,7 @@ public class OverworldDemo extends Game {
 
 	@Override
 	public void reset() {
-		Screen townScreen = new OverworldScreen(this,new SampleWanderer(),"sample","overworld",1,1,0,0,40,49);
+		Screen townScreen = new OverworldScreen(this,new SampleWanderer(),"sample","overworld",1,1,0,0,540,49);
 		setScreen(townScreen);
 		activeScreen.update();
 		repaint();

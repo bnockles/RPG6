@@ -161,7 +161,7 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 		
 		if(!pressedKeys.contains(KeyEvent.VK_RIGHT) && pressedKeys.contains(KeyEvent.VK_LEFT)) proposedNewX-=MOVE_UNIT;
 		
-		checkCollisionOrOutOfBounds(proposedNewX, proposedNewY);
+		checkCollisionOrOutOfBounds(proposedNewX, proposedNewY+sprite.getHeight());
 		
 	}
 
@@ -169,44 +169,49 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 
 	private void  checkCollisionOrOutOfBounds(int proposedNewX, int proposedNewY) {
 		boolean moves = true;
-		
+		int clr = 0;
 		//check if movement is beyond x boundary
 		if(proposedNewX > mapTileWidth){
 			if(currentColumn == gridColumns-1) moves = false;
 			else{
 				currentColumn++;
 				proposedNewX-=mapTileWidth;
+				clr=  backgroundGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY);
 			}
 		}
-		if(proposedNewX < 0){
+		else if(proposedNewX < 0){
 			if(currentColumn == 0) moves = false;
 			else{
 				currentColumn--;
 				proposedNewX+=mapTileWidth;
+				clr=  backgroundGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY);
 			}
 		}
-		if(proposedNewY > mapTileHeight){
+		else if(proposedNewY > mapTileHeight){
 			if(currentRow == gridRows-1) moves = false;
 			else{
 				currentRow++;
 				proposedNewY-=mapTileHeight;
+				clr=  backgroundGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY);
 			}
 		}
-		if(proposedNewY < 0){
+		else if(proposedNewY < 0){
 			if(currentRow == 0) moves = false;
 			else{
 				currentColumn--;
 				proposedNewX+=mapTileWidth;
+				clr=  backgroundGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY);
 			}
 		}
-		int clr=  obstacleGrid[currentRow][currentColumn].getRGB(100,40); 
+		else clr=  obstacleGrid[currentRow][currentColumn].getRGB(proposedNewX,proposedNewY); 
+		
 		int  red   = (clr & 0x00ff0000) >> 16;
 		int  green = (clr & 0x0000ff00) >> 8;
 		int  blue  =  clr & 0x000000ff;
-		if(red>200 && green > 200 && blue>200)moves = false;
+		if(red<200 && green < 200 && blue<200)moves = false;
 		
 		if(moves){
-			spriteY=(proposedNewY);
+			spriteY=(proposedNewY-sprite.getHeight());
 			spriteX=(proposedNewX);
 		}
 	}

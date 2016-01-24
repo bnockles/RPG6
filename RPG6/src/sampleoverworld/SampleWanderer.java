@@ -85,4 +85,8 @@ public class SampleWanderer implements OverworldWanderer{
 		walking=b;
 	}
 
+	public int getHeight() {
+		return SPRITE_HEIGHT;
+	}
+
 }
