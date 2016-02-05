@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Screen {
 
-	Game game;
+	protected Game game;
 	BufferedImage screenImage;
 	public int width;
 	public int height;
@@ -31,7 +31,10 @@ public abstract class Screen {
 	//abstract makes this a required method for classes that extend this one
 	public abstract void paintScreen(Graphics2D g2);
 	
-	
+	//this method is for updating when the screen changes
+	public final void update(){
+		paintScreen((Graphics2D)(screenImage.getGraphics()));
+	}
 	
 	public abstract KeyListener getKeyListener();
 	

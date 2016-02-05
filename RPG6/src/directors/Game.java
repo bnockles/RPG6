@@ -26,7 +26,7 @@ public class Game extends JFrame{
 		setVisible(true);
 	}
 	
-	private void reset() {
+	protected void reset() {
 		Screen startScreen = new StartScreen(this);
 		setScreen(startScreen);
 		repaint();
@@ -40,7 +40,7 @@ public class Game extends JFrame{
 		repaint();
 	}
 	
-	private void applySettings(){
+	protected void applySettings(){
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int monitorWidth = (int)screenSize.getWidth();
 		int monitorHeight = (int)screenSize.getHeight();
