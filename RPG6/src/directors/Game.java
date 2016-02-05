@@ -38,11 +38,8 @@ public class Game extends JFrame{
 		timer.start();
 	}
 	
-<<<<<<< HEAD
-	public void reset() {
-=======
+
 	protected void reset() {
->>>>>>> refs/remotes/origin/enemies
 		Screen startScreen = new StartScreen(this);
 		setScreen(startScreen);
 
