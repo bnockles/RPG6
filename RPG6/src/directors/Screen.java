@@ -1,13 +1,15 @@
 package directors;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
-public abstract class Screen {
+public abstract class Screen{
 
-	Game game;
-	BufferedImage screenImage;
+
+	protected BufferedImage screenImage;
+	protected Game game;
 	public int width;
 	public int height;
 	
@@ -20,7 +22,11 @@ public abstract class Screen {
 		screenImage = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
 		//TODO paint on the screen Image
 		Graphics2D g2 = (Graphics2D)screenImage.getGraphics();
-		paintScreen(g2);
+		try{
+			paintScreen(g2);
+		}catch(Exception e){
+			//Screen might not paint in sub classes with constructors that initialize 
+		}
 	}
 
 	//this method cannot be overriden
@@ -32,8 +38,17 @@ public abstract class Screen {
 	public abstract void paintScreen(Graphics2D g2);
 	
 	
-	
 	public abstract KeyListener getKeyListener();
+
+	public void update(){
+		Graphics2D g2 = (Graphics2D) screenImage.getGraphics();
+		g2.setColor(Color.white);
+		g2.fillRect(0, 0, width, height);
+		g2.setColor(Color.black);
+		paintScreen(g2);
+	}
+
+
 	
 
 	
