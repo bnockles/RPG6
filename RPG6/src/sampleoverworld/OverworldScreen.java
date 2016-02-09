@@ -60,6 +60,7 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 		obstacleGrid = new BufferedImage[gridHeight][gridWidth];
 		foregroundGrid = new BufferedImage[gridHeight][gridWidth];
 		topGrid = new BufferedImage[gridHeight][gridWidth];
+		//populate the arrays with graphics from the directory
 		for(int r=0; r<gridHeight; r++){
 			for(int c=0; c< gridWidth; c++){
 				try {
@@ -127,34 +128,15 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 
 
 	private void drawLayer(Graphics2D g2, BufferedImage[][] layer, int x, int y){
+		
+		
+		//gets the scale factor so the image fits in the Screen
 		int scaledMapTileWidth = (int)(mapTileWidth*scaleFactorX);
 		int scaledMapTileHeight = (int)(mapTileHeight*scaleFactorY);
 		drawImage(g2, layer[currentRow][currentColumn], x, y);
-		if(x<0){
-			drawImage(g2, layer[currentRow][currentColumn+1], x+scaledMapTileWidth, y);
-		}
-		if(x>0){
-			drawImage(g2, layer[currentRow][currentColumn-1], x-scaledMapTileWidth, y);
-		}
-		if(y<0){
-			drawImage(g2, layer[currentRow+1][currentColumn], x, y+scaledMapTileHeight);
-		}
-		if(y>0){
-			drawImage(g2, layer[currentRow-1][currentColumn], x, y - scaledMapTileHeight);
-		}
-		//diagonal corners
-		if(x<0 && y<0 && currentRow < gridRows-1 && currentColumn < gridColumns - 1){
-			drawImage(g2, layer[currentRow+1][currentColumn+1], x+scaledMapTileWidth, y+scaledMapTileHeight);
-		}
-		if(x>0 && y<0 && currentRow < gridRows-1 && currentColumn > 0){
-			drawImage(g2, layer[currentRow+1][currentColumn-1], x-scaledMapTileWidth, y+scaledMapTileHeight);
-		}
-		if(x<0 && y>0 && currentRow > 0 && currentColumn < gridColumns - 1){
-			drawImage(g2, layer[currentRow-1][currentColumn+1], x+scaledMapTileWidth, y+-scaledMapTileHeight);
-		}
-		if(x>0 && y>0 && currentRow > 0 && currentColumn > 0){
-			drawImage(g2, layer[currentRow-1][currentColumn-1], x-scaledMapTileWidth, y+-scaledMapTileHeight);
-		}
+		
+		//TODO: draws all of the visible elements in the layer, creating illusion of continuity
+		//(for example, draws the frames below, above, left, right and diagonal of the current frame)
 	}
 	
 	private void drawImage(Graphics2D g2, BufferedImage img, int x, int y){
@@ -162,15 +144,10 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 	}
 
 	private int determineOffset(int widthOrHeight, int currentColumnOrRow, int xOrY, int gridColumnsorRows) {
+		//TO DO: Write a method that will return how far the image of the background should be shifted left or right, 
+		//depending on the location of the Character on the map
+		// does not offset if there is no image to fill in the empty space
 		int offset = 0;
-		//if sprite is left of center, offset compensates right, assuming adjacent cell
-		if(xOrY < widthOrHeight/2 && currentColumnOrRow > 0){
-			offset = widthOrHeight/2 - xOrY;
-		}
-		//if sprite is right of center, offset compensates left, assuming adjacent cell
-		if(xOrY > widthOrHeight/2 && currentColumnOrRow < gridColumnsorRows-1){
-			offset = -xOrY + widthOrHeight/2;
-		}
 		return offset;
 	}
 
@@ -206,6 +183,9 @@ public class OverworldScreen extends Screen implements KeyListener, Animated{
 
 
 	private void  checkCollisionOrOutOfBounds(int proposedNewX, int proposedNewY) {
+		//this method (written for you) reads the color of the pixel in the obstacle grid that will become
+		//the Character's new location
+		//if the propoosedNewX and proposedNewY are not a black pixel or out of bounds, the character moves.
 		boolean moves = true;
 
 		int comparingX = (int)(proposedNewX/scaleFactorX);
