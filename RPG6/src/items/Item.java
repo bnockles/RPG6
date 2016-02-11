@@ -3,18 +3,14 @@ package items;
 import java.awt.image.BufferedImage;
 
 public abstract class Item {
-	
-	String description;
-	String name;
-	boolean durable;
-	BufferedImage itemImage;
+	private String description;
+	private String name;
+	//BufferedImage itemImage;
 	//hi
 	
-	public Item(String description, String name, BufferedImage image, boolean durable){
+	public Item(String description, String name){
 		this.description = description;
 		this.name = name;
-		this.itemImage = image;
-		this.durable = durable;
 	}
 	
 	public String getDescription() {
@@ -23,14 +19,6 @@ public abstract class Item {
 
 	public String getName() {
 		return name;
-	}
-
-	public boolean isDurable() {
-		return durable;
-	}
-
-	public BufferedImage getItemImage() {
-		return itemImage;
 	}
 
 	public abstract void onUse();
