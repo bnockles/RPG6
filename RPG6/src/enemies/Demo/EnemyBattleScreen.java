@@ -32,8 +32,8 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		targets.add(new SampleTarget());
 		targets.add(new SampleTarget());
 		targets.add(new SampleTarget());
-		this.enemy1= new SampleEnemy(1, targets);
-		this.enemy2= new SampleEnemy(2, targets);
+		this.enemy1= new SampleEnemy(2, SampleEnemy.FLYING, targets);
+		this.enemy2= new SampleEnemy(3, SampleEnemy.ZOMBIE, targets);
 		update();
 	}
 
@@ -48,19 +48,19 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		try{
 			g2.drawString("ENEMIES", 50, 75);
 			g2.drawString(enemy1.name, 50, 100);
-		g2.drawString(enemy2.name, 50, 125);
-		g2.drawString("Press '1' to make enemy 1 take its turn", 120, 100);
-		g2.drawString("Press '2' to make enemy 1 take its turn", 120, 125);
-		
-		g2.drawString("TARGETS", 50, 155);
-		int y = 175;
-		for(Target t:targets){
-			g2.drawString(t.getName(), 75, y);
+			g2.drawString(enemy2.name, 50, 125);
+			g2.drawString("Press '1' to make enemy 1 take its turn", 160, 100);
+			g2.drawString("Press '2' to make enemy 1 take its turn", 160, 125);
+
+			g2.drawString("TARGETS", 50, 155);
+			int y = 175;
+			for(Target t:targets){
+				g2.drawString(t.getName(), 75, y);
+				y+=25;
+			}
+
 			y+=25;
-		}
-	
-		y+=25;
-		g2.drawString(battleMessage, 50, y);
+			g2.drawString(battleMessage, 50, y);
 		}catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
@@ -90,12 +90,12 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

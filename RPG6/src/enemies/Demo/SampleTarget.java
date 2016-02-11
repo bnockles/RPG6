@@ -27,7 +27,7 @@ public class SampleTarget implements Target {
 	 */
 	public void hit(SampleEnemy e) {
 		name = name.replace(" not", "").replace(" yet", "");
-		EnemyBattleScreen.battleMessage=name+ " was hit by "+e.name;
+		EnemyBattleScreen.battleMessage=name+ " was hit by "+e.name + " and took "+e.strength+" damage, (whatever that means.)";
 
 	}
 
