@@ -1,5 +1,5 @@
 package towns;
 
-public interface Market {
-
+public interface Marketable {
+	
 }
