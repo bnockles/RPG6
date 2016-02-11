@@ -1,3 +1,4 @@
+package enemies;
 
 public abstract class NeutralMob extends Enemy{
 //
