@@ -16,10 +16,15 @@ public Character determineTarget(ArrayList<Character> character){
 	 * they do not really affect the plot of the game
 	 * 
 	 * */
+	
 	return null;
 	
 	
 }
-
+public void startRandomFight implements cutscenesStuff(){
+	
+	//lemme explain talks before going into the battle. is that possible?
+	Battles.startBattle();
+}
 
 }
