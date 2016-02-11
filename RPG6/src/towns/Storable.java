@@ -13,5 +13,8 @@ public interface Storable {
 //		}
 //	}
 	
-	public void storageFee(ArrayList<String> list, int days);
+	public void storageFee(ArrayList<String> list, int days)//{
+//		int fee = days*days*(list.size());
+//		playerCurrency = playerInventory.getMoney()-fee;
+//	}
 }
