@@ -3,8 +3,6 @@ package items;
 public abstract class Item {
 	private String name;
 	private String description;
-	//BufferedImage itemImage;
-	//hi
 
 	public Item(String name, String description){
 		this.description = description;
