@@ -16,6 +16,12 @@ public class Movement implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_W){
 			System.out.println("w was pressed. You are moving foward.");
+			/**
+			 * Note from Mr. Nockles
+			 * This will work well for the demo, but you need to plan carefully how the Movement KeyListener is used.
+			 * Is it used by Character? If so, maybe character needs to implement a Mover class that has methods like
+			 * "moveLeft", "moveRight", etc..
+			 * */
 		}
 		if(e.getKeyCode()==KeyEvent.VK_A){
 			System.out.println("a was pressed. You are moving to the left.");
