@@ -1,5 +1,7 @@
 package towns;
 
+import java.awt.event.KeyEvent;
+
 public class Merchant extends AbstractNPC {
 
 	public Merchant(String nm, String gen, String des, boolean talkable) {

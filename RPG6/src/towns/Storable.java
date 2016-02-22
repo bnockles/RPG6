@@ -17,4 +17,6 @@ public interface Storable {
 //		int fee = days*days*(list.size());
 //		playerCurrency = playerInventory.getMoney()-fee;
 //	}
+	
+	public void retrieveItem(String item);
 }

@@ -1,5 +1,7 @@
 package towns;
 
+import java.awt.event.KeyListener;
+
 public abstract class AbstractNPC {
 
 	public String name;
