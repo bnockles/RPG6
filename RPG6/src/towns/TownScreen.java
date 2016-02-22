@@ -111,6 +111,7 @@ public class TownScreen extends Screen implements KeyListener{
 			rpsMan.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			Storage.storable = false;
 			update();
 			game.repaint();
 		}
@@ -127,6 +128,7 @@ public class TownScreen extends Screen implements KeyListener{
 			displayNpc = new SampleCharacter("/images/minigame.jpg",810,400);
 			actionMessage = "";
 			storedItems = "";
+			Storage.storable = false;
 			update();
 			game.repaint();
 		}
@@ -189,6 +191,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==KeyEvent.VK_3){
 			System.out.println("3 was pressed");
+			Storage.storable = true;
 			message = "We store your goods! Store something (Press '4') or take out something you already stored (Press '5'). Press 'K' to quit.";
 			displayNpc = new SampleCharacter("/images/storage.png",810,400);
 			storedItems = "The items you have stored are: ";
@@ -206,6 +209,7 @@ public class TownScreen extends Screen implements KeyListener{
 			rpsMan.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			Storage.storable = false;
 			update();
 			game.repaint();
 		}
@@ -216,6 +220,7 @@ public class TownScreen extends Screen implements KeyListener{
 			rpsMan.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			Storage.storable = false;
 			update();
 			game.repaint();
 		}
@@ -226,6 +231,7 @@ public class TownScreen extends Screen implements KeyListener{
 			rpsMan.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			Storage.storable = false;
 			update();
 			game.repaint();
 		}
@@ -237,10 +243,11 @@ public class TownScreen extends Screen implements KeyListener{
 			rpsMan.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			Storage.storable = false;
 			update();
 			game.repaint();
 		}
-		if(e.getKeyCode()==KeyEvent.VK_4){
+		if(e.getKeyCode()==KeyEvent.VK_4 && Storage.storable == true){
 			System.out.println("4 was pressed");
 			if(character.getItems().size() == 0){
 				actionMessage = "You have nothing else we can store...";
@@ -255,8 +262,8 @@ public class TownScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-		if(e.getKeyCode()==KeyEvent.VK_5){
-			System.out.println("4 was pressed");
+		if(e.getKeyCode()==KeyEvent.VK_5 && Storage.storable == true){
+			System.out.println("5 was pressed");
 			if(Storage.storedItems.size() == 0){
 				actionMessage = "You have nothing stored here...";
 				storedItems = "The items you have stored are: ";
