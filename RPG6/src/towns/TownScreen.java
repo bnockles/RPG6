@@ -113,7 +113,7 @@ public class TownScreen extends Screen implements KeyListener{
 			}
 			displayNpc = new SampleCharacter("/images/merchant.png",810,400);
 			rpsMan.setComputerPlay("null");
-			actionMessage = "Press  6 for Healing Potions, 7 for Mana Potion, and 8 for Stats Potion";
+			actionMessage = "Press  6 for Healing Potions (300 Gems), 7 for Mana Potion (400 Gems), and 8 for Stats Potion (500 Gems)";
 			Merchant.buyable = true;
 			storedItems = "";
 			Storage.storable = false;
@@ -265,6 +265,7 @@ public class TownScreen extends Screen implements KeyListener{
 			System.out.println("3 was pressed");
 			Storage.storable = true;
 			message = "We store your goods! Store something (Press '4') or take out something you already stored (Press '5'). Press 'K' to quit.";
+			actionMessage = "";
 			displayNpc = new SampleCharacter("/images/storage.png",810,400);
 			storedItems = "The items you have stored are: ";
 			for(int i=0;i < Storage.storedItems.size();i++){
