@@ -7,6 +7,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
 
+/**
+ * 
+ * @author Khandaker Shayel
+ *
+ */
+
+
 public class Minigame extends AbstractNPC {
 
 	public void setComputerPlay(String computerPlay) {

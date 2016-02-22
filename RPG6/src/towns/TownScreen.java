@@ -14,7 +14,8 @@ import directors.Game;
 import directors.Screen;
 
 /**
- * @author Teacher
+ * 
+ * @author Khandaker Shayel, Yash Patel
  *
  */
 public class TownScreen extends Screen implements KeyListener{
@@ -29,6 +30,7 @@ public class TownScreen extends Screen implements KeyListener{
 	
 	ArrayList<String> inventory = new ArrayList<String>();
 	
+
 	
 	public static String message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 	public static String actionMessage = "";
@@ -41,6 +43,7 @@ public class TownScreen extends Screen implements KeyListener{
 	/**
 	 * @param game
 	 */
+	
 	
 	
 	public TownScreen(Game game) {
