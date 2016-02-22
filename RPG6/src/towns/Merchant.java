@@ -8,6 +8,9 @@ public class Merchant extends AbstractNPC {
 		super(nm, gen, des, talkable);
 	}
 
+	String[] ItemShop = {"Healing Potion", "Mana Potion", "Attack Potion", "Speed Potion", "Defense Potion"};
+	static boolean buyable;
+	
 	@Override
 	public void npcMovement() {
 		// TODO Auto-generated method stub
