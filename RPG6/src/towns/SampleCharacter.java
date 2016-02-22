@@ -95,4 +95,28 @@ public class SampleCharacter {
 			e.printStackTrace();
 		}
 	}
+	
+	public SampleCharacter(String imageLocation, int locationX, int locationY){
+		int width = 150;
+		int height = 200;
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		x = locationX;
+		y = locationY;
+		URL url = getClass().getResource(imageLocation);
+		
+		try {
+			BufferedImage original = ImageIO.read(url);
+			
+			//draw the image file into a scaled version on the image canvas
+			Graphics2D g = (Graphics2D) image.getGraphics();
+			int w = original.getWidth();
+			int h = original.getHeight();
+			
+			
+			g.drawImage(original,0,0,width,height,0,0,w,h,null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

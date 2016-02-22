@@ -7,6 +7,10 @@ public class Minigame extends AbstractNPC {
 		// TODO Auto-generated constructor stub
 	}
 
+	public void playRPS(){
+		System.out.println("I hate sponge cake");
+	}
+	
 	@Override
 	public void npcMovement() {
 		// TODO Auto-generated method stub

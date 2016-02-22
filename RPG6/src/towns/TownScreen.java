@@ -20,21 +20,29 @@ import directors.Screen;
 public class TownScreen extends Screen implements KeyListener{
 
 	SampleCharacter character;
+	SampleCharacter displayNpc;
 	Merchant merchant1;
 	Minigame rpsMan;
 	Storage storageDude;
 	int timesWon = 0;	
 	
 	
-	private BufferedImage img;
+	
 	
 	ArrayList<String> inventory = new ArrayList<String>();
 	
 	
 	public static String message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
+	
+	
+	private BufferedImage img;
+	
+	
 	/**
 	 * @param game
 	 */
+	
+	
 	public TownScreen(Game game) {
 		super(game);
 		inventory.add("Health Potion");
@@ -42,6 +50,7 @@ public class TownScreen extends Screen implements KeyListener{
 		inventory.add("Broad Sword");
 		inventory.add("Long Bow");
 		this.character = new SampleCharacter(400, "Smith","/images/character.png",9,590, inventory);
+		this.displayNpc = new SampleCharacter("/images/white.png",600,590);
 		this.merchant1 = new Merchant("Kathy","Female","Kathy is a merchant, merchants sell specific items based on what town you are in, Kathy sells potions." , true);
 		this.rpsMan = new Minigame("Bob","Male","Bob triggers a minigame, there are different minigames in each town that will help you earn money in the game, Bob lets you play rock, paper, scissors in this demo." , true);
 		this.storageDude = new Storage("Greg","Male","Greg is your storage guy, he is in every town in case you want to store items and then take them back for later.", true);
@@ -55,6 +64,7 @@ public class TownScreen extends Screen implements KeyListener{
 		g2.setColor(Color.black);
 		try{
 			g2.drawImage(character.getImage(),character.getX(),character.getY(),null);
+			g2.drawImage(displayNpc.getImage(),displayNpc.getX(),displayNpc.getY(),null);
 			g2.drawString("NAME: " + character.getName(), 170, 620);
 			g2.drawString("BLANACE: " + character.getCurrency() + " Gems", 170, 640);
 			g2.drawString("Current Inventory: ", 170, 720);
@@ -69,10 +79,10 @@ public class TownScreen extends Screen implements KeyListener{
 			g2.drawString(rpsMan.getName(), 50, 200);
 			g2.drawString(storageDude.getName(), 50, 300);
 			g2.drawString("Press '1' to talk to the merchant or 'Q' for information.", 160, 100);
-			g2.drawString("Press '2' to talk to the storage NPC or 'W' for information.", 160, 200);
-			g2.drawString("Press '3' to talk to play mini games or 'E' for information.", 160, 300);
+			g2.drawString("Press '2' to talk to play mini games or 'W' for information.", 160, 200);
+			g2.drawString("Press '3' to talk to to the storage NPC or 'E' for information.", 160, 300);
 
-			g2.drawString(message, 50, 400);
+			g2.drawString(message, 50, 375);
 		}catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
@@ -89,36 +99,41 @@ public class TownScreen extends Screen implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_1){
 			System.out.println("1 was pressed");
-			//inventory.add("drugs");
+			displayNpc = new SampleCharacter("/images/merchant.png",810,400);
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_2){
 			System.out.println("2 was pressed");
-			//enemy2.takeTurn();
+			message = "We are going to play rock, paper, scissors. Press 'R' for rock, 'P' for paper, and 'S' for scissors.";
+			displayNpc = new SampleCharacter("/images/minigame.jpg",810,400);
+			rpsMan.playRPS();
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_3){
 			System.out.println("3 was pressed");
-			//enemy1.takeTurn();
+			displayNpc = new SampleCharacter("/images/storage.png",810,400);
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_Q){
 			System.out.println("Q was pressed");
+			this.displayNpc = new SampleCharacter("/images/merchant.png",810,400);
 			message = merchant1.getDescription();
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_E){
 			System.out.println("E was pressed");
+			this.displayNpc = new SampleCharacter("/images/storage.png",810,400);
 			message = storageDude.getDescription();
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_W){
 			System.out.println("W was pressed");
+			this.displayNpc = new SampleCharacter("/images/minigame.jpg",810,400);
 			message = rpsMan.getDescription();
 			update();
 			game.repaint();

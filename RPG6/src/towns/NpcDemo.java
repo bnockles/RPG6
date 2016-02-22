@@ -9,10 +9,10 @@ import directors.Screen;
 import towns.TownScreen;
 
 
-public class Npc extends Game{
+public class NpcDemo extends Game{
 
 	public static void main(String[] args) {
-		new Npc();
+		new NpcDemo();
 	}
 	
 	protected void reset() {
