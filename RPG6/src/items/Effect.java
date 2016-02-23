@@ -1,12 +1,12 @@
 package items;
 
-public abstract class effect {
+public abstract class Effect {
 	String ailment;
 	int buff;
 	int damage;
 	String description;
 	
-	public effect (String ailment, int buff, int damage) {
+	public Effect (String ailment, int buff, int damage) {
 		this.ailment=ailment;
 		this.buff=buff;
 		this.damage=damage;
