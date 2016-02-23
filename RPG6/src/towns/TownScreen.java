@@ -15,7 +15,7 @@ import directors.Screen;
 
 /**
  * 
- * @author Khandaker Shayel, Yash Patel
+ * @author Khandaker Shayel and Yash Patel
  *
  */
 public class TownScreen extends Screen implements KeyListener{
@@ -31,7 +31,6 @@ public class TownScreen extends Screen implements KeyListener{
 	ArrayList<String> inventory = new ArrayList<String>();
 	
 
-	
 	public static String message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 	public static String actionMessage = "";
 	public static String storedItems = "";
@@ -47,11 +46,14 @@ public class TownScreen extends Screen implements KeyListener{
 	
 	
 	public TownScreen(Game game) {
+		
 		super(game);
+		
 		inventory.add("Health Potion");
 		inventory.add("Mana Potion");
 		inventory.add("Broad Sword");
 		inventory.add("Long Bow");
+		
 		this.character = new SampleCharacter(400, "Smith","/images/character.png",9,590, inventory);
 		this.displayNpc = new SampleCharacter("/images/white.png",600,590);
 		this.merchant1 = new Merchant("Kathy","Female","Kathy is a merchant, merchants sell specific items based on what town you are in, Kathy sells potions." , true);
@@ -62,9 +64,11 @@ public class TownScreen extends Screen implements KeyListener{
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
+		
 		g2.setColor(Color.white);
 		g2.fillRect(0, 0, width, height);
 		g2.setColor(Color.black);
+		
 		try{
 			g2.drawImage(character.getImage(),character.getX(),character.getY(),null);
 			g2.drawImage(displayNpc.getImage(),displayNpc.getX(),displayNpc.getY(),null);
@@ -88,74 +92,101 @@ public class TownScreen extends Screen implements KeyListener{
 			g2.drawString(message, 50, 375);
 			g2.drawString(actionMessage, 50, 400);
 			g2.drawString(storedItems, 50, 425);
-		}catch(Exception e){
+		}
+		
+		catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
+		
 	}
 
 	/* (non-Javadoc)
 	 * @see directors.Screen#getKeyListener()
 	 */
 	@Override
+	
 	public KeyListener getKeyListener() {
 		return this;
 	}
 
 	public void keyPressed(KeyEvent e) {
+		
 		if(e.getKeyCode()==KeyEvent.VK_1){
 			System.out.println("1 was pressed");
+			
 			if(character.getCurrency() < 300){
 				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You need more gems!";
 			}
+			
 			else{
 				message = "Welcome to the market! Feel free to buy what we have or sell what you have! Press 'K' to quit.";
 			}
+			
 			displayNpc = new SampleCharacter("/images/merchant.png",810,400);
+			
 			rpsMan.setComputerPlay("null");
+			
 			actionMessage = "Press  6 for Healing Potions (300 Gems), 7 for Mana Potion (400 Gems), and 8 for Stats Potion (500 Gems)";
+			
 			Merchant.buyable = true;
+			
 			storedItems = "";
+			
 			Storage.storable = false;
+			
 			update();
+			
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_6 && Merchant.buyable == true){
+			
 			System.out.println("6 was pressed");
+			
 			if(character.getCurrency() < 300){
 				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
+			
 			else{
 				character.setCurrency(character.getCurrency()-300);
 				inventory.add("Healing Potion");
 			}
+			
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_7 && Merchant.buyable == true){
+			
 			System.out.println("7 was pressed");
+			
 			if(character.getCurrency() < 400){
 				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
+			
 			else{
 				character.setCurrency(character.getCurrency()-400);
 				inventory.add("Mana Potion");
 			}
+			
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_8 && Merchant.buyable == true){
+			
 			System.out.println("8 was pressed");
+			
 			if(character.getCurrency() < 500){
 				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
+			
 			else{
 				character.setCurrency(character.getCurrency()-500);
 				inventory.add("Stats Potion");
 			}
+			
 			update();
 			game.repaint();
 		}
