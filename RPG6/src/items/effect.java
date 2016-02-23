@@ -12,14 +12,9 @@ public abstract class effect {
 		this.damage=damage;
 	}
 	
-	public int skillDamage(Character user,String damage) {
-		
-		return 0;
-	}
+	public abstract int skillDamage(Character user,String damage);
 
-	public String getAilment() {
-		return ailment;
-	}
+	public abstract String getAilment();
 
 
 	public int getBuff() {
