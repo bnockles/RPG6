@@ -12,7 +12,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 
 	public CharacterScreen(Game game) {
 		super(game);
-		//Please work
+		//Please work asdf
 		// TODO Auto-generated constructor stub
 	}
 
