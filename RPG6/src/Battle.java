@@ -18,7 +18,9 @@ public class Battle {
 		
 		public static void attack(Char attacker, Char defender){
 			int damageToBeDealt = attacker.getDamage();
-			if(Battle.BattleMechanic.willCrit(attacker) == true){
+			if(Battle.BattleMechanic.dodgeAttack(defender) == true){
+				damageToBeDealt = 0;
+			}else if(Battle.BattleMechanic.willCrit(attacker) == true){
 				damageToBeDealt = damageToBeDealt*2;
 			}
 			defender.setHealth(defender.getHealth()-damageToBeDealt);
