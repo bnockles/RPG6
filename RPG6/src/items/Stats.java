@@ -1,7 +1,7 @@
 package items;
 
 public final class Stats {
-	//direct stats
+	//direct statss
 	private int health;
 	private int mana;
 	private int attack;

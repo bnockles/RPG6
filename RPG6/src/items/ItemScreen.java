@@ -13,7 +13,7 @@ public final class ItemScreen extends Screen implements KeyListener {
 	public ItemScreen(Game game) {
 		super(game);
 	}
-
+//s
 	
 	public void paintScreen(Graphics2D g2) {
 		g2.setColor(Color.green);

@@ -10,7 +10,7 @@ public abstract class Item {
 		this.name = name;
 		this.draw = new DrawItem();
 	}
-	
+	//s
 	public String toString(){ return this.name; }
 	public boolean equals(Item item){ return this.name == item.name; }
 	

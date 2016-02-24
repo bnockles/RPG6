@@ -5,7 +5,7 @@ public class Equipment extends Item {
 	public static final int HELMET 	= 1;
 	public static final int CHEST 	= 2;
 	public static final int LEG 	= 3;
-	
+	//s
 	private int type;
 	private Stats stats;
 	

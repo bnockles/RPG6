@@ -20,7 +20,7 @@ public class DrawItem {
 	private void drawBg(Graphics g, int x, int y){
 		//Color original = g.getColor();
 		
-		//replace these magic numbers with variables
+		//replace these magic numbers with variabless
 		g.setColor(Color.black);
 		g.fillRect(x, y, 200, 300);
 		
