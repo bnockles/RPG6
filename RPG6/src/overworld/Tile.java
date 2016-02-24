@@ -12,7 +12,7 @@ public class Tile {
 	public static Tile grassTile = new GrassTile(0);
 	public static Tile GreyStoneTile= new GreyStoneTile(1);
 	
-	//CLASS
+	//CLASSES
 	public static final int TILEWIDTH = 32, TILEHEIGHT=32;
 	protected BufferedImage texture;
 	protected final int id;
