@@ -16,8 +16,13 @@ public class Battle {
 		//exp formulas, algorithms, most likely extend enemy design ai for enemy turn
 		//or give them interface for ai
 		
+		/**
+		 * attacks an enemy, removes health using a setter
+		 * @param attacker
+		 * @param defender
+		 */
 		public static void attack(Char attacker, Char defender){
-			int damageToBeDealt = attacker.getDamage();
+			double damageToBeDealt = attacker.getAttack();
 			if(Battle.BattleMechanic.dodgeAttack(defender) == true){
 				damageToBeDealt = 0;
 			}else if(Battle.BattleMechanic.willCrit(attacker) == true){
