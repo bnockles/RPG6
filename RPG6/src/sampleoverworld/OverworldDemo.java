@@ -18,9 +18,7 @@ public class OverworldDemo extends Game {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static void main(String[] args) {
-		new OverworldDemo();
-	}
+	
 
 	@Override
 	public void reset() {

@@ -1,11 +1,11 @@
 package characters;
 
 import directors.Game;
+import sampleoverworld.OverworldDemo;
 
 public class CharacterDemo extends Game{
 
-	public CharacterDemo(){
-		super();
+	public static void main(String[] args) {
 		new CharacterDemo();
 	}
 
