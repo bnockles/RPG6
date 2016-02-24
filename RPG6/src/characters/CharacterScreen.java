@@ -48,7 +48,8 @@ public class CharacterScreen extends Screen implements KeyListener{
 			g2.fillRect(0, 0, width, height);
 			g2.setColor(Color.black);
 			try{
-				g2.drawString(SampleArmor.b, 50, 125);
+				g2.drawString("Inventory", 50, 50);;
+				g2.drawString(SampleArmor.b, 120, 75);
 				g2.drawString(SamplePotion.c, 120, 100);
 				g2.drawString(SampleAccesory.a, 120, 125);
 				g2.drawString(SampleWeapon.d, 120, 150);
