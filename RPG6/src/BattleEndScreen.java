@@ -1,31 +1,50 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import directors.Game;
+import directors.Screen;
 
-public class EndBattle extends Screen{
-	//int expBar;
+public class BattleEndScreen extends Screen{
+	public BattleEndScreen(Game game) {
+		super(game);
+		// TODO Auto-generated constructor stub
+	}
 	private int inventoryIdx = Math.random() * Inventory.size();
 	
 	private ArrayList<Item> Inventory = new ArrayList<Item>();
 	
- 	public void win(Character character ,Item item,int battleExp,int battleGold){
-		//expBar+=exp//exp gain algorithm;
- 		System.out.println(character.getLevel());
- 		character.setExp(character.getExp()+battleExp);
- 		character.setGold(character.getGold()+battleGold);
- 		System.out.println(character.getGold());
-		Inventory.add(item);
-		System.out.println("You win! You have earned "+exp+"exp and gained "+item+".");
+ 	public void win(Hero hero, Enemy enemy, int level ,Item item,double getExpGained, double currentExp,int battleGold){
+ 		public void paintScreenWin(Graphics g){
+ 			g.drawString("Current Level:" +level, 30, 65);  
+ 			g.drawString("Experience Earned: "+enemy.getExpGained(), 30,75);
+ 			g.drawString("Current Exp:"+ hero.getCurrentExp(), 30, 85);
+ 			g.drawString("Gold Gained: "+ battleGold,30,95);
+ 			g.drawString("Item Obtained: "+ item, 30, 105);
+ 		
+ 	
+ 		}
+ 	}
+	public void lose(Hero hero, Enemy enemy, int level ,Item item,double getExpGained, double currentExp,int battleGold){
+		public void paintScreenLose(Graphics g2){
+ 			g2.drawString("Current Level:" +level, 30, 65);  
+ 			g2.drawString("Experience Lost: "+enemy.getExpGained(), 30,75);
+ 			g2.drawString("Current Exp:"+ hero.getCurrentExp(), 30, 85);
+ 			g2.drawString("Gold Lost: "+ battleGold,30,95);
+ 		
+		
 	}
-	public void lose(Character character,int battleExp,int battleGold){
-		//expBar-=exp//exp loss algorithm;
-		System.out.println(character.getLevel());
-		character.setExp(character.getExp()-battleExp);
-		if(character.getExp()<0){
-			character.setExp(0);
+		public void paintScreen(Graphics2D g2) {
+			// TODO Auto-generated method stub
+			g2.setColor(Color.white);
+			g2.fillRect(0, 0, width, height);
+			g2.setColor(Color.black);
 		}
-		character.setGold(character.getGold()+battleGold);
-		System.out.println(character.getGold());
-		Inventory.remove(inventoryIdx);
-		System.out.println("You died! You have lost "+exp+"exp and lost "+item+".");
-	}
+		
+		public KeyListener getKeyListener() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	
 }
