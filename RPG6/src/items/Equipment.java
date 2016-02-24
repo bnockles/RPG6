@@ -9,3 +9,7 @@ public class Equipment extends Item {
 	public boolean canUse(Character user){ return true; }
 	public void use(Character user){ /*user.equip(this);*/ }
 }
+
+
+
+

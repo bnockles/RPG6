@@ -3,6 +3,7 @@ package items;
 public abstract class Item {
 	private String name;
 	private String description;
+	private DrawItem draw;
 
 	public Item(String name, String description){
 		this.description = description;

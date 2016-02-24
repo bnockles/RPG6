@@ -1,5 +1,9 @@
 package items;
 
-public class DrawItem {
+import java.awt.image.BufferedImage;
 
+public class DrawItem {
+	private BufferedImage icon24;
+	
+	
 }
