@@ -16,8 +16,17 @@ public class Battle {
 		//exp formulas, algorithms, most likely extend enemy design ai for enemy turn
 		//or give them interface for ai
 		
+		public static void attack(Char attacker, Char defender){
+			int damageToBeDealt = attacker.getDamage();
+			if(Battle.BattleMechanic.willCrit(attacker) == true){
+				damageToBeDealt = damageToBeDealt*2;
+			}
+			defender.setHealth(defender.getHealth()-damageToBeDealt);
+		}
+		
 		/**
 		 * need fields: double expRequiredToLevel, double currentExp
+		 * Hero and Enemy extend Char
 		 * @param hero in the battle
 		 * @return sets hero exp to current+amount enemy gives
 		 */
