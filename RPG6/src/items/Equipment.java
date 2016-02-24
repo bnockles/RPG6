@@ -2,8 +2,7 @@ package items;
 
 public class Equipment extends Item {
 	public Equipment(String name, String description){
-		this.name = name;
-		this.description = description;
+		super(name, description);
 	}
 	
 
