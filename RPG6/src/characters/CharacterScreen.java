@@ -11,7 +11,6 @@ import directors.Screen;
 public class CharacterScreen extends Screen implements KeyListener{
 
 	public CharacterScreen(Game game) {
-		
 		super(game);
 		
 		// TODO Auto-generated constructor stub
@@ -54,7 +53,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 				g2.drawString(SampleAccesory.a, 120, 125);
 				g2.drawString(SampleWeapon.d, 120, 150);
 			}catch(Exception e){
-				//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
+				//idk
 			}
 	}
 }
