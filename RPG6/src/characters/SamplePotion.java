@@ -2,7 +2,7 @@ package characters;
 
 public class SamplePotion implements Consumable{
 	
-	public String c;
+	public static String c;
 	public SamplePotion(String title,String description){
 		 c=title ;
 	}

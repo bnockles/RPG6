@@ -2,7 +2,7 @@ package characters;
 
 public class SampleArmor implements Equipable{
 	
-	public String b;
+	public static String b;
 	
 	
 	public SampleArmor(String title,String description){

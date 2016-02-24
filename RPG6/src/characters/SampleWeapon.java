@@ -1,8 +1,8 @@
 package characters;
 
-public class SampleWeapon implements Equipable{
+public class SampleWeapon implements Wieldable{
 	
-	public String d;
+	public static String d;
 	public SampleWeapon(String title,String description){
 		 d = title ;
 	}

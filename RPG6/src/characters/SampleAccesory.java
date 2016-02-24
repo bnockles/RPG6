@@ -1,10 +1,10 @@
 package characters;
 
-public class SampleAccesory implements Equipable{
+public class SampleAccesory implements Wearable{
 
-	public String a;
+	public static String a;
 	public SampleAccesory(String title,String description){
-		 a =title ;
+		 a=title ;
 	}
 	
 	//Ex. Getter

@@ -16,6 +16,11 @@ public class Inventory {
 		weapons = new ArrayList<Wieldable>();
 		accesories = new ArrayList<Wearable>();
 		potions = new ArrayList<Consumable>();
+		armor.add(new SampleArmor("1", "NOOB ARMOR"));
+		weapons.add((Wieldable) new SampleWeapon("1", "NOOB SWORD"));
+		accesories.add(new SampleAccesory("1", "NOOB RING"));
+		potions.add(new SamplePotion("1", "RED POTION"));
+		
 	}
 	
 	
