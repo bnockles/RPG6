@@ -73,7 +73,7 @@ public class TownScreen extends Screen implements KeyListener{
 			g2.drawImage(character.getImage(),character.getX(),character.getY(),null);
 			g2.drawImage(displayNpc.getImage(),displayNpc.getX(),displayNpc.getY(),null);
 			g2.drawString("NAME: " + character.getName(), 170, 620);
-			g2.drawString("BLANACE: " + character.getCurrency() + " Gems", 170, 640);
+			g2.drawString("BALANCE: " + character.getCurrency() + " Gems", 170, 640);
 			g2.drawString("Current Inventory: ", 170, 720);
 
 			int x = 170;
