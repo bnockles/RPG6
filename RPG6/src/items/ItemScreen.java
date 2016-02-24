@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 
 import directors.Game;
 import directors.Screen;
-import directors.UtilityMethods;
 
 public final class ItemScreen extends Screen implements KeyListener {
 
@@ -19,8 +18,20 @@ public final class ItemScreen extends Screen implements KeyListener {
 	public void paintScreen(Graphics2D g2) {
 		g2.setColor(Color.green);
 		g2.fillRect(0, 0, width, height);
-		g2.setColor(Color.yellow);
-		UtilityMethods.centerText(g2, "ITEMS DEMO", width, height);
+
+		//replace with Item.draw()
+		g2.setColor(Color.black);
+		g2.fillRect(50, 100, 365, 100);
+		g2.setColor(Color.white);
+		g2.drawString(ItemSandbox.testChest.getName(), 				50+10, 100+20);
+		g2.drawString(ItemSandbox.testChest.getDescription(), 		50+10, 100+50);
+		g2.drawString(ItemSandbox.testChest.getStats().toString(), 	50+10, 100+90);
+
+		g2.setColor(Color.black);
+		g2.fillRect(50, 300, 365, 100);
+		g2.setColor(Color.white);
+		g2.drawString(ItemSandbox.testPotion.getName(), 			50+10, 300+20);
+		g2.drawString(ItemSandbox.testPotion.getDescription(), 		50+10, 300+90);
 	}
 
 	public KeyListener getKeyListener() {

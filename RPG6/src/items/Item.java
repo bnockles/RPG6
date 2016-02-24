@@ -8,6 +8,7 @@ public abstract class Item {
 	public Item(String name, String description){
 		this.description = description;
 		this.name = name;
+		this.draw = new DrawItem();
 	}
 	
 	public String toString(){ return this.name; }
@@ -16,9 +17,9 @@ public abstract class Item {
 	public String getDescription() { return this.description; }
 	public String getName() { return this.name; }
 	
-	
 
 	public abstract boolean canUse(Character user);
 	public abstract void use(Character user);
 	
+	public void draw(){}
 }
