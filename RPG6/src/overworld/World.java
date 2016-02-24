@@ -2,9 +2,9 @@ package overworld;
 
 import java.awt.Graphics;
 
-import FirstRpg.Game;
-import FirstRpg.Tile.Tile;
-import FirstRpg.Utility.Utilities;
+//import FirstRpg.Game;
+//import FirstRpg.Tile.Tile;
+//import FirstRpg.Utility.Utilities;
 
 public class World {
 	
@@ -23,18 +23,12 @@ public class World {
 	}
 	
 	public void render(Graphics g){
-		
-		int xStart =0;//(int) Math.max(0, game.getGameCamera().getxOffset() / Tile.TILEWIDTH);
-		int xEnd=width;//(int) Math.min(width, (game.getGameCamera().getxOffset()+game.getWidth() / Tile.TILEWIDTH+1));
-		int yStart=0;
-		int yEnd=height;
-		
-		for(int y=yStart; y<yEnd;y++){
-			for(int x = xStart; x < xEnd; x++){
-				getTile(x,y).render(g, (int)(x*Tile.TILEWIDTH-game.getGameCamera().getxOffset()), 
-						(int)(y*Tile.TILEHEIGHT-game.getGameCamera().getyOffset()));
+		for(int y=0; y<height; y++){
+			for(int x=0; x<width; x++){
+				getTile(x,y).render(g,x* Tile.TILEWIDTH, y*Tile.TILEHEIGHT);
 			}
 		}
+		
 	}
 	
 	public Tile getTile(int x, int y){

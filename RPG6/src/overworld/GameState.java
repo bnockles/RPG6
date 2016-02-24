@@ -2,9 +2,9 @@ package overworld;
 
 import java.awt.Graphics;
 
-import FirstRpg.Game;
-import FirstRpg.Entity.Creatures.Player;
-import FirstRpg.Worlds.World;
+//import FirstRpg.Game;
+//import FirstRpg.Entity.Creatures.Player;
+//import FirstRpg.Worlds.World;
 
 public class GameState extends State{
 	

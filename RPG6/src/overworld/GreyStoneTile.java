@@ -2,7 +2,7 @@ package overworld;
 
 import java.awt.image.BufferedImage;
 
-import FirstRpg.gfx.Assets;
+//import FirstRpg.gfx.Assets;
 
 public class GreyStoneTile extends Tile{
 

@@ -2,8 +2,8 @@ package overworld;
 
 import java.awt.image.BufferedImage;
 
-import FirstRpg.gfx.ImageLoader;
-import FirstRpg.gfx.SpriteSheet;
+//import FirstRpg.gfx.ImageLoader;
+//import FirstRpg.gfx.SpriteSheet;
 
 public class Assets {
 	//JOE

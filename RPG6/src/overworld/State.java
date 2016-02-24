@@ -2,7 +2,7 @@ package overworld;
 
 import java.awt.Graphics;
 
-import FirstRpg.Game;
+//import FirstRpg.Game;
 
 public abstract class State {
 	private static State currentState=null;

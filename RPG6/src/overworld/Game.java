@@ -3,7 +3,7 @@ package overworld;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-
+/*
 import FirstRpg.Display.Display;
 import FirstRpg.Input.KeyManager;
 import FirstRpg.State.GameState;
@@ -13,7 +13,7 @@ import FirstRpg.gfx.GameCamera;
 import FirstRpg.gfx.ImageLoader;
 import FirstRpg.gfx.SpriteSheet;
 import overworld.Assets;
-
+*/
 public class Game implements Runnable{
 	
 	private Display display;
@@ -31,7 +31,7 @@ public class Game implements Runnable{
 	
 	private KeyManager keyManager;
 	
-	private GameCamera gameCamera;
+
 	
 	public Game(String title, int width, int height){
 		this.width=width;
@@ -45,7 +45,6 @@ public class Game implements Runnable{
 		display.getFrame().addKeyListener(keyManager);
 		Assets.init();
 		
-		gameCamera= new GameCamera(this,0,0);
 		
 		gameState= new GameState(this);
 		State.setState(gameState);
@@ -102,9 +101,6 @@ public class Game implements Runnable{
 		return keyManager;
 	}
 	
-	public GameCamera getGameCamera(){
-		return gameCamera;
-	}
 	
 	public int getWidth(){
 		return width;

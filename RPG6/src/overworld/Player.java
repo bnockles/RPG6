@@ -2,8 +2,8 @@ package overworld;
 
 import java.awt.Graphics;
 
-import FirstRpg.Game;
-import FirstRpg.gfx.Assets;
+//import FirstRpg.Game;
+//import FirstRpg.gfx.Assets;
 
 public class Player extends Creature{
 	
@@ -16,7 +16,7 @@ public class Player extends Creature{
 	public void update() {
 		getInput();
 		move();
-		game.getGameCamera().centerOnEntity(this);
+	
 	}
 	public void getInput(){
 		xMove=0;
@@ -29,7 +29,7 @@ public class Player extends Creature{
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(Assets.player, (int) (x-game.getGameCamera().getxOffset()), (int) (y-game.getGameCamera().getyOffset()),width, height, null);
+		g.drawImage(Assets.player, (int)x, (int)y, null);
 	}
 
 }

@@ -1,7 +1,7 @@
 package overworld;
 
-import FirstRpg.Game;
-import FirstRpg.Entity.Entity;
+//import FirstRpg.Game;
+//import FirstRpg.Entity.Entity;
 
 public abstract class Creature extends Entity {
 
