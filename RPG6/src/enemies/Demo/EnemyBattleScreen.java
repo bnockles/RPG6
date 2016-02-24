@@ -82,7 +82,7 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_2){
-			enemy2.takeTurn();
+			enemy2.takeBossTurn();
 			update();
 			game.repaint();
 		}
