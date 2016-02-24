@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Screen {
 
-	Game game;
+	protected Game game;
 	BufferedImage screenImage;
 	public int width;
 	public int height;
