@@ -43,7 +43,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		return this;
 	}
 
-	public void paintScreen1(Graphics2D g2) {
+	public void paintScreen1(Graphics2D g2){
 			g2.setColor(Color.white);
 			g2.fillRect(0, 0, width, height);
 			g2.setColor(Color.black);
