@@ -15,7 +15,7 @@ import directors.Screen;
 
 /**
  * 
- * @author Khandaker Shayel and Yash Patel
+ * @author Khandaker Shayel & Yash Patel
  *
  */
 public class TownScreen extends Screen implements KeyListener{
