@@ -39,7 +39,8 @@ public class Game extends JFrame{
 	}
 	
 
-	protected void reset() {
+	public void reset() {
+
 		Screen startScreen = new StartScreen(this);
 		setScreen(startScreen);
 
