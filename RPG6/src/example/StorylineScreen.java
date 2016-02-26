@@ -54,14 +54,21 @@ public class StorylineScreen extends Screen implements KeyListener {
 			
 		}
 		if(k==KeyEvent.VK_Q){
-			nextDescision();
+			nextDescisionAuto();
 		}
 
 	}
 
 
-	private void nextDescision() {
+	private void nextDescisionAuto() {
 		storyPoint.select(0);
+		decisionPoint = storyPoint.getNextPoint();
+		storyPoint=new StoryPoint(storyPoint.getEvents(), decisionPoint);
+	}
+
+
+	private void nextDescision() {
+//		storyPoint.select(0);
 		decisionPoint = storyPoint.getNextPoint();
 		storyPoint=new StoryPoint(storyPoint.getEvents(), decisionPoint);
 	}
