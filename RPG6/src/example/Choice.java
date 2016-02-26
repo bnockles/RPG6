@@ -30,13 +30,15 @@ public class Choice {
 	
 	public String nextLine(){
 		displayingLine++;
+		if(displayingLine < consequences[choice].length)
 		return consequences[choice][displayingLine];
+		else return "";
 	}
 	
 
 	
 	public boolean isDisplayingLastLine(){
-		return displayingLine==consequences[choice].length-1;
+		return displayingLine>=consequences[choice].length-1;
 	}
 	
 	

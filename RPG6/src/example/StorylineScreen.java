@@ -18,12 +18,14 @@ import directors.Screen;
 public class StorylineScreen extends Screen implements KeyListener {
 
 	StoryPoint storyPoint;
+	int decisionPoint;
 	
 	/**
 	 * @param game
 	 */
 	public StorylineScreen(Game game) {
 		super(game);
+		decisionPoint=1;
 		storyPoint = new StoryPoint();
 	}
 
@@ -42,11 +44,14 @@ public class StorylineScreen extends Screen implements KeyListener {
 		}
 		if(k==KeyEvent.VK_1){
 			storyPoint.select(0);
-			storyPoint.nextLn();;
+			storyPoint.update();
+			
 		}
 		if(k==KeyEvent.VK_2){
 			storyPoint.select(1);
-			storyPoint.nextLn();;
+			storyPoint.update();
+//			storyPoint.nextLn();;
+			
 		}
 		if(k==KeyEvent.VK_Q){
 			nextDescision();
@@ -56,7 +61,9 @@ public class StorylineScreen extends Screen implements KeyListener {
 
 
 	private void nextDescision() {
-		storyPoint=new StoryPoint(storyPoint.getEvents(), 2);
+		storyPoint.select(0);
+		decisionPoint = storyPoint.getNextPoint();
+		storyPoint=new StoryPoint(storyPoint.getEvents(), decisionPoint);
 	}
 
 

@@ -23,10 +23,15 @@ public class StoryPoint {
 	private boolean choiceMade;
 	private int width;
 	private int height;
+	private int selection;
+	private int choiceID;
 
+	public static final String CHAR_NAME = "TROY";
+	
 	//the default storypoint (beginning of the game)
 	public StoryPoint(){
 		events = new StoryEvent[NUMBER_OF_EVENTS];
+		choiceID = 1;
 		//automatically fills in all events, since events are numbered
 		for(int i = 0; i< NUMBER_OF_EVENTS; i++){
 			events[i] = new StoryEvent(i) {
@@ -42,12 +47,11 @@ public class StoryPoint {
 				"Monsters had crept in...",
 				"Making the forest more dangerous than ever...",
 				"...",
-				"You: What's that?",
-				"Father: I'll go check it out...",
-		"What do you do?"};
+				CHAR_NAME+": What's that?",
+				"FATHER: I'll go check it out..."};
 		String[] choices = {"Follow him.", "Stay home"};
 		boolean[] outcome = {true, true};
-		String[][] consequences= {{"Father: You need to stay here.","You: I'm scare for you.","Father: I said stay! It's too dangerous!","You trail behind him anyway","You walk about a mile, and your father disappears as he descends down a rocky crag","A beast howls and your father's terrified screams echo in your ears."}, {"You decide to stay home","Later you hear your father screaming. I guess he died."}};
+		String[][] consequences= {{"FATHERR: You need to stay here.",CHAR_NAME+": I'm scare for you.","FATHER: I said stay! It's too dangerous!","","",CHAR_NAME+":FAAAAAATHER!"}, {"","",CHAR_NAME+":FAAAAAATHER!"}};
 		Choice followFather = new Choice(events[StoryEvent.FATHER_LEAVES],choices ,outcome, consequences);
 		descisionAtHand = new Descision(context, followFather);
 		currentString = descisionAtHand.nextLine();
@@ -57,6 +61,67 @@ public class StoryPoint {
 		choiceMade = false;
 		update();
 
+	}
+
+	public StoryPoint(StoryEvent[] previousState, int i) {
+		this.events = previousState;
+		choiceID = i ;
+		//automatically fills in all events, since events are numbered
+	
+		if (i==StoryEvent.SWORD_FOUND){
+			String[] context = {CHAR_NAME+": What is that gleaming light?",
+					CHAR_NAME+": It looks like it's made of metal.",
+					CHAR_NAME+": It looks like its been laying here for years...",
+					CHAR_NAME+": ...but it isn't at all rusted.",
+					CHAR_NAME+": Is that a sword?"};
+			String[] choices = {"Take.", "Don't take."};
+			boolean[] outcome = {true, true};
+			String[][] consequences= {{"You have obtained a strange sword. Though it seems older than you can image, the blade is infinitely sharp!"}, {"Come on, you know you want to take it...","Take.","You have obtained a strange sword. Though it seems older than you can image, the blade is infinitely sharp!"}};
+			Choice takeSword = new Choice(events[StoryEvent.SWORD_FOUND],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, takeSword);
+		}		if (i==StoryEvent.BOSS_1_DEFEATED){
+			String[] context = {"MYSTERIOUS VOICE: Did you ever wonder why King Letralus withdrew his trops from the forest?",
+					CHAR_NAME+": Who's there?",
+					"MYSTERIOUS VOICE: Only a loyal servant of King Letralus.",
+					CHAR_NAME+": Show yourself!",
+					"MYSTERIOUS VOICE: <chuckle><chuckle> If you insisssssst.",
+					"GIANT SNAKE: Nicccce to meet you, brave adventurer.",
+					CHAR_NAME+": You're no servant of the king!.",
+					"GIANT SNAKE: Show's how little you know."};
+			String[] choices = {"Attack"};
+			boolean[] outcome = {true};
+			String[][] consequences= {{"The GIANT SNAKE twitches as the life escapes from its body.",CHAR_NAME+": Why did he say he was a servant of the king?"}};
+			Choice takeSword = new Choice(events[StoryEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, takeSword);
+		}if (i==StoryEvent.GEAR_FOUND){
+			String[] context = {"A rare alatnium gear lays on the ground."};
+			String[] choices = {"Take gear.","Do not take gear."};
+			boolean[] outcome = {true, false};
+			String[][] consequences= {{"You gain an alatnium gear. It is harder than diamond."},{CHAR_NAME+": I can probably find one of those elsewhere."}};
+			Choice takeSword = new Choice(events[StoryEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, takeSword);
+		}
+		if (i==StoryEvent.AIRSHIP_UNLOCKED){
+			String[] context = {"NORM: Have you got a alatnium gear?"};
+			String[] choices = {"Give gear.","Do not give gear."};
+			boolean[] outcome = {true, false};
+			String[][] consequences= {{"NORM: Do you understand how hard these are to find!?","NORM: How did you ever find one of these?",CHAR_NAME+": It was in the den of the giant snake I defeated in the last StoryPoint","NORM: Whoah, that's so meta."},{"NORM: Well, let me know if you ever find one."}};
+			Choice takeSword = new Choice(events[StoryEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, takeSword);
+		}if(i==StoryEvent.GEAR_BOUGHT){
+			String[] context = {"PEDLER: You can buy this rare gear for only 10,000 nerp."};
+			String[] choices = {"Buy gear.","Do not buy gear."};
+			boolean[] outcome = {true, false};
+			String[][] consequences= {{"PEDLER: Pleasure doing business with you!"},{"PEDLER: It's a shame. These gears are so rare."}};
+			Choice takeSword = new Choice(events[StoryEvent.GEAR_FOUND],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, takeSword);
+		}
+		currentString = descisionAtHand.nextLine();
+		width = 600;
+		height = 400;
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		choiceMade = false;
+		update();
 	}
 
 	public void update(){
@@ -70,8 +135,10 @@ public class StoryPoint {
 		g.setColor(Color.black);
 		final int LINE_SPACE = 30;
 		int y = 40;
+		g.drawString("PRESS 'Q' TO JUMP TO THE NEXT POINT IN THE STORY.",30, y);
+		y+=LINE_SPACE;
 		for(StoryEvent se : events){
-			y=printMultiLine(g, se.getDescription() + ": "+ se.state(), 30, y, 70);
+			y=printMultiLine(g, se.getDescription() + ": "+ se.state(), 30, y, 75);
 		}
 		g.drawString("CURRENT DESCISION",30, y);
 		y+=LINE_SPACE;
@@ -142,45 +209,30 @@ public class StoryPoint {
 		return events;
 	}
 	
-	public StoryPoint(StoryEvent[] previousState, int i) {
-		this.events = previousState;
-		//automatically fills in all events, since events are numbered
-
-		if (i==2){
-			String[] context = {"It had been SEVEN years since your mother died",
-					"Ever since then it was just you and your father...",
-					"Living in the wilderness was never easy...",
-					"Especially after the arrival of King Letralus",
-					"The king withdrew the army from the farther reachest of the kingdom",
-					"And that included the little region near the falls where your father and you had been living together",
-					"Monsters had crept in...",
-					"Making the forest more dangerous than ever...",
-					"...",
-					"You: What's that?",
-					"Father: I'll go check it out...",
-			"What do you do?"};
-			String[] choices = {"Follow him.", "Stay home"};
-			boolean[] outcome = {true, true};
-			String[][] consequences= {{"Father: You need to stay here.","You: I'm scare for you.","Father: I said stay! It's too dangerous!","You trail behind him anyway","You walk about a mile, and your father disappears as he descends down a rocky crag","A beast howls and your father's terrified screams echo in your ears."}, {"You decide to stay home","Later you hear your father screaming. I guess he died."}};
-			Choice followFather = new Choice(events[StoryEvent.SWORD_FOUND],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, followFather);
-		}
-		currentString = descisionAtHand.nextLine();
-		width = 600;
-		height = 400;
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		choiceMade = false;
-		update();
-	}
-
 	public void select(int i) {
 		if(descisionAtHand.isDisplayingLastLine()){
 			descisionAtHand.getChoices().choose(i);
 			choiceMade = true;
 			currentString = descisionAtHand.getChoices().nextLine();
-					
+			selection = i;		
 		}
 
+	}
+
+	//determines which point to go to next, depending on the decision that was previously made
+	public int getNextPoint() {
+		if(choiceID==StoryEvent.FATHER_LEAVES)return StoryEvent.SWORD_FOUND;
+		else if(choiceID==StoryEvent.SWORD_FOUND)return StoryEvent.BOSS_1_DEFEATED;
+		else if(choiceID==StoryEvent.BOSS_1_DEFEATED)return StoryEvent.GEAR_FOUND;
+		else if(choiceID==StoryEvent.GEAR_FOUND){
+			if(selection == 0)return StoryEvent.AIRSHIP_UNLOCKED;
+			else return StoryEvent.GEAR_BOUGHT;
+		}
+		else if(choiceID==StoryEvent.GEAR_BOUGHT){
+			if(selection == 0)return StoryEvent.AIRSHIP_UNLOCKED;
+			else return StoryEvent.GEAR_BOUGHT;
+		}
+		return 0;
 	}
 
 }
