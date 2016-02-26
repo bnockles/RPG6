@@ -21,7 +21,7 @@ public abstract class StoryEvent {
 	public static final int BOSS_1_DEFEATED = 3;
 	public static final int GEAR_FOUND = 4;
 	public static final int AIRSHIP_UNLOCKED = 5;
-	public static final int GEAR_BOUGHT = 5;
+	public static final int GEAR_BOUGHT = 6;
 
 	/**
 	 * 

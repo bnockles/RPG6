@@ -27,7 +27,7 @@ public class StoryPoint {
 	private int choiceID;
 
 	public static final String CHAR_NAME = "TROY";
-	
+
 	//the default storypoint (beginning of the game)
 	public StoryPoint(){
 		events = new StoryEvent[NUMBER_OF_EVENTS];
@@ -48,7 +48,7 @@ public class StoryPoint {
 				"Making the forest more dangerous than ever...",
 				"...",
 				CHAR_NAME+": What's that?",
-				"FATHER: I'll go check it out..."};
+		"FATHER: I'll go check it out..."};
 		String[] choices = {"Follow him.", "Stay home"};
 		boolean[] outcome = {true, true};
 		String[][] consequences= {{"FATHERR: You need to stay here.",CHAR_NAME+": I'm scare for you.","FATHER: I said stay! It's too dangerous!","","",CHAR_NAME+":FAAAAAATHER!"}, {"","",CHAR_NAME+":FAAAAAATHER!"}};
@@ -67,7 +67,7 @@ public class StoryPoint {
 		this.events = previousState;
 		choiceID = i ;
 		//automatically fills in all events, since events are numbered
-	
+
 		if (i==StoryEvent.SWORD_FOUND){
 			String[] context = {CHAR_NAME+": What is that gleaming light?",
 					CHAR_NAME+": It looks like it's made of metal.",
@@ -87,7 +87,7 @@ public class StoryPoint {
 					"MYSTERIOUS VOICE: <chuckle><chuckle> If you insisssssst.",
 					"GIANT SNAKE: Nicccce to meet you, brave adventurer.",
 					CHAR_NAME+": You're no servant of the king!.",
-					"GIANT SNAKE: Show's how little you know."};
+			"GIANT SNAKE: Show's how little you know."};
 			String[] choices = {"Attack"};
 			boolean[] outcome = {true};
 			String[][] consequences= {{"The GIANT SNAKE twitches as the life escapes from its body.",CHAR_NAME+": Why did he say he was a servant of the king?"}};
@@ -140,6 +140,9 @@ public class StoryPoint {
 		for(StoryEvent se : events){
 			y=printMultiLine(g, se.getDescription() + ": "+ se.state(), 30, y, 75);
 		}
+		g.setColor(Color.blue);
+		g.fillRect(15, y-20, width-30, 175);
+		g.setColor(Color.white);
 		g.drawString("CURRENT DESCISION",30, y);
 		y+=LINE_SPACE;
 
@@ -192,7 +195,7 @@ public class StoryPoint {
 	public boolean nextLn(){
 		if(!choiceMade){
 			if(!descisionAtHand.isDisplayingLastLine())currentString=descisionAtHand.nextLine();
-			
+
 		}else{
 			if(!descisionAtHand.getChoices().isDisplayingLastLine())currentString=descisionAtHand.getChoices().nextLine();
 			else return true;
@@ -208,14 +211,17 @@ public class StoryPoint {
 	public StoryEvent[] getEvents(){
 		return events;
 	}
-	
+
 	public void select(int i) {
+		selection = i;		
+		descisionAtHand.getChoices().choose(i);
+		choiceMade = true;
 		if(descisionAtHand.isDisplayingLastLine()){
-			descisionAtHand.getChoices().choose(i);
-			choiceMade = true;
 			currentString = descisionAtHand.getChoices().nextLine();
-			selection = i;		
+		}else{
+			currentString="";
 		}
+
 
 	}
 
