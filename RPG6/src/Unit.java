@@ -2,44 +2,21 @@
 public class Unit{
     
     String name;
-    int level;
-    double hitPoints;
-    double costPoints;
-    double rechargeRate;
-    double strength;
-    double spirit;
-    double armor;
-    double willpower;
-    double evasion;
-    boolean haste = false;
-    boolean slow = false;
+	int level;
+	int health;
+	int attack;
+	int defence;
+	int speed;
+	int exp;
     
-    public Unit(String name, double recharge){
+    public Unit(String name, int level, int heatlh int speed){
         this.name = name;
-        this.rechargeRate = recharge;
+        this.health = health;
+        this.speed = speed;
+        this.exp = 0;
     }
 
     public String getName() {
         return name;
-    }
-
-    public double getHitPoints() {
-        return hitPoints;
-    }
-
-    public double getCostPoints() {
-        return costPoints;
-    }
-
-    public double getRechargeRate() {
-        return rechargeRate;
-    }
-    
-    public void setHaste() {
-        this.haste = true;
-    }
-
-    public void setSlow() {
-        this.slow = true;
     }
 }
