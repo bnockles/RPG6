@@ -1,0 +1,22 @@
+package battle;
+
+import java.util.ArrayList;
+
+public class Start{
+	private static ArrayList<Unit> Party = new ArrayList<Unit>();
+	
+	public static void main(String[] args){
+	    addParty();
+		
+    	Party.get(0).displayStats();
+    	BattleMethods.addExp(Party.get(0));
+    	Party.get(0).displayStats();
+	}
+	
+	public static void addParty(){
+    	Party.add(new Unit("Mickey",1,220,55));
+    	Party.add(new Unit("Sora",1,260,43));
+    	Party.add(new Unit("Goofy",1,340,34));
+    	Party.add(new Unit("Donald",1,150,22));
+	}
+}
