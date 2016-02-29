@@ -34,6 +34,7 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		targets.add(new SampleTarget());
 		this.enemy1= new SampleEnemy(1, targets);
 		this.enemy2= new SampleEnemy(2, targets);
+		this.enemy3= new SampleEnemy(3, targets);
 		update();
 	}
 
@@ -83,6 +84,11 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==KeyEvent.VK_2){
 			enemy2.takeBossTurn();
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_3){
+			enemy3.takeTurn();
 			update();
 			game.repaint();
 		}
