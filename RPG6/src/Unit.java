@@ -19,4 +19,10 @@ public class Unit{
     public String getName() {
         return name;
     }
+    
+    public void displayStats(){
+	System.out.println(this.name+"\nLv. "+this.level+"\nHealth "
+	+this.health+"\nSpeed "+this.speed+"\nEXP "+this.exp+"\nNext Lv "
+	+BattleMethods.nextLevel(this)+"\n---------------");
+    }
 }
