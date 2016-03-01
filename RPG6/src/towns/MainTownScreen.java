@@ -75,7 +75,7 @@ public class MainTownScreen extends Screen implements KeyListener {
 
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
-
+//1
 		}
 
 		public void keyTyped(KeyEvent e) {
