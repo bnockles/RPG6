@@ -21,6 +21,8 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 	//this String is ONLY useful for a demo
 	public static String battleMessage = "Press 1,2, or 3 to make an enemy take its turn";
 	ArrayList<Target> targets;
+	ArrayList<String> battleMessages = new ArrayList<String>(5);
+	public int battleMessageNumber = 5;
 	SampleEnemy enemy1;
 	SampleEnemy enemy2;
 	SampleEnemy enemy3;
@@ -65,8 +67,9 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 				g2.drawString(t.getName(), 75, y);
 				y+=25;
 			}
-			y+=25;
-			g2.drawString(battleMessage, 50, y);
+			//y+=25;		This moves the battle message down a bit, I think it looks better without so comment out.
+			g2.drawString(battleMessage, X_COORDINATE_FOR_TEXT, y);
+			
 		}catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
