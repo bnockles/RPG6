@@ -17,6 +17,7 @@ import directors.Screen;
 
 public class MainTownScreen extends Screen implements KeyListener {
 
+	
 	public MainTownScreen (Game game) {
 		super(game); 
 		update();
@@ -54,6 +55,7 @@ public class MainTownScreen extends Screen implements KeyListener {
 				System.out.println("1 was pressed");
 				Screen warpTown1 = new TownScreen(game);
 				game.setScreen(warpTown1);
+				
 				update();
 				game.repaint();
 			}
