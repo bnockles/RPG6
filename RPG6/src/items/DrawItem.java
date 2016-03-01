@@ -6,24 +6,57 @@ import java.awt.image.BufferedImage;
 
 public class DrawItem {
 	private BufferedImage icon24;
+	private BufferedImage icon32;
+	private BufferedImage icon64;
 	
 	
-	public void draw(Graphics g, int x, int y, String[] text){}
-	public void draw(Graphics g, int x, int y, String text1, String text2){
-		drawBg(g, x, y);
+	public DrawItem(){}
+
+	
+	// utility method to assign icon images
+	// uses builder pattern
+	//	i.e. you can do [[ DrawItem d = new DrawItem().setIcon32(...); ]]
+	private DrawItem setIconXX(BufferedImage icon, int size){
+		if(icon.getWidth() == size && icon.getHeight() == size){
+			switch(size){
+			case 24:
+				this.icon24 = icon;
+				break;
+			case 32:
+				this.icon32 = icon;
+				break;
+			case 64:
+				this.icon64 = icon;
+				break;
+			default:
+				System.out.println("Invalid icon size!");
+				break;
+			}
+		}
+		else{
+			System.out.println("Icon"+size+" must be assigned a "+size+"x"+size+" icon!");
+		}
 		
-		g.setColor(Color.white);
-		g.drawString(text1, x+10, y+10);
-		g.drawString(text2, x+10, y+100);
+		return this;
 	}
 	
-	private void drawBg(Graphics g, int x, int y){
-		//Color original = g.getColor();
-		
-		//replace these magic numbers with variabless
+	public DrawItem setIcon24(BufferedImage icon){
+		return setIconXX(icon, 24);
+	}
+	
+	public DrawItem setIcon32(BufferedImage icon){
+		return setIconXX(icon, 32);
+	}
+	
+	public DrawItem setIcon64(BufferedImage icon){
+		return setIconXX(icon, 64);
+	}
+	
+
+	public void draw(Graphics g, int x, int y, String[] text){}
+	
+	private void drawBg(Graphics g, int x, int y, int w, int h){
 		g.setColor(Color.black);
-		g.fillRect(x, y, 200, 300);
-		
-		//g.setColor(original);
+		g.fillRect(x, y, w, h);
 	}
 }
