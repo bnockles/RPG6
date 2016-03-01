@@ -31,6 +31,15 @@ public class Battle {
 			defender.setHealth(defender.getHealth()-damageToBeDealt);
 		}
 		
+		/**
+		 * 
+		 * 
+		 * 
+		 **/
+		public static void selectTarget(){
+			
+		}
+		
 		//TODO Damage Formula
 		
 		/**
