@@ -6,14 +6,16 @@ public class Equipment extends Item {
 	public static final int CHEST 	= 2;
 	public static final int LEG 	= 3;
 	//s
+	private int durability;
 	private int type;
 	private Stats stats;
 	
-	public Equipment(String name, String description, int type, Stats stats){
+	public Equipment(String name, String description, int type, Stats stats, int durability){
 		super(name, description);
-		
+		this.durability = durability;
 		this.type = type;
 		this.stats = stats;
+		
 	}
 	
 	public int getType(){ return this.type; }

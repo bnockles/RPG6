@@ -1,6 +1,5 @@
 package items;
 
-import java.awt.image.BufferedImage;
 
 public abstract class QuestItem extends Item {
 	int amount;
@@ -15,15 +14,11 @@ public abstract class QuestItem extends Item {
 		return storylineProgress;
 	}
 
-	public QuestItem(String description, String name, BufferedImage image,
-			boolean durable, int amount) {
+	public QuestItem(String name, String description, int amount) {
 		super(name, description);
 		this.amount = amount;
-		// TODO Auto-generated constructor stub
+		
 	}
-
-	public abstract void onUse();
-		// TODO Auto-generated method stub
 
 	
 

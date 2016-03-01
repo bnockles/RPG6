@@ -9,7 +9,7 @@ public final class ItemSandbox {
 
 class TestChestArmor extends Equipment {
 	public TestChestArmor(){
-		super("test armor", "REQ: 12 STR.", CHEST, new Stats(0, 0, 0, 5));
+		super("test armor", "REQ: 12 STR.", CHEST, new Stats(0, 0, 0, 5), 100);
 	}
 	
 	@Override
