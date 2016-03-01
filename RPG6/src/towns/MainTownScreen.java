@@ -39,7 +39,7 @@ public class MainTownScreen extends Screen implements KeyListener {
 			}
 			
 		}
-		//test
+		//testing
 		/* (non-Javadoc)
 		 * @see directors.Screen#getKeyListener()
 		 */
