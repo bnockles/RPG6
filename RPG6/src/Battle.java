@@ -81,14 +81,14 @@ public class Battle {
 		
 		public static int getExpNeededToLevel(Hero hero){
 			//returns the difference between the EXP to reach the next level and the characters current EXP
-			return getLevelExp(hero.getLevel+1)-hero.getCurrentExp();
+			return getLevelExp(hero.getLevel()+1)-hero.getCurrentExp();
 		}
 		
 		public static void levelUp(Hero hero){
 			//updates character statistics when reaching a new level
-			while(hero.getCurrentExp() >= getLevelExp(hero.getLevel)){
-				hero.setLevel++;
-				hero.health = hero.health + (int)(hero.getLevel*1.8);
+			while(hero.getCurrentExp() >= getLevelExp(hero.getLevel())){
+				hero.setLevel(hero.getLevel()++);
+				hero.setHealth(hero.getHealth() + (int)(hero.getLevel()*1.8));
 				//fill in other stats
 			}
 		}
