@@ -40,10 +40,10 @@ public class SampleEnemy {
 	//something required by the Battles team. It is likely they will 
 	//require a method for taking a turn in a battle
 	public void takeTurn(){
-		
+
 		int targetSelection = (int) (Math.random()*targets.size());
 		targets.get(targetSelection).hit(this);
-	
+
 	}
 	public void takeBossTurn(){
 		int targetSelection = 0;

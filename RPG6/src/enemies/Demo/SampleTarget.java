@@ -32,7 +32,7 @@ public class SampleTarget implements Target {
 		int newHealth = health - e.attack;
 		name = name.replace(" not", "").replace(" yet", "");
 		this.health = newHealth;
-		
+
 		if(e.itemPosessed==""){
 			System.out.println(e.name + " has no items");
 		}
@@ -50,13 +50,13 @@ public class SampleTarget implements Target {
 		// TODO Auto-generated method stub
 		return health;
 	}
-	
+
 	//add constructor and everything from document files later
-	
 
 
 
 
-	
+
+
 
 }

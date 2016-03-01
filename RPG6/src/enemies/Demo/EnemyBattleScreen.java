@@ -19,10 +19,11 @@ import directors.Screen;
 public class EnemyBattleScreen extends Screen implements KeyListener{
 
 	//this String is ONLY useful for a demo
-	public static String battleMessage = "Press 1 or 2 to make an enemy take its turn";
+	public static String battleMessage = "Press 1,2, or 3 to make an enemy take its turn";
 	ArrayList<Target> targets;
 	SampleEnemy enemy1;
 	SampleEnemy enemy2;
+	SampleEnemy enemy3;
 	/**
 	 * @param game
 	 */
@@ -47,21 +48,25 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		g2.fillRect(0, 0, width, height);
 		g2.setColor(Color.black);
 		try{
-			g2.drawString("ENEMIES", 50, 75);
-			g2.drawString(enemy1.name, 50, 100);
-		g2.drawString(enemy2.name, 50, 125);
-		g2.drawString("Press '1' to make enemy 1 take its turn", 120, 100);
-		g2.drawString("Press '2' to make enemy 1 take its turn", 120, 125);
-		
-		g2.drawString("TARGETS", 50, 155);
-		int y = 175;
-		for(Target t:targets){
-			g2.drawString(t.getName(), 75, y);
+			int X_COORDINATE_FOR_TEXT = 50;
+			int Y_COORDINATE_FOR_TEXT = 75;
+			g2.drawString("ENEMIES", X_COORDINATE_FOR_TEXT, Y_COORDINATE_FOR_TEXT);
+			g2.drawString(enemy1.name, X_COORDINATE_FOR_TEXT, Y_COORDINATE_FOR_TEXT+25);
+			g2.drawString(enemy2.name, X_COORDINATE_FOR_TEXT, Y_COORDINATE_FOR_TEXT+50);
+			g2.drawString(enemy3.name, X_COORDINATE_FOR_TEXT, Y_COORDINATE_FOR_TEXT+75);
+			g2.drawString("Press '1' to make enemy 1 take its turn", X_COORDINATE_FOR_TEXT+70, Y_COORDINATE_FOR_TEXT+25);
+			g2.drawString("Press '2' to make enemy 2 take its turn", X_COORDINATE_FOR_TEXT+70, Y_COORDINATE_FOR_TEXT+50);
+			g2.drawString("Press '3' to make enemy 3 take its turn", X_COORDINATE_FOR_TEXT+70, Y_COORDINATE_FOR_TEXT+75);
+
+
+			g2.drawString("TARGETS", X_COORDINATE_FOR_TEXT, Y_COORDINATE_FOR_TEXT+100);
+			int y = 195;
+			for(Target t:targets){
+				g2.drawString(t.getName(), 75, y);
+				y+=25;
+			}
 			y+=25;
-		}
-	
-		y+=25;
-		g2.drawString(battleMessage, 50, y);
+			g2.drawString(battleMessage, 50, y);
 		}catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
@@ -96,12 +101,12 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
