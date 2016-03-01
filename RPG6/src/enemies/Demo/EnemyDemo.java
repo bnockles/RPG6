@@ -30,7 +30,7 @@ public class EnemyDemo extends Game{
 //		setVisible(true);
 //	}
 	
-	protected void reset() {
+	public void reset() {
 		Screen demoScreen = new EnemyBattleScreen(this);
 		setScreen(demoScreen);
 		repaint();
