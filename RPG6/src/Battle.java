@@ -31,6 +31,35 @@ public class Battle {
 			defender.setHealth(defender.getHealth()-damageToBeDealt);
 		}
 		
+		//TODO Damage Formula
+		
+		/**
+		 * 
+		 * @param c character who is attempting to dodge
+		 */
+		public static boolean isDodge(Char c){
+			boolean willDodge = false;
+			int rand = 1 + (int)(Math.random() * ((10000 - 1) + 1));
+			if(rand <= c.getEvasion()*100){
+				willDodge = true;
+			}
+			return willDodge;
+		}
+		
+		/**
+		 * 
+		 * @param character in battle
+		 * @return returns if a character willCrit
+		 */
+		public static boolean isCrit(Char c){
+			boolean willCrit = false;
+			int rand = 1 + (int)(Math.random() * ((100) + 1));
+			if(rand <= c.getCritHitChance()){
+				willCrit = true;
+			}
+			return willCrit;
+		}
+		
 		public static int getLevelExp(int lv){
 			//returns the EXP needed to reach a level
 			int exp = (int)(.1*(Math.pow(lv+1, 3.5)));
@@ -52,44 +81,17 @@ public class Battle {
 		
 		public static int getExpNeededToLevel(Hero hero){
 			//returns the difference between the EXP to reach the next level and the characters current EXP
-			return getLevelExp(hero.level+1)-hero.getCurrentExp();
+			return getLevelExp(hero.getLevel+1)-hero.getCurrentExp();
 		}
 		
 		public static void levelUp(Hero hero){
 			//updates character statistics when reaching a new level
-			while(hero.getCurrentExp() >= getLevelExp(hero.level)){
-				hero.level++;
-				hero.health = hero.health + (int)(hero.level*1.8);
+			while(hero.getCurrentExp() >= getLevelExp(hero.getLevel)){
+				hero.setLevel++;
+				hero.health = hero.health + (int)(hero.getLevel*1.8);
 				//fill in other stats
 			}
 		}
-		/**
-		 * 
-		 * @param c character who is attempting to dodge
-		 */
-		public static boolean dodgeAttack(Char c){
-			boolean willDodge = false;
-			int rand = 1 + (int)(Math.random() * ((10000 - 1) + 1));
-			if(rand <= c.getEvasion()*100){
-				willDodge = true;
-			}
-			return willDodge;
-		}
-		
-		/**
-		 * 
-		 * @param character in battle
-		 * @return returns if a character willCrit
-		 */
-		public static boolean willCrit(Char c){
-			boolean willCrit = false;
-			int rand = 1 + (int)(Math.random() * ((100) + 1));
-			if(rand <= c.getCritHitChance()){
-				willCrit = true;
-			}
-			return willCrit;
-		}
-		
 	}
 	
 	public class BattleScreen{
