@@ -3,12 +3,12 @@ package items.itemslist;
 import items.Character;
 import items.Consumable;
 
-public class HP100 extends Consumable {
+public class HP1000 extends Consumable {
 	
 	boolean user_hp_full = true;
 
-	public HP100(String name, String description, int amount) {
-		super("HP 100", "Restores 100 HP to the target.", 1);
+	public HP1000(String name, String description, int amount) {
+		super("HP 1000", "Restores 1000 HP to the target.", 1);
 		
 	}
 
@@ -22,7 +22,7 @@ public class HP100 extends Consumable {
 
 
 	public void use(Character user) {
-		System.out.println("You restored 100 HP!");
+		System.out.println("You restored 1000 HP!");
 		
 	}
 
