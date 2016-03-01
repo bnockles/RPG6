@@ -17,11 +17,12 @@ public class Battle {
 		//or give them interface for ai
 		
 		/**
+		 * consider parameter for raw damage of attacker (Unit attacker, Unit defender, )
 		 * attacks an enemy, removes health using a setter
 		 * @param attacker
 		 * @param defender
 		 */
-		public static void attack(Char attacker, Char defender){
+		public static void attack(Unit attacker, Unit defender){
 			double damageToBeDealt = attacker.getAttack();
 			if(Battle.BattleMechanic.isDodge(defender) == true){
 				damageToBeDealt = 0;
@@ -33,23 +34,27 @@ public class Battle {
 		
 		/**
 		 * 
-		 * 
-		 * 
+		 * will be used to find which target is attacking and which is defending
 		 **/
 		public static void selectTarget(){
 			
 		}
 		
-		//TODO Damage Formula
+		/**
+		 * used to calculate damage
+		 * */
+		public static void calculateDamage(Unit attacker){
+			
+		}
 		
 		/**
 		 * 
 		 * @param c character who is attempting to dodge
 		 */
-		public static boolean isDodge(Char c){
+		public static boolean isDodge(Unit u){
 			boolean willDodge = false;
 			int rand = 1 + (int)(Math.random() * ((10000 - 1) + 1));
-			if(rand <= c.getEvasion()*100){
+			if(rand <= u.getEvasion()*100){
 				willDodge = true;
 			}
 			return willDodge;
@@ -60,10 +65,10 @@ public class Battle {
 		 * @param character in battle
 		 * @return returns if a character willCrit
 		 */
-		public static boolean isCrit(Char c){
+		public static boolean isCrit(Unit u){
 			boolean willCrit = false;
 			int rand = 1 + (int)(Math.random() * ((100) + 1));
-			if(rand <= c.getCritHitChance()){
+			if(rand <= u.getCritHitChance()){
 				willCrit = true;
 			}
 			return willCrit;
