@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import menus.MainMenu;
+
 import directors.Game;
 import directors.Screen;
 
@@ -389,6 +391,10 @@ public class TownScreen extends Screen implements KeyListener{
 			rpsMan.setComputerPlay("null");
 			update();
 			game.repaint();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			Screen mainMenu = new MainTownScreen(game);
+			game.setScreen(mainMenu);
 		}
 	}
 
