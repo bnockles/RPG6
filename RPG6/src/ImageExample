@@ -38,9 +38,9 @@ public class ImageExample extends JFrame{
 	
 	
 	public void paint(Graphics g){
-	
+		g.fillRect(0, 0, WIDTH, HEIGHT);
 		g.drawImage(getImage("Image Directory"), 500, 500, null);
-//	g.drawImage(getImage("Link.png"), 500, 500, null);
+//		g.drawImage(getImage("Link.png"), 500, 500, null);
 	}
 	
 	public final BufferedImage getImage(String path){
