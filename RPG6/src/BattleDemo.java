@@ -19,10 +19,10 @@ public class BattleDemo {
 	private JPanel infoBox;
 	private static int currPlayerHP; 
 	private static int currEnemyHP;
-	public BattleDemo(DemoChar player, DemoChar ai) {
+	public BattleDemo(Unit player, Unit ai) {
 		gui(player,ai);
 	}
-	private void gui( final DemoChar player, final DemoChar ai)  {
+	private void gui( final Unit player, final Unit ai)  {
 
 		JPanel container = new JPanel();
 		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
@@ -69,11 +69,11 @@ public class BattleDemo {
 		battleScreen.setSize(1000,800);
 		battleScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	protected void characterCheckItems(DemoChar player) {
+	protected void characterCheckItems(Unit player) {
 		something.setText("You got nothing...you might be in trouble :P");
 		
 	}
-	protected void characterMagic(DemoChar player, DemoChar ai) {
+	protected void characterMagic(Unit player, Unit ai) {
 		currPlayerHP-=ai.magicStat;
 		currEnemyHP-=player.magicStat;
 		String events ="<html>"+player.Title +" did "+ player.magicStat + " Damage to " + ai.Title + "<br>"+
@@ -84,13 +84,13 @@ public class BattleDemo {
 		something.setText(events);
 		battleScreen.setVisible(true);
 	}
-	protected void characterAttemptToRunAway(DemoChar player, DemoChar ai) {
+	protected void characterAttemptToRunAway(Unit player, Unit ai) {
 		if(player.speedStat>ai.speedStat){
 			something.setText("You manage to get away great job you coward.....");
 		}else{something.setText("There's no escaping this...prepare yourself to die in battle");}
 		
 	}
-	protected void characterFight(DemoChar player, DemoChar ai) {
+	protected void characterFight(Unit player, Unit ai) {
 		currPlayerHP-=ai.attackStat;
 		currEnemyHP-=player.attackStat;
 		String events ="<html>"+player.Title +" did "+ player.attackStat + " Damage to " + ai.Title + "<br>"+
@@ -103,8 +103,8 @@ public class BattleDemo {
 		
 	}
 	public static void main(String[] args) {
-		DemoChar Player = new DemoChar("Jose",9999,9999,9999,9999);
-		DemoChar Enemy = new DemoChar("Wilson",1,1,1,1);
+		Unit Player = new Unit("Jose",9999,9999,9999,9999);
+		Unit Enemy = new Unit("Wilson",1,1,1,1);
 		currPlayerHP = Player.healthStat;
 		currEnemyHP = Enemy.healthStat;
 		new BattleDemo(Player,Enemy);
