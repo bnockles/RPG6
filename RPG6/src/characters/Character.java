@@ -3,9 +3,6 @@ package characters;
 
 public abstract class Character {
 	public String name;
-	public String race;
-	public String jobClass;
-	public String gender;
 	public double health;
 	public double attack;
 	public double defense;
@@ -14,13 +11,9 @@ public abstract class Character {
 	public double dropRate;
 	public double critHitChance;
 	public double currentExp;
-	public double expNeededToLevel;
 	
-	public Character(String name, String race, String jobClass, String gender, double health, double attack, double defense, double mana, double speed, double dropRate, double critHitChance, double currentExp, double expNeededToLevel){
+	public Character(String name, double health, double attack, double defense, double mana, double speed, double dropRate, double critHitChance, double currentExp){
 		this.name = name;
-		this.race = race;
-		this.jobClass = jobClass;
-		this.gender = gender;
 		this.health = health;
 		this.attack = attack;
 		this.defense = defense;
@@ -29,7 +22,6 @@ public abstract class Character {
 		this.dropRate = dropRate;
 		this.critHitChance = critHitChance;
 		this.currentExp = currentExp;
-		this.expNeededToLevel = expNeededToLevel;	
 	}
 
 	public abstract void displayCharacter();
@@ -40,30 +32,6 @@ public abstract class Character {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getRace() {
-		return race;
-	}
-
-	public void setRace(String race) {
-		this.race = race;
-	}
-
-	public String getJobClass() {
-		return jobClass;
-	}
-
-	public void setJobClass(String jobClass) {
-		this.jobClass = jobClass;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 
 	public double getHealth() {
@@ -130,11 +98,9 @@ public abstract class Character {
 		this.currentExp = currentExp;
 	}
 
-	public double getExpNeededToLevel() {
-		return expNeededToLevel;
-	}
-
-	public void setExpNeededToLevel(double expNeededToLevel) {
-		this.expNeededToLevel = expNeededToLevel;
+	
+	public double[] getAllStats(){
+		double[] stats = {health, attack, defense, mana, speed, dropRate, critHitChance, currentExp};
+		return stats;		
 	}
 }

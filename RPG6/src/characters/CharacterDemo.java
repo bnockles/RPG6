@@ -1,7 +1,8 @@
 package characters;
 
 import directors.Game;
-import sampleoverworld.OverworldDemo;
+import directors.Screen;
+import characters.CharacterScreen;
 
 public class CharacterDemo extends Game{
 
@@ -9,4 +10,9 @@ public class CharacterDemo extends Game{
 		new CharacterDemo();
 	}
 
+	protected void reset() {
+		Screen demoScreen = new CharacterScreen(this);
+		setScreen(demoScreen);
+		repaint();
+	}
 }
