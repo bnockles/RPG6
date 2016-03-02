@@ -10,6 +10,12 @@ import javax.imageio.ImageIO;
 
 public class SampleCharacter {
 	
+	/**
+	 * 
+	 * @author Khandaker Shayel, Jeffrey Lei
+	 *
+	 */
+	
 	public ArrayList<String> getItems() {
 		return items;
 	}

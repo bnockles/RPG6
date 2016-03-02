@@ -7,6 +7,7 @@ package towns;
 import directors.Game;
 import directors.Screen;
 import towns.TownScreen;
+import towns.MainTownScreen;
 
 
 public class NpcDemo extends Game{
@@ -16,7 +17,7 @@ public class NpcDemo extends Game{
 	}
 	
 	protected void reset() {
-		Screen demoScreen = new TownScreen(this);
+		Screen demoScreen = new MainTownScreen(this);
 		setScreen(demoScreen);
 		repaint();
 	}

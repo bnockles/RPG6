@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 public interface Storable {
 	
+	/**
+	 * 
+	 * @author Jeffrey Lei
+	 *
+	 */
+	
 	public ArrayList<String> storedItems = new ArrayList<String>();
 	
 	public void storeItem(String item);//{
