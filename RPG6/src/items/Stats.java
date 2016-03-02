@@ -23,6 +23,9 @@ public final class Stats {
 	public Stats(int str, int dex, int iq, int wis, int luck){
 		this(0, 0, 0, 0, str, dex, iq, wis, luck);
 	}
+	public Stats(int atk, int str, int dex, int iq, int wis, int luck){
+		this(0, atk, 0, 0, str, dex, iq, wis ,luck);
+	}
 	public Stats(int hp, int mp, int atk, int def, int str, int dex, int iq, int wis, int luck){
 		this.health 		= hp;
 		this.mana 			= mp;
