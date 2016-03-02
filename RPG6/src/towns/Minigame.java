@@ -1,18 +1,17 @@
 package towns;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Random;
-
 /**
  * 
  * @author Khandaker Shayel
  *
  */
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
 
 public class Minigame extends AbstractNPC {
 
