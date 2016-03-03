@@ -20,4 +20,4 @@ public class potionFloor extends ItemOnFloor {
 	}
 
 }
-
+ 

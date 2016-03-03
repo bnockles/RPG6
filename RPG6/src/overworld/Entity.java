@@ -21,7 +21,7 @@ public abstract class Entity {
 	public float getX() {
 		return x;
 	}
-
+ 
 	public void setX(float x) {
 		this.x = x;
 	}

@@ -48,5 +48,5 @@ public class Player extends Creature{
 	public void render(Graphics g) {
 		g.drawImage(Assets.player, (int) x, (int) y, pWidth, pHeight, null);
 	}
-
+  
 }

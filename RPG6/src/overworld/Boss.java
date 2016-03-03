@@ -20,5 +20,5 @@ public class Boss extends Creature{
 	public void render(Graphics g) {
 		g.drawImage(Assets.zakum, (int) x, (int) y, width, height, null);
 	}
-
+ 
 }

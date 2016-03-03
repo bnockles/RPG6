@@ -13,7 +13,7 @@ public class chestFloor extends ItemOnFloor {
 	public void update() {
 
 	}
-
+ 
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(Assets.chest, (int) x, (int) y, width, height, null);

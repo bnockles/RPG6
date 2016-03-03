@@ -19,7 +19,7 @@ public class Assets {
 		SpriteSheet cSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mc2.png"));
 		SpriteSheet tSheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
 		SpriteSheet sheetI = new SpriteSheet(ImageLoader.loadImage("/textures/sheetI.png"));
-		
+		 
 		potion = sheetI.crop(0,0,eWidth,eHeight);
 		chest = sheetI.crop(eWidth,0,eWidth,eHeight);
 		zakum = sheetI.crop(0,eHeight,eWidth,eHeight);

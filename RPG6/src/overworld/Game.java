@@ -14,86 +14,92 @@ import FirstRpg.gfx.ImageLoader;
 import FirstRpg.gfx.SpriteSheet;
 import overworld.Assets;
 */
-public class Game implements Runnable{
-	
+public class Game implements Runnable {
+
 	private Display display;
-	private int width, height;
+	public int width, height;
+	public String title;
 	
+	private boolean running = false;
 	private Thread thread;
-	private boolean running=false;
-	private String title;
 	
 	private BufferStrategy bs;
 	private Graphics g;
 	
 	private State gameState;
-	private State menuState;
 	
 	private KeyManager keyManager;
 	
-
-	
 	public Game(String title, int width, int height){
-		this.width=width;
-		this.height=height;
-		this.title=title;
-		keyManager= new KeyManager();
+		this.width = width;
+		this.height = height;
+		this.title = title;
+		keyManager = new KeyManager();
 	}
 	
-	private void init(){
-		display= new Display(title,width,height);
+	private void initialize(){
+		display = new Display(title,width,height);
 		display.getFrame().addKeyListener(keyManager);
-		Assets.init();
+		Assets.initialize();
 		
-		
-		gameState= new GameState(this);
+		gameState = new GameState(this);
 		State.setState(gameState);
 	}
 	
-	private void update(){
+	private void tick(){
 		keyManager.update();
-		if(State.getState()!=null)
+		
+		if(State.getState() != null){
 			State.getState().update();
+		}
 	}
 	
 	private void render(){
-		bs=display.getCanvas().getBufferStrategy();
-		if(bs==null){
+		bs = display.getCanvas().getBufferStrategy();
+		if(bs == null){
 			display.getCanvas().createBufferStrategy(3);
 			return;
 		}
-		g=bs.getDrawGraphics();
-		//Clear Screen
-		g.clearRect(0, 0, width, height);
-		//Start Draw
-	
-		if(State.getState()!=null)
-			State.getState().render(g);
+		g = bs.getDrawGraphics();
 		
-		//End Draw
+		g.clearRect(0, 0, width, height);
+		
+		if(State.getState() != null){
+			State.getState().render(g);
+		}
+		
 		bs.show();
 		g.dispose();
 	}
 	
 	public void run(){
-		init();
-		int fps=60;
-		double timePerTick=1000000000 / fps;
-		double delta=0;
+		
+		initialize();
+		
+		int fps = 60;
+		double timePerTick = 1000000000 / fps;
+		double delta = 0;
 		long now;
-		long lastTime =System.nanoTime();
+		long lastTime = System.nanoTime();
+		long timer = 0;
 		
 		while(running){
-			now= System.nanoTime();
-			delta +=(now-lastTime)/timePerTick;
-			lastTime=now;
+			now = System.nanoTime();
+			delta += (now - lastTime) / timePerTick;
+			timer += now - lastTime;
+			lastTime = now;
 			
-			if(delta>=1){
-				update();
+			if(delta >= 1){
+				tick();
 				render();
 				delta--;
 			}
+			
+			if(timer >= 1000000000){
+				timer = 0;
+			}
 		}
+		
 		stop();
 	}
 	
@@ -101,24 +107,20 @@ public class Game implements Runnable{
 		return keyManager;
 	}
 	
-	
-	public int getWidth(){
-		return width;
-	}
-	
-	public int getHeight(){
-		return height;
-	}
-	
 	public synchronized void start(){
-		if(running)return;
-		running=true;
-		thread= new Thread(this);
+		if(running){
+			return;
+		}
+		running = true;
+		thread = new Thread(this);
 		thread.start();
 	}
+	
 	public synchronized void stop(){
-		if(!running)return;
-		running=false;
+		if(!running){
+			return;
+		}
+		running = false;
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
@@ -127,3 +129,4 @@ public class Game implements Runnable{
 		}
 	}
 }
+
