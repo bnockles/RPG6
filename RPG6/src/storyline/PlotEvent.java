@@ -16,12 +16,16 @@ public abstract class PlotEvent {
 	private String description;//how it displays in the demo GUI
 	private boolean state;
 
-	public static final int FATHER_LEAVES = 1;
-	public static final int SWORD_FOUND = 2;
-	public static final int BOSS_1_DEFEATED = 3;
-	public static final int GEAR_FOUND = 4;
-	public static final int AIRSHIP_UNLOCKED = 5;
-	public static final int GEAR_BOUGHT = 6;
+	public static final int DESTORY_VILLAGE = 0;
+	public static final int DIRECTION = 1
+	// ^ choic
+	public static final int NEW_ALLY = 2;
+	public static final int ACCEPT_ALLY = 3;
+	// ^choice
+	public static final int KISS_SO= 4;
+	// ^choice
+	public static final int PLOT_TWIST = 5;
+	final int DEATH = 6;
 
 	/**
 	 * 
