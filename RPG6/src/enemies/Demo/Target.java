@@ -17,3 +17,5 @@ public interface Target {
 	public String getName();
 	public int getHP();
 }
+
+

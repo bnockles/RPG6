@@ -86,17 +86,17 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode()==KeyEvent.VK_1){
 			System.out.println("1 was pressed");
-			enemy1.takeTurn();
+			enemy1.newTakeTurn();
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_2){
-			enemy2.takeBossTurn();
+			enemy2.newTakeTurn();
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_3){
-			enemy3.takeTurn();
+			enemy3.newTakeTurn();
 			update();
 			game.repaint();
 		}

@@ -14,7 +14,7 @@ public class SampleEnemy {
 
 	ArrayList<Target> targets;
 	public String name;
-	public static String itemPosessed;
+	String itemPosessed;
 	public static int attack;
 	/**
 	 * 
@@ -25,13 +25,25 @@ public class SampleEnemy {
 		this.itemPosessed=determineRandomItem();
 		attack = 10;
 	}
+	
+	//old determineRandomItem Code
+//	public static String determineRandomItem(){
+//		String[]items = {"potion A","potion B","poison A","","","","sword","armor","shield","hemlock","more poisonous stuff"};
+//		int x = (int)Math.random()*items.length;
+//		return items[x];
+//	}
+	
 	public static String determineRandomItem(){
 		String[]items = {"potion A","potion B","poison A","","","","sword","armor","shield","hemlock","more poisonous stuff"};
-		int x = (int)Math.random()*items.length;
-		return items[x];
+		double x = Math.floor(Math.random()*items.length);
+		System.out.println(x);
+		int y = (int)x;
+		return items[y];
+		//return "";
 	}
-	public static String getItemPosessed(){
-		return itemPosessed;
+	
+	public static String getItemPosessed(SampleEnemy e){
+		return e.itemPosessed;
 	}
 	public static int getAttack(){
 		return attack;
@@ -39,20 +51,44 @@ public class SampleEnemy {
 	//the following method will most likely be
 	//something required by the Battles team. It is likely they will 
 	//require a method for taking a turn in a battle
-	public void takeTurn(){
+	
+	//Old take turn code
+//	public void takeTurn(){
+//
+//		int targetSelection = (int) (Math.random()*targets.size());
+//		targets.get(targetSelection).hit(this);
+//
+//	}
+//	public void takeBossTurn(){
+//		int targetSelection = 0;
+//		for(int i = 0; i < targets.size() - 1; i++)
+//		{
+//			if(targets.get(i).getHP() < targets.get(targetSelection).getHP())
+//				targetSelection = i;
+//		}
+//		targets.get(targetSelection).hit(this); 
+//	}
+	
+	public int randomizer;
+	public void newTakeTurn(){
 
-		int targetSelection = (int) (Math.random()*targets.size());
-		targets.get(targetSelection).hit(this);
+		randomizer = (int) (Math.random()*10);
 
-	}
-	public void takeBossTurn(){
-		int targetSelection = 0;
-		for(int i = 0; i < targets.size() - 1; i++)
-		{
-			if(targets.get(i).getHP() < targets.get(targetSelection).getHP())
-				targetSelection = i;
+		if(randomizer < 4){
+			int targetSelection = 0;
+			for(int i = 0; i < targets.size() - 1; i++)
+			{
+				if(targets.get(i).getHP() < targets.get(targetSelection).getHP())
+					targetSelection = i;
+			}
+			targets.get(targetSelection).hit(this); 
+
 		}
-		targets.get(targetSelection).hit(this); 
+		else if(randomizer >=4){
+			int targetSelection = (int) (Math.random()*targets.size());
+			targets.get(targetSelection).hit(this);
+		}
+		System.out.println("randomized number is " + randomizer);
 	}
 
 }

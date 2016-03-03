@@ -21,7 +21,8 @@ public class SampleTarget implements Target {
 	public SampleTarget() {
 		targetNumber++;
 		health = 100;
-		name = "Target "+targetNumber+ " (has not been hit yet)";
+		name = "Target "+targetNumber+ " (has not been hit yet)"; 
+		//+this.getHP()+ "HP currently";
 		hit = false;
 	}
 
@@ -37,9 +38,14 @@ public class SampleTarget implements Target {
 			System.out.println(e.name + " has no items");
 		}
 		else{
-			System.out.println(e.name + " has " + SampleEnemy.getItemPosessed());
+			System.out.println(e.name + " has " + SampleEnemy.getItemPosessed(e));
 		}
+		
 		EnemyBattleScreen.battleMessage=name+ " was hit by "+e.name + " and has taken " + e.attack + " damage and has "  + health + "health";
+	}
+	
+	public static String getItemPosessed(SampleEnemy e){
+		return e.itemPosessed;
 	}
 
 	public String getName() {
@@ -50,13 +56,5 @@ public class SampleTarget implements Target {
 		// TODO Auto-generated method stub
 		return health;
 	}
-
-	//add constructor and everything from document files later
-
-
-
-
-
-
 
 }
