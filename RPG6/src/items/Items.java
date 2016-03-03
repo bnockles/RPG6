@@ -3,10 +3,10 @@ package items;
 import java.util.HashMap;
 
 public final class Items {
-	private static HashMap<String,Item> items;
+	private static HashMap<String,Item> registry;
 	
 	static {
-		items = new HashMap<String,Item>();
+		registry = new HashMap<String,Item>();
 	}
 	
 
@@ -16,15 +16,15 @@ public final class Items {
 			return;
 		}
 		
-		Items.items.put(it.getId(), it);
+		Items.registry.put(it.getId(), it);
 	}
 	
 	public static boolean itemRegistered(String id){
-		return Items.items.containsKey(id);
+		return Items.registry.containsKey(id);
 	}
 	
 	public static Item getItemById(String id){
-		return Items.items.get(id);
+		return Items.registry.get(id);
 	}
 	
 
