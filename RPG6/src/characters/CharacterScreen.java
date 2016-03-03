@@ -72,17 +72,32 @@ public class CharacterScreen extends Screen implements KeyListener{
 	}
 
 	public synchronized void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			heroNum++;
+			if(heroNum > 3){
+				heroNum = 1;
+			}
+			if(heroNum == 1){
+				selectedHero = hero;
+			}else if(heroNum == 2){
+				selectedHero = hero2;
+			}else if(heroNum == 3){
+				selectedHero = hero3;
+			}
+			name = selectedHero.getName();
+			stats = selectedHero.getAllStats();
+			update();
+			game.repaint();
+		}
 		//toggle menu
 		if(on){
 			if(e.getKeyCode()==KeyEvent.VK_Q){	
-				System.out.println("Q2 was pressed");
 				on = false;
 				update();
 				game.repaint();
 			}
 		}else{
-			if(e.getKeyCode()==KeyEvent.VK_Q){	
-				System.out.println("Q1 was pressed");
+			if(e.getKeyCode()==KeyEvent.VK_Q){
 				on = true;
 				update();
 				game.repaint();
@@ -170,23 +185,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 			game.repaint();
 		}
 		
-		if(e.getKeyCode()==KeyEvent.VK_SPACE){
-			heroNum++;
-			if(heroNum > 3){
-				heroNum = 1;
-			}
-			if(heroNum == 1){
-				selectedHero = hero;
-			}else if(heroNum == 2){
-				selectedHero = hero2;
-			}else if(heroNum == 3){
-				selectedHero = hero3;
-			}
-			name = selectedHero.getName();
-			stats = selectedHero.getAllStats();
-			update();
-			game.repaint();
-		}
+		
 		
 		//movement
 //        if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_LEFT){
@@ -295,6 +294,12 @@ public class CharacterScreen extends Screen implements KeyListener{
 	}
 	
 	public void paintScreen(Graphics2D g2){
+		BufferedImage image = new BufferedImage(width, height,
+                BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = image.createGraphics();
+		Color c = new Color(0, 102, 51, 200);
+		g2.setColor(c);
+		g2.fillRect(0, 0, width, height);
 		g2.setColor(Color.black);
 		g2.drawString("Press 'Q' to toggle stat menu", 30, 75);
 		g2.drawString("Press 'F' to take damage", 30, 90);
@@ -336,7 +341,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		//Equiped
 		int eqX = 730;
 		int eqY = 75;
-		g2.drawString("Equiped", eqX, eqY);
+		g2.drawString("Equipped", eqX, eqY);
 		for(int l = 0; l < selectedHero.getEquiped().length; l++){
 			eqY
 			+= 15;
