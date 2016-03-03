@@ -43,7 +43,7 @@ public class Battle {
 		/**
 		 * used to calculate damage
 		 * */
-		public static void calculateDamage(Unit attacker){
+		public static void calculateDamage(Char attacker){
 			
 		}
 		
