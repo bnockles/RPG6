@@ -12,6 +12,7 @@ public class World {
 	private int width, height;
 	private int xSpawn, ySpawn;
 	private int[][] tiles;
+	//private boolean origin;
 	
 	public World(Game game,String path){
 		this.game=game;
@@ -19,7 +20,6 @@ public class World {
 	}
 	
 	public void update(){
-		
 	}
 	
 	public void render(Graphics g){
