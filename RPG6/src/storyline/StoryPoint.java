@@ -1,4 +1,4 @@
-package example;
+package storyline;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
