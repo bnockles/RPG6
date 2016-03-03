@@ -191,7 +191,7 @@ public class battleScreen extends Screen implements KeyListener {
 		buttonNames.add("Run[Press D]");
 	}
 	public static void buttonMaker(ArrayList<String> keyPressAction){
-			buttonNames.clear();
+			buttonNames.clear(); 
 			buttonNames.addAll(keyPressAction);
 	}
 
