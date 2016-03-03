@@ -20,6 +20,12 @@ public final class ItemScreen extends Screen implements KeyListener {
 		g2.fillRect(0, 0, width, height);
 
 		//TODO: draw inventory here
+		g2.setColor(Color.black);
+		g2.fillRect(this.width/2-200, this.height/2-300, 400, 600);
+		
+		Item it = ItemSandbox.inv.getItem();
+		g2.drawString(it.getName(), 		this.width/2-204, this.height/2-304);
+		g2.drawString(it.getDescription(), 	this.width/2-204, this.height/2-326);
 	}
 
 	public KeyListener getKeyListener() {
@@ -31,7 +37,10 @@ public final class ItemScreen extends Screen implements KeyListener {
 	}
 
 	public void keyReleased(KeyEvent ev) {
+		int key = ev.getKeyCode();
 		
+		if(key == KeyEvent.VK_LEFT)	ItemSandbox.inv.moveCursor(-1);
+		if(key == KeyEvent.VK_RIGHT)ItemSandbox.inv.moveCursor(+1);
 	}
 
 	public void keyTyped(KeyEvent ev) {

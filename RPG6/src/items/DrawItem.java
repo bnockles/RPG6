@@ -3,14 +3,19 @@ package items;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 
 public class DrawItem {
+	private static void drawBg(Graphics g, int x, int y, int w, int h){
+		g.setColor(Color.black);
+		g.fillRect(x, y, w, h);
+	}
+	
+	
 	private BufferedImage icon24;
 	private BufferedImage icon32;
 	private BufferedImage icon64;
 	
-	
-	public DrawItem(){}
 
 	
 	// utility method to assign icon images
@@ -53,10 +58,15 @@ public class DrawItem {
 	}
 	
 
-	public void draw(Graphics g, int x, int y, String[] text){}
+	public void drawIcon24(Graphics g, int x, int y){
+		g.drawImage(this.icon24, x, y, (ImageObserver)this.icon24);
+	}
+
+	public void drawIcon32(Graphics g, int x, int y){
+		g.drawImage(this.icon32, x, y, (ImageObserver)this.icon32);
+	}
 	
-	private void drawBg(Graphics g, int x, int y, int w, int h){
-		g.setColor(Color.black);
-		g.fillRect(x, y, w, h);
+	public void drawIcon64(Graphics g, int x, int y){
+		g.drawImage(this.icon64, x, y, (ImageObserver)this.icon64);
 	}
 }

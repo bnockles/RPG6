@@ -1,6 +1,10 @@
 package items;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Manages the inventory of each PC.
@@ -8,14 +12,31 @@ import java.util.HashMap;
  * @class Inventory
  */
 public final class Inventory {
-	private HashMap<String,Integer> stock;
+	private LinkedHashMap<String,Integer> stock;
 	private int cursor;
 	
 	public Inventory(){
-		this.stock = new HashMap<String,Integer>();
+		this.stock = new LinkedHashMap<String,Integer>();
 		this.cursor = 0;
 	}
 	
+	
+	
+	public Item getItem(int pos){
+		if(pos < 0 || pos >= this.stock.size()) return null;
+		
+		int i=0;
+		for(String id : this.stock.keySet()){
+			if(i==pos) return Items.getItemById(id);
+			++i;
+		}
+		
+		return null;
+	}
+	//retrieve item by cursor position by default
+	public Item getItem(){
+		return getItem(this.cursor);
+	}
 	
 	
 	public int getStock(String id){
