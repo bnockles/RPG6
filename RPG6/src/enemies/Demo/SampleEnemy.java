@@ -16,6 +16,13 @@ public class SampleEnemy {
 	public String name;
 	String itemPosessed;
 	public static int attack;
+	
+	//This code just for constructor demo
+	//public static SampleEnemy enemy2;
+	//public static SampleEnemy enemy3;
+	//public static SampleEnemy enemy4;
+	//public static SampleEnemy enemy5;
+	
 	/**
 	 * 
 	 */

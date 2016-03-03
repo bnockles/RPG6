@@ -22,7 +22,9 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 	public static String battleMessage = "Press 1,2, or 3 to make an enemy take its turn";
 	ArrayList<Target> targets;
 	ArrayList<String> battleMessages = new ArrayList<String>(5);
-	public int battleMessageNumber = 5;
+	//public int battleMessageNumber = 5;			//later use this to make sure we can mod and show 5 messages at once
+	//int numEnemies = (int) (Math.ceil(Math.random()*3));	//generate num enemies 1-3
+	
 	SampleEnemy enemy1;
 	SampleEnemy enemy2;
 	SampleEnemy enemy3;
@@ -38,6 +40,10 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		this.enemy1= new SampleEnemy(1, targets);
 		this.enemy2= new SampleEnemy(2, targets);
 		this.enemy3= new SampleEnemy(3, targets);
+		//this.enemy1 = new SampleEnemy("regular",5);		//Implement this later
+		//this.enemy2 = new SampleEnemy("tank",5);
+		//this.enemy3 = new SampleEnemy("mage",5);
+		
 		update();
 	}
 
