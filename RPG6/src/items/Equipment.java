@@ -12,8 +12,8 @@ public class Equipment extends Item {
 	private int type;
 	private Stats stats;
 	
-	public Equipment(String name, String description, int type, Stats stats, int durability){
-		super(name, description);
+	public Equipment(String id, String name, String description, int type, Stats stats, int durability){
+		super(id, name, description);
 		this.durability = durability;
 		this.type = type;
 		this.stats = stats;
