@@ -59,7 +59,7 @@ public class battleScreen extends Screen implements KeyListener {
 		mapSelect = 0;
 		action = "home";
 		maps.add("/images/sewerFloor.png");
-		maps.add("/images/modernsewer.png");
+		maps.add("/images/modernsewer.png"); 
 		maps.add("/images/DemonCastleFloor.png");
 		maps.add("/images/DemonCastleBackground.png");
 		maps.add("/images/LavaCaveFloor.png");

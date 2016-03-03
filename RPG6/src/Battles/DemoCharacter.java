@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class DemoCharacter {
 	String title;
-	
+	 
 	ArrayList<String> meleeMoves = new ArrayList<String>();
 	ArrayList<String> spellMoves = new ArrayList<String>();
 	ArrayList<Integer>stats = new ArrayList<Integer>();
