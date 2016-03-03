@@ -4,6 +4,7 @@ package overworld;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+
 public class Tile {
 	
 	//STATIC
@@ -11,6 +12,12 @@ public class Tile {
 	public static Tile[] tiles= new Tile[256];
 	public static Tile grassTile = new GrassTile(0);
 	public static Tile GreyStoneTile= new GreyStoneTile(1);
+	public static Tile dirtTile= new DirtTile(2);
+	public static Tile cStoneTile= new cStoneTile(3);
+	public static Tile woodWallTile= new WoodWallTile(4);
+	public static Tile woodFloorTile= new WoodFlTile(5);
+	public static Tile waterTile = new WaterTile(6);
+	public static Tile lavaTile = new LavaTile(7);
 	
 	//CLASSES
 	public static final int TILEWIDTH = 32, TILEHEIGHT=32;

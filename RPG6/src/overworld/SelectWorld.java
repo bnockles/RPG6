@@ -18,5 +18,5 @@ public class SelectWorld {
 	public void updateWorldG(World world, Graphics g){
 		world.render(g);
 	}
-
+ 
 }

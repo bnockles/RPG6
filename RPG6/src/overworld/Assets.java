@@ -13,7 +13,8 @@ public class Assets {
 	private static int eWidth = 32, eHeight = 32;
 	
 	public static BufferedImage player,dirt, grass, greyStone, woodWall,
-								woodFloor, water, potion, chest, zakum, axe, sword, lance;
+								woodFloor, water, potion, chest, zakum, axe, sword, lance,
+								cobbleStone, lava;
 	
 	public static void initialize(){
 		SpriteSheet cSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mc2.png"));
@@ -27,13 +28,16 @@ public class Assets {
 		sword = sheetI.crop(0,eHeight*2,eWidth,eHeight);
 		lance = sheetI.crop(eWidth,eHeight*2,eWidth,eHeight);
 		
+		lava = sheetI.crop(0,tWidth*5,tWidth,tHeight);
+		water = sheetI.crop(tWidth,tHeight*4,tWidth,tHeight);
+		
 		player= cSheet.crop(0, 0, pWidth, pHeight);
 		dirt= tSheet.crop(tWidth * 4, tHeight * 6, tWidth, tHeight);
 		grass= tSheet.crop(tWidth, 0, tWidth, tHeight);
 		greyStone= tSheet.crop(0, tHeight, tWidth, tHeight);
 		woodWall= tSheet.crop(tWidth*5, 0, tWidth, tHeight);
 		woodFloor= tSheet.crop(tWidth*4, tHeight, tWidth, tHeight);
-		
+		cobbleStone= tSheet.crop(tWidth*2, tHeight*7, tWidth, tHeight);
 	}
 	
 }
