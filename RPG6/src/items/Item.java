@@ -1,5 +1,6 @@
 package items;
 
+
 public abstract class Item {
 	private String id;
 	private String name;
@@ -16,6 +17,12 @@ public abstract class Item {
 	//return this for builder pattern 
 	public Item setDrawItem(DrawItem d){ 
 		this.drawItem = d;
+		return this;
+	}
+	
+	//register the item to the Items class' manager 
+	public Item register(){
+		Items.registerItem(this);
 		return this;
 	}
 	

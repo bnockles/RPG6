@@ -1,15 +1,23 @@
 package items;
 
 public final class ItemSandbox {
-	public static TestChestArmor testChest = new TestChestArmor();
-	public static TestPotion testPotion = new TestPotion(); 
+	//debug and testing
+	private static Item ca = new TestChestArmor().register();
+	private static Item tp = new TestPotion().register(); 
+	
+	public static Inventory inv = new Inventory();
+	
+	static {
+		inv.addStock(ca.getId());
+		inv.addStock(tp.getId(),2);
+	}
 }
 //s
 
 
 class TestChestArmor extends Equipment {
 	public TestChestArmor(){
-		super("test armor", "REQ: 12 STR.", CHEST, new Stats(0, 0, 0, 5), 100);
+		super("TestChestArmor", "test armor", "REQ: 12 STR.", CHEST, new Stats(0, 0, 0, 5), 100);
 	}
 	
 	@Override
@@ -20,7 +28,7 @@ class TestChestArmor extends Equipment {
 
 class TestPotion extends Item {
 	public TestPotion() {
-		super("test potion", "HP+50");
+		super("TestChestArmor", "test potion", "HP+50");
 	}
 
 	@Override
