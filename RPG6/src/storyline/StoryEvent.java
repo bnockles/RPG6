@@ -23,7 +23,11 @@ public abstract class StoryEvent {
 	final int NEW_ALLY = 3;
 	final int ACCEPT_ALLY = 4;
 	final int KISS_SO= 5;
-	final int PLOT_TWIST = 6;
+	final int KISS_SO_YELLOW= 6;
+	final int KISS_SO_GREEN= 7;
+	final int KISS_SO_PURPLE= 8;
+	final int KISS_SO_ORANGE= 9;
+	//final int PLOT_TWIST = 6;
 
 	/**
 	 * 
@@ -46,6 +50,26 @@ public abstract class StoryEvent {
 			break;
 		case ACCEPT_ALLY:
 		description = "You have accepted this ally";
+		break;
+		}
+		case KISS_SO:
+		description = "Which friend will you kiss?";
+		break;
+		}
+		case KISS_SO_YELLOW:
+		description = "You kissed Yellow";
+		break;
+		}
+		case KISS_SO_ORANGE:
+		description = "You kissed Orange";
+		break;
+		}
+		case KISS_SO_GREEN:
+		description = "You kissed Green";
+		break;
+		}
+		case KISS_SO_PURPLE:
+		description = "You kissed Purple";
 		break;
 		}
 	}
