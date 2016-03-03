@@ -3,7 +3,12 @@ package characters;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.awt.Color;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.print.DocFlavor.URL;
 
 import directors.Game;
 import directors.Screen;
@@ -12,36 +17,178 @@ import directors.Screen;
 public class CharacterScreen extends Screen implements KeyListener{
 
 	String[] statNames = {"Health", "Attack", "Defense", "Mana", "Speed", "Drop Rate", "Crit Hit Chance", "CurrentExp"};
-	int counter = 0;
 	String name;
 	double[] stats;
 	Hero hero;
+	double maxHeath;
 	boolean on = false;
+	boolean wepOn = false;
+	boolean armorOn = false;
+	SampleWeapon sword;
+	SampleArmor armor;
+	SamplePotion potion;
+	BufferedImage heroImg;
+	BufferedImage icon;
 	
 	public CharacterScreen(Game game) {
 		super(game);
 		hero = new Hero("The Hero", 100.0, 10.0, 10.0, 100.0, 5.0, 0, 5.0, 0);
 		name = hero.getName();
 		stats = hero.getAllStats();
-		// TODO Auto-generated constructor stub
+		sword = new SampleWeapon("Sword", 10);
+		armor = new SampleArmor("Armor", 50);
+		potion = new SamplePotion("Potion", 10);
+		maxHeath = hero.getHealth();
+		
+		hero.addItem(sword);
+		hero.addItem(armor);
+		hero.addItem(potion);
+		
+		
+		heroImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		try{
+			java.net.URL url = getClass().getResource("/character/sample/hero.jpg"); 
+			icon = ImageIO.read(url);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
-	public void keyPressed(KeyEvent e) {
+	public synchronized void keyPressed(KeyEvent e) {
+		//toggle menu
 		if(on){
 			if(e.getKeyCode()==KeyEvent.VK_Q){	
-				System.out.println("Q1 was pressed");
+				System.out.println("Q2 was pressed");
 				on = false;
 				update();
 				game.repaint();
 			}
 		}else{
 			if(e.getKeyCode()==KeyEvent.VK_Q){	
-				System.out.println("Q2 was pressed");
+				System.out.println("Q1 was pressed");
 				on = true;
 				update();
 				game.repaint();
 			}
 		}
+		
+		//equip/dequip wep
+		if(!wepOn){
+			if(e.getKeyCode()==KeyEvent.VK_1){	
+				wepOn = true;
+				hero.removeItem(sword);
+				hero.equipItem(sword);
+				hero.setAttack(hero.getAttack() + sword.statBoost());
+				stats = hero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}else{
+			if(e.getKeyCode()==KeyEvent.VK_1){	
+				wepOn = false;
+				hero.addItem(sword);
+				hero.dequipItem(sword);
+				hero.setAttack(hero.getAttack() - sword.statBoost());
+				stats = hero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}
+		
+		//equip/dequip armor
+		if(!armorOn){
+			if(e.getKeyCode()==KeyEvent.VK_2){	
+				armorOn = true;
+				hero.removeItem(armor);
+				hero.equipItem(armor);
+				hero.setDefense(hero.getDefense() + armor.statBoost());
+				stats = hero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}else{
+			if(e.getKeyCode()==KeyEvent.VK_2){	
+				armorOn = false;
+				hero.addItem(armor);
+				hero.dequipItem(armor);
+				hero.setDefense(hero.getDefense() - armor.statBoost());
+				stats = hero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}
+
+		//drink potion
+		if(e.getKeyCode()==KeyEvent.VK_3){
+			if(hero.getInvList().contains(potion)){
+				hero.removeItem(potion);
+				if(hero.getHealth() < maxHeath){
+					hero.setHealth(hero.getHealth() + potion.heal());
+					if(hero.getHealth() > maxHeath){
+						hero.setHealth(maxHeath);
+					}
+				}
+				stats = hero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}
+		
+		//get potion
+		if(e.getKeyCode()==KeyEvent.VK_4){	
+			hero.addItem(potion);
+			update();
+			game.repaint();
+		}
+		
+		//receive damage
+		if(e.getKeyCode()==KeyEvent.VK_SPACE){
+			hero.setHealth(hero.getHealth() - 10);
+			if(hero.getHealth() <= 0){
+				hero.setHealth(0);
+			}
+			stats = hero.getAllStats();
+			update();
+			game.repaint();
+		}
+		
+		//movement
+        if(e.getKeyCode() == KeyEvent.VK_UP){
+            hero.setY(hero.getY()-10);
+            game.repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+            hero.setY(hero.getY()+10);
+            game.repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+            hero.setX(hero.getX()-10);
+            game.repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+            hero.setX(hero.getX()+10);
+            game.repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_LEFT){
+            hero.setY(hero.getY()+10);
+            hero.setX(hero.getX()+10);
+            game.repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_RIGHT){
+            hero.setY(hero.getY()+10);
+            hero.setX(hero.getX()-10);
+            game.repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN && e.getKeyCode() == KeyEvent.VK_LEFT){
+            hero.setY(hero.getY()-10);
+            hero.setX(hero.getX()+10);
+            game.repaint();
+        }
+        else if(e.getKeyCode() == KeyEvent.VK_DOWN && e.getKeyCode() == KeyEvent.VK_RIGHT){
+            hero.setY(hero.getY()-10);
+            hero.setX(hero.getX()-10);
+            game.repaint();
+        }
 	}
 
 	public void keyReleased(KeyEvent arg0) {
@@ -64,29 +211,51 @@ public class CharacterScreen extends Screen implements KeyListener{
 	public void paintScreen(Graphics2D g2){
 		g2.setColor(Color.black);
 		g2.drawString("This is the hero", 30, 75);
-//			g2.setColor(Color.white);
+		g2.drawString("Press 'Q' to toggle stat menu", 30, 90);
+		g2.drawString("Press '1' to equip/dequip weapon", 30, 105);
+		g2.drawString("Press '2' to equip/dequip armor", 30, 120);
+		g2.drawString("Press '3' to use potion", 30, 135);
+//			g2.setColor(Cr.white)
 //			g2.fillRect(0, 0, width, height);
 //			g2.setColor(Color.black);
-//			try{
-//				g2.drawString("Inventory", 50, 50);;
-//				g2.drawString(SampleArmor.b, 120, 75);
-//				g2.drawString(SamplePotion.c, 120, 100);
-//				g2.drawString(SampleAccesory.a, 120, 125);
-//				g2.drawString(SampleWeapon.d, 120, 150);
-//			}catch(Exception e){
-//				//idk
-//			}
+		
+		//Stat menu
 		if(on){
 			int x = 50;
-			int y = 100;
+			int y = 150;
 			g2.setColor(Color.black);	
 			g2.drawString(name, x, y);
-			
+
 			for(int i = 0; i < stats.length; i++){
 				y += 15;
 				g2.drawString(statNames[i] + ": "+ stats[i], x, y);
 			}
 		}
+		
+		//Inventory
+		int invX = 530;
+		int invY = 75;
+		g2.drawString("Inventory", invX, invY);
+		for(int j = 0; j < hero.getInventory().length; j++){
+			invY += 15;
+			g2.drawString(hero.getInventory()[j] + "", invX, invY);
+		}
+		
+		
+		
+		//Equiped
+		int eqX = 730;
+		int eqY = 75;
+		g2.drawString("Equiped", eqX, eqY);
+		for(int l = 0; l < hero.getEquiped().length; l++){
+			eqY
+			+= 15;
+			g2.drawString(hero.getEquiped()[l] + "", eqX, eqY);
+		}
+		
+		
+		//display character
+		g2.drawImage(icon, hero.getX(), hero.getY(), null);
 	}
 	
 }

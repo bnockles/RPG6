@@ -1,14 +1,15 @@
 package characters;
 
-public class SampleWeapon implements Wieldable{
+public class SampleWeapon extends SampleItem {
+	double attackBoost;
 	
-	public static String d;
-	public SampleWeapon(String title,String description){
-		 d = title ;
+	public SampleWeapon(String name, double attackBoost) {
+		super(name);
+		// TODO Auto-generated constructor stub
+		this.attackBoost = attackBoost;
 	}
-	
-	//Ex. Getter
-	public String getTitle(){
-		return this.d;
+
+	public double statBoost(){
+		return attackBoost;
 	}
 }

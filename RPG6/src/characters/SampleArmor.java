@@ -1,19 +1,15 @@
 package characters;
 
-public class SampleArmor implements Equipable{
+public class SampleArmor extends SampleItem {
+	double defenseBoost;
 	
-	public static String b;
-	
-	
-	public SampleArmor(String title,String description){
-		 b=title ;
+	public SampleArmor(String name, double defenseBoost) {
+		super(name);
+		// TODO Auto-generated constructor stub
+		this.defenseBoost = defenseBoost;
 	}
-	
-	//Ex. Getter
-	public String getTitle(){
-		return this.b;
+
+	public double statBoost(){
+		return defenseBoost;
 	}
-	
 }
-
-

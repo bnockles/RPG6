@@ -1,14 +1,16 @@
 package characters;
 
-public class SamplePotion implements Consumable{
+public class SamplePotion extends SampleItem {
+	double healAmt;
 	
-	public static String c;
-	public SamplePotion(String title,String description){
-		 c=title ;
+	public SamplePotion(String name, double healAmt) {
+		super(name);
+		// TODO Auto-generated constructor stub
+		this.healAmt = healAmt;
 	}
-	
-	//Ex. Getter
-	public String getTitle(){
-		return this.c;
+
+
+	public double heal(){
+		return healAmt;
 	}
 }
