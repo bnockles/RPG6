@@ -23,11 +23,13 @@ public abstract class StoryEvent {
 	public static final int NEW_ALLY = 2;
 	public static final int ACCEPT_ALLY = 3;
 	public static final int KISS_SO= 4;
+	/// vvvv might not keep these
 	final int KISS_SO_YELLOW= 5;
 	final int KISS_SO_GREEN= 6;
 	final int KISS_SO_PURPLE= 7;
 	final int KISS_SO_ORANGE= 8;
-	//final int PLOT_TWIST = 9;
+	//^^^
+	//final int PLOT_TWIST = 9; this for later
 
 	/**
 	 * 
