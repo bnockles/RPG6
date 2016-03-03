@@ -16,18 +16,18 @@ public abstract class StoryEvent {
 	private String description;//how it displays in the demo GUI
 	private boolean state;
 
-	final int DESTROY_VILLAGE = 0;
-	final int LEFT = 1;
-	final int RIGHT = 2;
+	public static final int DESTROY_VILLAGE = 0;
+	public static final int DIRECTION = 1;
+	// ^ Left is true Right is false
 	// ^these are for that choice1 thing
-	final int NEW_ALLY = 3;
-	final int ACCEPT_ALLY = 4;
-	final int KISS_SO= 5;
-	final int KISS_SO_YELLOW= 6;
-	final int KISS_SO_GREEN= 7;
-	final int KISS_SO_PURPLE= 8;
-	final int KISS_SO_ORANGE= 9;
-	//final int PLOT_TWIST = 6;
+	public static final int NEW_ALLY = 2;
+	public static final int ACCEPT_ALLY = 3;
+	public static final int KISS_SO= 4;
+	final int KISS_SO_YELLOW= 5;
+	final int KISS_SO_GREEN= 6;
+	final int KISS_SO_PURPLE= 7;
+	final int KISS_SO_ORANGE= 8;
+	//final int PLOT_TWIST = 9;
 
 	/**
 	 * 
@@ -38,11 +38,8 @@ public abstract class StoryEvent {
 		case DESTROY_VILLAGE: 	
 			description = "Your village has been destroyed.";
 			break;
-		case LEFT: 	
+		case DIRECTION: 	
 			description = "You have turned left.";
-			break;
-		case RIGHT:
-			description = "You have turned right.";
 			break;
 
 		case NEW_ALLY:
