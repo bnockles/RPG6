@@ -22,7 +22,7 @@ public class Battle {
 		 * @param attacker
 		 * @param defender
 		 */
-		public static void attack(Unit attacker, Unit defender){
+		public static void attack(Char attacker, Char defender){
 			double damageToBeDealt = attacker.getAttack();
 			if(Battle.BattleMechanic.isDodge(defender) == true){
 				damageToBeDealt = 0;
@@ -51,10 +51,10 @@ public class Battle {
 		 * 
 		 * @param c character who is attempting to dodge
 		 */
-		public static boolean isDodge(Unit u){
+		public static boolean isDodge(Char c){
 			boolean willDodge = false;
-			int rand = 1 + (int)(Math.random() * ((10000 - 1) + 1));
-			if(rand <= u.getEvasion()*100){
+			int rand = 1 + (int)(Math.random() * 100);
+			if(rand <= c.getEvasion()){
 				willDodge = true;
 			}
 			return willDodge;
@@ -65,10 +65,10 @@ public class Battle {
 		 * @param character in battle
 		 * @return returns if a character willCrit
 		 */
-		public static boolean isCrit(Unit u){
+		public static boolean isCrit(Char c){
 			boolean willCrit = false;
-			int rand = 1 + (int)(Math.random() * ((100) + 1));
-			if(rand <= u.getCritHitChance()){
+			int rand = 1 + (int)(Math.random() * 101);
+			if(rand <= c.getCritHitChance()){
 				willCrit = true;
 			}
 			return willCrit;
