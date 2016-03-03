@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 //import FirstRpg.gfx.SpriteSheet;
 
 public class Assets {
-	//JOE
+	//JOEe
 	private static final int pWidth=32, pHeight=48;
 	private static final int tWidth=32, tHeight=32;
 	
