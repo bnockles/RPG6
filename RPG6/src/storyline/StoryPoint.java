@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  * This class is a point in the story where something can change
- * it inherits the StoryEvents from the previous StoryPoint but also
+ * it inherits the PlotEvents from the previous StoryPoint but also
  * presents a decision that can change the story 
  * @author bnockles
  *
@@ -17,7 +17,7 @@ public class StoryPoint {
 
 	private BufferedImage image;//for displaying information about this point of the game in the demo GUI
 	public static final int NUMBER_OF_EVENTS = 6;
-	private StoryEvent[] events;
+	private PlotEvent[] events;
 	private Descision descisionAtHand;
 	private String currentString;
 	private boolean choiceMade;
@@ -30,11 +30,11 @@ public class StoryPoint {
 
 	//the default storypoint (beginning of the game)
 	public StoryPoint(){
-		events = new StoryEvent[NUMBER_OF_EVENTS];
+		events = new PlotEvent[NUMBER_OF_EVENTS];
 		choiceID = 1;
 		//automatically fills in all events, since events are numbered
 		for(int i = 0; i< NUMBER_OF_EVENTS; i++){
-			events[i] = new StoryEvent(i) {
+			events[i] = new PlotEvent(i) {
 			};
 		}
 		//The first decision:
@@ -52,7 +52,7 @@ public class StoryPoint {
 		String[] choices = {"Follow him.", "Stay home"};
 		boolean[] outcome = {true, true};
 		String[][] consequences= {{"FATHERR: You need to stay here.",CHAR_NAME+": I'm scare for you.","FATHER: I said stay! It's too dangerous!","","",CHAR_NAME+":FAAAAAATHER!"}, {"","",CHAR_NAME+":FAAAAAATHER!"}};
-		Choice followFather = new Choice(events[StoryEvent.FATHER_LEAVES],choices ,outcome, consequences);
+		Choice followFather = new Choice(events[PlotEvent.FATHER_LEAVES],choices ,outcome, consequences);
 		descisionAtHand = new Descision(context, followFather);
 		currentString = descisionAtHand.nextLine();
 		width = 600;
@@ -63,12 +63,12 @@ public class StoryPoint {
 
 	}
 
-	public StoryPoint(StoryEvent[] previousState, int i) {
+	public StoryPoint(PlotEvent[] previousState, int i) {
 		this.events = previousState;
 		choiceID = i ;
 		//automatically fills in all events, since events are numbered
 
-		if (i==StoryEvent.SWORD_FOUND){
+		if (i==PlotEvent.SWORD_FOUND){
 			String[] context = {CHAR_NAME+": What is that gleaming light?",
 					CHAR_NAME+": It looks like it's made of metal.",
 					CHAR_NAME+": It looks like its been laying here for years...",
@@ -77,9 +77,9 @@ public class StoryPoint {
 			String[] choices = {"Take.", "Don't take."};
 			boolean[] outcome = {true, true};
 			String[][] consequences= {{"You have obtained a strange sword. Though it seems older than you can image, the blade is infinitely sharp!"}, {"Come on, you know you want to take it...","Take.","You have obtained a strange sword. Though it seems older than you can image, the blade is infinitely sharp!"}};
-			Choice takeSword = new Choice(events[StoryEvent.SWORD_FOUND],choices ,outcome, consequences);
+			Choice takeSword = new Choice(events[PlotEvent.SWORD_FOUND],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, takeSword);
-		}		if (i==StoryEvent.BOSS_1_DEFEATED){
+		}		if (i==PlotEvent.BOSS_1_DEFEATED){
 			String[] context = {"MYSTERIOUS VOICE: Did you ever wonder why King Letralus withdrew his trops from the forest?",
 					CHAR_NAME+": Who's there?",
 					"MYSTERIOUS VOICE: Only a loyal servant of King Letralus.",
@@ -91,29 +91,29 @@ public class StoryPoint {
 			String[] choices = {"Attack"};
 			boolean[] outcome = {true};
 			String[][] consequences= {{"The GIANT SNAKE twitches as the life escapes from its body.",CHAR_NAME+": Why did he say he was a servant of the king?"}};
-			Choice takeSword = new Choice(events[StoryEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
+			Choice takeSword = new Choice(events[PlotEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, takeSword);
-		}if (i==StoryEvent.GEAR_FOUND){
+		}if (i==PlotEvent.GEAR_FOUND){
 			String[] context = {"A rare alatnium gear lays on the ground."};
 			String[] choices = {"Take gear.","Do not take gear."};
 			boolean[] outcome = {true, false};
 			String[][] consequences= {{"You gain an alatnium gear. It is harder than diamond."},{CHAR_NAME+": I can probably find one of those elsewhere."}};
-			Choice takeSword = new Choice(events[StoryEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
+			Choice takeSword = new Choice(events[PlotEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, takeSword);
 		}
-		if (i==StoryEvent.AIRSHIP_UNLOCKED){
+		if (i==PlotEvent.AIRSHIP_UNLOCKED){
 			String[] context = {"NORM: Have you got a alatnium gear?"};
 			String[] choices = {"Give gear.","Do not give gear."};
 			boolean[] outcome = {true, false};
 			String[][] consequences= {{"NORM: Do you understand how hard these are to find!?","NORM: How did you ever find one of these?",CHAR_NAME+": It was in the den of the giant snake I defeated in the last StoryPoint","NORM: Whoah, that's so meta."},{"NORM: Well, let me know if you ever find one."}};
-			Choice takeSword = new Choice(events[StoryEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
+			Choice takeSword = new Choice(events[PlotEvent.BOSS_1_DEFEATED],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, takeSword);
-		}if(i==StoryEvent.GEAR_BOUGHT){
+		}if(i==PlotEvent.GEAR_BOUGHT){
 			String[] context = {"PEDLER: You can buy this rare gear for only 10,000 nerp."};
 			String[] choices = {"Buy gear.","Do not buy gear."};
 			boolean[] outcome = {true, false};
 			String[][] consequences= {{"PEDLER: Pleasure doing business with you!"},{"PEDLER: It's a shame. These gears are so rare."}};
-			Choice takeSword = new Choice(events[StoryEvent.GEAR_FOUND],choices ,outcome, consequences);
+			Choice takeSword = new Choice(events[PlotEvent.GEAR_FOUND],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, takeSword);
 		}
 		currentString = descisionAtHand.nextLine();
@@ -137,7 +137,7 @@ public class StoryPoint {
 		int y = 40;
 		g.drawString("PRESS 'Q' TO JUMP TO THE NEXT POINT IN THE STORY.",30, y);
 		y+=LINE_SPACE;
-		for(StoryEvent se : events){
+		for(PlotEvent se : events){
 			y=printMultiLine(g, se.getDescription() + ": "+ se.state(), 30, y, 75);
 		}
 		g.setColor(Color.blue);
@@ -208,7 +208,7 @@ public class StoryPoint {
 		return image;
 	}
 
-	public StoryEvent[] getEvents(){
+	public PlotEvent[] getEvents(){
 		return events;
 	}
 
@@ -227,16 +227,16 @@ public class StoryPoint {
 
 	//determines which point to go to next, depending on the decision that was previously made
 	public int getNextPoint() {
-		if(choiceID==StoryEvent.FATHER_LEAVES)return StoryEvent.SWORD_FOUND;
-		else if(choiceID==StoryEvent.SWORD_FOUND)return StoryEvent.BOSS_1_DEFEATED;
-		else if(choiceID==StoryEvent.BOSS_1_DEFEATED)return StoryEvent.GEAR_FOUND;
-		else if(choiceID==StoryEvent.GEAR_FOUND){
-			if(selection == 0)return StoryEvent.AIRSHIP_UNLOCKED;
-			else return StoryEvent.GEAR_BOUGHT;
+		if(choiceID==PlotEvent.FATHER_LEAVES)return PlotEvent.SWORD_FOUND;
+		else if(choiceID==PlotEvent.SWORD_FOUND)return PlotEvent.BOSS_1_DEFEATED;
+		else if(choiceID==PlotEvent.BOSS_1_DEFEATED)return PlotEvent.GEAR_FOUND;
+		else if(choiceID==PlotEvent.GEAR_FOUND){
+			if(selection == 0)return PlotEvent.AIRSHIP_UNLOCKED;
+			else return PlotEvent.GEAR_BOUGHT;
 		}
-		else if(choiceID==StoryEvent.GEAR_BOUGHT){
-			if(selection == 0)return StoryEvent.AIRSHIP_UNLOCKED;
-			else return StoryEvent.GEAR_BOUGHT;
+		else if(choiceID==PlotEvent.GEAR_BOUGHT){
+			if(selection == 0)return PlotEvent.AIRSHIP_UNLOCKED;
+			else return PlotEvent.GEAR_BOUGHT;
 		}
 		return 0;
 	}
