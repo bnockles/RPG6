@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
@@ -16,6 +17,7 @@ import directors.Screen;
 
 public class CharacterScreen extends Screen implements KeyListener{
 
+	private static final int MOVE_UNIT = 10;
 	String[] statNames = {"Health", "Attack", "Defense", "Mana", "Speed", "Drop Rate", "Crit Hit Chance", "CurrentExp"};
 	String name;
 	double[] stats;
@@ -29,6 +31,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 	SamplePotion potion;
 	BufferedImage heroImg;
 	BufferedImage icon;
+	ArrayList<Integer> pressedKeys;
 	
 	public CharacterScreen(Game game) {
 		super(game);
@@ -39,6 +42,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		armor = new SampleArmor("Armor", 50);
 		potion = new SamplePotion("Potion", 10);
 		maxHeath = hero.getHealth();
+		pressedKeys = new ArrayList<Integer>();
 		
 		hero.addItem(sword);
 		hero.addItem(armor);
@@ -153,47 +157,69 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}
 		
 		//movement
-        if(e.getKeyCode() == KeyEvent.VK_UP){
-            hero.setY(hero.getY()-10);
-            game.repaint();
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-            hero.setY(hero.getY()+10);
-            game.repaint();
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            hero.setX(hero.getX()-10);
-            game.repaint();
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            hero.setX(hero.getX()+10);
-            game.repaint();
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_LEFT){
-            hero.setY(hero.getY()+10);
-            hero.setX(hero.getX()+10);
-            game.repaint();
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_RIGHT){
-            hero.setY(hero.getY()+10);
-            hero.setX(hero.getX()-10);
-            game.repaint();
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_DOWN && e.getKeyCode() == KeyEvent.VK_LEFT){
-            hero.setY(hero.getY()-10);
-            hero.setX(hero.getX()+10);
-            game.repaint();
-        }
-        else if(e.getKeyCode() == KeyEvent.VK_DOWN && e.getKeyCode() == KeyEvent.VK_RIGHT){
-            hero.setY(hero.getY()-10);
-            hero.setX(hero.getX()-10);
-            game.repaint();
-        }
+//        if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_LEFT){
+//            hero.setY(hero.getY()+10);
+//            hero.setX(hero.getX()+10);
+//            update();
+//            game.repaint();
+//        }
+//        else if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_RIGHT){
+//            hero.setY(hero.getY()+10);
+//            hero.setX(hero.getX()-10);
+//            update();
+//            game.repaint();
+//        }
+//        else if(e.getKeyCode() == KeyEvent.VK_DOWN && e.getKeyCode() == KeyEvent.VK_LEFT){
+//            hero.setY(hero.getY()-10);
+//            hero.setX(hero.getX()+10);
+//            update();
+//            game.repaint();
+//        }
+//        else if(e.getKeyCode() == KeyEvent.VK_DOWN && e.getKeyCode() == KeyEvent.VK_RIGHT){
+//            hero.setY(hero.getY()-10);
+//            hero.setX(hero.getX()-10);
+//            update();
+//            game.repaint();
+//        }
+//        else if(e.getKeyCode() == KeyEvent.VK_UP){
+//            hero.setY(hero.getY()-10);
+//            update();
+//            game.repaint();
+//        }
+//        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
+//            hero.setY(hero.getY()+10);
+//            update();
+//            update();
+//            game.repaint();
+//        }
+//        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
+//            hero.setX(hero.getX()-10);
+//            update();
+//            game.repaint();
+//        }
+//        else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
+//            hero.setX(hero.getX()+10);
+//            update();
+//            game.repaint();
+//        }
+		
+		 int keyCode = e.getKeyCode();
+		 if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_LEFT){
+			 if(!pressedKeys.contains(keyCode))pressedKeys.add(keyCode);
+		 }
+		 if(!pressedKeys.isEmpty()){
+			 hero.setWalking(true);
+		 }
+		 respondToKeyInput();
 	}
 
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyEvent e) {
+		 int keyCode = e.getKeyCode();
+		 if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_LEFT){
+			 pressedKeys.remove(pressedKeys.indexOf(keyCode));
+		 }
+		 if(pressedKeys.isEmpty())hero.setWalking(false);
+		 respondToKeyInput();
 	}
 
 	public void keyTyped(KeyEvent arg0) {
@@ -208,6 +234,13 @@ public class CharacterScreen extends Screen implements KeyListener{
 		return this;
 	}
 
+	private void respondToKeyInput() { 
+		if(pressedKeys.contains(KeyEvent.VK_UP) && !pressedKeys.contains(KeyEvent.VK_DOWN)) hero.setY(hero.getY() - MOVE_UNIT); 
+		if(!pressedKeys.contains(KeyEvent.VK_UP) && pressedKeys.contains(KeyEvent.VK_DOWN)) hero.setY(hero.getY() + MOVE_UNIT); 
+		if(pressedKeys.contains(KeyEvent.VK_RIGHT) && !pressedKeys.contains(KeyEvent.VK_LEFT)) hero.setX(hero.getX() + MOVE_UNIT); 
+		if(!pressedKeys.contains(KeyEvent.VK_RIGHT) && pressedKeys.contains(KeyEvent.VK_LEFT)) hero.setX(hero.getX() - MOVE_UNIT); 
+	}
+	
 	public void paintScreen(Graphics2D g2){
 		g2.setColor(Color.black);
 		g2.drawString("This is the hero", 30, 75);
@@ -255,7 +288,10 @@ public class CharacterScreen extends Screen implements KeyListener{
 		
 		
 		//display character
-		g2.drawImage(icon, hero.getX(), hero.getY(), null);
+		//g2.drawImage(icon, hero.getX(), hero.getY(), null);
+		
+		hero.increaseCount();
+		g2.drawImage(hero.getImage(),hero.getX(),hero.getY(),null);
 	}
 	
 }
