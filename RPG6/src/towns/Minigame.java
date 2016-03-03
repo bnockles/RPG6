@@ -54,6 +54,22 @@ public class Minigame extends AbstractNPC {
 	    }
 	}
 	
+	public void flipCoin(){
+		Random generator = new Random(); 
+		 //Generate computer's play (0,1,2) 
+	    int computerInt = generator.nextInt(2)+1; 
+	    //Translate computer's randomly generated play to 
+	    //string using if //statements 
+	    if (computerInt == 1){ 
+	       computerPlay = "H";
+	       System.out.println("Computer: H");
+	    }
+	    else if (computerInt == 2){ 
+	       computerPlay = "T"; 
+	       System.out.println("Computer: T");
+	    }
+	}
+	
 	@Override
 	public void npcMovement() {
 		// TODO Auto-generated method stub

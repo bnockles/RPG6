@@ -5,12 +5,20 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-import menus.MainMenu;
 import directors.Game;
 import directors.Screen;
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  * 
@@ -19,9 +27,9 @@ import directors.Screen;
  */
 public class TownScreen extends Screen implements KeyListener{
 
-	public static final int talkMerchant = KeyEvent.VK_1;
-	public static final int talkMini = KeyEvent.VK_2;
-	public static final int talkStorage = KeyEvent.VK_3;
+	public static final int talkNpc1 = KeyEvent.VK_1;
+	public static final int talkNpc2 = KeyEvent.VK_2;
+	public static final int talkNpc3 = KeyEvent.VK_3;
 	public static final int storeItem = KeyEvent.VK_4;
 	public static final int takeItem = KeyEvent.VK_5;
 	public static final int buyItem1 = KeyEvent.VK_6;
@@ -30,6 +38,8 @@ public class TownScreen extends Screen implements KeyListener{
 	public static final int sellItem = KeyEvent.VK_9;
 	public static final int rock = KeyEvent.VK_R;
 	public static final int paper = KeyEvent.VK_R;
+	public static final int heads = KeyEvent.VK_H;
+	public static final int tails = KeyEvent.VK_T;
 	public static final int scissor = KeyEvent.VK_S;
 	public static final int infoNpc1 = KeyEvent.VK_Q;
 	public static final int infoNpc3 = KeyEvent.VK_W;
@@ -47,8 +57,23 @@ public class TownScreen extends Screen implements KeyListener{
 	Minigame miniGame1;
 	Minigame miniGame2;
 	dummy dummy;
+	static int dummyCounter = 0;
 	Storage storageDude;
 	int timesWonRps = 0;
+	int timesWonFlip =0;
+	static boolean town1 = true;
+	static boolean town2 = false;
+	static boolean town3 = false;
+	
+	
+	//Sounds and music
+	static AudioPlayer MGP = AudioPlayer.player;
+	static AudioStream BGM;
+	static AudioData MD;
+	static ContinuousAudioDataStream loop = null;
+	static InputStream town1Music;  
+	static InputStream town2Music; 
+	static InputStream town3Music; 
 	
 	
 	ArrayList<String> inventory = new ArrayList<String>();
@@ -57,9 +82,10 @@ public class TownScreen extends Screen implements KeyListener{
 	public static ArrayList<AbstractNPC> town3Npc = new ArrayList<AbstractNPC>();
 	ArrayList<towns> Towns = new ArrayList<towns>();
 	
-	towns currentTown;
+	static towns currentTown;
 
 	public static String welcomeMessage = "Welcome to Pellet Town!";
+	SampleCharacter town;
 	public static String message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 	public static String actionMessage = "";
 	public static String storedItems = "";
@@ -75,7 +101,9 @@ public class TownScreen extends Screen implements KeyListener{
 	
 	
 	public TownScreen(Game game) {
-		super(game);
+		super(game);		
+		
+		music();
 		
 		currentTown = townStock.getTown(townStock.PelletTown);
 		
@@ -101,7 +129,8 @@ public class TownScreen extends Screen implements KeyListener{
 		inventory.add("Long Bow");
 		
 		this.character = new SampleCharacter(400, "Con Duh Kurr","/images/character.png",9,590, inventory);
-		this.displayNpc = new SampleCharacter("/images/white.png",600,590);
+		this.displayNpc = new SampleCharacter("/images/white.png",600,590, "npc");
+		this.town = new SampleCharacter("/images/town1.png",600,100, "town");
 		
 		//Npcs in Town 1
 		this.merchant1 = new Merchant("Kathy","Female","Kathy is a merchant, merchants sell specific items based on what town you are in, Kathy sells potions." , true);
@@ -113,7 +142,8 @@ public class TownScreen extends Screen implements KeyListener{
 		
 		//Npcs in Town 3
 		this.merchant3 = new Merchant("Karmen", "Female", "Karmen is the merchant for Old Yelelr Town, she sells armor!", true);
-		this.dummy = new dummy("Omar", "Male", "All the storage dudes look the same... I secretly think they are all clones of each other! And how do they all store the same items when they are in different towns???",true);
+		this.dummy = new dummy("Omar", "Male", "This is a dummy npc, they don't do much in terms of actual gameplay but rather they give you small hints and tips on what to do in the game.",true);
+
 		
 		//Storage is in Every Town
 		this.storageDude = new Storage("Greg","Male","He is your storage guy, him and his cousins (who look exactly like him) are in every town in case you want to store items and then take them back for later.", true);
@@ -131,6 +161,7 @@ public class TownScreen extends Screen implements KeyListener{
 		try{
 			g2.drawImage(character.getImage(),character.getX(),character.getY(),null);
 			g2.drawImage(displayNpc.getImage(),displayNpc.getX(),displayNpc.getY(),null);
+			g2.drawImage(town.getImage(),town.getX(),town.getY(),null);
 			g2.drawString("NAME: " + character.getName(), 170, 620);
 			g2.drawString("BALANCE: " + character.getCurrency() + " Gems", 170, 640);
 			g2.drawString("Current Inventory: ", 170, 720);
@@ -147,10 +178,11 @@ public class TownScreen extends Screen implements KeyListener{
 			g2.drawString(storedItems, 50, 425);
 			
 			
-			
 			//Gui for first town
 			if(currentTown.getTownName() == "Pellet Town"){
+				
 				welcomeMessage = "Welcome to Pellet Town";
+				this.town = new SampleCharacter("/images/town1.png",600,100, "town");
 				g2.drawString("Press 'N' to go to Big Root Town, or 'M' to go to Old Yelp Town.", 350, 75);
 				
 				g2.drawString(merchant1.getName(), 50, 100);
@@ -171,6 +203,7 @@ public class TownScreen extends Screen implements KeyListener{
 			//Gui for Second town
 			if(currentTown.getTownName() == "Big Root Town"){
 				welcomeMessage = "Welcome to Big Root Town!";
+				this.town = new SampleCharacter("/images/town2.png",600,100, "town");
 				g2.drawString("Press 'B' to go to Pellet Town, or 'M' to go to Old Yelp Town.", 350, 75);
 				
 				g2.drawString(merchant2.getName(), 50, 100);
@@ -189,6 +222,7 @@ public class TownScreen extends Screen implements KeyListener{
 			//Gui for third town
 			if(currentTown.getTownName() == "Old Yelp Town"){
 				welcomeMessage = "Welcome to Old Yelp Town!";
+				this.town = new SampleCharacter("/images/town3.png",600,100, "town");
 				g2.drawString("Press 'B' to go to Pellet Town, or 'N' to go to Big Root Town.", 350, 75);
 				
 				g2.drawString(merchant3.getName(), 50, 100);
@@ -207,6 +241,65 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		
 	}
+	
+
+	
+	public static void music(){
+		try {
+			town1Music = new FileInputStream("bin/images/town1.wav");
+			BGM = new AudioStream(town1Music);
+			AudioPlayer.player.start(BGM);
+			//MD = BGM.getData();
+			//loop = new ContinuousAudioDataStream(MD);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		MGP.start(loop);
+	}
+	
+	public static void music2(){
+		try {
+			town2Music = new FileInputStream("bin/images/town2.wav");
+			BGM = new AudioStream(town2Music);
+			AudioPlayer.player.start(BGM);
+			//MD = BGM.getData();
+			//loop = new ContinuousAudioDataStream(MD);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		MGP.start(loop);
+	}
+	
+	public static void music3(){		
+		try {
+			InputStream town3Music = new FileInputStream("bin/images/town3.wav");
+			BGM = new AudioStream(town3Music);
+			AudioPlayer.player.start(BGM);
+			//MD = BGM.getData();
+			//loop = new ContinuousAudioDataStream(MD);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		MGP.start(loop);
+	}
+	
+
+	
+	public static void stopMusic(){
+		AudioPlayer.player.stop(BGM);
+	}
 
 	/* (non-Javadoc)
 	 * @see directors.Screen#getKeyListener()
@@ -219,7 +312,7 @@ public class TownScreen extends Screen implements KeyListener{
 
 	public void keyPressed(KeyEvent e) {
 		
-		if(e.getKeyCode()==talkMerchant && currentTown.getTownName() == "Pellet Town"){
+		if(e.getKeyCode()==talkNpc1 && currentTown.getTownName() == "Pellet Town"){
 			System.out.println("1 was pressed");
 			
 			if(character.getCurrency() < 300){
@@ -231,9 +324,51 @@ public class TownScreen extends Screen implements KeyListener{
 				message = "Welcome to the market! Feel free to buy what we have or sell what you have! Press 'K' to quit.";
 			}
 			
-			displayNpc = new SampleCharacter("/images/merchant.png",810,400);
+			displayNpc = new SampleCharacter("/images/merchant.png",810,400,"npc");
 			miniGame1.setComputerPlay("null");
 			actionMessage = "Press  6 for Healing Potions (300 Gems), 7 for Mana Potion (400 Gems), and 8 for Stats Potion (500 Gems)";
+			Merchant.buyable = true;
+			storedItems = "";
+			Storage.storable = false;
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==talkNpc1 && currentTown.getTownName() == "Big Root Town"){
+			System.out.println("1 was pressed");
+			
+			if(character.getCurrency() < 600){
+				message = "Oops! Seems like you don't have enough to buy anything! You need at least 600 gems, go and see Bob to try and earn some money!";
+				actionMessage = "You need more gems!";
+			}
+			
+			else{
+				message = "Welcome to the market! Feel free to buy what we have or sell what you have! Press 'K' to quit.";
+			}
+			
+			displayNpc = new SampleCharacter("/images/merchant2.png",810,400,"npc");
+			miniGame1.setComputerPlay("null");
+			actionMessage = "Press  6 for Shuriken (600 Gems), 7 for Katana (700 Gems), and 8 for Pistol (800 Gems)";
+			Merchant.buyable = true;
+			storedItems = "";
+			Storage.storable = false;
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==talkNpc1 && currentTown.getTownName() == "Old Yelp Town"){
+			System.out.println("1 was pressed");
+			
+			if(character.getCurrency() < 400){
+				message = "Oops! Seems like you don't have enough to buy anything! You need at least 400 gems, go and see Bob to try and earn some money!";
+				actionMessage = "You need more gems!";
+			}
+			
+			else{
+				message = "Welcome to the market! Feel free to buy what we have or sell what you have! Press 'K' to quit.";
+			}
+			
+			displayNpc = new SampleCharacter("/images/merchant3.png",810,400,"npc");
+			miniGame1.setComputerPlay("null");
+			actionMessage = "Press  6 for Healing leather armor (400 Gems), 7 for Iron armor (500 Gems), and 8 for diamond armor (600 Gems)";
 			Merchant.buyable = true;
 			storedItems = "";
 			Storage.storable = false;
@@ -245,7 +380,7 @@ public class TownScreen extends Screen implements KeyListener{
 			System.out.println("6 was pressed");
 			
 			if(character.getCurrency() < 300){
-				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 400 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
 			
@@ -257,12 +392,46 @@ public class TownScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
+		if(e.getKeyCode()==buyItem1 && Merchant.buyable == true && currentTown.getTownName() == "Big Root Town"){
+			
+			System.out.println("6 was pressed");
+			
+			if(character.getCurrency() < 600){
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 600 gems, go and see Bob to try and earn some money!";
+				actionMessage = "You don't have any more gems!";
+			}
+			
+			else{
+				character.setCurrency(character.getCurrency()-600);
+				inventory.add("Shuriken");
+			}
+			
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==buyItem1 && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town"){
+			
+			System.out.println("6 was pressed");
+			
+			if(character.getCurrency() < 400){
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 400 gems, go and see Bob to try and earn some money!";
+				actionMessage = "You don't have any more gems!";
+			}
+			
+			else{
+				character.setCurrency(character.getCurrency()-400);
+				inventory.add("Leather Armor");
+			}
+			
+			update();
+			game.repaint();
+		}
 		if(e.getKeyCode()==buyItem2 && Merchant.buyable == true && currentTown.getTownName() == "Pellet Town"){
 			
 			System.out.println("7 was pressed");
 			
 			if(character.getCurrency() < 400){
-				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 400 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
 			
@@ -274,18 +443,86 @@ public class TownScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
+		if(e.getKeyCode()==buyItem2 && Merchant.buyable == true && currentTown.getTownName() == "Big Root Town"){
+			
+			System.out.println("7 was pressed");
+			
+			if(character.getCurrency() < 700){
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 700 gems, go and see Bob to try and earn some money!";
+				actionMessage = "You don't have any more gems!";
+			}
+			
+			else{
+				character.setCurrency(character.getCurrency()-700);
+				inventory.add("Katana");
+			}
+			
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==buyItem2 && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town"){
+			
+			System.out.println("7 was pressed");
+			
+			if(character.getCurrency() < 500){
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 500 gems, go and see Bob to try and earn some money!";
+				actionMessage = "You don't have any more gems!";
+			}
+			
+			else{
+				character.setCurrency(character.getCurrency()-500);
+				inventory.add("Iron Armor");
+			}
+			
+			update();
+			game.repaint();
+		}
 		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Pellet Town"){
 			
 			System.out.println("8 was pressed");
 			
 			if(character.getCurrency() < 500){
-				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
 			
 			else{
 				character.setCurrency(character.getCurrency()-500);
 				inventory.add("Stats Potion");
+			}
+			
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Big Root Town"){
+			
+			System.out.println("8 was pressed");
+			
+			if(character.getCurrency() < 800){
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 800 gems, go and see Bob to try and earn some money!";
+				actionMessage = "You don't have any more gems!";
+			}
+			
+			else{
+				character.setCurrency(character.getCurrency()-800);
+				inventory.add("Pistol");
+			}
+			
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town"){
+			
+			System.out.println("8 was pressed");
+			
+			if(character.getCurrency() < 600){
+				message = "Oops! Seems like you don't have enough to buy this! You need at least 600 gems, go and see Bob to try and earn some money!";
+				actionMessage = "You don't have any more gems!";
+			}
+			
+			else{
+				character.setCurrency(character.getCurrency()-600);
+				inventory.add("Diamond Armor");
 			}
 			
 			update();
@@ -313,18 +550,30 @@ public class TownScreen extends Screen implements KeyListener{
 				if(inventory.get(0) == "Long Bow"){
 					character.setCurrency(character.getCurrency()+600);
 				}
-				//ADD MORE ITEMS LATER
-				//
-				//
-				//
-				//
-				//
+				if(inventory.get(0) == "Leather Armor"){
+					character.setCurrency(character.getCurrency()+300);
+				}
+				if(inventory.get(0) == "Iron Armor"){
+					character.setCurrency(character.getCurrency()+400);
+				}
+				if(inventory.get(0) == "Diamond Armor"){
+					character.setCurrency(character.getCurrency()+500);
+				}
+				if(inventory.get(0) == "Shuriken"){
+					character.setCurrency(character.getCurrency()+500);
+				}
+				if(inventory.get(0) == "Katana"){
+					character.setCurrency(character.getCurrency()+600);
+				}
+				if(inventory.get(0) == "Pistol"){
+					character.setCurrency(character.getCurrency()+700);
+				}
 				inventory.remove(0);
 			}
 			update();
 			game.repaint();
 		}
-		if(e.getKeyCode()==talkMini && currentTown.getTownName() == "Pellet Town"){
+		if(e.getKeyCode()==talkNpc2 && currentTown.getTownName() == "Pellet Town"){
 			System.out.println("2 was pressed");
 			if(character.getCurrency() < 100){
 				message = "You don't have enough money to play! Sorry!";
@@ -334,11 +583,73 @@ public class TownScreen extends Screen implements KeyListener{
 				message = "We are going to play rock, paper, scissors. Press 'R' for rock, 'P' for paper, and 'S' for scissors. Or press 'K' to quit. You have won: " + timesWonRps + " times.";
 				miniGame1.playRPS();
 			}
-			displayNpc = new SampleCharacter("/images/minigame.jpg",810,400);
+			displayNpc = new SampleCharacter("/images/minigame.jpg",810,400,"npc");
 			actionMessage = "";
 			storedItems = "";
 			Storage.storable = false;
 			Merchant.buyable = false;
+			update();
+			game.repaint();
+		}
+		
+		//EDIT MINI GAME 2
+		if(e.getKeyCode()==talkNpc2 && currentTown.getTownName() == "Big Root Town"){
+			System.out.println("2 was pressed");
+			if(character.getCurrency() < 100){
+				message = "You don't have enough money to play! Sorry!";
+				miniGame2.setComputerPlay("null");
+			}
+			else{
+				message = "Dare to take chance? Lets flip coin, yeah? 'H' for heads, 'T' for tails! Or press 'K' to quit. You have won: " + timesWonFlip + " times.";
+				miniGame2.flipCoin();
+			}
+			displayNpc = new SampleCharacter("/images/minigame2.jpg",810,400,"npc");
+			actionMessage = "";
+			storedItems = "";
+			Storage.storable = false;
+			Merchant.buyable = false;
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==talkNpc2 && currentTown.getTownName() == "Old Yelp Town"){
+			System.out.println("2 was pressed");
+			displayNpc = new SampleCharacter("/images/dummy.jpg",810,400,"npc");
+			dummyCounter++;
+			message = dummy.getNpcMessages(dummyCounter);
+			actionMessage = "";
+			storedItems = "";
+			Storage.storable = false;
+			Merchant.buyable = false;
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==heads){
+			if(miniGame2.getComputerPlay()=="H"){
+				message = "It lands on heads! I lost??? Take 100 gems. Press 'K' to quit.";
+				timesWonFlip++;
+				character.setCurrency(character.getCurrency()+100);
+				miniGame2.setComputerPlay("null");
+			}
+			if(miniGame2.getComputerPlay()=="T"){
+				message = "It lands on tails! Ha! I have won, you lost 100 Gems! Press 'K' to quit.";
+				character.setCurrency(character.getCurrency()-100);
+				miniGame2.setComputerPlay("null");
+			}
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==tails){
+			if(miniGame2.getComputerPlay()=="T"){
+				message = "It lands on tails! I lost??? Take 100 gems. Press 'K' to quit.";
+				timesWonFlip++;
+				character.setCurrency(character.getCurrency()+100);
+				miniGame2.setComputerPlay("null");
+			}
+			if(miniGame2.getComputerPlay()=="H"){
+				message = "It lands on heads! Ha! I have won, you lost 100 Gems! Press 'K' to quit.";
+				character.setCurrency(character.getCurrency()-100);
+				miniGame2.setComputerPlay("null");
+			}
 			update();
 			game.repaint();
 		}
@@ -399,12 +710,12 @@ public class TownScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-		if(e.getKeyCode()==talkStorage){
+		if(e.getKeyCode()==talkNpc3){
 			System.out.println("3 was pressed");
 			Storage.storable = true;
 			message = "Have you seen my cousins? They look exactly like me! We store your goods! Store something (Press '4') or take out something out (Press '5'). Press 'K' to quit.";
 			actionMessage = "";
-			displayNpc = new SampleCharacter("/images/storage.png",810,400);
+			displayNpc = new SampleCharacter("/images/storage.png",810,400,"npc");
 			storedItems = "The items you have stored are: ";
 			for(int i=0;i < Storage.storedItems.size();i++){
 				storedItems += Storage.storedItems.get(i)+ " ";
@@ -416,7 +727,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==infoNpc1 && currentTown.getTownName() == "Pellet Town"){
 			System.out.println("Q was pressed");
-			this.displayNpc = new SampleCharacter("/images/merchant.png",810,400);
+			this.displayNpc = new SampleCharacter("/images/merchant.png",810,400,"npc");
 			message = merchant1.getDescription();
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
@@ -428,7 +739,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==infoNpc1 && currentTown.getTownName() == "Big Root Town"){
 			System.out.println("Q was pressed");
-			this.displayNpc = new SampleCharacter("/images/merchant2.png",810,400);
+			this.displayNpc = new SampleCharacter("/images/merchant2.png",810,400,"npc");
 			message = merchant2.getDescription();
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
@@ -440,7 +751,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==infoNpc1 && currentTown.getTownName() == "Old Yelp Town"){
 			System.out.println("Q was pressed");
-			this.displayNpc = new SampleCharacter("/images/merchant3.png",810,400);
+			this.displayNpc = new SampleCharacter("/images/merchant3.png",810,400,"npc");
 			message = merchant3.getDescription();
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
@@ -452,7 +763,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==infoNpc2){
 			System.out.println("E was pressed");
-			this.displayNpc = new SampleCharacter("/images/storage.png",810,400);
+			this.displayNpc = new SampleCharacter("/images/storage.png",810,400,"npc");
 			message = storageDude.getDescription();
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
@@ -464,7 +775,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==infoNpc3 && currentTown.getTownName() == "Pellet Town"){
 			System.out.println("W was pressed");
-			this.displayNpc = new SampleCharacter("/images/minigame.jpg",810,400);
+			this.displayNpc = new SampleCharacter("/images/minigame.jpg",810,400,"npc");
 			message = miniGame1.getDescription();
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
@@ -476,7 +787,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==infoNpc3 && currentTown.getTownName() == "Big Root Town"){
 			System.out.println("W was pressed");
-			this.displayNpc = new SampleCharacter("/images/minigame2.jpg",810,400);
+			this.displayNpc = new SampleCharacter("/images/minigame2.jpg",810,400,"npc");
 			message = miniGame2.getDescription();
 			actionMessage = "";
 			storedItems = "";
@@ -487,7 +798,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==infoNpc3 && currentTown.getTownName() == "Old Yelp Town"){
 			System.out.println("W was pressed");
-			this.displayNpc = new SampleCharacter("/images/dummy.jpg",810,400);
+			this.displayNpc = new SampleCharacter("/images/dummy.jpg",810,400,"npc");
 			message = dummy.getDescription();
 			actionMessage = "";
 			storedItems = "";
@@ -498,7 +809,7 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==quit){
 			System.out.println("K was pressed");
-			this.displayNpc = new SampleCharacter("/images/white.png",810,400);
+			this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
 			message =  "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
@@ -544,39 +855,54 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==goToPellet && currentTown.getTownName() != "Pellet Town"){
 			System.out.println("B was pressed");
-			this.displayNpc = new SampleCharacter("/images/white.png",810,400);
+			this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
 			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 			actionMessage = "";
 			storedItems = "";
 			Storage.storable = false;
 			Merchant.buyable = false;
 			currentTown = townStock.getTown(townStock.PelletTown);
+			town1 = true;
+			town2 = false;
+			town3 = false;
+			stopMusic();
+			music();
 			welcomeMessage = "Welcome to Pellet Town!";
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==goToBigRoot && currentTown.getTownName() != "Big Root Town"){
 			System.out.println("N was pressed");
-			this.displayNpc = new SampleCharacter("/images/white.png",810,400);
+			this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
 			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 			actionMessage = "";
 			storedItems = "";
 			Storage.storable = false;
 			Merchant.buyable = false;
 			currentTown = townStock.getTown(townStock.BigRootTown);
+			town1 = false;
+			town2 = true;
+			town3 = false;
+			stopMusic();
+			music2();
 			welcomeMessage = "Welcome to Big Root Town!";
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==goToOldYelp && currentTown.getTownName() != "Old Yelp Town"){
 			System.out.println("M was pressed");
-			this.displayNpc = new SampleCharacter("/images/white.png",810,400);
+			this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
 			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 			actionMessage = "";
 			storedItems = "";
 			Storage.storable = false;
 			Merchant.buyable = false;
 			currentTown = townStock.getTown(townStock.OldYelpTown);
+			town1 = false;
+			town2 = false;
+			town3 = true;
+			stopMusic();
+			music3();
 			welcomeMessage = "Welcome to Old Yelp Town!";
 			update();
 			game.repaint();

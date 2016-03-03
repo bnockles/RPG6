@@ -96,9 +96,13 @@ public class SampleCharacter {
 		}
 	}
 	
-	public SampleCharacter(String imageLocation, int locationX, int locationY){
+	public SampleCharacter(String imageLocation, int locationX, int locationY, String type){
 		int width = 150;
 		int height = 200;
+		if (type == "town"){
+			width = 350;
+			height = 250;
+		}
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		x = locationX;
 		y = locationY;
