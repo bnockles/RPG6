@@ -10,6 +10,6 @@ public class BattleDemo extends Game{
 	protected void reset() {
 		Screen demoScreen = new battleScreen(this);
 		setScreen(demoScreen); 
-		repaint();
+		repaint(); 
 	}
 }
