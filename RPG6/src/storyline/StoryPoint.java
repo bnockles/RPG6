@@ -27,6 +27,11 @@ public class StoryPoint {
 	private int choiceID;
 
 	public static final String CHAR_NAME = "TROY";
+	public static final String LOVE_GAL_1 = "GRENDA";
+	public static final String LOVE_GAL_2 = "YUNG LI";
+	public static final String LOVE_BOY_1 = "PIP";
+	public static final String LOVE_BOY_2 = "ORLANDO";	
+	
 
 	//the default storypoint (beginning of the game)
 	public StoryPoint(){
@@ -38,6 +43,7 @@ public class StoryPoint {
 			};
 		}
 		//The first decision:
+		StorylineScreen.callImage(DESTORY_VILLAGE);
 		String[] context = {"The first seven years of your life were full of bliss.",
 				"Kind friends. A warm home. A loving family.",
 				"These were the kinds of luxuries you took for granted.",
@@ -47,7 +53,7 @@ public class StoryPoint {
 		String[] choices = {"Run left.", "Run right"};
 		boolean[] outcome = {true, false};
 		String[][] consequences= {{"You run left as far as you can. Around you, all you can see are the corpses of your neighbors and friends. You pass by your house on the way, and it doesnt seem like anyone will ever make it out. You continue to run as far as you can.","You run right as far as you can. Around you, all you can see are the corpses of your neighbors and friends. You pass by your house on the way, and it doesnt seem like anyone will ever make it out. You continue to run as far as you can."}};
-		Choice pickDirection = new Choice(events[StoryEvent.LEFT],choices ,outcome, consequences);
+		Choice pickDirection = new Choice(events[StoryEvent.DIRECTION],choices ,outcome, consequences);
 		descisionAtHand = new Descision(context, pickDirection);
 		currentString = descisionAtHand.nextLine();
 		width = 600;
@@ -64,6 +70,7 @@ public class StoryPoint {
 		//automatically fills in all events, since events are numbered
 
 		if (i==StoryEvent.NEW_ALLY){
+			StorylineScreen.callImage(NEW_ALLY);
 			String[] context = {"Eventually, you are found by the troops of a neighboring kingdom. You are your village's only survivor.",
 					"As the days pass by in the neighboring kingdom, you grow increasingly angry.",
 					CHAR_NAME+":Who was it that took away my family? Who was it that ruined my life?",
@@ -86,6 +93,7 @@ public class StoryPoint {
 		this.events = previousState;
 		choiceID = i ;
 		if (i==StoryEvent.KISS_SO){
+			StorylineScreen.callImage(KISS_SO);
 			String[] context = {"Eventually, you were able to grow close to these friends.",
 					"So much so, that you decide you might want to settle down with one."};
 			String[] choices = {"Kiss someone you care about", "Do not kiss anyone.."};
