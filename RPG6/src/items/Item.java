@@ -1,21 +1,30 @@
 package items;
 
 public abstract class Item {
+	private String id;
 	private String name;
 	private String description;
-	private DrawItem draw;
+	private DrawItem drawItem;
 
-	public Item(String name, String description){
+	public Item(String id, String name, String description){
+		this.id = id;
 		this.description = description;
 		this.name = name;
-		this.draw = new DrawItem();
+		this.drawItem = new DrawItem();
 	}
-	//s
-	public String toString(){ return this.name; }
-	public boolean equals(Item item){ return this.name == item.name; }
 	
-	public String getDescription() { return this.description; }
+	//return this for builder pattern 
+	public Item setDrawItem(DrawItem d){ 
+		this.drawItem = d;
+		return this;
+	}
+	
+	public String toString(){ return this.name; }
+	public boolean equals(Item item){ return this.id.equals(item.id); }
+
+	public String getId() { return this.id; }
 	public String getName() { return this.name; }
+	public String getDescription() { return this.description; }
 	
 
 	public abstract boolean canUse(Character user);
