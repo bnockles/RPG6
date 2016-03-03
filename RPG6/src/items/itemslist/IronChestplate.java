@@ -6,7 +6,7 @@ import items.Stats;
 
 public class IronChestplate extends Equipment {
 
-	public IronChestplate(String name, String description, int type, Stats stats, int durability) {
+	public IronChestplate() {
 		super("IronChestplate", "Iron Chestplate", "REQ: 20 STR, 5 DEX", CHEST, new Stats(15, 8, 1, 1, 5), 100);
 		
 	}

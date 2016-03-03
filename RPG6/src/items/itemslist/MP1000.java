@@ -7,7 +7,7 @@ public class MP1000 extends Consumable {
 	
 	boolean user_mp_full = true;
 
-	public MP1000(String name, String description, int amount) {
+	public MP1000() {
 		super("MP1000", "MP 1000", "Restores 1000 MP to the target.", 1);
 		
 	}

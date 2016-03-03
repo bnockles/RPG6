@@ -8,7 +8,7 @@ public class AngelFeather extends QuestItem /* implements Storyline's Progressor
 	int storylineProgress;
 	String characterLocation;
 	
-	public AngelFeather(String name, String description, int amount) {
+	public AngelFeather() {
 		super("AngelFeather", "Angel's Feather", "Activates Angel's Event", 3);
 	}
 
