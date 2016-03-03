@@ -1,6 +1,7 @@
 package items;
 
 import java.util.HashMap;
+import items.itemslist.*;
 
 public final class Items {
 	private static HashMap<String,Item> registry;
@@ -32,13 +33,22 @@ public final class Items {
 	//put your item here after you define it to automatically register it
 	//TODO: make sure registerBufferedItems is called on init.
 	public static void registerBufferedItems(){
-		//EXAMPLE:
-		//new TestItem().register();
+		//Quest Items
+		new AngelFeather().register();
+		
+		//Equipment
+		new BronzeSword().register();
+		
+		//Consumables
+		new HP100().register();
+		new HP500().register();
+		new HP1000().register();
+		
+		new MP100().register();
+		new MP500().register();
+		new MP1000().register();
+		
+		new SpeedI().register();
+		new SpeedII().register();
 	}
-	
-//	EXAMPLE FOR IMPLEMENTATION OF ITEMS 
-//	public static void main(String[] args) {
-//		registerBufferedItems();
-//		System.out.println("items: " + Items.items.size());
-//	}
 }
