@@ -246,7 +246,7 @@ public class TownScreen extends Screen implements KeyListener{
 	
 	public static void music(){
 		try {
-			town1Music = new FileInputStream("bin/images/town1.wav");
+			town1Music = new FileInputStream("src/towns/images/town1.wav");
 			BGM = new AudioStream(town1Music);
 			AudioPlayer.player.start(BGM);
 			//MD = BGM.getData();
@@ -263,7 +263,7 @@ public class TownScreen extends Screen implements KeyListener{
 	
 	public static void music2(){
 		try {
-			town2Music = new FileInputStream("bin/images/town2.wav");
+			town2Music = new FileInputStream("src/towns/images/town2.wav");
 			BGM = new AudioStream(town2Music);
 			AudioPlayer.player.start(BGM);
 			//MD = BGM.getData();
@@ -280,7 +280,7 @@ public class TownScreen extends Screen implements KeyListener{
 	
 	public static void music3(){		
 		try {
-			InputStream town3Music = new FileInputStream("bin/images/town3.wav");
+			InputStream town3Music = new FileInputStream("src/towns/images/town3.wav");
 			BGM = new AudioStream(town3Music);
 			AudioPlayer.player.start(BGM);
 			//MD = BGM.getData();
