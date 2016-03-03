@@ -52,7 +52,7 @@ public abstract class StoryEvent {
 		break;
 		}
 		case KISS_SO:
-		description = "Which friend will you kiss?";
+		description = "Will you kiss a friend?";
 		break;
 		}
 		case KISS_SO_YELLOW:
