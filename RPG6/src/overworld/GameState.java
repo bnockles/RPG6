@@ -9,12 +9,15 @@ import java.awt.Graphics;
 public class GameState extends State{
 	
 	private Player player;
-	private World world;
+	private World world, world2, world3, world4;
 	
 	public GameState(Game game){
 		super(game);
 		player=new Player(game, 100,100);
 		world= new World(game,"resources/worlds/world1.txt");
+		world2= new World(game,"resources/worlds/world2.txt");
+		world3= new World(game,"resources/worlds/world3.txt");
+		world4= new World(game,"resources/worlds/world4.txt");
 	}
 
 	public void update() {
