@@ -120,6 +120,8 @@ public class StoryPoint {
 	public void update(){
 		Graphics2D g = (Graphics2D)image.getGraphics();
 		paint(g);
+		StorylineScreen.paintScreen(g2);
+		// this is to repaint the background white. it maybe work who knows.
 	}
 
 	public void paint(Graphics2D g){
