@@ -4,6 +4,7 @@ package characters;
 public abstract class Character {
 	public String name;
 	public double health;
+	public double currHealth;
 	public double attack;
 	public double defense;
 	public double mana;
@@ -12,9 +13,10 @@ public abstract class Character {
 	public double critHitChance;
 	public double currentExp;
 	
-	public Character(String name, double health, double attack, double defense, double mana, double speed, double dropRate, double critHitChance, double currentExp){
+	public Character(String name, double health, double currHealth, double attack, double defense, double mana, double speed, double dropRate, double critHitChance, double currentExp){
 		this.name = name;
 		this.health = health;
+		this.currHealth = currHealth;
 		this.attack = attack;
 		this.defense = defense;
 		this.mana = mana;
@@ -36,6 +38,14 @@ public abstract class Character {
 
 	public double getHealth() {
 		return health;
+	}
+
+	public double getCurrHealth() {
+		return currHealth;
+	}
+
+	public void setCurrHealth(double currHealth) {
+		this.currHealth = currHealth;
 	}
 
 	public void setHealth(double health) {
@@ -100,7 +110,7 @@ public abstract class Character {
 
 	
 	public double[] getAllStats(){
-		double[] stats = {health, attack, defense, mana, speed, dropRate, critHitChance, currentExp};
+		double[] stats = {currHealth, attack, defense, mana, speed, dropRate, critHitChance, currentExp};
 		return stats;		
 	}
 }
