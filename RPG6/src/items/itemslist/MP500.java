@@ -8,7 +8,7 @@ public class MP500 extends Consumable {
 	boolean user_mp_full = true;
 
 	public MP500(String name, String description, int amount) {
-		super("MP 500", "Restores 500 MP to the target.", 1);
+		super("MP500", "MP 500", "Restores 500 MP to the target.", 1);
 		
 	}
 

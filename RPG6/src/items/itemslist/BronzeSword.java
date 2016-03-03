@@ -7,7 +7,7 @@ import items.Stats;
 public class BronzeSword extends Equipment {
 
 	public BronzeSword(String name, String description, int type, Stats stats, int durability) {
-		super("Bronze Sword", "REQ: 5 STR", WEAPON, new Stats(5, 5, 1, 0, 0, 1), 100);
+		super("BronzeSword", "Bronze Sword", "REQ: 5 STR", WEAPON, new Stats(5, 5, 1, 0, 0, 1), 100);
 		
 	}
 	@Override

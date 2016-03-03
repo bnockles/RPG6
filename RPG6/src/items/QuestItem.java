@@ -14,8 +14,8 @@ public abstract class QuestItem extends Item {
 		return storylineProgress;
 	}
 
-	public QuestItem(String name, String description, int amount) {
-		super(name, description);
+	public QuestItem(String id, String name, String description, int amount) {
+		super(id, name, description);
 		this.amount = amount;
 		
 	}

@@ -9,7 +9,7 @@ public class AngelFeather extends QuestItem /* implements Storyline's Progressor
 	String characterLocation;
 	
 	public AngelFeather(String name, String description, int amount) {
-		super("Angel's Feather", "Activates Angel's Event", 3);
+		super("AngelFeather", "Angel's Feather", "Activates Angel's Event", 3);
 	}
 
 	public boolean canUse(items.Character user) {

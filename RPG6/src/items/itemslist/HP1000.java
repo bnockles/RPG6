@@ -8,7 +8,7 @@ public class HP1000 extends Consumable {
 	boolean user_hp_full = true;
 
 	public HP1000(String name, String description, int amount) {
-		super("HP 1000", "Restores 1000 HP to the target.", 1);
+		super("HP1000", "HP 1000", "Restores 1000 HP to the target.", 1);
 		
 	}
 

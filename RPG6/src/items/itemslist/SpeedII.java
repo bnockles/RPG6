@@ -6,7 +6,7 @@ import items.Consumable;
 public class SpeedII extends Consumable {
 
 	public SpeedII(String name, String description, int amount) {
-		super("Speed II", "Increases the target's speed by 15.", 1);
+		super("SpeedII", "Speed II", "Increases the target's speed by 15.", 1);
 		
 	}
 
