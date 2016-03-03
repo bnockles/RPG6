@@ -8,11 +8,14 @@ import java.util.HashMap;
  * @class Inventory
  */
 public final class Inventory {
-	public HashMap<String,Integer> stock;
+	private HashMap<String,Integer> stock;
+	private int cursor;
 	
 	public Inventory(){
 		this.stock = new HashMap<String,Integer>();
+		this.cursor = 0;
 	}
+	
 	
 	
 	public int getStock(String id){
@@ -54,5 +57,20 @@ public final class Inventory {
 			stock.put(id, stock.get(id)-amt);
 		}
 	}
+
 	
+	
+	
+	public int getCursor(){ return this.cursor; }
+	
+	public void setCursor(int pos){
+		//mod with stock size to prevent out of bounds
+		this.cursor = pos % this.stock.size();
+	}
+	
+	public void moveCursor(int steps){
+		//mod with stock size to prevent out of bounds
+		this.cursor = (this.cursor + steps) % this.stock.size();
+	}
+
 }
