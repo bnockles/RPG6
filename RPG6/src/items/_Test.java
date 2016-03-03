@@ -3,9 +3,9 @@ package items;
 
 /**
  * Class to run unit tests in.
- * @class Test 
+ * @class _Test 
  */
-public final class Test {
+public final class _Test {
 	public static void main(String[] args) {
 		new InventoryTest().test();
 	}
@@ -63,9 +63,9 @@ class InventoryTest implements Testable{
 		  		  one.addStock("test");
 		  		  one.addStock("test");
 
-		Test.assertEqual(notEmpty(one,"test"), 	true, 	"Inv not empty test");
-		Test.assertEqual(one.getStock("test"), 	2, 		"Inv proper stock test: 0");
-		Test.assertEqual(one.getStock("foob"), 	0, 		"Inv proper stock test: 1");
+		_Test.assertEqual(notEmpty(one,"test"), 	true, 	"Inv not empty test");
+		_Test.assertEqual(one.getStock("test"), 	2, 		"Inv proper stock test: 0");
+		_Test.assertEqual(one.getStock("foob"), 	0, 		"Inv proper stock test: 1");
 	}
 }
 
