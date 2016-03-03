@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import directors.Game;
 import directors.Screen;
 
-	public class TownScreen3 extends Screen implements KeyListener{
+	public class TownScreen3 extends Screen implements KeyListener{  
 
 		SampleCharacter character;
 		SampleCharacter displayNpc;

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class towns {
-	public String getTownName() {
+	public String getTownName() {  
 		return townName;
 	}
 

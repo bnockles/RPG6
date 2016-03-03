@@ -22,7 +22,7 @@ public abstract class AbstractNPC {
 	}
 
 	public boolean isTalkable() {
-		return isTalkable;
+		return isTalkable; 
 	}
 
 	public void setName(String name) {

@@ -1,4 +1,4 @@
-package towns;
+package towns; 
 
 public class dummy extends AbstractNPC{
 

@@ -24,5 +24,5 @@ public interface Storable {
 //		playerCurrency = playerInventory.getMoney()-fee;
 //	}
 	
-	public void retrieveItem(String item);
+	public void retrieveItem(String item); 
 }

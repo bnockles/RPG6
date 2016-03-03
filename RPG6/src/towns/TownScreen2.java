@@ -11,7 +11,7 @@ import directors.Game;
 import directors.Screen;
 
 
-	public class TownScreen2 extends Screen implements KeyListener{
+	public class TownScreen2 extends Screen implements KeyListener{  
 
 		SampleCharacter character;
 		SampleCharacter displayNpc;

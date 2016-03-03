@@ -14,7 +14,7 @@ public class Storage extends AbstractNPC {
 	static boolean storable;
 	
 	@Override
-	public void npcMovement() {
+	public void npcMovement() {  
 		// TODO Auto-generated method stub
 		
 	}
