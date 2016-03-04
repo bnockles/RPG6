@@ -29,12 +29,14 @@ public class Game implements Runnable {
 	private State gameState;
 	
 	private KeyManager keyManager;
+	private Pause pauseGame;
 	
 	public Game(String title, int width, int height){
 		this.width = width;
 		this.height = height;
 		this.title = title;
 		keyManager = new KeyManager();
+		pauseGame= new Pause(this, width, height);
 	}
 	
 	private void initialize(){
@@ -90,6 +92,8 @@ public class Game implements Runnable {
 			lastTime = now;
 			
 			if(delta >= 1){
+				if(this.getKeyManager().pause)pauseGame.pause(thread);
+				
 				tick();
 				render();
 				delta--;
