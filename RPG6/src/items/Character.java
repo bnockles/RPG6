@@ -16,7 +16,7 @@ public class Character {
 			this.trueStats = new Stats(str, dex, iq, wis, luck);
 			this.buffStats = new Stats(0, 0, 0, 0, 0);
 		}
-		
+		//s
 		
 		public Stats getTrueStats(){
 			return this.trueStats;
