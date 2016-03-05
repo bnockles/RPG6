@@ -50,27 +50,27 @@ public abstract class StoryEvent {
 		case ACCEPT_ALLY:
 		description = "You have accepted this ally";
 		break;
-		}
+		
 		case KISS_SO:
 		description = "Will you kiss a friend?";
 		break;
-		}
+		
 		case KISS_SO_YELLOW:
 		description = "You kissed Yellow";
 		break;
-		}
+		
 		case KISS_SO_ORANGE:
 		description = "You kissed Orange";
 		break;
-		}
+		
 		case KISS_SO_GREEN:
 		description = "You kissed Green";
 		break;
-		}
+		
 		case KISS_SO_PURPLE:
 		description = "You kissed Purple";
 		break;
-		}
+	  }
 	}
 
 	public String getDescription() {
