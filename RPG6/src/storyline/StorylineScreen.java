@@ -34,11 +34,6 @@ public class StorylineScreen extends Screen implements KeyListener {
 	}
 
 
-	public void keyTyped(KeyEvent e) {
-		
-	}
-
-
 	public void keyPressed(KeyEvent e) {
 		int k = e.getKeyCode();
 		if(k==KeyEvent.VK_SPACE){
@@ -80,7 +75,18 @@ public class StorylineScreen extends Screen implements KeyListener {
 
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+	}
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
 
+	public BufferedImage getImage(){
+		return image;
+	}
+	
+	public void callImage(int imageNum){
+		// assuming we ever get those images on here 
+		backgroundImage = UtilityMethods.getImageFromFile(this, "/storyline/sample/"+ imageNum +".png");
 	}
 
 	@Override
@@ -93,16 +99,6 @@ public class StorylineScreen extends Screen implements KeyListener {
 			
 		}
 	}
-	
-	public BufferedImage getImage(){
-		return image;
-	}
-	
-	public void callImage(int imageNum){
-		// assuming we ever get those images on here 
-		backgroundImage = UtilityMethods.getImageFromFile(this, "/storyline/sample/"+ imageNum +".png");
-	}
-	
 
 	@Override
 	public KeyListener getKeyListener() {
