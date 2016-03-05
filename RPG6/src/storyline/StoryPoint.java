@@ -1,4 +1,4 @@
-package example;
+package storyline;
 
 import java.awt.Color;
 import java.awt.FontMetrics;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author bnockles - Tasnia
  *
  */
-public class StoryPoint {
+public class StoryPoint  {
 
 	private BufferedImage image;//for displaying information about this point of the game in the demo GUI
 	public static final int NUMBER_OF_EVENTS = 5;
@@ -31,7 +31,7 @@ public class StoryPoint {
 	public static final String LOVE_GAL_2 = "YUNG LI";
 	public static final String LOVE_BOY_1 = "PIP";
 	public static final String LOVE_BOY_2 = "ORLANDO";	
-	
+
 
 	//the default storypoint (beginning of the game)
 	public StoryPoint(){
@@ -43,23 +43,23 @@ public class StoryPoint {
 			};
 		}
 		//The first decision:
-		StorylineScreen.callImage(DESTORY_VILLAGE);
+	//	StorylineScreen.callImage(DESTORY_VILLAGE);
 		String[] context = {"The first seven years of your life were full of bliss.",
 				"Kind friends. A warm home. A loving family.",
 				"These were the kinds of luxuries you took for granted.",
 				"...",
 				CHAR_NAME+": What's that?", //background change
-				"A fire has started, and is spreading through your entire village!"};
+		"A fire has started, and is spreading through your entire village!"};
 		String[] choices = {"Run left.", "Run right"};
 		boolean[] outcome = {true, false};
 		String[][] consequences= {{"You run left as far as you can. Around you, all you can see are the corpses of your neighbors and friends.",
-						"You pass by your house on the way, and it doesnt seem like anyone will ever make it out.",
-						"You continue to run as far as you can. Some years from now you happen upon a new", 
-						"kingdom fighting against the villians who destoryed your village."},
-					{"You run right as far as you can. Around you, all you can see are the corpses of your neighbors and friends.",
-						"You pass by your house on the way, and it doesnt seem like anyone will ever make it out."
-						"You continue to run as far as you can.Some years from now you happen upon a new",
-						"village fighting against the villians who destoryed your village."}};
+			"You pass by your house on the way, and it doesnt seem like anyone will ever make it out.",
+			"You continue to run as far as you can. Some years from now you happen upon a new", 
+		"kingdom fighting against the villians who destoryed your village."},
+		{"You run right as far as you can. Around you, all you can see are the corpses of your neighbors and friends.",
+			"You pass by your house on the way, and it doesnt seem like anyone will ever make it out.",
+			"You continue to run as far as you can.Some years from now you happen upon a new",
+		"village fighting against the villians who destoryed your village."}};
 		Choice pickDirection = new Choice(events[StoryEvent.DIRECTION],choices ,outcome, consequences);
 		descisionAtHand = new Descision(context, pickDirection);
 		currentString = descisionAtHand.nextLine();
@@ -71,18 +71,18 @@ public class StoryPoint {
 
 	}
 
-	public StoryPoint(StoryEvent[] previousState, int i) {
+	 public void StoryPoint1(StoryEvent[] previousState, int i) {
 		this.events = previousState;
 		choiceID = i ;
 		//automatically fills in all events, since events are numbered
 
 		if (i==StoryEvent.NEW_ALLY){
-			StorylineScreen.callImage(NEW_ALLY);
+		//	StorylineScreen.callImage(NEW_ALLY);
 			String[] context = {"You are your village's only survivor.",
-						"As the days pass by in the neighboring kingdom, you grow increasingly angry.",
-						CHAR_NAME+":Who was it that took away my family? Who was it that ruined my life?",
-						"Eventually, you join the army to answer this question.",
-						"Later on, you are approached by a strange group of people, asking if you would like to be allies."};
+					"As the days pass by in the neighboring kingdom, you grow increasingly angry.",
+					CHAR_NAME+":Who was it that took away my family? Who was it that ruined my life?",
+					"Eventually, you join the army to answer this question.",
+			"Later on, you are approached by a strange group of people, asking if you would like to be allies."};
 			String[] choices = {"Become allies", "Do not become allies."};
 			boolean[] outcome = {true, true};
 			String[][] consequences= {{"You have made new friends!"}, {"Come on, you know you want to be friends...", "It's not like you have any other ones..."}};
@@ -102,7 +102,7 @@ public class StoryPoint {
 		if (i==StoryEvent.KISS_SO){
 			StorylineScreen.callImage(KISS_SO);
 			String[] context = {"Eventually, you were able to grow close to these friends.",
-					"So much so, that you decide you might want to settle down with one."};
+			"So much so, that you decide you might want to settle down with one."};
 			String[] choices = {"Kiss someone you care about", "Do not kiss anyone.."};
 			boolean[] outcome = {true, true};
 			String[][] consequences= {{"You decide to maybe take one of them on a date"}, {"You decide to be a hermit forever."}};
@@ -114,7 +114,7 @@ public class StoryPoint {
 			image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 			choiceMade = false;
 			update();
-			
+
 		}
 	}
 	public void update(){
@@ -225,10 +225,11 @@ public class StoryPoint {
 		if(choiceID==StoryEvent.DIRECTION)return StoryEvent.NEW_ALLY;
 		else if(choiceID==StoryEvent.NEW_ALLY)return StoryEvent.KISS_SO;
 		else if(choiceID==StoryEvent.KISS_SO){
-//			if(selection == 0)return "This is the end of the game.";
-//			else return StoryEvent.GEAR_BOUGHT;
-//		}
-		return 0;
-	}
+			//			if(selection == 0)return "This is the end of the game.";
+			//			else return StoryEvent.GEAR_BOUGHT;
+			//		}
+			return 0;
+		}
 
+	}
 }
