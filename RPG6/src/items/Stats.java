@@ -18,7 +18,7 @@ public final class Stats {
 		this(0, 0, 0, 0, 0);
 	}
 	public Stats(int hp, int mp, int atk, int def){
-		this(hp, mp, atk, def, 0, 0, 0, 0, 0); //stats for characters
+		this(hp, mp, atk, def, 0, 0, 0, 0, 0); //stats for enemies
 	}
 	public Stats(int str, int dex, int iq, int wis, int luck){
 		this(0, 0, 0, 0, str, dex, iq, wis, luck); //stats for armor and character + armor together
@@ -32,7 +32,7 @@ public final class Stats {
 	public Stats(int hp, int def, int str){
 		this(hp, 0, 0, 0, str, 0, 0, 0, 0); //stats for str armor
 	}
-	public Stats(int hp, int mp, int atk, int def, int str, int dex, int iq, int wis, int luck){
+	public Stats(int hp, int mp, int atk, int def, int str, int dex, int iq, int wis, int luck){ //this might be for characters
 		this.health 		= hp;
 		this.mana 			= mp;
 		this.attack 		= atk;
