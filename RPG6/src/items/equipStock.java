@@ -148,52 +148,52 @@ public class equipStock {
 			return new Equipment("God's Shield", "REQ: 100 STR", "An undestructible shield. God forged it himself.", 5, new Stats(100, 100, 10, 10, 10, 10), 100);
 		}
 		if (type == W_CE){
-			return new Equipment("Wooden Chestplate", "REQ: NONE", "Blocks from any incoming attack, partially.", 2, new Stats(10, 10, 10, 10), 100);
+			return new Equipment("Wooden Chestplate", "REQ: NONE", "Blocks from any incoming attack, partially.", 2, new Stats(10, 10, 10, 10, 10), 100);
 		}
 		if (type == I_CE){
-			return new Equipment("Iron Chestplate", "REQ: 15 STR", "Guards the wearer from all physical attacks.", 2, new Stats(20, 20, 20, 20), 100);
+			return new Equipment("Iron Chestplate", "REQ: 15 STR", "Guards the wearer from all physical attacks.", 2, new Stats(20, 20, 20, 20, 20), 100);
 		}
 		if (type == D_CE){
-			return new Equipment("Diamond Chestplate", "REQ: 40 STR", "Hard as diamond. Well it is diamond. Very sturdy.", 2, new Stats(40, 40, 30, 30), 100);
+			return new Equipment("Diamond Chestplate", "REQ: 40 STR", "Hard as diamond. Well it is diamond. Very sturdy.", 2, new Stats(40, 40, 30, 30, 30), 100);
 		}
 		if (type == D_AR){
-			return new Equipment("Devil's Armor", "REQ: 999 STR", "Armor made of darkness. Anyone who wears this will die. Anyone who doesn't is a devil.", 2, new Stats(500, 500, 99, 99), 100);
+			return new Equipment("Devil's Armor", "REQ: 999 STR", "Armor made of darkness. Anyone who wears this will die. Anyone who doesn't is a devil.", 2, new Stats(500, 500, 99, 99, 99), 100);
 		}
 		if (type == L_PT){
-			return new Equipment("Leather Pants", "REQ: 5 STR", "Pants of a leather. Sticks to the skin.", 3, new Stats(5, 5, 0, 0), 100);
+			return new Equipment("Leather Pants", "REQ: 5 STR", "Pants of a leather. Sticks to the skin.", 3, new Stats(5, 5, 0, 0, 0), 100);
 		}
 		if (type == S_PT){
-			return new Equipment("Silk Pants", "REQ: 15 STR", "Soft but protective.", 3, new Stats(15, 15, 1, 1), 100);
+			return new Equipment("Silk Pants", "REQ: 15 STR", "Soft but protective.", 3, new Stats(15, 15, 1, 1, 1), 100);
 		}
 		if (type == GW_P){
-			return new Equipment("God Woven Pants", "REQ: 50 STR", "God made these pants himself. They will never break.", 3, new Stats(50, 55, 3, 3), 100);
+			return new Equipment("God Woven Pants", "REQ: 50 STR", "God made these pants himself. They will never break.", 3, new Stats(50, 55, 3, 3, 3), 100);
 		}
 		if (type == F_LG){
-			return new Equipment("Forsaken Leggings", "REQ: 100 STR", "Pants forbidden from this world. It's surging with power.", 3, new Stats(100, 100, 5, 5), 100);
+			return new Equipment("Forsaken Leggings", "REQ: 100 STR", "Pants forbidden from this world. It's surging with power.", 3, new Stats(100, 100, 5, 5, 5), 100);
 		}
 		if (type == S_HT){
-			return new Equipment("Straw Hat", "REQ: 5 STR", "Looks like a pirate will wear this hat. Old but fashionable.", 1, new Stats(5, 5, 1, 1), 100);
+			return new Equipment("Straw Hat", "REQ: 5 STR", "Looks like a pirate will wear this hat. Old but fashionable.", 1, new Stats(5, 5, 1, 1, 1), 100);
 		}
 		if (type == I_HT){
-			return new Equipment("Iron Helmet", "REQ: 20 STR", "Helmet that covers the whole face. For the sake of protection.", 1, new Stats(20, 20, 3, 3), 100);
+			return new Equipment("Iron Helmet", "REQ: 20 STR", "Helmet that covers the whole face. For the sake of protection.", 1, new Stats(20, 20, 3, 3, 3), 100);
 		}
 		if (type == P_HT){
-			return new Equipment("Plat Helmet", "REQ: 55 STR", "It's heavy. It is probably not a good idea to wear this if you have a squishy head.", 1, new Stats(55, 50, 5, 5), 100);
+			return new Equipment("Plat Helmet", "REQ: 55 STR", "It's heavy. It is probably not a good idea to wear this if you have a squishy head.", 1, new Stats(55, 50, 5, 5, 5), 100);
 		}
 		if (type == S_HD){
-			return new Equipment("Satan's Headguard", "REQ: 500 STR", "Stolen from Satan. Any human who wears this will turn into a devil.", 1, new Stats(500, 500, 500, 500), 100);
+			return new Equipment("Satan's Headguard", "REQ: 500 STR", "Stolen from Satan. Any human who wears this will turn into a devil.", 1, new Stats(500, 500, 500, 500, 500), 100);
 		}
 		if (type == R_SE){
-			return new Equipment("Running Shoes", "REQ: 5 STR", "Shoes that make you run faster.", 4, new Stats(5, 5, 1, 1), 100);
+			return new Equipment("Running Shoes", "REQ: 5 STR", "Shoes that make you run faster.", 4, new Stats(5, 5, 1, 1, 1), 100);
 		}
 		if (type == R_BT){
-			return new Equipment("Rain Boots", "REQ: 15 STR", "Boots that help you in the rain.", 4, new Stats(15, 15, 5, 5), 100);
+			return new Equipment("Rain Boots", "REQ: 15 STR", "Boots that help you in the rain.", 4, new Stats(15, 15, 5, 5, 5), 100);
 		}
 		if (type == A_SE){
-			return new Equipment("Armor Shoes", "REQ: 45 STR", "Shoes that protect your feet. It helps protect the wearer generally too.", 4, new Stats(45, 45, 10, 10), 100);
+			return new Equipment("Armor Shoes", "REQ: 45 STR", "Shoes that protect your feet. It helps protect the wearer generally too.", 4, new Stats(45, 45, 10, 10, 10), 100);
 		}
 		if (type == G_SL){
-			return new Equipment("God's Sandals", "REQ: 100 STR", "God wears these sandals. They look weak and old, but they help a lot.", 4, new Stats(100, 100, 100, 100), 100);
+			return new Equipment("God's Sandals", "REQ: 100 STR", "God wears these sandals. They look weak and old, but they help a lot.", 4, new Stats(100, 100, 100, 100, 100), 100);
 		}
 		return null;
 	}
