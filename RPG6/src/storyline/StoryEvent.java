@@ -25,14 +25,18 @@ public abstract class StoryEvent {
 	public static final int DIRECTION = 1;
 	// ^ Left is true Right is false
 	// ^these are for that choice1 thing
-	public static final int NEW_ALLY = 2;
-	public static final int ACCEPT_ALLY = 3;
-	public static final int KISS_SO= 4;
+	public static final int LEFT = 2;
+	public static final int RIGHT = 3;
+	public static final int NEW_ALLY = 4;
+	public static final int ACCEPT_ALLY = 5;
+	public static final int KISS_SO= 6;
 	/// vvvv might not keep these
-	final int KISS_SO_YELLOW= 5;
-	final int KISS_SO_GREEN= 6;
-	final int KISS_SO_PURPLE= 7;
-	final int KISS_SO_ORANGE= 8;
+	public static final int KISS_SO_YELLOW= 7;
+	public static final int KISS_SO_GREEN= 8;
+	public static final int KISS_SO_PURPLE= 9;
+	public static final int KISS_SO_ORANGE= 10;
+	public static final int REGRET = 11;
+	
 	//^^^
 	//final int PLOT_TWIST = 9; this for later
 
@@ -69,6 +73,9 @@ public abstract class StoryEvent {
 			break;
 		case KISS_SO_PURPLE:
 			description = "You kissed Purple";
+			break;
+		case REGRET:
+			description = "What are ya? Afraid? Hmmm??? Whatever, man. Have fun being alone..... forever....";
 			break;
 	  }
 	}
