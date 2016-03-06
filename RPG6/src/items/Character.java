@@ -22,9 +22,6 @@ public class Character {
 		public Stats getTrueStats(){
 			return this.trueStats;
 		}
-		public Stats getBuffStats(){
-			return this.buffStats;
-		}
 		public Equipment getHelmet(){ return this.helmet; }
 		public Equipment getChest(){ return this.chest; }
 		public Equipment getLeg(){ return this.leg; }

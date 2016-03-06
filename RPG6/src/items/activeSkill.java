@@ -16,10 +16,15 @@ public class activeSkill extends Spell {
 	}
 
 	@Override
-	public void cast(Character caster, activeSkill skill, Character target) {
+	public int cast(Character caster, activeSkill skill, Character target) {
 		if (canCast(caster, target)){
 			finalDamage = (caster.getTrueStats().getAttack() + skill.getDamage()) - target.getTrueStats().getDefense();
 		}
+		return finalDamage;
+	}
+
+	public int getFinalDamage() {
+		return finalDamage;
 	}
 
 }
