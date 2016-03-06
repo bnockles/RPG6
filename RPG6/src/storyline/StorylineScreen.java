@@ -38,7 +38,7 @@ public class StorylineScreen extends Screen implements KeyListener {
 		int k = e.getKeyCode();
 		if(k==KeyEvent.VK_SPACE){
 			if(storyPoint.nextLn()){
-				nextDescision();
+				nextDecision();
 			};
 		}
 		if(k==KeyEvent.VK_1){
@@ -65,20 +65,20 @@ public class StorylineScreen extends Screen implements KeyListener {
 			storyPoint.update();
 		}
 		if(k==KeyEvent.VK_Q){
-			nextDescisionAuto();
+			nextDecisionAuto();
 		}
 
 	}
 
 
-	private void nextDescisionAuto() {
+	private void nextDecisionAuto() {
 		storyPoint.select(0);
 		decisionPoint = storyPoint.getNextPoint();
 		storyPoint=new StoryPoint(storyPoint.getEvents(), decisionPoint);
 	}
 
 
-	private void nextDescision() {
+	private void nextDecision() {
 //		storyPoint.select(0);
 		decisionPoint = storyPoint.getNextPoint();
 		storyPoint=new StoryPoint(storyPoint.getEvents(), decisionPoint);
