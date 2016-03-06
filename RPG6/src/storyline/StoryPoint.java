@@ -88,7 +88,7 @@ public class StoryPoint  {
 			int[] outcome = {1};
 			String[][] consequences= {{"GUNG HO GUNG HO GUNG HO"}};
 			Choice armyTime = new Choice(events[StoryEvent.LEFT],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, LEFT);
+			descisionAtHand = new Descision(context, armyTime);
 			}
 			if (i==StoryEvent.RIGHT){
 			String[] context = {"You are your village's only survivor.",
@@ -103,7 +103,7 @@ public class StoryPoint  {
 			int[] outcome = {1};
 			String[][] consequences= {{"OOH RAH"}};
 			Choice armyTime = new Choice(events[StoryEvent.RIGHT],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, RIGHT);
+			descisionAtHand = new Descision(context, armyTime);
 		}
 		if (i==StoryEvent.NEW_ALLY){
 			String[] context = {"Eventually, you join the army to ensure such injustice never happens again",
@@ -114,7 +114,7 @@ public class StoryPoint  {
 			String[][] consequences= {{"You have made new friends!", "They all think you're cool!!", ":>"}, 
 			{"You have made friends... sorta", "They think you're alright but they dont invite you out much."}};
 			Choice becomeFriends = new Choice(events[StoryEvent.NEW_ALLY],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, NEW_ALLY);
+			descisionAtHand = new Descision(context, becomeFriends);
 		}
 		if (i==StoryEvent.KISS_SO){
 		//	StorylineScreen.callImage(KISS_SO);
@@ -140,56 +140,64 @@ public class StoryPoint  {
 				"He's really good at running and defense."},
 				
 				{"You decide to do you. Love is way too much work.", "And besides what good can come from it?"}};
-			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, KISS_SO);
+			Choice kissyTimeOrNo = new Choice(events[StoryEvent.KISS_SO],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, kissyTimeOrNo);
 		}
 		if (i==StoryEvent.KISS_SO_YELLOW){
 			String[] context = {// TODO
 			};
 			int[] outcome = {};
 			String[][] consequences= {{}};
-			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO_YELLOW],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, KISS_SO_YELLOW);
+			Choice smooch = new Choice(events[StoryEvent.KISS_SO_YELLOW],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, smooch);
 		}
 		if (i==StoryEvent.KISS_SO_GREEN){
 			String[] context = {// TODO
 			};
 			int[] outcome = {};
 			String[][] consequences= {{}};
-			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO_GREEN],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, KISS_SO_GREEN);
+			Choice smooch = new Choice(events[StoryEvent.KISS_SO_GREEN],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, smooch);
 		}
 		if (i==StoryEvent.KISS_SO_PURPLE){
 			String[] context = {// TODO
 			};
 			int[] outcome = {};
 			String[][] consequences= {{}};
-			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO_PURPLE],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, KISS_SO_PURPLE);
+			Choice smooch = new Choice(events[StoryEvent.KISS_SO_PURPLE],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, smooch);
 		}
 		if (i==StoryEvent.KISS_SO_ORANGE){
 			String[] context = {// TODO
 			};
 			int[] outcome = {};
 			String[][] consequences= {{}};
-			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO_ORANGE],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, KISS_SO_ORANGE);
+			Choice smooch = new Choice(events[StoryEvent.KISS_SO_ORANGE],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, smooch);
+		}
+		if (i==StoryEvent.REGRET){
+			String[] context = {// TODO
+			};
+			int[] outcome = {};
+			String[][] consequences= {{}};
+			Choice lonely = new Choice(events[StoryEvent.REGRET],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, lonely);
 		}
 		if (i==StoryEvent.ENDING){
 			String[] context = {// TODO
 			};
 			int[] outcome = {};
 			String[][] consequences= {{}};
-			Choice becomeFriends = new Choice(events[StoryEvent.ENDING],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, ENDING);
+			Choice endDemo = new Choice(events[StoryEvent.ENDING],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, endDemo);
 		}
 		if (i==StoryEvent.DEATH){
 			String[] context = {// TODO
 			};
 			int[] outcome = {};
 			String[][] consequences= {{}};
-			Choice becomeFriends = new Choice(events[StoryEvent.DEATH],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, DEATH);
+			Choice endYou = new Choice(events[StoryEvent.DEATH],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, endYou);
 		}
 		currentString = descisionAtHand.nextLine();
 		width = 600;
