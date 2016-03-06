@@ -14,6 +14,9 @@ package storyline;
 public abstract class StoryEvent {
 
 	private String description;//how it displays in the demo GUI
+	private int choices;
+	// this is so we arent limited to 2 choices, allowing more branching
+	// 0 would be false, 1 true 
 	private boolean state;
 
 	public static final int DESTROY_VILLAGE = 0;
@@ -76,9 +79,17 @@ public abstract class StoryEvent {
 	public boolean state() {
 		return state;
 	}
+	
+	public int getChoices(){
+		return choices;
+	}
 
 	public void setState(boolean newState) {
 		this.state = newState;
+	}
+	
+	public void setChoices(int choices) {
+		this.state = choices;
 	}
 
 
