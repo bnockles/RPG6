@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class StoryPoint  {
 
 	private BufferedImage image;//for displaying information about this point of the game in the demo GUI
-	public static final int NUMBER_OF_EVENTS = 5;
+	public static final int NUMBER_OF_EVENTS = 13;
 	private StoryEvent[] events;
 	private Descision descisionAtHand;
 	private String currentString;
@@ -36,7 +36,7 @@ public class StoryPoint  {
 	//the default storypoint (beginning of the game)
 	public StoryPoint(){
 		events = new StoryEvent[NUMBER_OF_EVENTS];
-		choiceID = 1;
+		choiceID = 0;
 		//automatically fills in all events, since events are numbered
 		for(int i = 0; i< NUMBER_OF_EVENTS; i++){
 			events[i] = new StoryEvent(i) {
@@ -51,15 +51,17 @@ public class StoryPoint  {
 				CHAR_NAME+": What's that?", //background change
 		"A fire has started, and is spreading through your entire village!"};
 		String[] choices = {"Run left.", "Run right"};
-		boolean[] outcome = {true, false};
-		String[][] consequences= {{"You run left as far as you can. Around you, all you can see are the corpses of your neighbors and friends.",
+		int[] outcome = {0, 1};
+		String[][] consequences= 
+		{
+			{"You run left as far as you can. Around you, all you can see are the corpses of your neighbors and friends.",
 			"You pass by your house on the way, and it doesnt seem like anyone will ever make it out.",
-			"You continue to run as far as you can. Some years from now you happen upon a new", 
-		"kingdom fighting against the villians who destoryed your village."},
-		{"You run right as far as you can. Around you, all you can see are the corpses of your neighbors and friends.",
+			"You continue to run as far as you can."},
+			
+			{"You run right as far as you can. Around you, all you can see are the corpses of your neighbors and friends.",
 			"You pass by your house on the way, and it doesnt seem like anyone will ever make it out.",
-			"You continue to run as far as you can.Some years from now you happen upon a new",
-		"village fighting against the villians who destoryed your village."}};
+			"You continue to run as far as you can."}
+		};
 		Choice pickDirection = new Choice(events[StoryEvent.DIRECTION],choices ,outcome, consequences);
 		descisionAtHand = new Descision(context, pickDirection);
 		currentString = descisionAtHand.nextLine();
@@ -89,23 +91,14 @@ public class StoryPoint  {
 			Choice becomeFriends = new Choice(events[StoryEvent.NEW_ALLY],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, NEW_ALLY);
 			currentString = descisionAtHand.nextLine();
-			width = 600;
-			height = 400;
-			image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-			choiceMade = false;
-			update();
 		}
-	}
-	public StoryPoint(StoryEvent[] previousState, int i) {
-		this.events = previousState;
-		choiceID = i ;
 		if (i==StoryEvent.KISS_SO){
-			StorylineScreen.callImage(KISS_SO);
+		//	StorylineScreen.callImage(KISS_SO);
 			String[] context = {"Eventually, you were able to grow close to these friends.",
 			"So much so, that you decide you might want to settle down with one."};
 			String[] choices = {"Kiss someone you care about", "Do not kiss anyone.."};
-			boolean[] outcome = {true, true};
-			String[][] consequences= {{"You decide to maybe take one of them on a date"}, {"You decide to be a hermit forever."}};
+			int[] outcome = {0,1,2,3,4,5};
+			String[][] consequences= {{"You decide that "}, {"You decide to be a hermit forever."}};
 			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, KISS_SO);
 			currentString = descisionAtHand.nextLine();
@@ -222,13 +215,29 @@ public class StoryPoint  {
 
 	//determines which point to go to next, depending on the decision that was previously made
 	public int getNextPoint() {
-		if(choiceID==StoryEvent.DIRECTION)return StoryEvent.NEW_ALLY;
-		else if(choiceID==StoryEvent.NEW_ALLY)return StoryEvent.KISS_SO;
+		if(choiceID==StoryEvent.DIRECTION){
+			if(selection == 0)return StoryEvent.LEFT;
+			else return StoryEvent.RIGHT;
+		}
+		else if(choiceID==StoryEvent.LEFT || choiceID==StoryEvent.RIGHT){
+			return StoryEvent.NEW_ALLY;
+		}
+		else if(choiceID==StoryEvent.NEW_ALLY){
+			return StoryEvent.KISS_SO;
+		}
 		else if(choiceID==StoryEvent.KISS_SO){
-			//			if(selection == 0)return "This is the end of the game.";
-			//			else return StoryEvent.GEAR_BOUGHT;
-			//		}
-			return 0;
+			if(selection == 0)return StoryEvent.KISS_SO_YELLOW;
+			if(selection == 1)return StoryEvent.KISS_SO_GREEN;
+			if(selection == 2)return StoryEvent.KISS_SO_PURPLE;
+			if(selection == 3)return StoryEvent.KISS_SO_ORANGE;
+			else return StoryEvent.REGRET;
+		}
+		else if(choiceID == StoryEvent.KISS_SO_YELLOW || choiceID == StoryEvent.KISS_SO_GREEN|| 
+			choiceID == StoryEvent.KISS_SO_PURPLE || choiceID == StoryEvent.KISS_SO_ORANGE ||){
+			return StoryEvent.ENDING;
+		}
+		else if(choiceID==StoryEvent.REGRET){
+			return StoryEvent.DEATH;
 		}
 
 	}
