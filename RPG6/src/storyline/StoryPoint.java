@@ -27,10 +27,10 @@ public class StoryPoint  {
 	private int choiceID;
 
 	public static final String CHAR_NAME = "TROY";
-	public static final String LOVE_GAL_1 = "GRENDA";
-	public static final String LOVE_GAL_2 = "YUNG LI";
-	public static final String LOVE_BOY_1 = "PIP";
-	public static final String LOVE_BOY_2 = "ORLANDO";	
+	public static final String GREEN = "GRENDA";
+	public static final String YELLOW = "YUNG LI";
+	public static final String PURPLE = "PIP";
+	public static final String ORANGE = "ORLANDO";	
 
 
 	//the default storypoint (beginning of the game)
