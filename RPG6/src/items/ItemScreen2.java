@@ -35,6 +35,7 @@ public class ItemScreen2 extends Screen implements KeyListener{
 	public static String nameMessage = "";
 	public static String reqMessage = "";
 	public static String descriptionMessage = "";
+	public static String statsMessage = "";
 	
 	
 	/**
@@ -126,6 +127,7 @@ public class ItemScreen2 extends Screen implements KeyListener{
 			g2.drawString(nameMessage, 50, 500);
 			g2.drawString(reqMessage, 50, 525);
 			g2.drawString(descriptionMessage, 50, 550);
+			g2.drawString(statsMessage, 50, 575);
 		}
 		
 		catch(Exception e){
@@ -138,6 +140,12 @@ public class ItemScreen2 extends Screen implements KeyListener{
 		nameMessage = inventory.get(i).getName();
 		reqMessage = inventory.get(i).getDescription();
 		descriptionMessage = inventory.get(i).getReq();
+		statsMessage = "Stats- STR: " + ((Equipment) inventory.get(i)).getStats().getStrength() +
+						" DEX: " + ((Equipment) inventory.get(i)).getStats().getDexterity() +
+						" INT: " + ((Equipment) inventory.get(i)).getStats().getIntelligence() +
+						" WIS: " + ((Equipment) inventory.get(i)).getStats().getWisdom() +
+						" LUK: " + ((Equipment) inventory.get(i)).getStats().getLuck() +
+						" ATK: " + ((Equipment) inventory.get(i)).getStats().getAttack();
 	}
 	
 	public static void updateCMessages(int i){
