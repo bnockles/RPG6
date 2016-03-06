@@ -43,8 +43,9 @@ public class Choice {
 	
 	
 	public void choose(int choice){
-		event.setState(effects[choice]);
+		event.setNumber(effects[choice]);
 		this.choice = choice; 
+		event.setState = true;
 		
 	}
 	
