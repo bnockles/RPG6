@@ -14,12 +14,9 @@ package storyline;
 public abstract class StoryEvent {
 
 	private String description;//how it displays in the demo GUI
-	private int numbers;
-	// this is so we arent limited to 2 choices, allowing more branching
-	// 0 would be false, 1 true generally
-	// named it horribly because choices is a variable for descision
+	
 	private boolean state;
-	// this would be used to just see if i went to that path
+	
 	private static int numberEvent;
 	// I think this will work
 
@@ -32,15 +29,16 @@ public abstract class StoryEvent {
 	public static final int NEW_ALLY = 4;
 	public static final int ACCEPT_ALLY = 5;
 	public static final int KISS_SO= 6;
+	public static final int LOVE_PATH = 7;
 	/// vvvv might not keep these(IGNORE)
-	public static final int KISS_SO_YELLOW= 7;
-	public static final int KISS_SO_GREEN= 8;
-	public static final int KISS_SO_PURPLE= 9;
-	public static final int KISS_SO_ORANGE= 10;
-	public static final int REGRET = 11;
+	public static final int KISS_SO_YELLOW= 8;
+	public static final int KISS_SO_GREEN= 9;
+	public static final int KISS_SO_PURPLE= 10;
+	public static final int KISS_SO_ORANGE= 11;
+	public static final int REGRET = 12;
 	//^^^ (IGNORE)
-	public static final int DEATH = 12;
-	public static final int ENDING = 13;
+	public static final int DEATH = 13;
+	public static final int ENDING = 14;
 	//final int PLOT_TWIST = WHATEVER THE LAST NUMBER IS; this for later
 
 	/**
@@ -64,7 +62,10 @@ public abstract class StoryEvent {
 			description = "You have accepted this ally";
 			break;
 		case KISS_SO:
-			description = "Will you kiss a friend?";
+			description = "Kiss a friend?";
+			break;
+		case LOVE_PATH:
+			description = "Who do you choose?"
 			break;
 		case KISS_SO_YELLOW:
 			description = "You kissed Yellow";
