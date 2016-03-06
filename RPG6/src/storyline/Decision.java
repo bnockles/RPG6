@@ -8,14 +8,14 @@ import java.util.ArrayList;
  * @author bnockles
  *
  */
-public class Descision {
+public class Decision {
 
 	
 	String[] contextLines;
 	Choice choices;
 	int displayingLine;
 	
-	public Descision(String[] contextLines, Choice choice) {
+	public Decision(String[] contextLines, Choice choice) {
 		this.contextLines = contextLines;
 		this.choices = choice;
 		displayingLine=-1;
@@ -26,7 +26,6 @@ public class Descision {
 		return contextLines[displayingLine];
 	}
 	
-
 	
 	public boolean isDisplayingLastLine(){
 		return displayingLine==contextLines.length-1;
