@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 
 public class Pause {
@@ -27,20 +28,20 @@ public class Pause {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		drawScreen(g);
+		drawScreen((Graphics2D) g);
 	}
 	public void resume(Game game){
 		System.out.println("hello");
 		newThread= new Thread(game);
 		game.start();
 	}
-	public void drawScreen(Graphics g) {
-	    g.drawRect (0, 0, width, height);    
-	    g.fillRect (0, 0, width, height);
-	    g.setColor(Color.gray);
+	public void drawScreen(Graphics2D g2) {
+	    g2.drawRect (0, 0, width, height);    
+	    g2.fillRect (0, 0, width, height);
+	    g2.setColor(Color.gray);
 	    int font=30;
-	    g.setFont(new Font("TimesRoman", Font.PLAIN, font));
-	    g.drawString("PAUSED", 400, 300);
+	    g2.setFont(new Font("TimesRoman", Font.PLAIN, font));
+	    g2.drawString("PAUSED", 400, 300);
 	  }
 }
 
