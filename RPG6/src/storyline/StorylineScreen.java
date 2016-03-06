@@ -52,6 +52,18 @@ public class StorylineScreen extends Screen implements KeyListener {
 //			storyPoint.nextLn();;
 			
 		}
+		if(k==KeyEvent.VK_3){
+			storyPoint.select(2);
+			storyPoint.update();
+		}
+		if(k==KeyEvent.VK_4){
+			storyPoint.select(3);
+			storyPoint.update();
+		}
+		if(k==KeyEvent.VK_5){
+			storyPoint.select(4);
+			storyPoint.update();
+		}
 		if(k==KeyEvent.VK_Q){
 			nextDescisionAuto();
 		}
@@ -84,10 +96,10 @@ public class StorylineScreen extends Screen implements KeyListener {
 		return image;
 	}
 	
-	public void callImage(int imageNum){
-		// assuming we ever get those images on here 
-		backgroundImage = UtilityMethods.getImageFromFile(this, "/storyline/sample/"+ imageNum +".png");
-	}
+//	public void callImage(int imageNum){
+//		// assuming we ever get those images on here 
+//		backgroundImage = UtilityMethods.getImageFromFile(this, "/storyline/sample/"+ imageNum +".png");
+//	}
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
