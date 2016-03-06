@@ -6,7 +6,7 @@ public abstract class Consumable extends Item {
 		super(id, name, description);
 		this.amount = amount;
 	}
-	
+	//s
 	public abstract boolean canUse(Character user);
 
 	public abstract void use(Character user);
