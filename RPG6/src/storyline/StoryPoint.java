@@ -213,7 +213,7 @@ public class StoryPoint  {
 			Choice endYou = new Choice(events[StoryEvent.DEATH],choices ,outcome, consequences);
 			decisionAtHand = new Decision(context, endYou);
 		}
-		currentString = descisionAtHand.nextLine();
+		currentString = decisionAtHand.nextLine();
 		width = 600;
 		height = 400;
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -241,12 +241,12 @@ public class StoryPoint  {
 		g.setColor(Color.blue);
 		g.fillRect(15, y-20, width-30, 175);
 		g.setColor(Color.white);
-		g.drawString("CURRENT DESCISION",30, y);
+		g.drawString("CURRENT DECISION",30, y);
 		y+=LINE_SPACE;
 
 		if(!choiceMade){
 			y=printMultiLine(g,currentString, 30, y, 70);
-			if(descisionAtHand.isDisplayingLastLine()){
+			if(decisionAtHand.isDisplayingLastLine()){
 				for(int i = 0; i<decisionAtHand.getChoices().getChoiceDesciptions().length; i++){
 					String str = (i+1)+") "+decisionAtHand.getChoices().getChoiceDesciptions()[i];
 					y=printMultiLine(g,str, 30, y, 70);
@@ -312,10 +312,10 @@ public class StoryPoint  {
 
 	public void select(int i) {
 		selection = i;		
-		descisionAtHand.getChoices().choose(i);
+		desisionAtHand.getChoices().choose(i);
 		choiceMade = true;
-		if(descisionAtHand.isDisplayingLastLine()){
-			currentString = descisionAtHand.getChoices().nextLine();
+		if(desisionAtHand.isDisplayingLastLine()){
+			currentString = desisionAtHand.getChoices().nextLine();
 		}else{
 			currentString="";
 		}
