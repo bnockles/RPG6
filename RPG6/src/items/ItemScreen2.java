@@ -7,16 +7,15 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import directors.Game;
 import directors.Screen;
-import items.equipStock;
 
 
 public class ItemScreen2 extends Screen implements KeyListener{
 	
 	Character character;
 
-	ArrayList<Item> inventory = new ArrayList<Item>();
-	ArrayList<Item> cInventory = new ArrayList<Item>();
-	ArrayList<Item> qInventory = new ArrayList<Item>();
+	static ArrayList<Item> inventory = new ArrayList<Item>();
+	static ArrayList<Item> cInventory = new ArrayList<Item>();
+	static ArrayList<Item> qInventory = new ArrayList<Item>();
 	public static boolean currentFirst = false;
 	public static boolean currentSecond = false;
 	public static boolean currentThird = false;
@@ -135,6 +134,18 @@ public class ItemScreen2 extends Screen implements KeyListener{
 		
 	}
 	
+	public static void updateMessages(int i){
+		nameMessage = inventory.get(i).getName();
+		reqMessage = inventory.get(i).getDescription();
+		descriptionMessage = inventory.get(i).getReq();
+	}
+	
+	public static void updateCMessages(int i){
+		nameMessage = cInventory.get(i).getName();
+		reqMessage = cInventory.get(i).getDescription();
+		descriptionMessage = cInventory.get(i).getReq();
+	}
+	
 	public KeyListener getKeyListener() {
 		return this;
 	}
@@ -240,346 +251,250 @@ public class ItemScreen2 extends Screen implements KeyListener{
 		if(equips){
 		if (currentFirst){
 			if(e.getKeyCode() == KeyEvent.VK_A){
-				nameMessage = inventory.get(0).getName();
-				reqMessage = inventory.get(0).getDescription();
-				descriptionMessage = inventory.get(0).getReq();
+				updateMessages(0);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_B){
-				nameMessage = inventory.get(1).getName();
-				reqMessage = inventory.get(1).getDescription();
-				descriptionMessage = inventory.get(1).getReq();
+				updateMessages(1);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_C){
-				nameMessage = inventory.get(2).getName();
-				reqMessage = inventory.get(2).getDescription();
-				descriptionMessage = inventory.get(2).getReq();
+				updateMessages(2);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_D){
-				nameMessage = inventory.get(3).getName();
-				reqMessage = inventory.get(3).getDescription();
-				descriptionMessage = inventory.get(3).getReq();
+				updateMessages(3);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_E){
-				nameMessage = inventory.get(4).getName();
-				reqMessage = inventory.get(4).getDescription();
-				descriptionMessage = inventory.get(4).getReq();
+				updateMessages(4);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_F){
-				nameMessage = inventory.get(5).getName();
-				reqMessage = inventory.get(5).getDescription();
-				descriptionMessage = inventory.get(5).getReq();
+				updateMessages(5);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_G){
-				nameMessage = inventory.get(6).getName();
-				reqMessage = inventory.get(6).getDescription();
-				descriptionMessage = inventory.get(6).getReq();
+				updateMessages(6);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_H){
-				nameMessage = inventory.get(7).getName();
-				reqMessage = inventory.get(7).getDescription();
-				descriptionMessage = inventory.get(7).getReq();
+				updateMessages(7);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_I){
-				nameMessage = inventory.get(8).getName();
-				reqMessage = inventory.get(8).getDescription();
-				descriptionMessage = inventory.get(8).getReq();
+				updateMessages(8);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_J){
-				nameMessage = inventory.get(9).getName();
-				reqMessage = inventory.get(9).getDescription();
-				descriptionMessage = inventory.get(9).getReq();
+				updateMessages(9);
 				update();
 				game.repaint();
 			}
 		}
 		if (currentSecond){
 			if(e.getKeyCode() == KeyEvent.VK_A){
-				nameMessage = inventory.get(10).getName();
-				reqMessage = inventory.get(10).getDescription();
-				descriptionMessage = inventory.get(10).getReq();
+				updateMessages(10);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_B){
-				nameMessage = inventory.get(11).getName();
-				reqMessage = inventory.get(11).getDescription();
-				descriptionMessage = inventory.get(11).getReq();
+				updateMessages(11);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_C){
-				nameMessage = inventory.get(12).getName();
-				reqMessage = inventory.get(12).getDescription();
-				descriptionMessage = inventory.get(12).getReq();
+				updateMessages(12);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_D){
-				nameMessage = inventory.get(13).getName();
-				reqMessage = inventory.get(13).getDescription();
-				descriptionMessage = inventory.get(13).getReq();
+				updateMessages(13);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_E){
-				nameMessage = inventory.get(14).getName();
-				reqMessage = inventory.get(14).getDescription();
-				descriptionMessage = inventory.get(14).getReq();
+				updateMessages(14);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_F){
-				nameMessage = inventory.get(15).getName();
-				reqMessage = inventory.get(15).getDescription();
-				descriptionMessage = inventory.get(15).getReq();
+				updateMessages(15);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_G){
-				nameMessage = inventory.get(16).getName();
-				reqMessage = inventory.get(16).getDescription();
-				descriptionMessage = inventory.get(16).getReq();
+				updateMessages(16);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_H){
-				nameMessage = inventory.get(17).getName();
-				reqMessage = inventory.get(17).getDescription();
-				descriptionMessage = inventory.get(17).getReq();
+				updateMessages(17);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_I){
-				nameMessage = inventory.get(18).getName();
-				reqMessage = inventory.get(18).getDescription();
-				descriptionMessage = inventory.get(18).getReq();
+				updateMessages(18);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_J){
-				nameMessage = inventory.get(19).getName();
-				reqMessage = inventory.get(19).getDescription();
-				descriptionMessage = inventory.get(19).getReq();
+				updateMessages(19);
 				update();
 				game.repaint();
 			}
 		}
 		if (currentThird){
 			if(e.getKeyCode() == KeyEvent.VK_A){
-				nameMessage = inventory.get(20).getName();
-				reqMessage = inventory.get(20).getDescription();
-				descriptionMessage = inventory.get(20).getReq();
+				updateMessages(20);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_B){
-				nameMessage = inventory.get(21).getName();
-				reqMessage = inventory.get(21).getDescription();
-				descriptionMessage = inventory.get(21).getReq();
+				updateMessages(21);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_C){
-				nameMessage = inventory.get(22).getName();
-				reqMessage = inventory.get(22).getDescription();
-				descriptionMessage = inventory.get(22).getReq();
+				updateMessages(22);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_D){
-				nameMessage = inventory.get(23).getName();
-				reqMessage = inventory.get(23).getDescription();
-				descriptionMessage = inventory.get(23).getReq();
+				updateMessages(23);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_E){
-				nameMessage = inventory.get(24).getName();
-				reqMessage = inventory.get(24).getDescription();
-				descriptionMessage = inventory.get(24).getReq();
+				updateMessages(24);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_F){
-				nameMessage = inventory.get(25).getName();
-				reqMessage = inventory.get(25).getDescription();
-				descriptionMessage = inventory.get(25).getReq();
+				updateMessages(25);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_G){
-				nameMessage = inventory.get(26).getName();
-				reqMessage = inventory.get(26).getDescription();
-				descriptionMessage = inventory.get(26).getReq();
+				updateMessages(26);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_H){
-				nameMessage = inventory.get(27).getName();
-				reqMessage = inventory.get(27).getDescription();
-				descriptionMessage = inventory.get(27).getReq();
+				updateMessages(27);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_I){
-				nameMessage = inventory.get(28).getName();
-				reqMessage = inventory.get(28).getDescription();
-				descriptionMessage = inventory.get(28).getReq();
+				updateMessages(28);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_J){
-				nameMessage = inventory.get(29).getName();
-				reqMessage = inventory.get(29).getDescription();
-				descriptionMessage = inventory.get(29).getReq();
+				updateMessages(29);
 				update();
 				game.repaint();
 			}
 		}
 		if (currentFourth){
 			if(e.getKeyCode() == KeyEvent.VK_A){
-				nameMessage = inventory.get(30).getName();
-				reqMessage = inventory.get(30).getDescription();
-				descriptionMessage = inventory.get(30).getReq();
+				updateMessages(30);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_B){
-				nameMessage = inventory.get(31).getName();
-				reqMessage = inventory.get(31).getDescription();
-				descriptionMessage = inventory.get(31).getReq();
+				updateMessages(31);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_C){
-				nameMessage = inventory.get(32).getName();
-				reqMessage = inventory.get(32).getDescription();
-				descriptionMessage = inventory.get(32).getReq();
+				updateMessages(32);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_D){
-				nameMessage = inventory.get(33).getName();
-				reqMessage = inventory.get(33).getDescription();
-				descriptionMessage = inventory.get(33).getReq();
+				updateMessages(33);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_E){
-				nameMessage = inventory.get(34).getName();
-				reqMessage = inventory.get(34).getDescription();
-				descriptionMessage = inventory.get(34).getReq();
+				updateMessages(34);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_F){
-				nameMessage = inventory.get(35).getName();
-				reqMessage = inventory.get(35).getDescription();
-				descriptionMessage = inventory.get(35).getReq();
+				updateMessages(35);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_G){
-				nameMessage = inventory.get(36).getName();
-				reqMessage = inventory.get(36).getDescription();
-				descriptionMessage = inventory.get(36).getReq();
+				updateMessages(36);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_H){
-				nameMessage = inventory.get(37).getName();
-				reqMessage = inventory.get(37).getDescription();
-				descriptionMessage = inventory.get(37).getReq();
+				updateMessages(37);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_I){
-				nameMessage = inventory.get(38).getName();
-				reqMessage = inventory.get(38).getDescription();
-				descriptionMessage = inventory.get(38).getReq();
+				updateMessages(38);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_J){
-				nameMessage = inventory.get(39).getName();
-				reqMessage = inventory.get(39).getDescription();
-				descriptionMessage = inventory.get(39).getReq();
+				updateMessages(39);
 				update();
 				game.repaint();
 			}
 		}
 		if (currentFifth){
 			if(e.getKeyCode() == KeyEvent.VK_A){
-				nameMessage = inventory.get(40).getName();
-				reqMessage = inventory.get(40).getDescription();
-				descriptionMessage = inventory.get(40).getReq();
+				updateMessages(40);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_B){
-				nameMessage = inventory.get(41).getName();
-				reqMessage = inventory.get(41).getDescription();
-				descriptionMessage = inventory.get(41).getReq();
+				updateMessages(41);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_C){
-				nameMessage = inventory.get(42).getName();
-				reqMessage = inventory.get(42).getDescription();
-				descriptionMessage = inventory.get(42).getReq();
+				updateMessages(42);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_D){
-				nameMessage = inventory.get(43).getName();
-				reqMessage = inventory.get(43).getDescription();
-				descriptionMessage = inventory.get(43).getReq();
+				updateMessages(43);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_E){
-				nameMessage = inventory.get(44).getName();
-				reqMessage = inventory.get(44).getDescription();
-				descriptionMessage = inventory.get(44).getReq();
+				updateMessages(44);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_F){
-				nameMessage = inventory.get(45).getName();
-				reqMessage = inventory.get(45).getDescription();
-				descriptionMessage = inventory.get(45).getReq();
+				updateMessages(45);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_G){
-				nameMessage = inventory.get(46).getName();
-				reqMessage = inventory.get(46).getDescription();
-				descriptionMessage = inventory.get(46).getReq();
+				updateMessages(46);
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == KeyEvent.VK_H){
-				nameMessage = inventory.get(47).getName();
-				reqMessage = inventory.get(47).getDescription();
-				descriptionMessage = inventory.get(47).getReq();
+				updateMessages(47);
 				update();
 				game.repaint();
 			}
@@ -588,102 +503,74 @@ public class ItemScreen2 extends Screen implements KeyListener{
 		if (consumes){
 			if (currentFirst){
 				if(e.getKeyCode() == KeyEvent.VK_A){
-					nameMessage = cInventory.get(0).getName();
-					reqMessage = cInventory.get(0).getDescription();
-					descriptionMessage = cInventory.get(0).getReq();
+					updateCMessages(0);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_B){
-					nameMessage = cInventory.get(1).getName();
-					reqMessage = cInventory.get(1).getDescription();
-					descriptionMessage = cInventory.get(1).getReq();
+					updateCMessages(1);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_C){
-					nameMessage = cInventory.get(2).getName();
-					reqMessage = cInventory.get(2).getDescription();
-					descriptionMessage = cInventory.get(2).getReq();
+					updateCMessages(2);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_D){
-					nameMessage = cInventory.get(3).getName();
-					reqMessage = cInventory.get(3).getDescription();
-					descriptionMessage = cInventory.get(3).getReq();
+					updateCMessages(3);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_E){
-					nameMessage = cInventory.get(4).getName();
-					reqMessage = cInventory.get(4).getDescription();
-					descriptionMessage = cInventory.get(4).getReq();
+					updateCMessages(4);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_F){
-					nameMessage = cInventory.get(5).getName();
-					reqMessage = cInventory.get(5).getDescription();
-					descriptionMessage = cInventory.get(5).getReq();
+					updateCMessages(5);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_G){
-					nameMessage = cInventory.get(6).getName();
-					reqMessage = cInventory.get(6).getDescription();
-					descriptionMessage = cInventory.get(6).getReq();
+					updateCMessages(6);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_H){
-					nameMessage = cInventory.get(7).getName();
-					reqMessage = cInventory.get(7).getDescription();
-					descriptionMessage = cInventory.get(7).getReq();
+					updateCMessages(7);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_I){
-					nameMessage = cInventory.get(8).getName();
-					reqMessage = cInventory.get(8).getDescription();
-					descriptionMessage = cInventory.get(8).getReq();
+					updateCMessages(8);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_J){
-					nameMessage = cInventory.get(9).getName();
-					reqMessage = cInventory.get(9).getDescription();
-					descriptionMessage = cInventory.get(9).getReq();
+					updateCMessages(9);
 					update();
 					game.repaint();
 				}
 			}
 			if (currentSecond){
 				if(e.getKeyCode() == KeyEvent.VK_A){
-					nameMessage = cInventory.get(10).getName();
-					reqMessage = cInventory.get(10).getDescription();
-					descriptionMessage = cInventory.get(10).getReq();
+					updateCMessages(10);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_B){
-					nameMessage = cInventory.get(11).getName();
-					reqMessage = cInventory.get(11).getDescription();
-					descriptionMessage = cInventory.get(11).getReq();
+					updateCMessages(11);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_C){
-					nameMessage = cInventory.get(12).getName();
-					reqMessage = cInventory.get(12).getDescription();
-					descriptionMessage = cInventory.get(12).getReq();
+					updateCMessages(12);
 					update();
 					game.repaint();
 				}
 				if(e.getKeyCode() == KeyEvent.VK_D){
-					nameMessage = cInventory.get(13).getName();
-					reqMessage = cInventory.get(13).getDescription();
-					descriptionMessage = cInventory.get(13).getReq();
+					updateCMessages(13);
 					update();
 					game.repaint();
 				}
