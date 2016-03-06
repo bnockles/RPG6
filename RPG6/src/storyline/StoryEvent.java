@@ -20,6 +20,8 @@ public abstract class StoryEvent {
 	// named it horribly because choices is a variable for descision
 	private boolean state;
 	// this would be used to just see if i went to that path
+	private static int numberEvent;
+	// I think this will work
 
 	public static final int DESTROY_VILLAGE = 0;
 	public static final int DIRECTION = 1;
@@ -49,6 +51,7 @@ public abstract class StoryEvent {
 		switch(event){
 		case DESTROY_VILLAGE: 	
 			description = "Your village has been destroyed.";
+			numberEvent = DESTTORY_VILLAGE;
 			break;
 		case DIRECTION: 	
 			description = "You have turned left.";
