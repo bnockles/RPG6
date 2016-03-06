@@ -30,15 +30,16 @@ public abstract class StoryEvent {
 	public static final int NEW_ALLY = 4;
 	public static final int ACCEPT_ALLY = 5;
 	public static final int KISS_SO= 6;
-	/// vvvv might not keep these
+	/// vvvv might not keep these(IGNORE)
 	public static final int KISS_SO_YELLOW= 7;
 	public static final int KISS_SO_GREEN= 8;
 	public static final int KISS_SO_PURPLE= 9;
 	public static final int KISS_SO_ORANGE= 10;
 	public static final int REGRET = 11;
-	
-	//^^^
-	//final int PLOT_TWIST = 9; this for later
+	//^^^ (IGNORE)
+	public static final int DEATH = 12;
+	public static final int ENDING = 13;
+	//final int PLOT_TWIST = WHATEVER THE LAST NUMBER IS; this for later
 
 	/**
 	 * 
@@ -76,6 +77,12 @@ public abstract class StoryEvent {
 			break;
 		case REGRET:
 			description = "What are ya? Afraid? Hmmm??? Whatever, man. Have fun being alone..... forever....";
+			break;
+		case DEATH:
+			description = "YOU DIE!!!!!!!!";
+			break;
+		case ENDING:
+			description = "DEMO ENDS";
 			break;
 	  }
 	}
