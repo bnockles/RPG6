@@ -14,11 +14,8 @@ package storyline;
 public abstract class StoryEvent {
 
 	private String description;//how it displays in the demo GUI
-	
 	private boolean state;
 	
-	private static int numberEvent;
-	// I think this will work
 
 	public static final int DESTROY_VILLAGE = 0;
 	public static final int DIRECTION = 1;
@@ -49,12 +46,10 @@ public abstract class StoryEvent {
 		switch(event){
 		case DESTROY_VILLAGE: 	
 			description = "Your village has been destroyed.";
-			numberEvent = DESTTORY_VILLAGE;
 			break;
 		case DIRECTION: 	
 			description = "You have turned left.";
 			break;
-
 		case NEW_ALLY:
 			description = "You have found a new ally.";
 			break;
@@ -95,23 +90,12 @@ public abstract class StoryEvent {
 		return description;
 	}
 
-
 	public boolean state() {
 		return state;
 	}
 	
-	public int getNumber(){
-		return number;
-	}
-
 	public void setState(boolean newState) {
 		this.state = newState;
 	}
 	
-	public void setNumber(int number) {
-		this.number = number;
-	}
-
-
-
 }
