@@ -14,10 +14,12 @@ package storyline;
 public abstract class StoryEvent {
 
 	private String description;//how it displays in the demo GUI
-	private int choices;
+	private int numbers;
 	// this is so we arent limited to 2 choices, allowing more branching
-	// 0 would be false, 1 true 
+	// 0 would be false, 1 true generally
+	// named it horribly because choices is a variable for descision
 	private boolean state;
+	// this would be used to just see if i went to that path
 
 	public static final int DESTROY_VILLAGE = 0;
 	public static final int DIRECTION = 1;
@@ -80,16 +82,16 @@ public abstract class StoryEvent {
 		return state;
 	}
 	
-	public int getChoices(){
-		return choices;
+	public int getNumber(){
+		return number;
 	}
 
 	public void setState(boolean newState) {
 		this.state = newState;
 	}
 	
-	public void setChoices(int choices) {
-		this.state = choices;
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 
