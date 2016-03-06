@@ -18,7 +18,7 @@ public class StoryPoint  {
 	private BufferedImage image;//for displaying information about this point of the game in the demo GUI
 	public static final int NUMBER_OF_EVENTS = 13;
 	private StoryEvent[] events;
-	private Descision descisionAtHand;
+	private Decision decisionAtHand;
 	private String currentString;
 	private boolean choiceMade;
 	private int width;
@@ -63,8 +63,8 @@ public class StoryPoint  {
 			"You continue to run as far as you can."}
 		};
 		Choice pickDirection = new Choice(events[StoryEvent.DIRECTION],choices ,outcome, consequences);
-		descisionAtHand = new Descision(context, pickDirection);
-		currentString = descisionAtHand.nextLine();
+		decisionAtHand = new Decision(context, pickDirection);
+		currentString = decisionAtHand.nextLine();
 		width = 600;
 		height = 400;
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -88,7 +88,7 @@ public class StoryPoint  {
 			boolean[] outcome = {true};
 			String[][] consequences= {{"GUNG HO GUNG HO GUNG HO"}};
 			Choice armyTime = new Choice(events[StoryEvent.LEFT],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, armyTime);
+			decisionAtHand = new Decision(context, armyTime);
 			}
 			if (i==StoryEvent.RIGHT){
 			String[] context = {"You are your village's only survivor.",
@@ -103,7 +103,7 @@ public class StoryPoint  {
 			boolean] outcome = {true};
 			String[][] consequences= {{"OOH RAH"}};
 			Choice armyTime = new Choice(events[StoryEvent.RIGHT],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, armyTime);
+			decisionAtHand = new Decision(context, armyTime);
 		}
 		if (i==StoryEvent.NEW_ALLY){
 			String[] context = {"Eventually, you join the army to ensure such injustice never happens again",
@@ -114,7 +114,7 @@ public class StoryPoint  {
 			String[][] consequences= {{"You have made new friends!", "They all think you're cool!!", ":>"}, 
 			{"You have made friends... sorta", "They think you're alright but they dont invite you out much."}};
 			Choice becomeFriends = new Choice(events[StoryEvent.NEW_ALLY],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, becomeFriends);
+			decisionAtHand = new Decision(context, becomeFriends);
 		}
 		if (i==StoryEvent.KISS_SO){
 		//	StorylineScreen.callImage(KISS_SO);
@@ -126,7 +126,7 @@ public class StoryPoint  {
 				{"Alright!", "You're real fun ya know that?? :>"},
 				{"BOOOOO", "C'mon man, be cool"}};
 			Choice kissyTimeOrNo = new Choice(events[StoryEvent.KISS_SO],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, kissyTimeOrNo);
+			decisionAtHand = new Decision(context, kissyTimeOrNo);
 		}
 		
 		
@@ -154,7 +154,7 @@ public class StoryPoint  {
 				
 				{"You decide to do you. Love is way too much work.", "And besides what good can come from it?"}};
 			Choice kissyTimeOrNo = new Choice(events[StoryEvent.KISS_SO],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, kissyTimeOrNo);	
+			decisionAtHand = new Decision(context, kissyTimeOrNo);	
 		
 		if (i==StoryEvent.KISS_SO_YELLOW){
 			String[] context = {// TODO
@@ -162,7 +162,7 @@ public class StoryPoint  {
 			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice smooch = new Choice(events[StoryEvent.KISS_SO_YELLOW],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, smooch);
+			decisionAtHand = new Decision(context, smooch);
 		}
 		if (i==StoryEvent.KISS_SO_GREEN){
 			String[] context = {// TODO
@@ -170,7 +170,7 @@ public class StoryPoint  {
 			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice smooch = new Choice(events[StoryEvent.KISS_SO_GREEN],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, smooch);
+			decisionAtHand = new Decision(context, smooch);
 		}
 		if (i==StoryEvent.KISS_SO_PURPLE){
 			String[] context = {// TODO
@@ -178,7 +178,7 @@ public class StoryPoint  {
 			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice smooch = new Choice(events[StoryEvent.KISS_SO_PURPLE],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, smooch);
+			decisionAtHand = new Decision(context, smooch);
 		}
 		
 		if (i==StoryEvent.KISS_SO_ORANGE){
@@ -187,7 +187,7 @@ public class StoryPoint  {
 			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice smooch = new Choice(events[StoryEvent.KISS_SO_ORANGE],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, smooch);
+			decisionAtHand = new Decision(context, smooch);
 		}
 		if (i==StoryEvent.REGRET){
 			String[] context = {// TODO
@@ -195,7 +195,7 @@ public class StoryPoint  {
 			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice lonely = new Choice(events[StoryEvent.REGRET],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, lonely);
+			decisionAtHand = new Decision(context, lonely);
 		}
 		if (i==StoryEvent.ENDING){
 			String[] context = {// TODO
@@ -203,7 +203,7 @@ public class StoryPoint  {
 			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice endDemo = new Choice(events[StoryEvent.ENDING],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, endDemo);
+			decisionAtHand = new Decision(context, endDemo);
 		}
 		if (i==StoryEvent.DEATH){
 			String[] context = {// TODO
@@ -211,7 +211,7 @@ public class StoryPoint  {
 			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice endYou = new Choice(events[StoryEvent.DEATH],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, endYou);
+			decisionAtHand = new Decision(context, endYou);
 		}
 		currentString = descisionAtHand.nextLine();
 		width = 600;
@@ -247,8 +247,8 @@ public class StoryPoint  {
 		if(!choiceMade){
 			y=printMultiLine(g,currentString, 30, y, 70);
 			if(descisionAtHand.isDisplayingLastLine()){
-				for(int i = 0; i<descisionAtHand.getChoices().getChoiceDesciptions().length; i++){
-					String str = (i+1)+") "+descisionAtHand.getChoices().getChoiceDesciptions()[i];
+				for(int i = 0; i<decisionAtHand.getChoices().getChoiceDesciptions().length; i++){
+					String str = (i+1)+") "+decisionAtHand.getChoices().getChoiceDesciptions()[i];
 					y=printMultiLine(g,str, 30, y, 70);
 				}
 				g.drawString("Select by pressing the number of your choice",30, y);
@@ -292,10 +292,10 @@ public class StoryPoint  {
 	//returns true when this sequence is over
 	public boolean nextLn(){
 		if(!choiceMade){
-			if(!descisionAtHand.isDisplayingLastLine())currentString=descisionAtHand.nextLine();
+			if(!decisionAtHand.isDisplayingLastLine())currentString=decisionAtHand.nextLine();
 
 		}else{
-			if(!descisionAtHand.getChoices().isDisplayingLastLine())currentString=descisionAtHand.getChoices().nextLine();
+			if(!decisionAtHand.getChoices().isDisplayingLastLine())currentString=decisionAtHand.getChoices().nextLine();
 			else return true;
 		}
 		update();
