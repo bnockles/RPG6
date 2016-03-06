@@ -49,7 +49,7 @@ public class StoryPoint  {
 				"These were the kinds of luxuries you took for granted.",
 				"...",
 				CHAR_NAME+": What's that?", //background change
-		"A fire has started, and is spreading through your entire village!"};
+				"A fire has started, and is spreading through your entire village!"};
 		String[] choices = {"Run left.", "Run right"};
 		int[] outcome = {0, 1};
 		String[][] consequences= 
@@ -73,43 +73,131 @@ public class StoryPoint  {
 
 	}
 
-	 public void StoryPoint1(StoryEvent[] previousState, int i) {
+	 public void StoryPoint(StoryEvent[] previousState, int i) {
 		this.events = previousState;
 		choiceID = i ;
 		//automatically fills in all events, since events are numbered
-
-		if (i==StoryEvent.NEW_ALLY){
-		//	StorylineScreen.callImage(NEW_ALLY);
+			if (i==StoryEvent.LEFT){
 			String[] context = {"You are your village's only survivor.",
-					"As the days pass by in the neighboring kingdom, you grow increasingly angry.",
-					CHAR_NAME+":Who was it that took away my family? Who was it that ruined my life?",
-					"Eventually, you join the army to answer this question.",
-			"Later on, you are approached by a strange group of people, asking if you would like to be allies."};
-			String[] choices = {"Become allies", "Do not become allies."};
-			boolean[] outcome = {true, true};
-			String[][] consequences= {{"You have made new friends!"}, {"Come on, you know you want to be friends...", "It's not like you have any other ones..."}};
+					"You eventually find a kingdom.",
+					"While the kingdom is wealthy and full, the orphanage is pretty cold...",
+					"Still you grow up healthy and strong.",
+					"AND REALLY ANGRY!!!!! >:O",
+					"ITS TIME TO JOIN THE ARMY!"};
+			String[] choices = {"OOH RAH"};
+			int[] outcome = {1};
+			String[][] consequences= {{"GUNG HO GUNG HO GUNG HO"}};
+			Choice armyTime = new Choice(events[StoryEvent.LEFT],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, LEFT);
+			}
+			if (i==StoryEvent.RIGHT){
+			String[] context = {"You are your village's only survivor.",
+					"You eventually find a village",
+					"It's pretty awful here. You sell matches like the street urchin you are",
+					"Straight outta The Little Match Girl...",
+					"You grow up on the leaner side. ",
+					"But don't fool yourself, you are A LEEAAN MEEAAN MACHINE!!!",
+					"TIME TO JOIN THE ARMY!!"
+					};
+			String[] choices = {"GUNG HO GUNG HO GUNG HO"};
+			int[] outcome = {1};
+			String[][] consequences= {{"OOH RAH"}};
+			Choice armyTime = new Choice(events[StoryEvent.RIGHT],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, RIGHT);
+		}
+		if (i==StoryEvent.NEW_ALLY){
+			String[] context = {"Eventually, you join the army to ensure such injustice never happens again",
+					"And possibly enact some revenge....","But to do that you'll need a posse",
+					"You usually scare off most people with your intense behavior", "Act more passively to make allies?"};
+			String[] choices = {"Do it!", "Do it..."};
+			int[] outcome = {1, 1};
+			String[][] consequences= {{"You have made new friends!", "They all think you're cool!!", ":>"}, 
+			{"You have made friends... sorta", "They think you're alright but they dont invite you out much."}};
 			Choice becomeFriends = new Choice(events[StoryEvent.NEW_ALLY],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, NEW_ALLY);
-			currentString = descisionAtHand.nextLine();
 		}
 		if (i==StoryEvent.KISS_SO){
 		//	StorylineScreen.callImage(KISS_SO);
 			String[] context = {"Eventually, you were able to grow close to these friends.",
 			"So much so, that you decide you might want to settle down with one."};
-			String[] choices = {"Kiss someone you care about", "Do not kiss anyone.."};
+			String[] choices = {"<3 Time for relationships. <3", "I have better things to do."};
 			int[] outcome = {0,1,2,3,4,5};
-			String[][] consequences= {{"You decide that "}, {"You decide to be a hermit forever."}};
+			String[][] consequences= {
+				{"You decide that "+ YELLOW + " is the one for you", "She's pretty cute.",
+				"Lean and a little scary, but cute! <3", "Plus she's into revenge as much as you.", 
+				"She trains you in weapons too!"}, 
+				
+				{"You decide that " + GREEN + " has captured your heart", "What a hottie! Real easy on the eyes ;o", 
+				"She's also really easy to talk to.", GREEN + ": UR PRETTY GUD URSELF <3333 ;PPP", "OH MAN",
+				"... she trains you... in potions... and other things....", "...so many things////"},
+				
+				{"You decide that " + PURPLE + " is the man of your dreams", "He's really strong, hoo boy.",
+				"You use this to your advantage and ask for his workouts while flirting",PURPLE+": THESE ARE SECRET!!!!", 
+				CHAR_NAME+ ": I'll make it worth your wild","You give him the face", "It works ,';^)"},
+				
+				{"You decide " + ORANGE + " is pretty hunky", "He may be the weakest one here.", 
+				"and really shy and loner-y", "But that's his selling points!!!", "You look inside and you see...",
+				"He's really good at running and defense."},
+				
+				{"You decide to do you. Love is way too much work.", "And besides what good can come from it?"}};
 			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, KISS_SO);
-			currentString = descisionAtHand.nextLine();
-			width = 600;
-			height = 400;
-			image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-			choiceMade = false;
-			update();
-
 		}
-	}
+		if (i==StoryEvent.KISS_SO_YELLOW){
+			String[] context = {// TODO
+			};
+			int[] outcome = {};
+			String[][] consequences= {{}};
+			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO_YELLOW],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, KISS_SO_YELLOW);
+		}
+		if (i==StoryEvent.KISS_SO_GREEN){
+			String[] context = {// TODO
+			};
+			int[] outcome = {};
+			String[][] consequences= {{}};
+			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO_GREEN],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, KISS_SO_GREEN);
+		}
+		if (i==StoryEvent.KISS_SO_PURPLE){
+			String[] context = {// TODO
+			};
+			int[] outcome = {};
+			String[][] consequences= {{}};
+			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO_PURPLE],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, KISS_SO_PURPLE);
+		}
+		if (i==StoryEvent.KISS_SO_ORANGE){
+			String[] context = {// TODO
+			};
+			int[] outcome = {};
+			String[][] consequences= {{}};
+			Choice becomeFriends = new Choice(events[StoryEvent.KISS_SO_ORANGE],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, KISS_SO_ORANGE);
+		}
+		if (i==StoryEvent.ENDING){
+			String[] context = {// TODO
+			};
+			int[] outcome = {};
+			String[][] consequences= {{}};
+			Choice becomeFriends = new Choice(events[StoryEvent.ENDING],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, ENDING);
+		}
+		if (i==StoryEvent.DEATH){
+			String[] context = {// TODO
+			};
+			int[] outcome = {};
+			String[][] consequences= {{}};
+			Choice becomeFriends = new Choice(events[StoryEvent.DEATH],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, DEATH);
+		}
+		currentString = descisionAtHand.nextLine();
+		width = 600;
+		height = 400;
+		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		choiceMade = false;
+		update();
+	 }
 	public void update(){
 		Graphics2D g = (Graphics2D)image.getGraphics();
 		paint(g);
