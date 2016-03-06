@@ -36,7 +36,7 @@ public class StoryPoint  {
 	//the default storypoint (beginning of the game)
 	public StoryPoint(){
 		events = new StoryEvent[NUMBER_OF_EVENTS];
-		choiceID = 0;
+		choiceID = 1;
 		//automatically fills in all events, since events are numbered
 		for(int i = 0; i< NUMBER_OF_EVENTS; i++){
 			events[i] = new StoryEvent(i) {
@@ -51,7 +51,7 @@ public class StoryPoint  {
 				CHAR_NAME+": What's that?", //background change
 				"A fire has started, and is spreading through your entire village!"};
 		String[] choices = {"Run left.", "Run right"};
-		int[] outcome = {0, 1};
+		boolean[] outcome = {true,false};
 		String[][] consequences= 
 		{
 			{"You run left as far as you can. Around you, all you can see are the corpses of your neighbors and friends.",
@@ -85,7 +85,7 @@ public class StoryPoint  {
 					"AND REALLY ANGRY!!!!! >:O",
 					"ITS TIME TO JOIN THE ARMY!"};
 			String[] choices = {"OOH RAH"};
-			int[] outcome = {1};
+			boolean[] outcome = {true};
 			String[][] consequences= {{"GUNG HO GUNG HO GUNG HO"}};
 			Choice armyTime = new Choice(events[StoryEvent.LEFT],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, armyTime);
@@ -100,7 +100,7 @@ public class StoryPoint  {
 					"TIME TO JOIN THE ARMY!!"
 					};
 			String[] choices = {"GUNG HO GUNG HO GUNG HO"};
-			int[] outcome = {1};
+			boolean] outcome = {true};
 			String[][] consequences= {{"OOH RAH"}};
 			Choice armyTime = new Choice(events[StoryEvent.RIGHT],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, armyTime);
@@ -110,7 +110,7 @@ public class StoryPoint  {
 					"And possibly enact some revenge....","But to do that you'll need a posse",
 					"You usually scare off most people with your intense behavior", "Act more passively to make allies?"};
 			String[] choices = {"Do it!", "Do it..."};
-			int[] outcome = {1, 1};
+			boolean[] outcome = {true, true};
 			String[][] consequences= {{"You have made new friends!", "They all think you're cool!!", ":>"}, 
 			{"You have made friends... sorta", "They think you're alright but they dont invite you out much."}};
 			Choice becomeFriends = new Choice(events[StoryEvent.NEW_ALLY],choices ,outcome, consequences);
@@ -121,7 +121,20 @@ public class StoryPoint  {
 			String[] context = {"Eventually, you were able to grow close to these friends.",
 			"So much so, that you decide you might want to settle down with one."};
 			String[] choices = {"<3 Time for relationships. <3", "I have better things to do."};
-			int[] outcome = {0,1,2,3,4,5};
+			boolean[] outcome = {true,false};
+			String[][] consequences= {
+				{"Alright!", "You're real fun ya know that?? :>"},
+				{"BOOOOO", "C'mon man, be cool"}};
+			Choice kissyTimeOrNo = new Choice(events[StoryEvent.KISS_SO],choices ,outcome, consequences);
+			descisionAtHand = new Descision(context, kissyTimeOrNo);
+		}
+		
+		
+		if (i==StoryEvent.LOVE_PATH){
+		//	StorylineScreen.callImage(KISS_SO);
+			String[] context = {"Let's pick a mate from ya mates!!"};
+			String[] choices = {YELLOW,GREEN,PURPLE,ORANGE,"I regret this decision"};
+			boolean[] outcome = {true,true,true,true,false};
 			String[][] consequences= {
 				{"You decide that "+ YELLOW + " is the one for you", "She's pretty cute.",
 				"Lean and a little scary, but cute! <3", "Plus she's into revenge as much as you.", 
@@ -141,12 +154,12 @@ public class StoryPoint  {
 				
 				{"You decide to do you. Love is way too much work.", "And besides what good can come from it?"}};
 			Choice kissyTimeOrNo = new Choice(events[StoryEvent.KISS_SO],choices ,outcome, consequences);
-			descisionAtHand = new Descision(context, kissyTimeOrNo);
-		}
+			descisionAtHand = new Descision(context, kissyTimeOrNo);	
+		
 		if (i==StoryEvent.KISS_SO_YELLOW){
 			String[] context = {// TODO
 			};
-			int[] outcome = {};
+			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice smooch = new Choice(events[StoryEvent.KISS_SO_YELLOW],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, smooch);
@@ -154,7 +167,7 @@ public class StoryPoint  {
 		if (i==StoryEvent.KISS_SO_GREEN){
 			String[] context = {// TODO
 			};
-			int[] outcome = {};
+			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice smooch = new Choice(events[StoryEvent.KISS_SO_GREEN],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, smooch);
@@ -162,15 +175,16 @@ public class StoryPoint  {
 		if (i==StoryEvent.KISS_SO_PURPLE){
 			String[] context = {// TODO
 			};
-			int[] outcome = {};
+			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice smooch = new Choice(events[StoryEvent.KISS_SO_PURPLE],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, smooch);
 		}
+		
 		if (i==StoryEvent.KISS_SO_ORANGE){
 			String[] context = {// TODO
 			};
-			int[] outcome = {};
+			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice smooch = new Choice(events[StoryEvent.KISS_SO_ORANGE],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, smooch);
@@ -178,7 +192,7 @@ public class StoryPoint  {
 		if (i==StoryEvent.REGRET){
 			String[] context = {// TODO
 			};
-			int[] outcome = {};
+			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice lonely = new Choice(events[StoryEvent.REGRET],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, lonely);
@@ -186,7 +200,7 @@ public class StoryPoint  {
 		if (i==StoryEvent.ENDING){
 			String[] context = {// TODO
 			};
-			int[] outcome = {};
+			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice endDemo = new Choice(events[StoryEvent.ENDING],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, endDemo);
@@ -194,7 +208,7 @@ public class StoryPoint  {
 		if (i==StoryEvent.DEATH){
 			String[] context = {// TODO
 			};
-			int[] outcome = {};
+			boolean[] outcome = {};
 			String[][] consequences= {{}};
 			Choice endYou = new Choice(events[StoryEvent.DEATH],choices ,outcome, consequences);
 			descisionAtHand = new Descision(context, endYou);
@@ -322,6 +336,9 @@ public class StoryPoint  {
 			return StoryEvent.KISS_SO;
 		}
 		else if(choiceID==StoryEvent.KISS_SO){
+			if(selection == 0)return StoryEvent.LOVE_PATH;
+			else return StoryEvent.REGRET;
+		else if(choiceID == StoryEvent.LOVE_PATH)	
 			if(selection == 0)return StoryEvent.KISS_SO_YELLOW;
 			if(selection == 1)return StoryEvent.KISS_SO_GREEN;
 			if(selection == 2)return StoryEvent.KISS_SO_PURPLE;
