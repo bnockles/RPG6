@@ -124,8 +124,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}
 		
 		if(!wepOn){
-			if(e.getKeyCode()==KeyEvent.VK_1){	
+			if(e.getKeyCode()==KeyEvent.VK_1 && selectedHero.isHasWeapon()==false){	
 				wepOn = true;
+				selectedHero.setHasWeapon(true);
 				selectedHero.removeItem(sword);
 				selectedHero.equipItem(sword);
 				selectedHero.setAttack(selectedHero.getAttack() + sword.statBoost());
@@ -136,6 +137,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}else{
 			if(e.getKeyCode()==KeyEvent.VK_1){	
 				wepOn = false;
+				selectedHero.setHasWeapon(false);
 				selectedHero.addItem(sword);
 				selectedHero.dequipItem(sword);
 				selectedHero.setAttack(selectedHero.getAttack() - sword.statBoost());
@@ -147,8 +149,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 		
 		//equip/dequip wep
 		if(!wepOn2){
-			if(e.getKeyCode()==KeyEvent.VK_2){	
+			if(e.getKeyCode()==KeyEvent.VK_2 && selectedHero.isHasWeapon()==false){	
 				wepOn2 = true;
+				selectedHero.setHasWeapon(true);
 				selectedHero.removeItem(sword2);
 				selectedHero.equipItem(sword2);
 				selectedHero.setAttack(selectedHero.getAttack() + sword2.statBoost());
@@ -159,6 +162,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}else{
 			if(e.getKeyCode()==KeyEvent.VK_2){	
 				wepOn2 = false;
+				selectedHero.setHasWeapon(false);
 				selectedHero.addItem(sword2);
 				selectedHero.dequipItem(sword2);
 				selectedHero.setAttack(selectedHero.getAttack() - sword2.statBoost());
@@ -171,8 +175,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 		
 		//equip/dequip armor
 		if(!armorOn){
-			if(e.getKeyCode()==KeyEvent.VK_3){	
+			if(e.getKeyCode()==KeyEvent.VK_3 && selectedHero.isHasArmor()==false){	
 				armorOn = true;
+				selectedHero.setHasArmor(true);
 				selectedHero.removeItem(armor);
 				selectedHero.equipItem(armor);
 				selectedHero.setDefense(selectedHero.getDefense() + armor.statBoost());
@@ -183,6 +188,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}else{
 			if(e.getKeyCode()==KeyEvent.VK_3){	
 				armorOn = false;
+				selectedHero.setHasArmor(false);
 				selectedHero.addItem(armor);
 				selectedHero.dequipItem(armor);
 				selectedHero.setDefense(selectedHero.getDefense() - armor.statBoost());
@@ -193,8 +199,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}
 		
 		if(!armorOn2){
-			if(e.getKeyCode()==KeyEvent.VK_4){	
+			if(e.getKeyCode()==KeyEvent.VK_4 && selectedHero.isHasArmor()==false){	
 				armorOn2 = true;
+				selectedHero.setHasArmor(true);
 				selectedHero.removeItem(armor2);
 				selectedHero.equipItem(armor2);
 				selectedHero.setDefense(selectedHero.getDefense() + armor2.statBoost());
@@ -205,6 +212,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}else{
 			if(e.getKeyCode()==KeyEvent.VK_4){	
 				armorOn2 = false;
+				selectedHero.setHasArmor(false);
 				selectedHero.addItem(armor2);
 				selectedHero.dequipItem(armor2);
 				selectedHero.setDefense(selectedHero.getDefense() - armor2.statBoost());
@@ -406,10 +414,10 @@ public class CharacterScreen extends Screen implements KeyListener{
 		g2.drawString("Press '2' to equip/dequip better weapon", 30, 150);
 		g2.drawString("Press '3' to equip/dequip armor", 30, 165);
 		g2.drawString("Press '4' to equip/dequip better armor", 30, 180);
-		g2.drawString("Press '5' to get HP potion", 30, 195);
-		g2.drawString("Press '6' to use HP potion", 30, 210);
-		g2.drawString("Press '7' to get MP potion", 30, 225);
-		g2.drawString("Press '8' to use MP potion", 30, 240);
+		g2.drawString("Press '5' to use HP potion", 30, 195);
+		g2.drawString("Press '6' to get HP potion", 30, 210);
+		g2.drawString("Press '7' to use MP potion", 30, 225);
+		g2.drawString("Press '8' to get MP potion", 30, 240);
 
 //			g2.setColor(Cr.white)
 //			g2.fillRect(0, 0, width, height);

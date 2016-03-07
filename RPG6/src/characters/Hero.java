@@ -16,6 +16,8 @@ public class Hero extends Character {
 	boolean back = false;
 	boolean right = false;
 	boolean left = false;
+	boolean hasWeapon = false;
+	boolean hasArmor = false;
 	ArrayList<SampleItem> inventory;
 	ArrayList<SampleItem> equiped;
 	int x;
@@ -247,5 +249,24 @@ public class Hero extends Character {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	//Setters/getters for weapon and armor 
+	public boolean isHasWeapon() {
+		return hasWeapon;
+	}
+
+	public void setHasWeapon(boolean hasWeapon) {
+		this.hasWeapon = hasWeapon;
+	}
+
+	public boolean isHasArmor() {
+		return hasArmor;
+	}
+
+	public void setHasArmor(boolean hasArmor) {
+		this.hasArmor = hasArmor;
+	}
+	
+
 	
 }
