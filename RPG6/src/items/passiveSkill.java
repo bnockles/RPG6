@@ -87,8 +87,5 @@ public class passiveSkill extends Spell {
 		boostWis = user.getTrueStats().getWisdom() + skill.getStats().getWisdom();
 		boostLuk = user.getTrueStats().getLuck() + skill.getStats().getLuck();
 	}
-	
-	public static void main(){
-		
-	}
+
 }
