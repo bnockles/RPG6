@@ -13,25 +13,19 @@ public final class ItemScreen extends Screen implements KeyListener {
 	public ItemScreen(Game game) {
 		super(game);
 	}
-//s
+	
 	
 	public void paintScreen(Graphics2D g2) {
 		g2.setColor(Color.green);
 		g2.fillRect(0, 0, width, height);
 
-		//replace with Item.draw()
+		//TODO: draw inventory here
 		g2.setColor(Color.black);
-		g2.fillRect(50, 100, 365, 100);
-		g2.setColor(Color.white);
-		g2.drawString(ItemSandbox.testChest.getName(), 				50+10, 100+20);
-		g2.drawString(ItemSandbox.testChest.getDescription(), 		50+10, 100+50);
-		g2.drawString(ItemSandbox.testChest.getStats().toString(), 	50+10, 100+90);
-
-		g2.setColor(Color.black);
-		g2.fillRect(50, 300, 365, 100);
-		g2.setColor(Color.white);
-		g2.drawString(ItemSandbox.testPotion.getName(), 			50+10, 300+20);
-		g2.drawString(ItemSandbox.testPotion.getDescription(), 		50+10, 300+90);
+		g2.fillRect(this.width/2-200, this.height/2-300, 400, 600);
+		
+		Item it = ItemSandbox.inv.getItem();
+		g2.drawString(it.getName(), 		this.width/2-204, this.height/2-304);
+		g2.drawString(it.getDescription(), 	this.width/2-204, this.height/2-326);
 	}
 
 	public KeyListener getKeyListener() {
@@ -43,7 +37,10 @@ public final class ItemScreen extends Screen implements KeyListener {
 	}
 
 	public void keyReleased(KeyEvent ev) {
+		int key = ev.getKeyCode();
 		
+		if(key == KeyEvent.VK_LEFT)	ItemSandbox.inv.moveCursor(-1);
+		if(key == KeyEvent.VK_RIGHT)ItemSandbox.inv.moveCursor(+1);
 	}
 
 	public void keyTyped(KeyEvent ev) {

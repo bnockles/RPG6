@@ -1,14 +1,28 @@
 package items;
 
-public abstract class Consumable extends Item {
+public class Consumable extends Item {
 	int amount;
-	public Consumable(String name, String description, int amount) {
-		super(name, description);
+	int value;
+	public Consumable(String name, String description, String req, int amount, int value) {
+		super(name, description, req);
 		this.amount = amount;
+		this.value = value;
 	}
 	
-	public abstract boolean canUse(Character user);
+	public int getAmount() {
+		return amount;
+	}
 
-	public abstract void use(Character user);
+	public int getValue() {
+		return value;
+	}
+
+	public boolean canUse(Character user){
+		return true;
+	}
+
+	public void use(Character user){
+		
+	}
 
 }

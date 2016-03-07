@@ -1,21 +1,26 @@
 package items;
 
+
 public abstract class Item {
 	private String name;
 	private String description;
-	private DrawItem draw;
+	public String req;
 
-	public Item(String name, String description){
+
+	public Item(String name, String description, String req){
 		this.description = description;
 		this.name = name;
-		this.draw = new DrawItem();
+		this.req = req;
 	}
-	//s
-	public String toString(){ return this.name; }
-	public boolean equals(Item item){ return this.name == item.name; }
 	
-	public String getDescription() { return this.description; }
+	
+	public String toString(){ return this.name; }
+
+	public String getReq() {
+		return req;
+	}
 	public String getName() { return this.name; }
+	public String getDescription() { return this.description; }
 	
 
 	public abstract boolean canUse(Character user);
