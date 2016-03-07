@@ -29,7 +29,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 	double maxMana;
 	boolean on = false;
 	boolean wepOn = false;
+	boolean wepOn2 = false;
 	boolean armorOn = false;
+	boolean armorOn2 = false;
 	SampleWeapon sword;
 	SampleWeapon sword2;
 	SampleArmor armor;
@@ -144,9 +146,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}
 		
 		//equip/dequip wep
-		if(!wepOn){
+		if(!wepOn2){
 			if(e.getKeyCode()==KeyEvent.VK_2){	
-				wepOn = true;
+				wepOn2 = true;
 				selectedHero.removeItem(sword2);
 				selectedHero.equipItem(sword2);
 				selectedHero.setAttack(selectedHero.getAttack() + sword2.statBoost());
@@ -156,7 +158,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 			}
 		}else{
 			if(e.getKeyCode()==KeyEvent.VK_2){	
-				wepOn = false;
+				wepOn2 = false;
 				selectedHero.addItem(sword2);
 				selectedHero.dequipItem(sword2);
 				selectedHero.setAttack(selectedHero.getAttack() - sword2.statBoost());
@@ -190,9 +192,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 			}
 		}
 		
-		if(!armorOn){
+		if(!armorOn2){
 			if(e.getKeyCode()==KeyEvent.VK_4){	
-				armorOn = true;
+				armorOn2 = true;
 				selectedHero.removeItem(armor2);
 				selectedHero.equipItem(armor2);
 				selectedHero.setDefense(selectedHero.getDefense() + armor2.statBoost());
@@ -202,7 +204,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 			}
 		}else{
 			if(e.getKeyCode()==KeyEvent.VK_4){	
-				armorOn = false;
+				armorOn2 = false;
 				selectedHero.addItem(armor2);
 				selectedHero.dequipItem(armor2);
 				selectedHero.setDefense(selectedHero.getDefense() - armor2.statBoost());
