@@ -41,10 +41,10 @@ public class SampleTarget implements Target {
 		else{
 			System.out.println(e.name + " has " + SampleEnemy.getItemPosessed(e));
 		}
-		
+
 		EnemyBattleScreen.battleMessage=name+ " was hit by "+e.name + " and has taken " + e.attack + " damage and has "  + health + "health";
 	}
-	
+
 	public static String getItemPosessed(SampleEnemy e){
 		return e.itemPosessed;
 	}

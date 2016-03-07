@@ -24,10 +24,14 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 	//ArrayList<String> battleMessages = new ArrayList<String>(5);
 	//public int battleMessageNumber = 5;			//later use this to make sure we can mod and show 5 messages at once
 	//int numEnemies = (int) (Math.ceil(Math.random()*3));	//generate num enemies 1-3
-	
+
 	SampleEnemy enemy1;
 	SampleEnemy enemy2;
 	SampleEnemy enemy3;
+	//int randomEnemy1 = (int) Math.ceil(Math.random()*5);
+	//int randomEnemy2 = (int) Math.ceil(Math.random()*5);
+	//int randomEnemy3 = (int) Math.ceil(Math.random()*5);
+
 	/**
 	 * @param game
 	 */
@@ -40,13 +44,13 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		//this.enemy1= new SampleEnemy(1, targets);
 		//this.enemy2= new SampleEnemy(2, targets);
 		//this.enemy3= new SampleEnemy(3, targets);
-		
+
 		//(String type, int level, ArrayList<Target> targets)
 		this.enemy1 = new SampleEnemy("regular", 10, targets);		//Implement this later
 		//System.out.println(enemy1.attack);
 		this.enemy2 = new SampleEnemy("tank", 10, targets);
 		this.enemy3 = new SampleEnemy("mage", 10, targets);
-		
+
 		update();
 	}
 
@@ -78,7 +82,7 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 			}
 			//y+=25;		This moves the battle message down a bit, I think it looks better without so comment out.
 			g2.drawString(battleMessage, X_COORDINATE_FOR_TEXT, y);
-			
+
 		}catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
