@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
+import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
 import directors.Game;
 import directors.Screen;
@@ -288,6 +289,10 @@ public class CharacterScreen extends Screen implements KeyListener{
 			stats = selectedHero.getAllStats();
 			update();
 			game.repaint();
+		}
+		//calls special move
+		if(e.getKeyCode()==KeyEvent.VK_V){
+			SpecialAction.specialAction(hero);
 		}
 		
 		
