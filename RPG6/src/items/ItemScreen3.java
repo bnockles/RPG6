@@ -28,14 +28,18 @@ public class ItemScreen3 extends Screen implements KeyListener{
 	public static boolean onFourth = false;
 	public static boolean onInvent = false;
 	public static boolean onSkill = false;
+	public static boolean selectedSkill = false;
+	public static boolean selectedSkill2 = false;
 	public static String welcomeMessage = "Battle Testing for Items and Skills";
 	public static String index = "Press 'I' for inventory.";
-	public static String currentPage = "Press 1-4 to select an ally. Then press 'K' to view their individual skills.";
+	public static String currentPage = "Press 1-4 to select an ally.";
 	public static String message = "Press buttons when prompted.";
 	public static String battleMessage = ""; //For Selecting
 	public static String info = "Battle Information";
 	public static String resultsMessage = "";
 	public static String openedMenu = "";
+	public static String skillArea1 = "";
+	public static String skillArea2 = "";
 	public Character ally1;
 	public Character ally2;
 	public Character ally3;
@@ -54,6 +58,7 @@ public class ItemScreen3 extends Screen implements KeyListener{
 	public int currentMP5;
 	public int currentHP6;
 	public int currentMP6;
+	public int finalDamage;
 	
 	/**
 	 * @param game
@@ -136,6 +141,8 @@ public class ItemScreen3 extends Screen implements KeyListener{
 			g2.drawString(index, 50, 75);
 			g2.drawString(currentPage, 50, 100);
 			g2.drawString(openedMenu, 50, 300);
+			g2.drawString(skillArea1, 50, 325);
+			g2.drawString(skillArea2, 50, 350);
 			g2.drawString("Enemies", 700, 125);
 			g2.drawString("5. NAME: " + enemy1.getName(), 700, 150);
 			g2.drawString("HP: " + currentHP5 + "/" + enemy1.getTrueStats().getHealth(), 700, 175);
@@ -212,9 +219,204 @@ public class ItemScreen3 extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-		
+		if(e.getKeyCode()==KeyEvent.VK_K && onFirst){
+			openedMenu = "Skills";
+			battleMessage = "You have selected " + ally1.getName() + "'s skills. Press their labeled skills to use it.";
+			skillArea1 = "Q:" + skillList1.get(0).getName();
+			skillArea2 = "W:" + skillList1.get(1).getName();
+			onSkill = true;
+			onInvent = false;
+			update();
+			game.repaint();
 		}
-		
+		if(e.getKeyCode()==KeyEvent.VK_K && onSecond){
+			openedMenu = "Skills";
+			battleMessage = "You have selected " + ally2.getName() + "'s skills. Press their labeled skills to use it.";
+			skillArea1 = "Q:" + skillList2.get(0).getName();
+			onSkill = true;
+			onInvent = false;
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_K && onThird){
+			openedMenu = "Skills";
+			battleMessage = "You have selected " + ally3.getName() + "'s skills. Press their labeled skills to use it.";
+			skillArea1 = "Q:" + skillList3.get(0).getName();
+			onSkill = true;
+			onInvent = false;
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==KeyEvent.VK_K && onFourth){
+			openedMenu = "Skills";
+			battleMessage = "You have selected " + ally4.getName() + "'s skills. Press their labeled skills to use it.";
+			skillArea1 = "This character has no skills!";
+			onSkill = true;
+			onInvent = false;
+			update();
+			game.repaint();
+		}
+		}
+		if (onSkill){
+			if (onFirst){
+			if(e.getKeyCode()== KeyEvent.VK_Q){
+				battleMessage = "You have selected " + skillList1.get(0).getName() + ". Choose an enemy to use it on them.";
+				selectedSkill = true;
+				update();
+				game.repaint();
+			}
+			if(e.getKeyCode()== KeyEvent.VK_W){
+				battleMessage = "You have selected " + skillList1.get(1).getName() + ". Choose an enemy to use it on them (5 or 6).";
+				selectedSkill2 = true;
+				update();
+				game.repaint();
+				}
+			if(e.getKeyCode()== KeyEvent.VK_5 && selectedSkill){
+				battleMessage = "You have selected to use " + skillList1.get(0).getName() + " on " + enemy1.getName() + ".";
+				finalDamage = skillList1.get(0).getDamage() + ally1.getTrueStats().getAttack();
+				resultsMessage = skillList1.get(0).getName() + " has done " + finalDamage + " damage on " + enemy1.getName() + " and used " + skillList1.get(0).getManaCost() + " MP! Press Z to continue";
+				if ((currentMP1 - skillList1.get(0).getManaCost()) < 0){
+					currentMP1 = 0;
+				}else{
+				currentMP1 -= skillList1.get(0).getManaCost();
+				}
+				if ((currentHP5 - finalDamage) < 0){
+					currentHP5 = 0;
+				} else {
+					currentHP5 -= finalDamage;
+				}
+				update();
+				game.repaint();
+			}
+			if(e.getKeyCode()== KeyEvent.VK_5 && selectedSkill2){
+				battleMessage = "You have selected to use " + skillList1.get(1).getName() + " on " + enemy1.getName() + ".";
+				finalDamage = skillList1.get(1).getDamage() + ally1.getTrueStats().getAttack();
+				resultsMessage = skillList1.get(1).getName() + " has done " + finalDamage + " damage on " + enemy1.getName() + " and used " + skillList1.get(0).getManaCost() + " MP! Press Z to continue";
+				if ((currentMP1 - skillList1.get(1).getManaCost()) < 0){
+					currentMP1 = 0;
+				}else{
+				currentMP1 -= skillList1.get(1).getManaCost();
+				}
+				if ((currentHP5 - finalDamage) < 0){
+					currentHP5 = 0;
+				} else {
+					currentHP5 -= finalDamage;
+				}
+				
+				update();
+				game.repaint();
+			}
+			if(e.getKeyCode()== KeyEvent.VK_6 && selectedSkill){
+				battleMessage = "You have selected to use " + skillList1.get(0).getName() + " on " + enemy2.getName() + ".";
+				finalDamage = skillList1.get(0).getDamage() + ally1.getTrueStats().getAttack();
+				resultsMessage = skillList1.get(0).getName() + " has done " + finalDamage + " damage on " + enemy2.getName() + " and used " + skillList1.get(0).getManaCost() + " MP! Press Z to continue";
+				if ((currentMP1 - skillList1.get(0).getManaCost()) < 0){
+					currentMP1 = 0;
+				}else{
+				currentMP1 -= skillList1.get(0).getManaCost();
+				}
+				if ((currentHP6 - finalDamage) < 0){
+					currentHP6 = 0;
+				} else {
+					currentHP6 -= finalDamage;
+				}
+				update();
+				game.repaint();
+			}
+			if(e.getKeyCode()== KeyEvent.VK_6 && selectedSkill2){
+				battleMessage = "You have selected to use " + skillList1.get(1).getName() + " on " + enemy2.getName() + ".";
+				finalDamage = skillList1.get(1).getDamage() + ally1.getTrueStats().getAttack();
+				resultsMessage = skillList1.get(1).getName() + " has done " + finalDamage + " damage on " + enemy2.getName() + " and used " + skillList1.get(0).getManaCost() + " MP! Press Z to continue";
+				if ((currentMP1 - skillList1.get(1).getManaCost()) < 0){
+					currentMP1 = 0;
+				}else{
+				currentMP1 -= skillList1.get(1).getManaCost();
+				}
+				if ((currentHP6 - finalDamage) < 0){
+					currentHP6 = 0;
+				} else {
+					currentHP6 -= finalDamage;
+				}
+				
+				update();
+				game.repaint();
+			}
+			if (selectedSkill || selectedSkill2){
+				if(e.getKeyCode()== KeyEvent.VK_Z){
+					battleMessage = "";
+					finalDamage = 0;
+					resultsMessage = "";
+					skillArea1 = "";
+					skillArea2 = "";
+					openedMenu = "";
+					onFirst = false;
+					onSkill = false;
+					selectedSkill = false;
+					selectedSkill2 = false;
+					update();
+					game.repaint();
+				}
+			}
+			}
+			if (onSecond){
+				if(e.getKeyCode()== KeyEvent.VK_Q){
+					battleMessage = "You have selected " + skillList2.get(0).getName() + ". Choose an enemy to use it on them.";
+					selectedSkill = true;
+					update();
+					game.repaint();
+				}
+				if(e.getKeyCode()== KeyEvent.VK_5 && selectedSkill){
+					battleMessage = "You have selected to use " + skillList2.get(0).getName() + " on " + enemy1.getName() + ".";
+					finalDamage = skillList2.get(0).getDamage() + ally2.getTrueStats().getAttack();
+					resultsMessage = skillList2.get(0).getName() + " has done " + finalDamage + " damage on " + enemy1.getName() + " and used " + skillList2.get(0).getManaCost() + " MP! Press Z to continue";
+					if ((currentMP1 - skillList2.get(0).getManaCost()) < 0){
+						currentMP2 = 0;
+					}else{
+					currentMP2 -= skillList2.get(0).getManaCost();
+					}
+					if ((currentHP5 - finalDamage) < 0){
+						currentHP5 = 0;
+					} else {
+						currentHP5 -= finalDamage;
+					}
+					update();
+					game.repaint();
+				}
+				if(e.getKeyCode()== KeyEvent.VK_6 && selectedSkill){
+					battleMessage = "You have selected to use " + skillList2.get(0).getName() + " on " + enemy2.getName() + ".";
+					finalDamage = skillList2.get(0).getDamage() + ally2.getTrueStats().getAttack();
+					resultsMessage = skillList2.get(0).getName() + " has done " + finalDamage + " damage on " + enemy2.getName() + " and used " + skillList2.get(0).getManaCost() + " MP! Press Z to continue";
+					if ((currentMP2 - skillList2.get(0).getManaCost()) < 0){
+						currentMP2 = 0;
+					}else{
+					currentMP2 -= skillList2.get(0).getManaCost();
+					}
+					if ((currentHP6 - finalDamage) < 0){
+						currentHP6 = 0;
+					} else {
+						currentHP6 -= finalDamage;
+					}
+					update();
+					game.repaint();
+				}
+				if (selectedSkill || selectedSkill2){
+					if(e.getKeyCode()== KeyEvent.VK_Z){
+						battleMessage = "";
+						finalDamage = 0;
+						resultsMessage = "";
+						skillArea1 = "";
+						skillArea2 = "";
+						openedMenu = "";
+						onFirst = false;
+						onSkill = false;
+						selectedSkill = false;
+						selectedSkill2 = false;
+						update();
+						game.repaint();
+					}
+				}
+			}
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
