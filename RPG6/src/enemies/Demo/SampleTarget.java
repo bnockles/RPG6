@@ -31,6 +31,7 @@ public class SampleTarget implements Target {
 	 */
 	public void hit(SampleEnemy e) {
 		int newHealth = health - e.attack;
+		//System.out.println(e.attack);
 		name = name.replace(" not", "").replace(" yet", "");
 		this.health = newHealth;
 

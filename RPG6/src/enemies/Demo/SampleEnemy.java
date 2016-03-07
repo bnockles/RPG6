@@ -38,7 +38,7 @@ public class SampleEnemy {
 	public static String determineRandomItem(){
 		String[]items = {"potion A","potion B","poison A","","","","sword","armor","shield","hemlock","more poisonous stuff"};
 		double x = Math.floor(Math.random()*items.length);
-		System.out.println(x);
+		//System.out.println(x);
 		int y = (int)x;
 		return items[y];
 		//return "";
@@ -47,8 +47,8 @@ public class SampleEnemy {
 	public static String getItemPosessed(SampleEnemy e){
 		return e.itemPosessed;
 	}
-	public static int getAttack(){
-		return attack;
+	public int getAttack(){
+		return this.attack;
 	}
 	//the following method will most likely be
 	//something required by the Battles team. It is likely they will 
@@ -96,7 +96,7 @@ public class SampleEnemy {
 	ArrayList<Target> targets;
 	public String name;
 	String itemPosessed;
-	public static int attack;
+	public int attack;
 	
     private String type;
     private int level;
@@ -114,7 +114,7 @@ public class SampleEnemy {
    	 this.level = level;
    	 this.targets=targets;
    	 this.itemPosessed=determineRandomItem();
-   	 if(type == "regular"){    	//cant use spells, just attacks.
+   	 if(this.type == "regular"){    	//cant use spells, just attacks.
    		 name = "Slime";
    		 hp = 65+2*level;
    		 mp = 10;
@@ -124,7 +124,7 @@ public class SampleEnemy {
    		 exp_gained_in_the_end = 1500+10*level;
    	 }
    	 
-   	 if(type == "tank"){
+   	 if(this.type == "tank"){
    		 name = "Spartan";
    		 hp = 80+3*level;
    		 mp = 15+2*level;
@@ -134,7 +134,7 @@ public class SampleEnemy {
    		 exp_gained_in_the_end = 2000+15*level;
    	 }
 
-   	 if(type == "mage"){	//can attack but does low damage, spells have set damage
+   	 if(this.type == "mage"){	//can attack but does low damage, spells have set damage
    		 name = "witch";
    		 hp = 50+2*level;
    		 mp = 30+2*level;
@@ -144,7 +144,7 @@ public class SampleEnemy {
    		 exp_gained_in_the_end = 2000+15*level;
    	 }
 
-   	 if(type == "speedy"){
+   	 if(this.type == "speedy"){
    		 name = "GATTA GO FAST";
    		 hp = 65+2*level;
    		 mp = 20;
@@ -154,7 +154,7 @@ public class SampleEnemy {
    		 exp_gained_in_the_end = 1750+10*level;
    	 }
 
-   	 if(type == "fluffy"){	//lucky exp giver
+   	 if(this.type == "fluffy"){	//lucky exp giver
    		 name = "Fluffykins";
    		 hp = 50;//+Character.getLevel();   	 //hp increases depending on character level
    		 mp = 0;

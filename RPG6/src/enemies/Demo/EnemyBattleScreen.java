@@ -21,7 +21,7 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 	//this String is ONLY useful for a demo
 	public static String battleMessage = "Press 1,2, or 3 to make an enemy take its turn";
 	ArrayList<Target> targets;
-	ArrayList<String> battleMessages = new ArrayList<String>(5);
+	//ArrayList<String> battleMessages = new ArrayList<String>(5);
 	//public int battleMessageNumber = 5;			//later use this to make sure we can mod and show 5 messages at once
 	//int numEnemies = (int) (Math.ceil(Math.random()*3));	//generate num enemies 1-3
 	
@@ -43,6 +43,7 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		
 		//(String type, int level, ArrayList<Target> targets)
 		this.enemy1 = new SampleEnemy("regular", 10, targets);		//Implement this later
+		//System.out.println(enemy1.attack);
 		this.enemy2 = new SampleEnemy("tank", 10, targets);
 		this.enemy3 = new SampleEnemy("mage", 10, targets);
 		
