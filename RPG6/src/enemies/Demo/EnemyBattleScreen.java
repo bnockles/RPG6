@@ -37,12 +37,14 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		targets.add(new SampleTarget());
 		targets.add(new SampleTarget());
 		targets.add(new SampleTarget());
-		this.enemy1= new SampleEnemy(1, targets);
-		this.enemy2= new SampleEnemy(2, targets);
-		this.enemy3= new SampleEnemy(3, targets);
-		//this.enemy1 = new SampleEnemy("regular",5);		//Implement this later
-		//this.enemy2 = new SampleEnemy("tank",5);
-		//this.enemy3 = new SampleEnemy("mage",5);
+		//this.enemy1= new SampleEnemy(1, targets);
+		//this.enemy2= new SampleEnemy(2, targets);
+		//this.enemy3= new SampleEnemy(3, targets);
+		
+		//(String type, int level, ArrayList<Target> targets)
+		this.enemy1 = new SampleEnemy("regular", 10, targets);		//Implement this later
+		this.enemy2 = new SampleEnemy("tank", 10, targets);
+		this.enemy3 = new SampleEnemy("mage", 10, targets);
 		
 		update();
 	}

@@ -11,11 +11,6 @@ import java.util.ArrayList;
  *
  */
 public class SampleEnemy {
-
-	ArrayList<Target> targets;
-	public String name;
-	String itemPosessed;
-	public static int attack;
 	
 	//This code just for constructor demo
 	//public static SampleEnemy enemy2;
@@ -26,12 +21,12 @@ public class SampleEnemy {
 	/**
 	 * 
 	 */
-	public SampleEnemy(int number, ArrayList<Target> targets) {
-		name = "enemy"+number;
-		this.targets=targets;
-		this.itemPosessed=determineRandomItem();
-		attack = 10;
-	}
+	//public SampleEnemy(int number, ArrayList<Target> targets) {
+	//	name = "enemy"+number;
+	//	this.targets=targets;
+	//	this.itemPosessed=determineRandomItem();
+	//	attack = 10;
+	//}
 	
 	//old determineRandomItem Code
 //	public static String determineRandomItem(){
@@ -97,26 +92,33 @@ public class SampleEnemy {
 		}
 		System.out.println("randomized number is " + randomizer);
 	}
+
+	ArrayList<Target> targets;
+	public String name;
+	String itemPosessed;
+	public static int attack;
 	
     private String type;
     private int level;
     private double hp;
     private double mp;
-    private double atk;
+    //private static double atk;
     private double def;
     private double spd;
     private double drop_rate;
     private double exp_gained_in_the_end;
     private double money_dropped;
 
-    public SampleEnemy(String type, int level){
+    public SampleEnemy(String type, int level, ArrayList<Target> targets){
    	 this.type = type;
    	 this.level = level;
+   	 this.targets=targets;
+   	 this.itemPosessed=determineRandomItem();
    	 if(type == "regular"){    	//cant use spells, just attacks.
    		 name = "Slime";
    		 hp = 65+2*level;
    		 mp = 10;
-   		 atk = 20+2*level;
+   		 attack = 20+2*level;
    		 def = 5+2*level;
    		 spd = 10+2*level;
    		 exp_gained_in_the_end = 1500+10*level;
@@ -126,7 +128,7 @@ public class SampleEnemy {
    		 name = "Spartan";
    		 hp = 80+3*level;
    		 mp = 15+2*level;
-   		 atk = 15+2*level;
+   		 attack = 15+2*level;
    		 def = 10+3*level;
    		 spd = 5+level;
    		 exp_gained_in_the_end = 2000+15*level;
@@ -136,7 +138,7 @@ public class SampleEnemy {
    		 name = "witch";
    		 hp = 50+2*level;
    		 mp = 30+2*level;
-   		 atk = 5;
+   		 attack = 5;
    		 def = 5+2*level;
    		 spd = 8+2*level;
    		 exp_gained_in_the_end = 2000+15*level;
@@ -146,7 +148,7 @@ public class SampleEnemy {
    		 name = "GATTA GO FAST";
    		 hp = 65+2*level;
    		 mp = 20;
-   		 atk = 10+level;
+   		 attack = 10+level;
    		 def = 5;
    		 spd = 1000;
    		 exp_gained_in_the_end = 1750+10*level;
@@ -156,7 +158,7 @@ public class SampleEnemy {
    		 name = "Fluffykins";
    		 hp = 50;//+Character.getLevel();   	 //hp increases depending on character level
    		 mp = 0;
-   		 atk = 5;
+   		 attack = 5;
    		 def = 5;
    		 spd = 1000;
    		 exp_gained_in_the_end = 10;//Character.getLevel();    //gives exp depending on characters level
@@ -164,7 +166,7 @@ public class SampleEnemy {
     }
     
     public String toString(){
-    	return "The enemy named "+name+" is level "+level+" has "+hp+" hp, "+mp+" mp,"+atk+" attack, "+def+" defense, "+spd+" speed, has a "+drop_rate+" drop rate, you gain "+exp_gained_in_the_end+" exp by killing it, and drops "+money_dropped+" moneys. ";
+    	return "The enemy named "+name+" is level "+level+" has "+hp+" hp, "+mp+" mp,"+attack+" attack, "+def+" defense, "+spd+" speed, has a "+drop_rate+" drop rate, you gain "+exp_gained_in_the_end+" exp by killing it, and drops "+money_dropped+" moneys. ";
     }
 
 }
