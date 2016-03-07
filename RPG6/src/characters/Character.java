@@ -5,21 +5,23 @@ public abstract class Character {
 	public String name;
 	public double health;
 	public double currHealth;
+	public double mana;
+	public double currMana;
 	public double attack;
 	public double defense;
-	public double mana;
 	public double speed;
 	public double dropRate;
 	public double critHitChance;
 	public double currentExp;
 	
-	public Character(String name, double health, double currHealth, double attack, double defense, double mana, double speed, double dropRate, double critHitChance, double currentExp){
+	public Character(String name, double health, double currHealth,  double attack, double defense, double mana, double currMana,double speed, double dropRate, double critHitChance, double currentExp){
 		this.name = name;
 		this.health = health;
 		this.currHealth = currHealth;
+		this.mana = mana;
+		this.currMana = currMana;
 		this.attack = attack;
 		this.defense = defense;
-		this.mana = mana;
 		this.speed = speed;
 		this.dropRate = dropRate;
 		this.critHitChance = critHitChance;
@@ -75,6 +77,14 @@ public abstract class Character {
 	public void setMana(double mana) {
 		this.mana = mana;
 	}
+	
+	public double getCurrMana() {
+		return currMana;
+	}
+	
+	public void setCurrMana(double currMana) {
+		this.currMana = currMana;
+	}
 
 	public double getSpeed() {
 		return speed;
@@ -110,7 +120,7 @@ public abstract class Character {
 
 	
 	public double[] getAllStats(){
-		double[] stats = {currHealth, attack, defense, mana, speed, dropRate, critHitChance, currentExp};
+		double[] stats = {currHealth, attack, defense, currMana, speed, dropRate, critHitChance, currentExp};
 		return stats;		
 	}
 }

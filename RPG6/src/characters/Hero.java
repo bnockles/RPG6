@@ -26,9 +26,9 @@ public class Hero extends Character {
 	
 	public Hero(String name,
 			double health, double currHealth, double attack, double defense, double mana,
-			double speed, double dropRate, double critHitChance,
+			double currMana,double speed, double dropRate, double critHitChance,
 			double currentExp) {
-		super(name, health, currHealth, attack, defense, mana,
+		super(name, health, currHealth, attack, defense, mana, currMana,
 				speed, dropRate, critHitChance, currentExp);
 		
 			inventory = new ArrayList<SampleItem>();

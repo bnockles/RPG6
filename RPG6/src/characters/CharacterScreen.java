@@ -26,12 +26,16 @@ public class CharacterScreen extends Screen implements KeyListener{
 	Hero hero3;
 	Hero selectedHero;
 	double maxHeath;
+	double maxMana;
 	boolean on = false;
 	boolean wepOn = false;
 	boolean armorOn = false;
 	SampleWeapon sword;
+	SampleWeapon sword2;
 	SampleArmor armor;
+	SampleArmor armor2;
 	SamplePotion potion;
+	SamplePotion potion2;
 	BufferedImage heroImg;
 	BufferedImage icon;
 	ArrayList<Integer> pressedKeys;
@@ -46,20 +50,33 @@ public class CharacterScreen extends Screen implements KeyListener{
 		name = selectedHero.getName();
 		stats = selectedHero.getAllStats();
 		sword = new SampleWeapon("Sword", 10);
+		sword2 = new SampleWeapon("Better Sword", 50);
 		armor = new SampleArmor("Armor", 50);
-		potion = new SamplePotion("Potion", 10);
+		armor2 = new SampleArmor("Better Armor", 100);
+		potion = new SamplePotion("HP Potion", 10);
+		potion2 = new SamplePotion("MP Potion", 10);
 		maxHeath = selectedHero.getHealth();
+		maxMana = selectedHero.getMana();
 		pressedKeys = new ArrayList<Integer>();
 		
 		hero.addItem(sword);
+		hero.addItem(sword2);
 		hero.addItem(armor);
+		hero.addItem(armor2);
 		hero.addItem(potion);
+		hero.addItem(potion2);
 		hero2.addItem(sword);
+		hero2.addItem(sword2);
 		hero2.addItem(armor);
+		hero2.addItem(armor2);
 		hero2.addItem(potion);
+		hero2.addItem(potion2);
 		hero3.addItem(sword);
+		hero3.addItem(sword2);
 		hero3.addItem(armor);
+		hero3.addItem(armor2);
 		hero3.addItem(potion);
+		hero3.addItem(potion2);
 		
 		
 //		heroImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -104,7 +121,6 @@ public class CharacterScreen extends Screen implements KeyListener{
 			}
 		}
 		
-		//equip/dequip wep
 		if(!wepOn){
 			if(e.getKeyCode()==KeyEvent.VK_1){	
 				wepOn = true;
@@ -127,9 +143,33 @@ public class CharacterScreen extends Screen implements KeyListener{
 			}
 		}
 		
+		//equip/dequip wep
+		if(!wepOn){
+			if(e.getKeyCode()==KeyEvent.VK_2){	
+				wepOn = true;
+				selectedHero.removeItem(sword2);
+				selectedHero.equipItem(sword2);
+				selectedHero.setAttack(selectedHero.getAttack() + sword2.statBoost());
+				stats = selectedHero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}else{
+			if(e.getKeyCode()==KeyEvent.VK_2){	
+				wepOn = false;
+				selectedHero.addItem(sword2);
+				selectedHero.dequipItem(sword2);
+				selectedHero.setAttack(selectedHero.getAttack() - sword2.statBoost());
+				stats = selectedHero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}
+		
+		
 		//equip/dequip armor
 		if(!armorOn){
-			if(e.getKeyCode()==KeyEvent.VK_2){	
+			if(e.getKeyCode()==KeyEvent.VK_3){	
 				armorOn = true;
 				selectedHero.removeItem(armor);
 				selectedHero.equipItem(armor);
@@ -139,7 +179,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 				game.repaint();
 			}
 		}else{
-			if(e.getKeyCode()==KeyEvent.VK_2){	
+			if(e.getKeyCode()==KeyEvent.VK_3){	
 				armorOn = false;
 				selectedHero.addItem(armor);
 				selectedHero.dequipItem(armor);
@@ -149,9 +189,31 @@ public class CharacterScreen extends Screen implements KeyListener{
 				game.repaint();
 			}
 		}
+		
+		if(!armorOn){
+			if(e.getKeyCode()==KeyEvent.VK_4){	
+				armorOn = true;
+				selectedHero.removeItem(armor2);
+				selectedHero.equipItem(armor2);
+				selectedHero.setDefense(selectedHero.getDefense() + armor2.statBoost());
+				stats = selectedHero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}else{
+			if(e.getKeyCode()==KeyEvent.VK_4){	
+				armorOn = false;
+				selectedHero.addItem(armor2);
+				selectedHero.dequipItem(armor2);
+				selectedHero.setDefense(selectedHero.getDefense() - armor2.statBoost());
+				stats = selectedHero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}
 
 		//drink potion
-		if(e.getKeyCode()==KeyEvent.VK_3){
+		if(e.getKeyCode()==KeyEvent.VK_5){
 			if(selectedHero.getInvList().contains(potion)){
 				maxHeath = selectedHero.getHealth();
 				selectedHero.removeItem(potion);
@@ -168,8 +230,31 @@ public class CharacterScreen extends Screen implements KeyListener{
 		}
 		
 		//get potion
-		if(e.getKeyCode()==KeyEvent.VK_4){	
+		if(e.getKeyCode()==KeyEvent.VK_6){	
 			selectedHero.addItem(potion);
+			update();
+			game.repaint();
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_7){
+			if(selectedHero.getInvList().contains(potion2)){
+				maxHeath = selectedHero.getMana();
+				selectedHero.removeItem(potion2);
+				if(selectedHero.getCurrMana() < maxMana){
+					selectedHero.setCurrMana(selectedHero.getCurrMana() + potion.heal());
+					if(selectedHero.getCurrMana() > maxMana){
+						selectedHero.setCurrMana(maxMana);
+					}
+				}
+				stats = selectedHero.getAllStats();
+				update();
+				game.repaint();
+			}
+		}
+		
+		//get mana pot
+		if(e.getKeyCode()==KeyEvent.VK_8){	
+			selectedHero.addItem(potion2);
 			update();
 			game.repaint();
 		}
@@ -179,6 +264,16 @@ public class CharacterScreen extends Screen implements KeyListener{
 			selectedHero.setCurrHealth(selectedHero.getCurrHealth() - 10);
 			if(selectedHero.getCurrHealth() <= 0){
 				selectedHero.setCurrHealth(0);
+			}
+			stats = selectedHero.getAllStats();
+			update();
+			game.repaint();
+		}
+		
+		if(e.getKeyCode()==KeyEvent.VK_G){
+			selectedHero.setCurrMana(selectedHero.getCurrMana() - 10);
+			if(selectedHero.getCurrMana() <= 0){
+				selectedHero.setCurrMana(0);
 			}
 			stats = selectedHero.getAllStats();
 			update();
@@ -303,11 +398,16 @@ public class CharacterScreen extends Screen implements KeyListener{
 		g2.setColor(Color.black);
 		g2.drawString("Press 'Q' to toggle stat menu", 30, 75);
 		g2.drawString("Press 'F' to take damage", 30, 90);
-		g2.drawString("Press 'Spacebar' switch heroes", 30, 105);
-		g2.drawString("Press '1' to equip/dequip weapon", 30, 120);
-		g2.drawString("Press '2' to equip/dequip armor", 30, 135);
-		g2.drawString("Press '3' to use potion", 30, 150);
-		g2.drawString("Press '4' to get potion", 30, 165);
+		g2.drawString("Press 'G' to consume mana", 30, 105);
+		g2.drawString("Press 'Spacebar' switch heroes", 30, 120);
+		g2.drawString("Press '1' to equip/dequip weapon", 30, 135);
+		g2.drawString("Press '2' to equip/dequip better weapon", 30, 150);
+		g2.drawString("Press '3' to equip/dequip armor", 30, 165);
+		g2.drawString("Press '4' to equip/dequip better armor", 30, 180);
+		g2.drawString("Press '5' to get HP potion", 30, 195);
+		g2.drawString("Press '6' to use HP potion", 30, 210);
+		g2.drawString("Press '7' to get MP potion", 30, 225);
+		g2.drawString("Press '8' to use MP potion", 30, 240);
 
 //			g2.setColor(Cr.white)
 //			g2.fillRect(0, 0, width, height);
@@ -316,7 +416,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		//Stat menu
 		if(on){
 			int x = 50;
-			int y = 200;
+			int y = 400;
 			g2.setColor(Color.black);	
 			g2.drawString(name, x, y);
 			stats = selectedHero.getAllStats();

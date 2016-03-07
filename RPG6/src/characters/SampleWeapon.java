@@ -12,4 +12,5 @@ public class SampleWeapon extends SampleItem {
 	public double statBoost(){
 		return attackBoost;
 	}
+
 }
