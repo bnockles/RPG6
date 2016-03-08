@@ -208,9 +208,52 @@ public class SampleEnemy {
 			def = 50;
 			spd = 1000;
 			exp_gained_in_the_end = 4000;
+		}//sonya
+		if(this.type == "cat"){
+			name = "Furr-ocious";
+			hp = 300+2*level;
+			mp = 200;
+			attack = 80+2*level;
+			def = 100;
+			spd = 100000;
+			exp_gained_in_the_end = 4000;
 		}
-		
-		
+		if(this.type == "dinosaur"){
+			name = "Dino";
+			hp = 500+2*level;
+			mp = 300;
+			attack = 100+2*level;
+			def = 95;
+			spd = 1000;
+			exp_gained_in_the_end = 6000;
+		}
+			if(this.type == "fish"){
+			name = "Nemo";
+			hp = 200+2*level;
+			mp = 10;
+			attack = 10+2*level;
+			def = 5;
+			spd = 100;
+			exp_gained_in_the_end = 100;
+		}
+			if(this.type == "dog"){
+			name = "Dug";
+			hp = 400+2*level;
+			mp = 100;
+			attack = 500+2*level;
+			def = 300;
+			spd = 150;
+			exp_gained_in_the_end = 300;
+		}
+			if(this.type == "vulture"){
+			name = "Voltaire";
+			hp = 800+2*level;
+			mp = 400;
+			attack = 700+2*level;
+			def = 600;
+			spd = 400;
+			exp_gained_in_the_end = 400;
+		}
 	}
 
 	public String toString(){
