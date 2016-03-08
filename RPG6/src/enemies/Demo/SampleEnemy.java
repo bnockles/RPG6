@@ -163,6 +163,54 @@ public class SampleEnemy {
 			spd = 1000;
 			exp_gained_in_the_end = 10;//Character.getLevel();    //gives exp depending on characters level
 		}
+		
+		if(this.type == "rogue"){
+			name = "Rogue";
+			hp = 30+2*level;
+			mp = 20;
+			attack = 15+level;
+			def = 5;
+			spd = 1000;
+			exp_gained_in_the_end = 1750+10*level;
+		}
+		if(this.type == "snake"){
+			name = "Snake";
+			hp = 30;
+			mp = 20;
+			attack = 5+level;
+			def = 5;
+			spd = 1000;
+			exp_gained_in_the_end = 1750+10*level;
+		}
+		if(this.type == "spider"){
+			name = "Rogue";
+			hp = 30+2*level;
+			mp = 20;
+			attack = 10+level;
+			def = 5;
+			spd = 1500;
+			exp_gained_in_the_end = 1750+10*level;
+		}
+		if(this.type == "boss"){
+			name = "Boss";
+			hp = 500+2*level;
+			mp = 500;
+			attack = 60+2*level;
+			def = 50;
+			spd = 1000;
+			exp_gained_in_the_end = 3000;
+		}
+		if(this.type == "boss2"){
+			name = "Boss 2";
+			hp = 600+2*level;
+			mp = 500;
+			attack = 80+2*level;
+			def = 50;
+			spd = 1000;
+			exp_gained_in_the_end = 4000;
+		}
+		
+		
 	}
 
 	public String toString(){
