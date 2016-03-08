@@ -20,6 +20,11 @@ public class BattleEndScreen extends Screen implements KeyListener{
  		this.enemy = enemy;
  		this.battleGold = battleGold;
  	}
+	public static void main(String[] args) {
+		Treasure box1 = new Treasure("rare",(int)(Math.random()*100000)+100,"This box contains a high amount of money.");
+		Treasure box2 = new Treasure("common",(int)(Math.random()*10000)+10,"This box contains a medium amount of money.");
+		Treasure box3 = new Treasure("Very Common",(int)(Math.random()*1000)+1,"This box contains a low amount of money.");
+	}
 	
 	//private int inventoryIdx = (int)Math.random() * Inventory.size();
 	
