@@ -153,7 +153,6 @@ public class SampleEnemy {
 			spd = 1000;
 			exp_gained_in_the_end = 1750+10*level;
 		}
-
 		if(this.type == "fluffy"){	//lucky exp giver
 			name = "Fluffykins";
 			hp = 50;//+Character.getLevel();   	 //hp increases depending on character level
@@ -164,13 +163,15 @@ public class SampleEnemy {
 			exp_gained_in_the_end = 10;//Character.getLevel();    //gives exp depending on characters level
 		}
 		
+		
+		//Jeff
 		if(this.type == "rogue"){
 			name = "Rogue";
 			hp = 30+2*level;
 			mp = 20;
 			attack = 15+level;
 			def = 5;
-			spd = 1000;
+			spd = 100;
 			exp_gained_in_the_end = 1750+10*level;
 		}
 		if(this.type == "snake"){
@@ -179,16 +180,16 @@ public class SampleEnemy {
 			mp = 20;
 			attack = 5+level;
 			def = 5;
-			spd = 1000;
+			spd = 10;
 			exp_gained_in_the_end = 1750+10*level;
 		}
 		if(this.type == "spider"){
-			name = "Rogue";
+			name = "Spider";
 			hp = 30+2*level;
 			mp = 20;
 			attack = 10+level;
 			def = 5;
-			spd = 1500;
+			spd = 15;
 			exp_gained_in_the_end = 1750+10*level;
 		}
 		if(this.type == "boss"){
@@ -197,7 +198,7 @@ public class SampleEnemy {
 			mp = 500;
 			attack = 60+2*level;
 			def = 50;
-			spd = 1000;
+			spd = 300;
 			exp_gained_in_the_end = 3000;
 		}
 		if(this.type == "boss2"){
@@ -208,28 +209,30 @@ public class SampleEnemy {
 			def = 50;
 			spd = 1000;
 			exp_gained_in_the_end = 4000;
-		}//sonya
+		}
+		
+		//sonya
 		if(this.type == "cat"){
 			name = "Furr-ocious";
-			hp = 300+2*level;
+			hp = 30+2*level;
 			mp = 200;
 			attack = 80+2*level;
 			def = 100;
-			spd = 100000;
-			exp_gained_in_the_end = 4000;
+			spd = 100;
+			exp_gained_in_the_end = 1500;
 		}
 		if(this.type == "dinosaur"){
 			name = "Dino";
-			hp = 500+2*level;
+			hp = 200+2*level;
 			mp = 300;
-			attack = 100+2*level;
+			attack = 80+2*level;
 			def = 95;
-			spd = 1000;
-			exp_gained_in_the_end = 6000;
+			spd = 80;
+			exp_gained_in_the_end = 2000;
 		}
 			if(this.type == "fish"){
 			name = "Nemo";
-			hp = 200+2*level;
+			hp = 20+2*level;
 			mp = 10;
 			attack = 10+2*level;
 			def = 5;
@@ -238,18 +241,18 @@ public class SampleEnemy {
 		}
 			if(this.type == "dog"){
 			name = "Dug";
-			hp = 400+2*level;
+			hp = 40+2*level;
 			mp = 100;
-			attack = 500+2*level;
+			attack = 50+2*level;
 			def = 300;
 			spd = 150;
 			exp_gained_in_the_end = 300;
 		}
 			if(this.type == "vulture"){
 			name = "Voltaire";
-			hp = 800+2*level;
+			hp = 80+2*level;
 			mp = 400;
-			attack = 700+2*level;
+			attack = 70+2*level;
 			def = 600;
 			spd = 400;
 			exp_gained_in_the_end = 400;
