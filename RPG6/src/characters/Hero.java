@@ -22,7 +22,7 @@ public class Hero extends Character {
 	/*inventory.add(weapon); adds weapon
 	 * inventory.get(0).addStats(); does not work since inventory at 0 not guaranteed to be a weapon
 	 * if(inventory.get(0) instanceof Weapon){
-	 * 		inventory.get(0).addStats(); works since inventory at 0 is guaranteed to be a weapon.
+	 * 		Weapon aWeapon  = (Weapon)inventory.get(0).addStats(); works since inventory at 0 is guaranteed to be a weapon.
 	 * }
 	 * 
 	 * */

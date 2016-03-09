@@ -24,12 +24,19 @@ public class CharacterScreen extends Screen implements KeyListener{
 	double[] stats;
 	Hero hero;
 	/*Hero hero = new Hero(); <-- hero
+	 * 	declared type = hero
+	 * 	actual type = hero
 	 *	can use Character.getStats(); since is a hero and hero is a character
 	 *	can use Hero.getInventory(); since is a hero
 	*Character hero = new Hero(); <-- character
+	*	declared type = character
+	*	actual type hero
 	*	can use Character.getStats(); since is a character
 	*	cannot use Hero.getInventory(); since is a character but not a hero
-	*
+	*	
+	*(Hero)hero 
+	*	declared type = hero
+	*	actual type = hero
 	*/
 	
 	Hero hero2;
