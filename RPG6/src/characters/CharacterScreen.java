@@ -23,6 +23,15 @@ public class CharacterScreen extends Screen implements KeyListener{
 	String name;
 	double[] stats;
 	Hero hero;
+	/*Hero hero = new Hero(); <-- hero
+	 *	can use Character.getStats(); since is a hero and hero is a character
+	 *	can use Hero.getInventory(); since is a hero
+	*Character hero = new Hero(); <-- character
+	*	can use Character.getStats(); since is a character
+	*	cannot use Hero.getInventory(); since is a character but not a hero
+	*
+	*/
+	
 	Hero hero2;
 	Hero hero3;
 	Hero selectedHero;
@@ -291,9 +300,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 			game.repaint();
 		}
 		//calls special move
-		if(e.getKeyCode()==KeyEvent.VK_V){
-			SpecialAction.specialAction(hero);
-		}
+//		if(e.getKeyCode()==KeyEvent.VK_V){
+//			SpecialAction.specialAction(hero);
+//		}
 		
 		
 		

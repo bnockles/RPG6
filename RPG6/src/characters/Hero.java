@@ -19,6 +19,14 @@ public class Hero extends Character {
 	boolean hasWeapon = false;
 	boolean hasArmor = false;
 	ArrayList<SampleItem> inventory;
+	/*inventory.add(weapon); adds weapon
+	 * inventory.get(0).addStats(); does not work since inventory at 0 not guaranteed to be a weapon
+	 * if(inventory.get(0) instanceof Weapon){
+	 * 		inventory.get(0).addStats(); works since inventory at 0 is guaranteed to be a weapon.
+	 * }
+	 * 
+	 * */
+	
 	ArrayList<SampleItem> equiped;
 	int x;
 	int y;
