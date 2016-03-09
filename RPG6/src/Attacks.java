@@ -7,8 +7,8 @@ public class Attacks {
 	public Attacks (String name, int power, int crit, int lifesteal){ 
 	   	this.name=name;
 	    this.power=power; 
-	    this.setCrit(crit); 
-	    this.setLifesteal(lifesteal); 
+	    this.crit=crit; 
+	    this.lifesteal=lifesteal; 
 	}
 
 	public int getPower() {
