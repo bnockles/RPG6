@@ -7,37 +7,46 @@ import java.awt.image.BufferedImage;
 
 public class Assets {
 	//JOEe
-	private static final int pWidth=32, pHeight=48;
-	private static final int tWidth=32, tHeight=32;
-	
-	private static int eWidth = 32, eHeight = 32;
+	private static int width = 32, height = 32;
 	
 	public static BufferedImage player,dirt, grass, greyStone, woodWall,
-								woodFloor, water, potion, chest, zakum, axe, sword, lance,
-								cobbleStone, lava;
+								woodFloor, water, potion, chest, zakum, 
+								axe, sword, lance, cobbleStone, lava;
+
 	
 	public static void initialize(){
-		SpriteSheet cSheet = new SpriteSheet(ImageLoader.loadImage("/textures/mc2.png"));
-		SpriteSheet tSheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
-		SpriteSheet sheetI = new SpriteSheet(ImageLoader.loadImage("/textures/sheetI.png"));
-		 
-		potion = sheetI.crop(0,0,eWidth,eHeight);
-		chest = sheetI.crop(eWidth,0,eWidth,eHeight);
-		zakum = sheetI.crop(0,eHeight,eWidth,eHeight);
-		axe = sheetI.crop(eWidth,eHeight,eWidth,eHeight);
-		sword = sheetI.crop(0,eHeight*2,eWidth,eHeight);
-		lance = sheetI.crop(eWidth,eHeight*2,eWidth,eHeight);
 		
-		lava = sheetI.crop(0,tWidth*5,tWidth,tHeight);
-		water = sheetI.crop(tWidth,tHeight*4,tWidth,tHeight);
+		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
 		
-		player= cSheet.crop(0, 0, pWidth, pHeight);
-		dirt= tSheet.crop(tWidth * 4, tHeight * 6, tWidth, tHeight);
-		grass= tSheet.crop(tWidth, 0, tWidth, tHeight);
-		greyStone= tSheet.crop(0, tHeight, tWidth, tHeight);
-		woodWall= tSheet.crop(tWidth*5, 0, tWidth, tHeight);
-		woodFloor= tSheet.crop(tWidth*4, tHeight, tWidth, tHeight);
-		cobbleStone= tSheet.crop(tWidth*2, tHeight*7, tWidth, tHeight);
+		int sheetWidth = SpriteSheet.getWidth();
+		int sheetHeight = SpriteSheet.getHeight();
+		
+		BufferedImage[][] pics = new BufferedImage[sheetWidth/width][sheetHeight/height];
+		
+		for(int i=0;i<pics.length;i++){
+			for(int j=0;j<pics[i].length;j++){
+				pics[i][j] = sheet.crop(i*width,j*height,height,height);
+			}
+		}
+		
+		potion = pics[11][8];
+		chest = pics[12][8];
+		zakum = pics[11][9];
+		axe = pics[12][9];
+		sword = pics[11][10];
+		lance = pics[12][10];
+		
+		lava = pics[11][13];
+		water = pics[12][12];
+		
+		player = pics[11][12];
+		dirt = pics[9][17];
+		grass = pics[9][14];
+		greyStone = pics[0][9];
+		woodWall = pics[5][8];
+		woodFloor = pics[4][9];
+		cobbleStone = pics[6][10];
+		
 	}
 	
 }
