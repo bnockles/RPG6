@@ -197,5 +197,13 @@ public class equipStock {
 		}
 		return null;
 	}
+	
+	
+	
+	
+	public static activeSkills(int type) {
+		
+	}
+	
 
 }
