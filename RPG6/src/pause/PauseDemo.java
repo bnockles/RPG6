@@ -1,6 +1,6 @@
 public class PauseDemo extends Game{
 
-  public static void main9String[] args){
+  public static void main (String[] args){
     new PauseDemo();
   }
 
