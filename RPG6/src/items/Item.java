@@ -6,19 +6,25 @@ public abstract class Item implements ItemTeam {
 	private String description;
 	private String req;
 	private String type;
-	private int tag;
+	private int shopTag;//0 is no shops sell, 1 is town1, 2 is town2, 3 is town3, etc
+	private int enemyTag;//0 is no enemy drops, 1 is enemy1, 2 is enemy2, etc.
+//	private int bossTag;//this will be for boss mobs that will be written later.
 
 
-	public Item(String name, String description, String req, String type, int tag){
+	public Item(String name, String description, String req, String type, int shopTag, int enemyTag){
 		this.description = description;
 		this.name = name;
 		this.req = req;
 		this.type = type;
-		this.tag = tag;
+		this.shopTag = shopTag;
+		this.enemyTag = enemyTag;
 	}
 	
-	public int getTag(){
-		return tag;
+	public int getenemyTag(){
+		return enemyTag;
+	}
+	public int getshopTag(){
+		return shopTag;
 	}
 	public String getType() {
 		return type;
@@ -36,7 +42,7 @@ public abstract class Item implements ItemTeam {
 	
 
 	public abstract boolean canUse(Character user);
-	public abstract void use(Character user);
+	public abstract void use(Character user, Consumable consume);
 	
 	public void draw(){}
 }

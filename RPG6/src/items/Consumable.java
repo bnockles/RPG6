@@ -3,8 +3,8 @@ package items;
 public class Consumable extends Item {
 	int amount;
 	int value;
-	public Consumable(String name, String description, String req, String type, int tag, int amount, int value) {
-		super(name, description, req, type, tag);
+	public Consumable(String name, String description, String req, String type, int shopTag, int enemyTag, int amount, int value) {
+		super(name, description, req, type, shopTag, enemyTag);
 		this.amount = amount;
 		this.value = value;
 	}
@@ -20,9 +20,12 @@ public class Consumable extends Item {
 	public boolean canUse(Character user){
 		return true;
 	}
-
-	public void use(Character user){
-		
+	
+	@Override
+	public void use(Character user, Consumable consume){
+		if(canUse(user)){
+			int currentHP = user.getTrueStats().getHealth() + consume.getValue();//fix this later, or fix with character class by implementing currentHP.
+		}
 	}
 
 

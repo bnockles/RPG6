@@ -6,6 +6,7 @@ public abstract class Spell {
 	private int manaCost;
 	public String effect;
 	public int damage;
+	public int classTag;//0 is All classes, 1 is Warrior, 2 is Bowman, 3 is Mage, 4 is Rogue
 	
 	public Spell(String name, String description, int cost, String effect, int damage){
 		this.name = name;

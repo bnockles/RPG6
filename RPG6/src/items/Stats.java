@@ -1,11 +1,12 @@
 package items;
 
-public final class Stats {
-	//direct statss
+public class Stats {
+	//direct stats
 	private int health;
 	private int mana;
 	private int attack;
 	private int defense;
+	private int speed;
 	//indirect stats
 	private int strength;
 	private int dexterity;
@@ -17,26 +18,27 @@ public final class Stats {
 	public Stats(){
 		this(0, 0, 0, 0, 0);
 	}
+	public Stats(int hp, int atk){//minions
+		this(hp, 0, atk, 0, 0, 0, 0, 0, 0, 0);
+	}
 	public Stats(int hp, int mp, int atk, int def){
-		this(hp, mp, atk, def, 0, 0, 0, 0, 0); //stats for enemies
+		this(hp, mp, atk, def, 0, 0, 0, 0, 0, 0); //stats for enemies
 	}
 	public Stats(int str, int dex, int iq, int wis, int luck){
-		this(0, 0, 0, 0, str, dex, iq, wis, luck); //stats for armor and character + armor together
+		this(0, 0, 0, 0, 0, str, dex, iq, wis, luck); //stats for armor
 	}
 	public Stats(int atk, int str, int dex, int iq, int wis, int luck){
-		this(0, 0, atk, 0, str, dex, iq, wis ,luck); //stats for weapons
+		this(0, 0, atk, 0, 0, str, dex, iq, wis ,luck); //stats for weapons
 	}
-	public Stats(int atk, int hp, int str, int dex, int iq, int wis, int luck){
-		this(hp, 0, atk, 0, str, dex, iq, wis, luck); //stats for shields
+	public Stats(int def, int hp, int str, int dex, int iq, int wis, int luck){
+		this(hp, 0, 0, def, 0, str, dex, iq, wis, luck); //stats for shields
 	}
-	public Stats(int hp, int def, int str){
-		this(hp, 0, 0, 0, str, 0, 0, 0, 0); //stats for str armor
-	}
-	public Stats(int hp, int mp, int atk, int def, int str, int dex, int iq, int wis, int luck){ //this might be for characters
+	public Stats(int hp, int mp, int atk, int def, int spd, int str, int dex, int iq, int wis, int luck){ //characters + bosses
 		this.health 		= hp;
 		this.mana 			= mp;
 		this.attack 		= atk;
 		this.defense 		= def;
+		this.speed          = spd;
 		
 		this.strength		= str;
 		this.dexterity 		= dex;
@@ -50,6 +52,7 @@ public final class Stats {
 				" MP+" + this.mana +
 				" ATK+" + this.attack +
 				" DEF+" + this.defense +
+				" SPD+" + this.speed +
 				" STR+" + this.strength +
 				" DEX+" + this.dexterity +
 				" INT+" + this.intelligence +
@@ -69,6 +72,9 @@ public final class Stats {
 	public int getDefense() {
 		return defense;
 	}
+	public int getSpeed() {
+		return speed;
+	}
 	public int getStrength() {
 		return strength;
 	}
@@ -85,4 +91,3 @@ public final class Stats {
 		return luck;
 	}
 }
-

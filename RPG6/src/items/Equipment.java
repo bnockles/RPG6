@@ -10,18 +10,17 @@ public class Equipment extends Item {
 	//s
 	public String req;
 	private int durability;
-	private int typeOf;
+	private int typeOf;//what kind of armor is it.
 	private Stats stats;
+	private int jobClass;//0 is Warrior, 1 is Bowman, 2 is Mage, 3 is Rogue, 4 is All
 	
-	public Equipment(String name, String description, String req, String type, int tag, int typeOf, Stats stats, int durability){
-		super(name, description, req, type, tag);//req and descriptions are switched up when writing. will fix.
+	public Equipment(String name, String description, String req, String type, int tag, int enemyTag, int typeOf, Stats stats, int durability){
+		super(name, description, req, type, tag, enemyTag);//req and descriptions are switched up when writing. will fix.
 		this.durability = durability;
 		this.typeOf = typeOf;
 		this.stats = stats;
 		
 	}
-	
-	
 
 	public static int getHelmet() {
 		return HELMET;
@@ -51,7 +50,7 @@ public class Equipment extends Item {
 	public Stats getStats(){ return this.stats; }
 
 	public boolean canUse(Character user){ return true; }
-	public void use(Character user){ user.equip(this); }
+	public void using(Character user){ user.equip(this); }
 
 
 
@@ -80,6 +79,10 @@ public class Equipment extends Item {
 
 	public int getChangeValue() {
 		return 0;
+	}
+
+	public void use(Character user, Consumable consume) {
+		
 	}
 }
 
