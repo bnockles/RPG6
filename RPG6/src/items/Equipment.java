@@ -10,18 +10,18 @@ public class Equipment extends Item {
 	//s
 	public String req;
 	private int durability;
-	private int type;
+	private int typeOf;
 	private Stats stats;
 	
-	public Equipment(String name, String description, String req, int type, Stats stats, int durability){
-		super(name, description, req);
+	public Equipment(String name, String description, String req, String type, int tag, int typeOf, Stats stats, int durability){
+		super(name, description, req, type, tag);//req and descriptions are switched up when writing. will fix.
 		this.durability = durability;
-		this.type = type;
+		this.typeOf = typeOf;
 		this.stats = stats;
 		
 	}
 	
-
+	
 
 	public static int getHelmet() {
 		return HELMET;
@@ -47,11 +47,40 @@ public class Equipment extends Item {
 		return durability;
 	}
 
-	public int getType(){ return this.type; }
+	public int getTypeOf(){ return this.typeOf; }
 	public Stats getStats(){ return this.stats; }
 
 	public boolean canUse(Character user){ return true; }
 	public void use(Character user){ user.equip(this); }
+
+
+
+
+	public String getItemInfo() {
+		String returnd = "Name: " + this.getName() + " Description: " + this.getDescription();
+		return returnd;
+	}
+
+
+
+
+	public String getItemType() {
+		return this.getType();
+	}
+
+
+
+
+	public boolean getIsUsableForBattle() {
+		return false;
+	}
+
+
+
+
+	public int getChangeValue() {
+		return 0;
+	}
 }
 
 

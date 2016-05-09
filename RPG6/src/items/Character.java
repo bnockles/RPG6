@@ -30,19 +30,19 @@ public class Character {
 		public String getName() { return this.name; }
 		public String getType() { return this.type; }
 		public void equip(Equipment armor){
-			if(armor.getType() == Equipment.HELMET){
+			if(armor.getTypeOf() == Equipment.HELMET){
 				this.helmet = armor;
 			}
-			else if(armor.getType() == Equipment.CHEST){
+			else if(armor.getTypeOf() == Equipment.CHEST){
 				this.chest = armor;
 			}
-			else if(armor.getType() == Equipment.LEG){
+			else if(armor.getTypeOf() == Equipment.LEG){
 				this.leg = armor;
 			}
-			else if(armor.getType() == Equipment.SHOE){
+			else if(armor.getTypeOf() == Equipment.SHOE){
 				shoes = armor;
 			}
-			else if (armor.getType() == Equipment.WEAPON){
+			else if (armor.getTypeOf() == Equipment.WEAPON){
 				weapon = armor;
 			}
 		}
