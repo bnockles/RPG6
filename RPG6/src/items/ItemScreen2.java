@@ -16,7 +16,7 @@ public class ItemScreen2 extends Screen implements KeyListener{
 	static ArrayList<Item> inventory = new ArrayList<Item>();
 	static ArrayList<Item> cInventory = new ArrayList<Item>();
 	static ArrayList<Item> qInventory = new ArrayList<Item>();
-	static ArrayList<activeSkill> skillList = new ArrayList<activeSkill>();
+	static ArrayList<ActiveSkill> skillList = new ArrayList<ActiveSkill>();
 	public static boolean currentFirst = false;
 	public static boolean currentSecond = false;
 	public static boolean currentThird = false;

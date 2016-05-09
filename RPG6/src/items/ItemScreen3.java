@@ -14,14 +14,14 @@ public class ItemScreen3 extends Screen implements KeyListener{
 	Character character;
 
 	static ArrayList<Item> inventory = new ArrayList<Item>();
-	static ArrayList<activeSkill> skillList1 = new ArrayList<activeSkill>();
-	public activeSkill skill1;
-	public activeSkill skill2;
-	static ArrayList<activeSkill> skillList2 = new ArrayList<activeSkill>();
-	public activeSkill skill3;
-	static ArrayList<activeSkill> skillList3 = new ArrayList<activeSkill>();
-	public activeSkill skill4;
-	static ArrayList<activeSkill> skillList4 = new ArrayList<activeSkill>();
+	static ArrayList<ActiveSkill> skillList1 = new ArrayList<ActiveSkill>();
+	public ActiveSkill skill1;
+	public ActiveSkill skill2;
+	static ArrayList<ActiveSkill> skillList2 = new ArrayList<ActiveSkill>();
+	public ActiveSkill skill3;
+	static ArrayList<ActiveSkill> skillList3 = new ArrayList<ActiveSkill>();
+	public ActiveSkill skill4;
+	static ArrayList<ActiveSkill> skillList4 = new ArrayList<ActiveSkill>();
 	public static boolean battling = true;
 	public static boolean onFirst = false;
 	public static boolean onSecond = false;
@@ -91,10 +91,10 @@ public class ItemScreen3 extends Screen implements KeyListener{
 		this.currentHP6 = enemy2.getTrueStats().getHealth();
 		this.currentMP6 = enemy2.getTrueStats().getMana();
 		
-		this.skill1 = new activeSkill("Firebolt", "Burns people.", 100, "Burn", 250);
-		this.skill2 = new activeSkill("Ice beam", "Freezes people.", 150, "Freeze", 300);
-		this.skill3 = new activeSkill("Double Shot", "Shoots people", 50, "None", 75);
-		this.skill4 = new activeSkill("Smack", "Hits people", 0, "None", 25);
+		this.skill1 = new ActiveSkill("Firebolt", "Burns people.", 100, "Burn", 250);
+		this.skill2 = new ActiveSkill("Ice beam", "Freezes people.", 150, "Freeze", 300);
+		this.skill3 = new ActiveSkill("Double Shot", "Shoots people", 50, "None", 75);
+		this.skill4 = new ActiveSkill("Smack", "Hits people", 0, "None", 25);
 		skillList1.add(skill1);
 		skillList1.add(skill2);
 		skillList2.add(skill3);

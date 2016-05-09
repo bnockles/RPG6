@@ -22,5 +22,5 @@ public abstract class Spell {
 	public int getDamage() { return this.damage; }
 	
 	public abstract boolean canCast(Character caster, Character target);
-	public abstract int cast(Character caster, activeSkill skill, Character target);
+	public abstract int cast(Character caster, ActiveSkill skill, Character target);
 }

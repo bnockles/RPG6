@@ -1,9 +1,9 @@
 package items;
 
-public class activeSkill extends Spell {
+public class ActiveSkill extends Spell {
 
 	public int finalDamage;
-	public activeSkill(String name, String description, int cost, String effect, int damage) {
+	public ActiveSkill(String name, String description, int cost, String effect, int damage) {
 		super(name, description, cost, effect, damage);
 	}
 
@@ -16,7 +16,7 @@ public class activeSkill extends Spell {
 	}
 
 	@Override
-	public int cast(Character caster, activeSkill skill, Character target) {
+	public int cast(Character caster, ActiveSkill skill, Character target) {
 		if (canCast(caster, target)){
 			finalDamage = (caster.getTrueStats().getAttack() + skill.getDamage()) - target.getTrueStats().getDefense();
 		}

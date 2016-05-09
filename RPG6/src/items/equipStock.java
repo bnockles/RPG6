@@ -201,9 +201,7 @@ public class equipStock {
 	
 	
 	
-	public static activeSkills(int type) {
-		
-	}
+	
 	
 
 }

@@ -69,7 +69,7 @@ public class passiveSkill extends Spell {
 	}
 
 	@Override
-	public int cast(Character caster, activeSkill skill, Character target) {
+	public int cast(Character caster, ActiveSkill skill, Character target) {
 		if (canCast(caster, target)){
 			finalDamage = (caster.getTrueStats().getAttack() + skill.getDamage()) - target.getTrueStats().getDefense();
 		}

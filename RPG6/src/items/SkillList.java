@@ -15,41 +15,41 @@ public class SkillList
 	}
 	
 	
-ArrayList<activeSkill> skillList = new ArrayList<activeSkill>();
+
 	
-	activeSkill fireblast = new activeSkill("Fireblast","fire fixes everything",50,"causes burn status",10);
-	activeSkill manaGuard = new activeSkill("Mana Guard","shields are essential",50,"NONE",10);
-    activeSkill energyBolt = new activeSkill("Energy Bolt","Pure energy hurts",50,"NONE",10);
-    activeSkill reignOfIce = new activeSkill("Reign of Ice","Ice ice baby",50,"causes frozen status",10);
-    activeSkill gravityCore = new activeSkill("Gravity Core","control gravity",50,"NONE",10);
-    activeSkill explosion = new activeSkill("Explosion","more fire",50,"causes burn status",10);
-    activeSkill meditate = new activeSkill("Meditate","too much causes hallucinations",50,"NONE",10);
-    activeSkill waterNebula = new activeSkill("Water Nebula","Agua Novela",50,"NONE",10);
-    activeSkill Runesave = new activeSkill("Runesave","No mp to give",50,"NONE",10);
-    activeSkill forbiddenTomb = new activeSkill("Forbidden Tomb","For the enemies you really hate",50,"NONE",10);
-    activeSkill rockCrush = new activeSkill("Rock Crush","Avalanche was not enough",50,"NONE",10);
-    activeSkill deathRay = new activeSkill("Death Ray","why not",50,"causes instant death",1000);
-    activeSkill TripleShot = new activeSkill("Triple Shot","Third times the charm",50,"NONE",10);
-    activeSkill ScatterShot = new activeSkill("Scatter Shot","to make sure enenmies can't escape",50,"NONE",10);
-    activeSkill Ricochet = new activeSkill("Ricochet","fire",50,"NONE",10);
-    activeSkill PoisonArrow = new activeSkill("Poison Arrow","Poison a convenient answer",50,"causes poison status",10);
-    activeSkill SpeedRun = new activeSkill("Speed Run","go fast",50,"raises speed",10);
-    activeSkill RainofFire = new activeSkill("Rain of Fire","even more fire",50,"causes burn status",10);
-    activeSkill Paralyzingshot = new activeSkill("Paralyzing Shot","fire at will",50,"causes paralysis",10);
-    activeSkill SniperInstincts = new activeSkill("Sniper Instincts","hunter wasn't enough",50,"",10);
-    activeSkill SuperFreezeArrow = new activeSkill("Super Freeze Arrow","fire wasn't the answer",50,"",10);
-    activeSkill StickyBombs = new activeSkill("Sticky Bombs","no comment",50,"",10);
-    activeSkill TotheShadows = new activeSkill("To the Shadow","really tempted to add Realm",50,"",10);
-    activeSkill TripleTalonStrike = new activeSkill("Triple Talon Strike","Two talons wasn't enough",50,"",10);
-    activeSkill Vulnerability = new activeSkill("Vulnerability","survival of the fittests or annihalation of the weak",50,"",10);
-    activeSkill JavalinThrow = new activeSkill("Javalin","not made of mistletoe",50,"",10);
-    activeSkill DragonStrike = new activeSkill("Dragon Strike","Blue Eyes Ultimate not ammused",50,"",10);
-    activeSkill Strengthen = new activeSkill("Strengthen","too  much steroids",50,"",10);
-    activeSkill GroundSmash = new activeSkill("Ground Smash","earthquake wasn't made",50,"",10);
-    activeSkill SevenBladeDance = new activeSkill("Seven Blade Dance","Because 7 is clearly better than 1",50,"",10);
-    activeSkill BodyGuard = new activeSkill("Body Guard","just hire one",50,"",10);
-    activeSkill OnePunch = new activeSkill("One Punch","tempted to use Man",50,"",10);
-    activeSkill RaijintoStrike = new activeSkill("Raijin to Strike","don't know what it is but use it",50,"",10);
+	ActiveSkill fireblast = new ActiveSkill("Fireblast","fire fixes everything",50,"causes burn status",10);
+	ActiveSkill manaGuard = new ActiveSkill("Mana Guard","shields are essential",50,"NONE",10);
+    ActiveSkill energyBolt = new ActiveSkill("Energy Bolt","Pure energy hurts",50,"NONE",10);
+    ActiveSkill reignOfIce = new ActiveSkill("Reign of Ice","Ice ice baby",50,"causes frozen status",10);
+    ActiveSkill gravityCore = new ActiveSkill("Gravity Core","control gravity",50,"NONE",10);
+    ActiveSkill explosion = new ActiveSkill("Explosion","more fire",50,"causes burn status",10);
+    ActiveSkill meditate = new ActiveSkill("Meditate","too much causes hallucinations",50,"NONE",10);
+    ActiveSkill waterNebula = new ActiveSkill("Water Nebula","Agua Novela",50,"NONE",10);
+    ActiveSkill Runesave = new ActiveSkill("Runesave","No mp to give",50,"NONE",10);
+    ActiveSkill forbiddenTomb = new ActiveSkill("Forbidden Tomb","For the enemies you really hate",50,"NONE",10);
+    ActiveSkill rockCrush = new ActiveSkill("Rock Crush","Avalanche was not enough",50,"NONE",10);
+    ActiveSkill deathRay = new ActiveSkill("Death Ray","why not",50,"causes instant death",1000);
+    ActiveSkill TripleShot = new ActiveSkill("Triple Shot","Third times the charm",50,"NONE",10);
+    ActiveSkill ScatterShot = new ActiveSkill("Scatter Shot","to make sure enenmies can't escape",50,"NONE",10);
+    ActiveSkill Ricochet = new ActiveSkill("Ricochet","fire",50,"NONE",10);
+    ActiveSkill PoisonArrow = new ActiveSkill("Poison Arrow","Poison a convenient answer",50,"causes poison status",10);
+    ActiveSkill SpeedRun = new ActiveSkill("Speed Run","go fast",50,"raises speed",10);
+    ActiveSkill RainofFire = new ActiveSkill("Rain of Fire","even more fire",50,"causes burn status",10);
+    ActiveSkill Paralyzingshot = new ActiveSkill("Paralyzing Shot","fire at will",50,"causes paralysis",10);
+    ActiveSkill SniperInstincts = new ActiveSkill("Sniper Instincts","hunter wasn't enough",50,"",10);
+    ActiveSkill SuperFreezeArrow = new ActiveSkill("Super Freeze Arrow","fire wasn't the answer",50,"",10);
+    ActiveSkill StickyBombs = new ActiveSkill("Sticky Bombs","no comment",50,"",10);
+    ActiveSkill TotheShadows = new ActiveSkill("To the Shadow","really tempted to add Realm",50,"",10);
+    ActiveSkill TripleTalonStrike = new ActiveSkill("Triple Talon Strike","Two talons wasn't enough",50,"",10);
+    ActiveSkill Vulnerability = new ActiveSkill("Vulnerability","survival of the fittests or annihalation of the weak",50,"",10);
+    ActiveSkill JavalinThrow = new ActiveSkill("Javalin","not made of mistletoe",50,"",10);
+    ActiveSkill DragonStrike = new ActiveSkill("Dragon Strike","Blue Eyes Ultimate not ammused",50,"",10);
+    ActiveSkill Strengthen = new ActiveSkill("Strengthen","too  much steroids",50,"",10);
+    ActiveSkill GroundSmash = new ActiveSkill("Ground Smash","earthquake wasn't made",50,"",10);
+    ActiveSkill SevenBladeDance = new ActiveSkill("Seven Blade Dance","Because 7 is clearly better than 1",50,"",10);
+    ActiveSkill BodyGuard = new ActiveSkill("Body Guard","just hire one",50,"",10);
+    ActiveSkill OnePunch = new ActiveSkill("One Punch","tempted to use Man",50,"",10);
+    ActiveSkill RaijintoStrike = new ActiveSkill("Raijin to Strike","don't know what it is but use it",50,"",10);
     
     skillList.add(fireblast);
     skillList.add(manaGuard);
