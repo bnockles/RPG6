@@ -3,8 +3,8 @@ package items;
 public class ActiveSkill extends Spell {
 
 	public int finalDamage;
-	public ActiveSkill(String name, String description, int cost, String effect, int damage) {
-		super(name, description, cost, effect, damage);
+	public ActiveSkill(String name, String description, int cost, int damage) {
+		super(name, description, cost, damage);
 	}
 
 	@Override
