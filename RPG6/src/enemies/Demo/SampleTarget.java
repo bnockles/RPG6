@@ -51,6 +51,7 @@ public class SampleTarget implements Target {
 		if(this.health <= 0 ){
 			EnemyBattleScreen.battleMessage = name + "is dead";
 			EnemyBattleScreen.targets.remove(this);
+			a;
 		}
 	}
 
