@@ -1,3 +1,4 @@
 public interface EnemySkills{
+ //get the damage a skill can do
   public int getDamage();
 }
