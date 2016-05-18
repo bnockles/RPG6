@@ -1,6 +1,6 @@
 package items;
 
-public class passiveSkill extends Spell {
+public class PassiveSkill extends Spell {
 	public int finalDamage;
 	public Stats stats;
 	public int boostAtk;
@@ -53,8 +53,8 @@ public class passiveSkill extends Spell {
 		return boostLuk;
 	}
 
-	public passiveSkill(String name, String description, int cost, String effect, int damage, Stats statBoost) {
-		super(name, description, cost, effect, damage);
+	public PassiveSkill(String name, String description, int cost, int damage, String effect, Stats statBoost) {
+		super(name, description, cost, damage);
 		this.stats = statBoost;
 	}
 	
@@ -76,7 +76,7 @@ public class passiveSkill extends Spell {
 		return finalDamage;
 	}
 	
-	public void statsBoost(Character user, passiveSkill skill){
+	public void statsBoost(Character user, PassiveSkill skill){
 		boostAtk = user.getTrueStats().getAttack() + skill.getStats().getAttack();
 		boostDef = user.getTrueStats().getDefense() + skill.getStats().getDefense();
 		boostHP = user.getTrueStats().getHealth() + skill.getStats().getHealth();
