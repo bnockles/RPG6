@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import menus.MainMenu;
+//import menus.MainMenu;
 
 public class StartScreen extends Screen implements KeyListener{
 
