@@ -78,24 +78,24 @@ public class CharacterScreen extends Screen implements KeyListener{
 		maxMana = selectedHero.getMana();
 		pressedKeys = new ArrayList<Integer>();
 		
-		hero.addItem(sword);
-		hero.addItem(sword2);
-		hero.addItem(armor);
-		hero.addItem(armor2);
-		hero.addItem(potion);
-		hero.addItem(potion2);
-		hero2.addItem(sword);
-		hero2.addItem(sword2);
-		hero2.addItem(armor);
-		hero2.addItem(armor2);
-		hero2.addItem(potion);
-		hero2.addItem(potion2);
-		hero3.addItem(sword);
-		hero3.addItem(sword2);
-		hero3.addItem(armor);
-		hero3.addItem(armor2);
-		hero3.addItem(potion);
-		hero3.addItem(potion2);
+//		hero.addItem(sword);
+//		hero.addItem(sword2);
+//		hero.addItem(armor);
+//		hero.addItem(armor2);
+//		hero.addItem(potion);
+//		hero.addItem(potion2);
+//		hero2.addItem(sword);
+//		hero2.addItem(sword2);
+//		hero2.addItem(armor);
+//		hero2.addItem(armor2);
+//		hero2.addItem(potion);
+//		hero2.addItem(potion2);
+//		hero3.addItem(sword);
+//		hero3.addItem(sword2);
+//		hero3.addItem(armor);
+//		hero3.addItem(armor2);
+//		hero3.addItem(potion);
+//		hero3.addItem(potion2);
 		
 		
 //		heroImg = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -125,166 +125,166 @@ public class CharacterScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-		//toggle menu
-		if(on){
-			if(e.getKeyCode()==KeyEvent.VK_Q){	
-				on = false;
-				update();
-				game.repaint();
-			}
-		}else{
-			if(e.getKeyCode()==KeyEvent.VK_Q){
-				on = true;
-				update();
-				game.repaint();
-			}
-		}
-		
-		if(!wepOn){
-			if(e.getKeyCode()==KeyEvent.VK_1 && selectedHero.isHasWeapon()==false){	
-				wepOn = true;
-				selectedHero.setHasWeapon(true);
-				selectedHero.removeItem(sword);
-				selectedHero.equipItem(sword);
-				selectedHero.setAttack(selectedHero.getAttack() + sword.statBoost());
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}else{
-			if(e.getKeyCode()==KeyEvent.VK_1){	
-				wepOn = false;
-				selectedHero.setHasWeapon(false);
-				selectedHero.addItem(sword);
-				selectedHero.dequipItem(sword);
-				selectedHero.setAttack(selectedHero.getAttack() - sword.statBoost());
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}
-		
-		//equip/dequip wep
-		if(!wepOn2){
-			if(e.getKeyCode()==KeyEvent.VK_2 && selectedHero.isHasWeapon()==false){	
-				wepOn2 = true;
-				selectedHero.setHasWeapon(true);
-				selectedHero.removeItem(sword2);
-				selectedHero.equipItem(sword2);
-				selectedHero.setAttack(selectedHero.getAttack() + sword2.statBoost());
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}else{
-			if(e.getKeyCode()==KeyEvent.VK_2){	
-				wepOn2 = false;
-				selectedHero.setHasWeapon(false);
-				selectedHero.addItem(sword2);
-				selectedHero.dequipItem(sword2);
-				selectedHero.setAttack(selectedHero.getAttack() - sword2.statBoost());
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}
-		
-		
-		//equip/dequip armor
-		if(!armorOn){
-			if(e.getKeyCode()==KeyEvent.VK_3 && selectedHero.isHasArmor()==false){	
-				armorOn = true;
-				selectedHero.setHasArmor(true);
-				selectedHero.removeItem(armor);
-				selectedHero.equipItem(armor);
-				selectedHero.setDefense(selectedHero.getDefense() + armor.statBoost());
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}else{
-			if(e.getKeyCode()==KeyEvent.VK_3){	
-				armorOn = false;
-				selectedHero.setHasArmor(false);
-				selectedHero.addItem(armor);
-				selectedHero.dequipItem(armor);
-				selectedHero.setDefense(selectedHero.getDefense() - armor.statBoost());
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}
-		
-		if(!armorOn2){
-			if(e.getKeyCode()==KeyEvent.VK_4 && selectedHero.isHasArmor()==false){	
-				armorOn2 = true;
-				selectedHero.setHasArmor(true);
-				selectedHero.removeItem(armor2);
-				selectedHero.equipItem(armor2);
-				selectedHero.setDefense(selectedHero.getDefense() + armor2.statBoost());
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}else{
-			if(e.getKeyCode()==KeyEvent.VK_4){	
-				armorOn2 = false;
-				selectedHero.setHasArmor(false);
-				selectedHero.addItem(armor2);
-				selectedHero.dequipItem(armor2);
-				selectedHero.setDefense(selectedHero.getDefense() - armor2.statBoost());
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}
-
-		//drink potion
-		if(e.getKeyCode()==KeyEvent.VK_5){
-			if(selectedHero.getInvList().contains(potion)){
-				maxHeath = selectedHero.getHealth();
-				selectedHero.removeItem(potion);
-				if(selectedHero.getCurrHealth() < maxHeath){
-					selectedHero.setCurrHealth(selectedHero.getCurrHealth() + potion.heal());
-					if(selectedHero.getCurrHealth() > maxHeath){
-						selectedHero.setCurrHealth(maxHeath);
-					}
-				}
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}
-		
-		//get potion
-		if(e.getKeyCode()==KeyEvent.VK_6){	
-			selectedHero.addItem(potion);
-			update();
-			game.repaint();
-		}
-		
-		if(e.getKeyCode()==KeyEvent.VK_7){
-			if(selectedHero.getInvList().contains(potion2)){
-				maxHeath = selectedHero.getMana();
-				selectedHero.removeItem(potion2);
-				if(selectedHero.getCurrMana() < maxMana){
-					selectedHero.setCurrMana(selectedHero.getCurrMana() + potion.heal());
-					if(selectedHero.getCurrMana() > maxMana){
-						selectedHero.setCurrMana(maxMana);
-					}
-				}
-				stats = selectedHero.getAllStats();
-				update();
-				game.repaint();
-			}
-		}
-		
-		//get mana pot
-		if(e.getKeyCode()==KeyEvent.VK_8){	
-			selectedHero.addItem(potion2);
-			update();
-			game.repaint();
-		}
+//		//toggle menu
+//		if(on){
+//			if(e.getKeyCode()==KeyEvent.VK_Q){	
+//				on = false;
+//				update();
+//				game.repaint();
+//			}
+//		}else{
+//			if(e.getKeyCode()==KeyEvent.VK_Q){
+//				on = true;
+//				update();
+//				game.repaint();
+//			}
+//		}
+//		
+//		if(!wepOn){
+//			if(e.getKeyCode()==KeyEvent.VK_1 && selectedHero.isHasWeapon()==false){	
+//				wepOn = true;
+//				selectedHero.setHasWeapon(true);
+//				selectedHero.removeItem(sword);
+//				selectedHero.equipItem(sword);
+//				selectedHero.setAttack(selectedHero.getAttack() + sword.statBoost());
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}else{
+//			if(e.getKeyCode()==KeyEvent.VK_1){	
+//				wepOn = false;
+//				selectedHero.setHasWeapon(false);
+//				selectedHero.addItem(sword);
+//				selectedHero.dequipItem(sword);
+//				selectedHero.setAttack(selectedHero.getAttack() - sword.statBoost());
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}
+//		
+//		//equip/dequip wep
+//		if(!wepOn2){
+//			if(e.getKeyCode()==KeyEvent.VK_2 && selectedHero.isHasWeapon()==false){	
+//				wepOn2 = true;
+//				selectedHero.setHasWeapon(true);
+//				selectedHero.removeItem(sword2);
+//				selectedHero.equipItem(sword2);
+//				selectedHero.setAttack(selectedHero.getAttack() + sword2.statBoost());
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}else{
+//			if(e.getKeyCode()==KeyEvent.VK_2){	
+//				wepOn2 = false;
+//				selectedHero.setHasWeapon(false);
+//				selectedHero.addItem(sword2);
+//				selectedHero.dequipItem(sword2);
+//				selectedHero.setAttack(selectedHero.getAttack() - sword2.statBoost());
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}
+//		
+//		
+//		//equip/dequip armor
+//		if(!armorOn){
+//			if(e.getKeyCode()==KeyEvent.VK_3 && selectedHero.isHasArmor()==false){	
+//				armorOn = true;
+//				selectedHero.setHasArmor(true);
+//				selectedHero.removeItem(armor);
+//				selectedHero.equipItem(armor);
+//				selectedHero.setDefense(selectedHero.getDefense() + armor.statBoost());
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}else{
+//			if(e.getKeyCode()==KeyEvent.VK_3){	
+//				armorOn = false;
+//				selectedHero.setHasArmor(false);
+//				selectedHero.addItem(armor);
+//				selectedHero.dequipItem(armor);
+//				selectedHero.setDefense(selectedHero.getDefense() - armor.statBoost());
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}
+//		
+//		if(!armorOn2){
+//			if(e.getKeyCode()==KeyEvent.VK_4 && selectedHero.isHasArmor()==false){	
+//				armorOn2 = true;
+//				selectedHero.setHasArmor(true);
+//				selectedHero.removeItem(armor2);
+//				selectedHero.equipItem(armor2);
+//				selectedHero.setDefense(selectedHero.getDefense() + armor2.statBoost());
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}else{
+//			if(e.getKeyCode()==KeyEvent.VK_4){	
+//				armorOn2 = false;
+//				selectedHero.setHasArmor(false);
+//				selectedHero.addItem(armor2);
+//				selectedHero.dequipItem(armor2);
+//				selectedHero.setDefense(selectedHero.getDefense() - armor2.statBoost());
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}
+//
+//		//drink potion
+//		if(e.getKeyCode()==KeyEvent.VK_5){
+//			if(selectedHero.getInvList().contains(potion)){
+//				maxHeath = selectedHero.getHealth();
+//				selectedHero.removeItem(potion);
+//				if(selectedHero.getCurrHealth() < maxHeath){
+//					selectedHero.setCurrHealth(selectedHero.getCurrHealth() + potion.heal());
+//					if(selectedHero.getCurrHealth() > maxHeath){
+//						selectedHero.setCurrHealth(maxHeath);
+//					}
+//				}
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}
+//		
+//		//get potion
+//		if(e.getKeyCode()==KeyEvent.VK_6){	
+//			selectedHero.addItem(potion);
+//			update();
+//			game.repaint();
+//		}
+//		
+//		if(e.getKeyCode()==KeyEvent.VK_7){
+//			if(selectedHero.getInvList().contains(potion2)){
+//				maxHeath = selectedHero.getMana();
+//				selectedHero.removeItem(potion2);
+//				if(selectedHero.getCurrMana() < maxMana){
+//					selectedHero.setCurrMana(selectedHero.getCurrMana() + potion.heal());
+//					if(selectedHero.getCurrMana() > maxMana){
+//						selectedHero.setCurrMana(maxMana);
+//					}
+//				}
+//				stats = selectedHero.getAllStats();
+//				update();
+//				game.repaint();
+//			}
+//		}
+//		
+//		//get mana pot
+//		if(e.getKeyCode()==KeyEvent.VK_8){	
+//			selectedHero.addItem(potion2);
+//			update();
+//			game.repaint();
+//		}
 		
 		//receive damage
 		if(e.getKeyCode()==KeyEvent.VK_F){
@@ -458,27 +458,27 @@ public class CharacterScreen extends Screen implements KeyListener{
 			}
 		}
 		
-		//Inventory
-		int invX = 530;
-		int invY = 75;
-		g2.drawString("Inventory", invX, invY);
-		for(int j = 0; j < selectedHero.getInventory().length; j++){
-			invY += 15;
-			g2.drawString(selectedHero.getInventory()[j] + "", invX, invY);
-		}
-		
-		
-		
-		//Equiped
-		int eqX = 730;
-		int eqY = 75;
-		g2.drawString("Equipped", eqX, eqY);
-		for(int l = 0; l < selectedHero.getEquiped().length; l++){
-			eqY
-			+= 15;
-			g2.drawString(selectedHero.getEquiped()[l] + "", eqX, eqY);
-		}
-		
+//		//Inventory
+//		int invX = 530;
+//		int invY = 75;
+//		g2.drawString("Inventory", invX, invY);
+//		for(int j = 0; j < selectedHero.getInventory().length; j++){
+//			invY += 15;
+//			g2.drawString(selectedHero.getInventory()[j] + "", invX, invY);
+//		}
+//		
+//		
+//		
+//		//Equiped
+//		int eqX = 730;
+//		int eqY = 75;
+//		g2.drawString("Equipped", eqX, eqY);
+//		for(int l = 0; l < selectedHero.getEquiped().length; l++){
+//			eqY
+//			+= 15;
+//			g2.drawString(selectedHero.getEquiped()[l] + "", eqX, eqY);
+//		}
+//		
 		
 		//display character
 		//g2.drawImage(icon, hero.getX(), hero.getY(), null);

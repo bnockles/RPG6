@@ -1,3 +1,4 @@
+
 package characters;
 
 import java.awt.image.BufferedImage;
@@ -41,7 +42,7 @@ public class Hero extends Character {
 		super(name, health, currHealth, attack, defense, mana, currMana,
 				speed, dropRate, critHitChance, currentExp);
 		
-			inventory = new ArrayList<SampleItem>();
+			
 			equiped = new ArrayList<SampleItem>();
 			x = 200;
 			y = 200;
@@ -122,25 +123,6 @@ public class Hero extends Character {
 	public void setY(int y) {
 		this.y = y;
 	}
-
-	public ArrayList getInvList(){
-		return inventory;
-	}
-	
-	
-	public String[] getInventory(){
-		String[] inv;
-		try{
-			inv = new String[inventory.size()];
-			for(int i = 0; i < inventory.size(); i++){
-				inv[i] = inventory.get(i).getName();
-			}
-		}catch(Exception e){
-			String[] inv1 = {" "};
-			return inv1; 
-		}
-		return inv;
-	}
 	
 	public String[] getEquiped(){
 		String[] eq;
@@ -156,18 +138,7 @@ public class Hero extends Character {
 		return eq;
 	}
 	
-	public void addItem(SampleItem item){		
-			inventory.add(item);
-
-	}
 	
-	public void removeItem(SampleItem item){
-		try{
-			inventory.remove(item);
-		}catch(Exception e){
-			return;
-		}
-	}
 	
 	public void equipItem(SampleItem item){
 		try{
