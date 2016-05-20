@@ -10,7 +10,7 @@ public class CharacterDemo extends Game{
 		new CharacterDemo();
 	}
 
-	protected void reset() {
+	public void reset() {
 		Screen demoScreen = new CharacterScreen(this);
 		setScreen(demoScreen);
 		repaint();

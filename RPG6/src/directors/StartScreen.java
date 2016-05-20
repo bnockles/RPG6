@@ -29,8 +29,8 @@ public class StartScreen extends Screen implements KeyListener{
 	public void keyPressed(KeyEvent arg) {
 		int k = arg.getKeyCode();
 		if(k==KeyEvent.VK_SPACE){
-			Screen mainMenu = new MainMenu(game);
-			game.setScreen(mainMenu);
+			//Screen mainMenu = new MainMenu(game);
+			//game.setScreen(mainMenu);
 		}
 	}
 

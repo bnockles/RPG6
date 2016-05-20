@@ -47,6 +47,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		stats = selectedHero.getAllStats();
 		sword = new SampleWeapon("Sword", 10);
 		armor = new SampleArmor("Armor", 50);
+		armor = new SampleArmor("Armor", 50);
 		potion = new SamplePotion("Potion", 10);
 		maxHeath = selectedHero.getHealth();
 		pressedKeys = new ArrayList<Integer>();
