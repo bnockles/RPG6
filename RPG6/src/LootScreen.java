@@ -1,3 +1,7 @@
+import items.Equipment;
+import items.equipStock;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -15,23 +19,27 @@ public class LootScreen extends Screen implements KeyListener{
 	Treasure[]boxes;
 	int money;
 	boolean haveBox;
+	equipStock y;
+	int equipLevel;
 	public LootScreen(Game game,int level) {
 		super(game);
 		update();
+		y = new equipStock();
+		equipLevel = level;
 		haveBox = false;
 		boxes = new Treasure[3];
 		for(int i=0;i<boxes.length;i++){
-			int y = (int)(Math.random()*3);
-			if(y==0){
-				Treasure x=new Treasure("Common",(int)(Math.random()*300),"Small box");
+			int y = (int)(Math.random()*15)+1;
+			if(y>0&&y<10){
+				Treasure x = new Treasure(Treasure.COMMON,(int)(Math.random()*300),"This is a small box");
 				boxes[i]=x;
 			}
-			else if(y==1){
-				Treasure x=new Treasure("Less Common",(int)(Math.random()*3000),"Medium box");
+			else if(y>=10&&y<15){
+				Treasure x = new Treasure(Treasure.UNCOMMON,(int)(Math.random()*3000),"This is a medium box");
 				boxes[i]=x;
 			}
 			else{
-				Treasure x=new Treasure("Rare",(int)(Math.random()*30000),"Large box");
+				Treasure x = new Treasure(Treasure.RARE,(int)(Math.random()*30000),"This is a large box");
 				boxes[i]=x;
 			}
 		}
@@ -47,13 +55,22 @@ public class LootScreen extends Screen implements KeyListener{
 	@Override
 	public void paintScreen(Graphics2D g2) {
 		// TODO Auto-generated method stub
-		g2.drawString("Box1",500,300);
-		g2.drawString("Box2",530,300);
-		g2.drawString("Box3",560,300);
-		g2.drawString("Choose a box.",530,200);
+		g2.setColor(Color.CYAN);
+		g2.fillRect(300, 100, 500, 500);
+		g2.setColor(Color.black);
+		g2.drawString("Choose a box.",400,200);
+		g2.drawString("Box1",400,250);
+		g2.drawString("Box2",430,250);
+		g2.drawString("Box3",460,250);
 		String x = "";
 		x = x+money;
-		g2.drawString("You got $"+ x + " from the box.", 300, 200);
+		if(haveBox){
+			g2.drawString("You got $"+ x + " from the box.",400,300);
+		}
+		Equipment equip = y.equipStocks(equipLevel);
+		g2.drawString("You have aquired a "+equip.getName()+" from the battle.",400,370);
+		g2.drawString(equip.getDescription(),400,400);
+		g2.drawString("Description - "+equip.getReq(),400,430);
 	}
 
 	@Override
@@ -66,15 +83,15 @@ public class LootScreen extends Screen implements KeyListener{
 		// TODO Auto-generated method stub
 		int keyCode = e.getKeyCode();
 		if(!haveBox){
-			if(keyCode == KeyEvent.VK_Z){
+			if(keyCode == KeyEvent.VK_1){
 				money+=boxes[0].getMoney();
 				haveBox=true;
 			}
-			if(keyCode == KeyEvent.VK_X){
+			if(keyCode == KeyEvent.VK_2){
 				money+=boxes[1].getMoney();
 				haveBox=true;
 			}
-			if(keyCode == KeyEvent.VK_C){
+			if(keyCode == KeyEvent.VK_3){
 				money+=boxes[2].getMoney();
 				haveBox=true;
 			}
