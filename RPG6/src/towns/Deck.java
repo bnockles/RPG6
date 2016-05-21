@@ -1,7 +1,11 @@
 package towns;
 import java.util.Random;
 import java.util.ArrayList;
-
+/**
+ * 
+ * @author Yash Patel
+ *
+ */
 public class Deck {
     private ArrayList<Card> cards;
      Deck()

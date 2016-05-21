@@ -1,4 +1,9 @@
 package towns;
+/**
+ * 
+ * @author Yash Patel
+ *
+ */
 public class Hand {
     private Card[] cards;
     private int[] value;

@@ -1,5 +1,9 @@
 package towns;
-
+/**
+ * 
+ * @author Yash Patel
+ *
+ */
 public class Card {
 	private short rank, suit;
 
