@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 public class Player extends Hero {
 	ArrayList<Items> inventory;
+	Party party;
 	
 	public Player(String name, double health, double currHealth, double attack,
 			double defense, double mana, double currMana, double speed,
 			double dropRate, double critHitChance, double currentExp) {
 		super(name, health, currHealth, attack, defense, mana, currMana, speed,
 				dropRate, critHitChance, currentExp);
-		Party party = new Party(this);
+		party = new Party(this);
 		inventory = new ArrayList<Items>();
 		
 	}
@@ -45,5 +46,9 @@ public class Player extends Hero {
 		}catch(Exception e){
 			return;
 		}
+	}
+	
+	public Party getParty(){
+		return party;
 	}
 }

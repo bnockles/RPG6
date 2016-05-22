@@ -22,7 +22,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 	String[] statNames = {"Health", "Attack", "Defense", "Mana", "Speed", "Drop Rate", "Crit Hit Chance", "CurrentExp"};
 	String name;
 	double[] stats;
-	Hero hero;
+	Player hero;
 	/*Hero hero = new Hero(); <-- hero
 	 * 	declared type = hero
 	 * 	actual type = hero
@@ -62,9 +62,16 @@ public class CharacterScreen extends Screen implements KeyListener{
 	
 	public CharacterScreen(Game game) {
 		super(game);
-		hero = HeroTeam.getHero(HeroTeam.ZELDA);
+		hero = new Player("Link", 100.0, 100.0, 10.0, 10.0, 190.0, 190.0, 5.0, 0, 0, 5.0);
 		hero2 = HeroTeam.getHero(HeroTeam.KNIGHT);
 		hero3 = HeroTeam.getHero(HeroTeam.ADVENTURER);
+		hero.getParty().addMember(hero2);
+		hero.getParty().addMember(hero3);
+		
+		System.out.println(hero.getParty().party.get(0).getX());
+		System.out.println(hero.getParty().party.get(1).getX());
+		System.out.println(hero.getParty().party.get(2).getX());
+		
 		selectedHero = hero;
 		name = selectedHero.getName();
 		stats = selectedHero.getAllStats();
@@ -306,87 +313,81 @@ public class CharacterScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-		//calls special move
-//		if(e.getKeyCode()==KeyEvent.VK_V){
-//			SpecialAction.specialAction(hero);
-//		}
-		
-		
-		
-		//movement
-//        if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_LEFT){
-//            hero.setY(hero.getY()+10);
-//            hero.setX(hero.getX()+10);
-//            update();
-//            game.repaint();
-//        }
-//        else if(e.getKeyCode() == KeyEvent.VK_UP && e.getKeyCode() == KeyEvent.VK_RIGHT){
-//            hero.setY(hero.getY()+10);
-//            hero.setX(hero.getX()-10);
-//            update();
-//            game.repaint();
-//        }
-//        else if(e.getKeyCode() == KeyEvent.VK_DOWN && e.getKeyCode() == KeyEvent.VK_LEFT){
-//            hero.setY(hero.getY()-10);
-//            hero.setX(hero.getX()+10);
-//            update();
-//            game.repaint();
-//        }
-//        else if(e.getKeyCode() == KeyEvent.VK_DOWN && e.getKeyCode() == KeyEvent.VK_RIGHT){
-//            hero.setY(hero.getY()-10);
-//            hero.setX(hero.getX()-10);
-//            update();
-//            game.repaint();
-//        }
-//        else if(e.getKeyCode() == KeyEvent.VK_UP){
-//            hero.setY(hero.getY()-10);
-//            update();
-//            game.repaint();
-//        }
-//        else if(e.getKeyCode() == KeyEvent.VK_DOWN){
-//            hero.setY(hero.getY()+10);
-//            update();
-//            update();
-//            game.repaint();
-//        }
-//        else if(e.getKeyCode() == KeyEvent.VK_LEFT){
-//            hero.setX(hero.getX()-10);
-//            update();
-//            game.repaint();
-//        }
-//        else if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-//            hero.setX(hero.getX()+10);
-//            update();
-//            game.repaint();
-//        }
 		
 		 int keyCode = e.getKeyCode();
 		 if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_LEFT){
 			 if(!pressedKeys.contains(keyCode))pressedKeys.add(keyCode);
 			 if(keyCode == KeyEvent.VK_UP){
-				 selectedHero.setFront(false);
-				 selectedHero.setBack(true);
-				 selectedHero.setRight(false);
-				 selectedHero.setLeft(false);
+				 for(int i = 1; i < hero.getParty().party.size(); i++){
+					 if((hero.getParty().party.get(i).getX() >= Math.abs(hero.getParty().party.get(i-1).getX() - 2) &&		 
+						hero.getParty().party.get(i).getX() <= Math.abs(hero.getParty().party.get(i-1).getX() + 2)) &&
+						hero.getParty().party.get(i-1).getY() >= hero.getParty().party.get(i).getY() - hero.getCharHeight() - 5 &&
+						hero.getParty().party.get(i-1).getY() <= hero.getParty().party.get(i).getY() - hero.getCharHeight() + 5){
+							hero.getParty().party.get(i).setFront(hero.getParty().party.get(i-1).isFront());
+							hero.getParty().party.get(i).setBack(hero.getParty().party.get(i-1).isBack());
+							hero.getParty().party.get(i).setRight(hero.getParty().party.get(i-1).isRight());
+							hero.getParty().party.get(i).setLeft(hero.getParty().party.get(i-1).isLeft());
+					 }
+				 }
+				 hero.getParty().party.get(0).setFront(false);
+				 hero.getParty().party.get(0).setBack(true);
+				 hero.getParty().party.get(0).setRight(false);
+				 hero.getParty().party.get(0).setLeft(false);		
 			 }else if(keyCode == KeyEvent.VK_DOWN){
-				 selectedHero.setFront(true);
-				 selectedHero.setBack(false);
-				 selectedHero.setRight(false);
-				 selectedHero.setLeft(false);
+				 	
+				 for(int i = 1; i < hero.getParty().party.size(); i++){
+					 if((hero.getParty().party.get(i).getX() >= Math.abs(hero.getParty().party.get(i-1).getX() - 2) &&		 
+						hero.getParty().party.get(i).getX() <= Math.abs(hero.getParty().party.get(i-1).getX() + 2)) &&
+						hero.getParty().party.get(i-1).getY() >= hero.getParty().party.get(i).getY() + hero.getCharHeight()){
+							hero.getParty().party.get(i).setFront(hero.getParty().party.get(i-1).isFront());
+							hero.getParty().party.get(i).setBack(hero.getParty().party.get(i-1).isBack());
+							hero.getParty().party.get(i).setRight(hero.getParty().party.get(i-1).isRight());
+							hero.getParty().party.get(i).setLeft(hero.getParty().party.get(i-1).isLeft());
+					 }
+				 }
+				 hero.getParty().party.get(0).setFront(true);
+				 hero.getParty().party.get(0).setBack(false);
+				 hero.getParty().party.get(0).setRight(false);
+				 hero.getParty().party.get(0).setLeft(false);
 			 }else if(keyCode == KeyEvent.VK_RIGHT){
-				 selectedHero.setFront(false);
-				 selectedHero.setBack(false);
-				 selectedHero.setRight(true);
-				 selectedHero.setLeft(false);
-			 }else{
-				 selectedHero.setFront(false);
-				 selectedHero.setBack(false);
-				 selectedHero.setRight(false);
-				 selectedHero.setLeft(true);
+				 for(int i = 1; i < hero.getParty().party.size(); i++){
+					 if((hero.getParty().party.get(i).getY() >= (hero.getParty().party.get(i-1).getY() - 2) &&		 
+						hero.getParty().party.get(i).getY() <= Math.abs(hero.getParty().party.get(i-1).getY() + 2)) &&
+						hero.getParty().party.get(i-1).getX() >= hero.getParty().party.get(i).getX() + 60){
+							hero.getParty().party.get(i).setFront(hero.getParty().party.get(i-1).isFront());
+							hero.getParty().party.get(i).setBack(hero.getParty().party.get(i-1).isBack());
+							hero.getParty().party.get(i).setRight(hero.getParty().party.get(i-1).isRight());
+							hero.getParty().party.get(i).setLeft(hero.getParty().party.get(i-1).isLeft());
+					 }
+				 }
+				 hero.getParty().party.get(0).setFront(false);
+				 hero.getParty().party.get(0).setBack(false);
+				 hero.getParty().party.get(0).setRight(true);
+				 hero.getParty().party.get(0).setLeft(false);
+				 
+			 }else{ 
+				 for(int i = 1; i < hero.getParty().party.size(); i++){
+					 if((hero.getParty().party.get(i).getY() >= Math.abs(hero.getParty().party.get(i-1).getY() - 2) &&		 
+						hero.getParty().party.get(i).getY() <= Math.abs(hero.getParty().party.get(i-1).getY() + 2)) &&
+						hero.getParty().party.get(i-1).getX() <= hero.getParty().party.get(i).getX() - 60){
+							hero.getParty().party.get(i).setFront(hero.getParty().party.get(i-1).isFront());
+							hero.getParty().party.get(i).setBack(hero.getParty().party.get(i-1).isBack());
+							hero.getParty().party.get(i).setRight(hero.getParty().party.get(i-1).isRight());
+							hero.getParty().party.get(i).setLeft(hero.getParty().party.get(i-1).isLeft());
+					 }
+				 }
+				 hero.getParty().party.get(0).setFront(false);
+				 hero.getParty().party.get(0).setBack(false);
+				 hero.getParty().party.get(0).setRight(false);
+				 hero.getParty().party.get(0).setLeft(true);
+				
 			 }
+			
 		 }
 		 if(!pressedKeys.isEmpty()){
-			 selectedHero.setWalking(true);
+			 for(int i = 0; i < hero.getParty().party.size(); i ++){
+				 hero.getParty().party.get(i).setWalking(true);
+			 }
 		 }
 		 respondToKeyInput();
 	}
@@ -396,7 +397,11 @@ public class CharacterScreen extends Screen implements KeyListener{
 		 if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_LEFT){
 			 pressedKeys.remove(pressedKeys.indexOf(keyCode));
 		 }
-		 if(pressedKeys.isEmpty())selectedHero.setWalking(false);
+		 if(pressedKeys.isEmpty()){
+			 for(int i = 0; i < hero.getParty().party.size(); i ++){
+				 hero.getParty().party.get(i).setWalking(false);
+			 }
+		 }
 		 respondToKeyInput();
 	}
 
@@ -412,11 +417,43 @@ public class CharacterScreen extends Screen implements KeyListener{
 		return this;
 	}
 
-	private void respondToKeyInput() { 
-		if(pressedKeys.contains(KeyEvent.VK_UP) && !pressedKeys.contains(KeyEvent.VK_DOWN)) selectedHero.setY(selectedHero.getY() - MOVE_UNIT); 
-		if(!pressedKeys.contains(KeyEvent.VK_UP) && pressedKeys.contains(KeyEvent.VK_DOWN)) selectedHero.setY(selectedHero.getY() + MOVE_UNIT); 
-		if(pressedKeys.contains(KeyEvent.VK_RIGHT) && !pressedKeys.contains(KeyEvent.VK_LEFT)) selectedHero.setX(selectedHero.getX() + MOVE_UNIT); 
-		if(!pressedKeys.contains(KeyEvent.VK_RIGHT) && pressedKeys.contains(KeyEvent.VK_LEFT)) selectedHero.setX(selectedHero.getX() - MOVE_UNIT); 
+	private void respondToKeyInput(){ 
+		if(pressedKeys.contains(KeyEvent.VK_UP) && !pressedKeys.contains(KeyEvent.VK_DOWN)){
+			// hero.getParty().party.get(0).setY(hero.getParty().party.get(0).getY() - MOVE_UNIT);
+			 for(int i = 0; i < hero.getParty().party.size(); i++){
+				 if(hero.getParty().party.get(i).isBack())hero.getParty().party.get(i).setY(hero.getParty().party.get(i).getY() - MOVE_UNIT);
+				 if(hero.getParty().party.get(i).isFront())hero.getParty().party.get(i).setY(hero.getParty().party.get(i).getY() + MOVE_UNIT); 
+				 if(hero.getParty().party.get(i).isRight())hero.getParty().party.get(i).setX(hero.getParty().party.get(i).getX() + MOVE_UNIT);
+				 if(hero.getParty().party.get(i).isLeft())hero.getParty().party.get(i).setX(hero.getParty().party.get(i).getX() - MOVE_UNIT);
+			 }
+		}
+		if(!pressedKeys.contains(KeyEvent.VK_UP) && pressedKeys.contains(KeyEvent.VK_DOWN)){
+			// hero.getParty().party.get(0).setY(hero.getParty().party.get(0).getY() + MOVE_UNIT); 
+			 for(int i = 0; i < hero.getParty().party.size(); i++){
+				 if(hero.getParty().party.get(i).isBack())hero.getParty().party.get(i).setY(hero.getParty().party.get(i).getY() - MOVE_UNIT);
+				 if(hero.getParty().party.get(i).isFront())hero.getParty().party.get(i).setY(hero.getParty().party.get(i).getY() + MOVE_UNIT); 
+				 if(hero.getParty().party.get(i).isRight())hero.getParty().party.get(i).setX(hero.getParty().party.get(i).getX() + MOVE_UNIT);
+				 if(hero.getParty().party.get(i).isLeft())hero.getParty().party.get(i).setX(hero.getParty().party.get(i).getX() - MOVE_UNIT);
+			 }
+		}
+		if(pressedKeys.contains(KeyEvent.VK_RIGHT) && !pressedKeys.contains(KeyEvent.VK_LEFT)){
+			// hero.getParty().party.get(0).setX(hero.getParty().party.get(0).getX() + MOVE_UNIT);
+			 for(int i = 0; i < hero.getParty().party.size(); i++){
+				 if(hero.getParty().party.get(i).isBack())hero.getParty().party.get(i).setY(hero.getParty().party.get(i).getY() - MOVE_UNIT);
+				 if(hero.getParty().party.get(i).isFront())hero.getParty().party.get(i).setY(hero.getParty().party.get(i).getY() + MOVE_UNIT); 
+				 if(hero.getParty().party.get(i).isRight())hero.getParty().party.get(i).setX(hero.getParty().party.get(i).getX() + MOVE_UNIT);
+				 if(hero.getParty().party.get(i).isLeft())hero.getParty().party.get(i).setX(hero.getParty().party.get(i).getX() - MOVE_UNIT);
+			 }
+		}
+		if(!pressedKeys.contains(KeyEvent.VK_RIGHT) && pressedKeys.contains(KeyEvent.VK_LEFT)){
+			// hero.getParty().party.get(0).setX(hero.getParty().party.get(0).getX() - MOVE_UNIT); 
+			 for(int i = 0; i < hero.getParty().party.size(); i++){		 
+				 if(hero.getParty().party.get(i).isBack())hero.getParty().party.get(i).setY(hero.getParty().party.get(i).getY() - MOVE_UNIT);
+				 if(hero.getParty().party.get(i).isFront())hero.getParty().party.get(i).setY(hero.getParty().party.get(i).getY() + MOVE_UNIT); 
+				 if(hero.getParty().party.get(i).isRight())hero.getParty().party.get(i).setX(hero.getParty().party.get(i).getX() + MOVE_UNIT);
+				 if(hero.getParty().party.get(i).isLeft())hero.getParty().party.get(i).setX(hero.getParty().party.get(i).getX() - MOVE_UNIT);
+			 }
+		}
 	}
 	
 	public void paintScreen(Graphics2D g2){
@@ -481,12 +518,12 @@ public class CharacterScreen extends Screen implements KeyListener{
 //		
 		
 		//display character
-		//g2.drawImage(icon, hero.getX(), hero.getY(), null);
-		
-		selectedHero.increaseCount();
-		g2.drawImage(hero.getImage(),hero.getX(),hero.getY(),null);
-		g2.drawImage(hero2.getImage(),hero2.getX()+100,hero2.getY(),null);
-		g2.drawImage(hero3.getImage(),hero3.getX()+200,hero3.getY(),null);
+
+		for(int i = 0; i < hero.getParty().party.size(); i ++){
+			hero.getParty().party.get(i).increaseCount();
+			g2.drawImage(hero.getParty().party.get(i).getImage(),hero.getParty().party.get(i).getX(),hero.getParty().party.get(i).getY(),null);
+		}
+
 	}
 	
 }

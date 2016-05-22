@@ -13,7 +13,7 @@ public class Hero extends Character {
 	private static final int CHAR_HEIGHT = 200;
 	int count;
 	boolean walking = false;
-	boolean front = false;
+	boolean front = true;
 	boolean back = false;
 	boolean right = false;
 	boolean left = false;
@@ -62,6 +62,7 @@ public class Hero extends Character {
 			BufferedImage image11=null;
 			try {
 				BufferedImage origimage0 = UtilityMethods.getImageFromFile(this, "/character/sample/hero1" + name.toLowerCase() + ".png");
+				System.out.println(origimage0);
 				BufferedImage origimage1 = UtilityMethods.getImageFromFile(this, "/character/sample/hero2" + name.toLowerCase() + ".png");
 				BufferedImage origimage2 = UtilityMethods.getImageFromFile(this, "/character/sample/hero3" + name.toLowerCase() + ".png");
 				BufferedImage origimage3 = UtilityMethods.getImageFromFile(this, "/character/sample/hero4" + name.toLowerCase() + ".png");
@@ -202,6 +203,26 @@ public class Hero extends Character {
 	}
 
 
+	public boolean isWalking() {
+		return walking;
+	}
+
+	public boolean isFront() {
+		return front;
+	}
+
+	public boolean isBack() {
+		return back;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public boolean isLeft() {
+		return left;
+	}
+
 	public void setFront(boolean front) {
 		this.front = front;
 	}
@@ -246,6 +267,8 @@ public class Hero extends Character {
 		this.hasArmor = hasArmor;
 	}
 	
-
+	public int getCharHeight(){
+		return CHAR_HEIGHT/3;
+	}
 	
 }
