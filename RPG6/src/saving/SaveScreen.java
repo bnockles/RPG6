@@ -12,15 +12,21 @@ import java.awt.event.KeyListener;
  */
 public class SaveScreen extends Screen implements KeyListener{
 
+    private Game game;
+    private Save[] saveList;
+
 
     public SaveScreen(Game game) {
         super(game);
-
+        this.game = game;
+        saveList = SaveUtility.get
     }
 
     public void paintScreen(Graphics2D g2) {
 
     }
+
+
 
     public KeyListener getKeyListener() {
         return this;

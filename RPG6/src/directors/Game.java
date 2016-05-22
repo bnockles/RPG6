@@ -18,7 +18,7 @@ public class Game extends JFrame{
 	public final int WIDTH = 1000;
 	public final int HEIGHT = 800;
 	protected Screen activeScreen;//whatever Screen we are currently on
-	private static Save currentSave;
+	private static Save currentSave = null;
 	
 	/**
 	 * @param args
@@ -78,7 +78,7 @@ public class Game extends JFrame{
         currentSave = save;
     }
 
-    public static Save getCurrentSave(Save save){
+    public static Save getCurrentSave(){
         return currentSave;
     }
 	

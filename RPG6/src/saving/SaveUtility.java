@@ -18,18 +18,26 @@ public class SaveUtility {
         }
     }
 
- /*   private void findPath(){
+    private File[] allSaveFiles(){
         ClassLoader cl = getClass().getClassLoader();
-        File file = new File(cl.getResource("saves").getFile());
-        for (File f :
-                file.listFiles()) {
-            System.out.println(f.getName());
-        }
-    }*/
+        return new File(cl.getResource("saves").getFile()).listFiles();
+    }
 
     private static File[] savesInResources(){
         File f = new File("hello");
         return null;
+    }
+
+
+    private static Save[] getAllSaves(){
+        SaveUtility util = new SaveUtility();
+        File[] files = util.allSaveFiles();
+        ArrayList<Save> saves = new ArrayList<>();
+        for (File f :
+                files) {
+            saves.add(new Save(1));
+            System.out.println(f.getName());
+        }
     }
 
 
