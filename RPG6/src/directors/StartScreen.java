@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 //import menus.MainMenu;
 
-public class StartScreen extends Screen implements KeyListener{
+public class 	StartScreen extends Screen implements KeyListener{
 
 	public StartScreen(Game game) {
 		super(game);

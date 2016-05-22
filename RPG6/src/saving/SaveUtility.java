@@ -1,10 +1,6 @@
 package saving;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.net.URL;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,17 +10,26 @@ import java.util.Scanner;
 public class SaveUtility {
 
     public static void main(String[] args){
-        SaveUtility obj = new SaveUtility();
-        obj.findPath();
+        try {
+            addTag(new File("RPG6\\resources\\saves\\Save1.txt"),"HP", 101);
+            System.out.println("added");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void findPath(){
+ /*   private void findPath(){
         ClassLoader cl = getClass().getClassLoader();
         File file = new File(cl.getResource("saves").getFile());
         for (File f :
                 file.listFiles()) {
             System.out.println(f.getName());
         }
+    }*/
+
+    private static File[] savesInResources(){
+        File f = new File("hello");
+        return null;
     }
 
 
@@ -40,9 +45,16 @@ public class SaveUtility {
             String line = in.nextLine();
 
             //Relocate to a function
-            String tag = line.substring(line.indexOf("<"),line.indexOf(">"));
+            String tag = line.substring(line.indexOf("<")+1,line.indexOf(">"));
 
         }
         return null;
+    }
+
+    public static void addTag(File f,String tag,int value) throws IOException {
+        FileWriter fw = new FileWriter(f,true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fw);
+        bufferedWriter.append("<" + tag + ">" + value + "</" + tag + ">"+System.getProperty("line.separator"));
+        bufferedWriter.close();
     }
 }

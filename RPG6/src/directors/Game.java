@@ -1,5 +1,7 @@
 package directors;
 
+import saving.Save;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -16,6 +18,7 @@ public class Game extends JFrame{
 	public final int WIDTH = 1000;
 	public final int HEIGHT = 800;
 	protected Screen activeScreen;//whatever Screen we are currently on
+	private static Save currentSave;
 	
 	/**
 	 * @param args
@@ -70,12 +73,14 @@ public class Game extends JFrame{
 	public void paint(Graphics g){
 		g.drawImage(activeScreen.getScreenImage(),0,0,null);
 	}
-	
-	
-	
-	
-	
-	
+
+	public static void setCurrentSave(Save save){
+        currentSave = save;
+    }
+
+    public static Save getCurrentSave(Save save){
+        return currentSave;
+    }
 	
 	
 	
