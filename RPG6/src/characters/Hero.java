@@ -9,8 +9,6 @@ import directors.UtilityMethods;
 	
 
 public class Hero extends Character {
-
-	private static final int CHAR_HEIGHT = 200;
 	int count;
 	boolean walking = false;
 	boolean front = true;
@@ -29,8 +27,6 @@ public class Hero extends Character {
 	 * */
 	
 	ArrayList<SampleItem> equiped;
-	int x;
-	int y;
 	BufferedImage image;
 	BufferedImage[] frames;
 	String name;
@@ -44,8 +40,7 @@ public class Hero extends Character {
 		
 			
 			equiped = new ArrayList<SampleItem>();
-			x = 200;
-			y = 200;
+
 			this.name = name;
 			
 			BufferedImage image0=null;
@@ -62,7 +57,6 @@ public class Hero extends Character {
 			BufferedImage image11=null;
 			try {
 				BufferedImage origimage0 = UtilityMethods.getImageFromFile(this, "/character/sample/hero1" + name.toLowerCase() + ".png");
-				System.out.println(origimage0);
 				BufferedImage origimage1 = UtilityMethods.getImageFromFile(this, "/character/sample/hero2" + name.toLowerCase() + ".png");
 				BufferedImage origimage2 = UtilityMethods.getImageFromFile(this, "/character/sample/hero3" + name.toLowerCase() + ".png");
 				BufferedImage origimage3 = UtilityMethods.getImageFromFile(this, "/character/sample/hero4" + name.toLowerCase() + ".png");
@@ -75,18 +69,18 @@ public class Hero extends Character {
 				BufferedImage origimage10 = UtilityMethods.getImageFromFile(this, "/character/sample/hero11" + name.toLowerCase() + ".png");
 				BufferedImage origimage11 = UtilityMethods.getImageFromFile(this, "/character/sample/hero12" + name.toLowerCase() + ".png");
 				//scale each image
-				image0=UtilityMethods.getScaledImage(origimage0,50,CHAR_HEIGHT/3);
-				image1=UtilityMethods.getScaledImage(origimage1,50,CHAR_HEIGHT/3);
-				image2=UtilityMethods.getScaledImage(origimage2,50,CHAR_HEIGHT/3);
-				image3=UtilityMethods.getScaledImage(origimage3,50,CHAR_HEIGHT/3);
-				image4=UtilityMethods.getScaledImage(origimage4,50,CHAR_HEIGHT/3);
-				image5=UtilityMethods.getScaledImage(origimage5,50,CHAR_HEIGHT/3);
-				image6=UtilityMethods.getScaledImage(origimage6,50,CHAR_HEIGHT/3);
-				image7=UtilityMethods.getScaledImage(origimage7,50,CHAR_HEIGHT/3);
-				image8=UtilityMethods.getScaledImage(origimage8,50,CHAR_HEIGHT/3);
-				image9=UtilityMethods.getScaledImage(origimage9,50,CHAR_HEIGHT/3);
-				image10=UtilityMethods.getScaledImage(origimage10,50,CHAR_HEIGHT/3);
-				image11=UtilityMethods.getScaledImage(origimage11,50,CHAR_HEIGHT/3);
+				image0=UtilityMethods.getScaledImage(origimage0,50,this.getCharHeight());
+				image1=UtilityMethods.getScaledImage(origimage1,50,this.getCharHeight());
+				image2=UtilityMethods.getScaledImage(origimage2,50,this.getCharHeight());
+				image3=UtilityMethods.getScaledImage(origimage3,50,this.getCharHeight());
+				image4=UtilityMethods.getScaledImage(origimage4,50,this.getCharHeight());
+				image5=UtilityMethods.getScaledImage(origimage5,50,this.getCharHeight());
+				image6=UtilityMethods.getScaledImage(origimage6,50,this.getCharHeight());
+				image7=UtilityMethods.getScaledImage(origimage7,50,this.getCharHeight());
+				image8=UtilityMethods.getScaledImage(origimage8,50,this.getCharHeight());
+				image9=UtilityMethods.getScaledImage(origimage9,50,this.getCharHeight());
+				image10=UtilityMethods.getScaledImage(origimage10,50,this.getCharHeight());
+				image11=UtilityMethods.getScaledImage(origimage11,50,this.getCharHeight());
 			} catch (IOException e) {
 				//will throw Exception when files cannot be found
 				e.printStackTrace();
@@ -109,21 +103,7 @@ public class Hero extends Character {
 			
 	}
 
-	public int getX() {
-		return x;
-	}
 
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
 	
 	public String[] getEquiped(){
 		String[] eq;
@@ -245,9 +225,10 @@ public class Hero extends Character {
 	}
 
 	@Override
-	public void displayCharacter() {
-		// TODO Auto-generated method stub
-		
+	public void interaction(Player player){
+		if(!player.getParty().party.contains(this)){
+			player.getParty().addMember(this);
+		}
 	}
 	
 	//Setters/getters for weapon and armor 
@@ -266,9 +247,4 @@ public class Hero extends Character {
 	public void setHasArmor(boolean hasArmor) {
 		this.hasArmor = hasArmor;
 	}
-	
-	public int getCharHeight(){
-		return CHAR_HEIGHT/3;
-	}
-	
 }

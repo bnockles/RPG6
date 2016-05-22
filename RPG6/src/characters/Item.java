@@ -1,6 +1,6 @@
 package characters;
 
-public class Items {
+public class Item {
 
 	/**
 	 * @param args

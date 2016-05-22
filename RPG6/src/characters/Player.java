@@ -2,17 +2,19 @@ package characters;
 
 import java.util.ArrayList;
 
-public class Player extends Hero {
-	ArrayList<Items> inventory;
+public class Player extends Hero implements CharacterInterface {
+	ArrayList<Item> inventory;
 	Party party;
+	int gold;
 	
 	public Player(String name, double health, double currHealth, double attack,
 			double defense, double mana, double currMana, double speed,
 			double dropRate, double critHitChance, double currentExp) {
 		super(name, health, currHealth, attack, defense, mana, currMana, speed,
 				dropRate, critHitChance, currentExp);
+		gold = 1000;
 		party = new Party(this);
-		inventory = new ArrayList<Items>();
+		inventory = new ArrayList<Item>();
 		
 	}
 	
@@ -35,12 +37,12 @@ public class Player extends Hero {
 //		return inv;
 //	}
 
-	public void addItem(Items item){		
+	public void addItem(Item item){		
 			inventory.add(item);
 
 	}
 	
-	public void removeItem(Items item){
+	public void removeItem(Item item){
 		try{
 			inventory.remove(item);
 		}catch(Exception e){
@@ -50,5 +52,13 @@ public class Player extends Hero {
 	
 	public Party getParty(){
 		return party;
+	}
+
+	public int getPlayerCurrency() {
+		return gold;
+	}
+
+	public ArrayList<Item> getInventory() {
+		return inventory;
 	}
 }

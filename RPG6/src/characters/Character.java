@@ -1,7 +1,12 @@
 package characters;
 
+import static characters.Character.CHAR_HEIGHT;
+
+import java.awt.image.BufferedImage;
+
 
 public abstract class Character {
+	public static final int CHAR_HEIGHT = 200;
 	public String name;
 	public double health;
 	public double currHealth;
@@ -13,6 +18,8 @@ public abstract class Character {
 	public double dropRate;
 	public double critHitChance;
 	public double currentExp;
+	int x;
+	int y;
 	
 	public Character(String name, double health, double currHealth,  double attack, double defense, double mana, double currMana,double speed, double dropRate, double critHitChance, double currentExp){
 		this.name = name;
@@ -26,9 +33,17 @@ public abstract class Character {
 		this.dropRate = dropRate;
 		this.critHitChance = critHitChance;
 		this.currentExp = currentExp;
+		x = 200;
+		y = 200;
 	}
 
-	public abstract void displayCharacter();
+	public abstract void interaction(Player player);
+	
+	public abstract BufferedImage getImage();
+	
+	public int getCharHeight(){
+		return CHAR_HEIGHT/3;
+	}
 	
 	public String getName() {
 		return name;
@@ -118,6 +133,21 @@ public abstract class Character {
 		this.currentExp = currentExp;
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
 	
 	public double[] getAllStats(){
 		double[] stats = {currHealth, attack, defense, currMana, speed, dropRate, critHitChance, currentExp};
