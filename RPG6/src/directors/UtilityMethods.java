@@ -26,8 +26,13 @@ public class UtilityMethods {
 		g2.drawString(string, x, y);
 	}
 	
+<<<<<<< HEAD
 	
 	public static BufferedImage getImageFromFile(Object requestingObject, String addressInResourcesFolder) throws IOException{
+=======
+	public static BufferedImage getImageFromFile(Object requestingObject, String addressInResourcesFolder) throws IOException{
+		System.out.println("Attempting to take image from "+addressInResourcesFolder);
+>>>>>>> refs/remotes/origin/storyline
 		URL url = requestingObject.getClass().getResource(addressInResourcesFolder);
 		BufferedImage image = ImageIO.read(url);
 		return image;
