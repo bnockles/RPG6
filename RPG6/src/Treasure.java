@@ -10,6 +10,7 @@ public class Treasure {
 	public Treasure(int type,int money,String description){
 		this.money = money;
 		this.type = type;
+		this.description = description;
 	}
 	
 	public String getDescription() {
@@ -27,7 +28,10 @@ public class Treasure {
 		if(type == UNCOMMON){
 			rarity = "Uncommon";
 		}
-		return "Rare";
+		if(type == RARE){
+			rarity = "Rare";
+		}
+		return rarity;
 	}
 	
 	public void setRarity(String rarity) {

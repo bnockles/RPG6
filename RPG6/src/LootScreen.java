@@ -18,6 +18,7 @@ import directors.UtilityMethods;
 public class LootScreen extends Screen implements KeyListener{
 	Treasure[]boxes;
 	int money;
+	int chosenBox;
 	boolean haveBox;
 	equipStock y;
 	int equipLevel;
@@ -31,15 +32,15 @@ public class LootScreen extends Screen implements KeyListener{
 		for(int i=0;i<boxes.length;i++){
 			int y = (int)(Math.random()*15)+1;
 			if(y>0&&y<10){
-				Treasure x = new Treasure(Treasure.COMMON,(int)(Math.random()*300),"This is a small box");
+				Treasure x = new Treasure(Treasure.COMMON,(int)(Math.random()*300),"This box has a small amount of money.");
 				boxes[i]=x;
 			}
 			else if(y>=10&&y<15){
-				Treasure x = new Treasure(Treasure.UNCOMMON,(int)(Math.random()*3000),"This is a medium box");
+				Treasure x = new Treasure(Treasure.UNCOMMON,(int)(Math.random()*3000),"This box has a decent amount of money.");
 				boxes[i]=x;
 			}
 			else{
-				Treasure x = new Treasure(Treasure.RARE,(int)(Math.random()*30000),"This is a large box");
+				Treasure x = new Treasure(Treasure.RARE,(int)(Math.random()*30000),"This box has a large amount of money.");
 				boxes[i]=x;
 			}
 		}
@@ -55,9 +56,10 @@ public class LootScreen extends Screen implements KeyListener{
 	@Override
 	public void paintScreen(Graphics2D g2) {
 		// TODO Auto-generated method stub
-		g2.setColor(Color.CYAN);
+		g2.setColor(Color.LIGHT_GRAY);
 		g2.fillRect(300, 100, 500, 500);
 		g2.setColor(Color.black);
+		g2.drawString("End of Battle",500,150);
 		g2.drawString("Choose a box.",400,200);
 		g2.drawString("Box1",400,250);
 		g2.drawString("Box2",430,250);
@@ -65,7 +67,9 @@ public class LootScreen extends Screen implements KeyListener{
 		String x = "";
 		x = x+money;
 		if(haveBox){
-			g2.drawString("You got $"+ x + " from the box.",400,300);
+			g2.drawString("You have chosen a " + boxes[chosenBox].getRarity() + " box.",400,280);
+			g2.drawString(boxes[chosenBox].getDescription(),400,300);
+			g2.drawString("You got $"+ x + " from the box.",400,320);
 		}
 		Equipment equip = y.equipStocks(equipLevel);
 		g2.drawString("You have aquired a "+equip.getName()+" from the battle.",400,370);
@@ -85,14 +89,17 @@ public class LootScreen extends Screen implements KeyListener{
 		if(!haveBox){
 			if(keyCode == KeyEvent.VK_1){
 				money+=boxes[0].getMoney();
+				chosenBox = 0;
 				haveBox=true;
 			}
 			if(keyCode == KeyEvent.VK_2){
 				money+=boxes[1].getMoney();
+				chosenBox = 1;
 				haveBox=true;
 			}
 			if(keyCode == KeyEvent.VK_3){
 				money+=boxes[2].getMoney();
+				chosenBox = 2;
 				haveBox=true;
 			}
 		}
