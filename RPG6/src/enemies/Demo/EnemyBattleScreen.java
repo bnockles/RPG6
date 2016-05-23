@@ -41,10 +41,7 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		targets.add(new SampleTarget());
 		targets.add(new SampleTarget());
 		targets.add(new SampleTarget());
-<<<<<<< HEAD
-		this.enemy1= new SampleEnemy(2, SampleEnemy.FLYING, targets);
-		this.enemy2= new SampleEnemy(3, SampleEnemy.ZOMBIE, targets);
-=======
+
 		//this.enemy1= new SampleEnemy(1, targets);
 		//this.enemy2= new SampleEnemy(2, targets);
 		//this.enemy3= new SampleEnemy(3, targets);
@@ -55,7 +52,6 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		this.enemy2 = new SampleEnemy("tank", 10, targets);
 		this.enemy3 = new SampleEnemy("mage", 10, targets);
 
->>>>>>> refs/remotes/origin/enemies
 		update();
 	}
 
@@ -68,23 +64,23 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 		g2.fillRect(0, 0, width, height);
 		g2.setColor(Color.black);
 		try{
-<<<<<<< HEAD
-			g2.drawString("ENEMIES", 50, 75);
-			g2.drawString(enemy1.name, 50, 100);
-			g2.drawString(enemy2.name, 50, 125);
-			g2.drawString("Press '1' to make enemy 1 take its turn", 160, 100);
-			g2.drawString("Press '2' to make enemy 1 take its turn", 160, 125);
-
-			g2.drawString("TARGETS", 50, 155);
-			int y = 175;
-			for(Target t:targets){
-				g2.drawString(t.getName(), 75, y);
-				y+=25;
-			}
-
-			y+=25;
-			g2.drawString(battleMessage, 50, y);
-=======
+//<<<<<<< HEAD
+//			g2.drawString("ENEMIES", 50, 75);
+//			g2.drawString(enemy1.name, 50, 100);
+//			g2.drawString(enemy2.name, 50, 125);
+//			g2.drawString("Press '1' to make enemy 1 take its turn", 160, 100);
+//			g2.drawString("Press '2' to make enemy 1 take its turn", 160, 125);
+//
+//			g2.drawString("TARGETS", 50, 155);
+//			int y = 175;
+//			for(Target t:targets){
+//				g2.drawString(t.getName(), 75, y);
+//				y+=25;
+//			}
+//
+//			y+=25;
+//			g2.drawString(battleMessage, 50, y);
+//=======
 			int X_COORDINATE_FOR_TEXT = 50;
 			int Y_COORDINATE_FOR_TEXT = 75;
 			g2.drawString("ENEMIES", X_COORDINATE_FOR_TEXT, Y_COORDINATE_FOR_TEXT);
@@ -105,7 +101,6 @@ public class EnemyBattleScreen extends Screen implements KeyListener{
 			//y+=25;		This moves the battle message down a bit, I think it looks better without so comment out.
 			g2.drawString(battleMessage, X_COORDINATE_FOR_TEXT, y);
 
->>>>>>> refs/remotes/origin/enemies
 		}catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
