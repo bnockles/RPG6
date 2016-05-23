@@ -11,7 +11,11 @@ public final class ItemDemo extends Game {
 	}
 
 	public ItemDemo(){
+<<<<<<< HEAD
 		Screen demoScreen = new ItemScreen2(this);
+=======
+		Screen demoScreen = new ItemScreen3(this);
+>>>>>>> refs/remotes/origin/characters
 		setScreen(demoScreen);
 		repaint();
 

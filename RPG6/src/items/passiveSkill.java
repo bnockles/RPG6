@@ -1,6 +1,6 @@
 package items;
 
-public class PassiveSkill extends Spell {
+public class passiveSkill extends Spell {
 	public int finalDamage;
 	public Stats stats;
 	public int boostAtk;
@@ -53,7 +53,7 @@ public class PassiveSkill extends Spell {
 		return boostLuk;
 	}
 
-	public PassiveSkill(String name, String description, int cost, int damage, String effect, Stats statBoost) {
+	public passiveSkill(String name, String description, int cost, int damage, Stats statBoost) {
 		super(name, description, cost, damage);
 		this.stats = statBoost;
 	}
@@ -69,14 +69,14 @@ public class PassiveSkill extends Spell {
 	}
 
 	@Override
-	public int cast(Character caster, ActiveSkill skill, Character target) {
+	public int cast(Character caster, activeSkill skill, Character target) {
 		if (canCast(caster, target)){
 			finalDamage = (caster.getTrueStats().getAttack() + skill.getDamage()) - target.getTrueStats().getDefense();
 		}
 		return finalDamage;
 	}
 	
-	public void statsBoost(Character user, PassiveSkill skill){
+	public void statsBoost(Character user, passiveSkill skill){
 		boostAtk = user.getTrueStats().getAttack() + skill.getStats().getAttack();
 		boostDef = user.getTrueStats().getDefense() + skill.getStats().getDefense();
 		boostHP = user.getTrueStats().getHealth() + skill.getStats().getHealth();
@@ -88,4 +88,19 @@ public class PassiveSkill extends Spell {
 		boostLuk = user.getTrueStats().getLuck() + skill.getStats().getLuck();
 	}
 
+	public String getSkillInfo() {
+		return "Name: " + this.getName() + " Description: " + this.getDescription();
+	}
+
+	public int getSkillDamage() {
+		return 0;
+	}
+
+	public int getSkillCost() {
+		return 0;
+	}
+
+	public boolean isUsable() {
+		return false;
+	}
 }

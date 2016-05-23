@@ -1,10 +1,15 @@
 package items;
 
-public class Character {
+
+import java.util.ArrayList;
+
+public class Character implements CharacterInterface{
 
 		private Stats trueStats;
 		public String name;
 		public String type;
+		private ArrayList<Item> inventory;
+		private int money;
 		
 		private Equipment helmet;
 		private Equipment chest;
@@ -12,13 +17,17 @@ public class Character {
 		public Equipment shoes;
 		public Equipment weapon;
 		
-		public Character(int level, int exp, Stats stats, String name, String type){
+		public Character(int level, int exp, Stats stats, String name, String type, ArrayList<Item> inventory, int money){
 			this.trueStats = stats;
 			this.name = name;
 			this.type = type;
+			this.inventory = inventory;
+			this.money = money;
 		}
-		//s
 		
+		public ArrayList<Item> getInventory(){
+			return this.inventory;
+		}
 		public Stats getTrueStats(){
 			return this.trueStats;
 		}
@@ -30,21 +39,26 @@ public class Character {
 		public String getName() { return this.name; }
 		public String getType() { return this.type; }
 		public void equip(Equipment armor){
-			if(armor.getType() == Equipment.HELMET){
+			if(armor.getTypeOf() == Equipment.HELMET){
 				this.helmet = armor;
 			}
-			else if(armor.getType() == Equipment.CHEST){
+			else if(armor.getTypeOf() == Equipment.CHEST){
 				this.chest = armor;
 			}
-			else if(armor.getType() == Equipment.LEG){
+			else if(armor.getTypeOf() == Equipment.LEG){
 				this.leg = armor;
 			}
-			else if(armor.getType() == Equipment.SHOE){
+			else if(armor.getTypeOf() == Equipment.SHOE){
 				shoes = armor;
 			}
-			else if (armor.getType() == Equipment.WEAPON){
+			else if (armor.getTypeOf() == Equipment.WEAPON){
 				weapon = armor;
 			}
+		}
+
+
+		public int getPlayerCurrency() {
+			return this.money;
 		}
 
 }
