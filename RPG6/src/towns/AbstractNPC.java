@@ -2,13 +2,6 @@ package towns;
 
 import java.awt.event.KeyListener;
 
-/**
- * 
- * @author Khandaker Shayel
- *
- */
-
-
 public abstract class AbstractNPC {
 
 	public String name;
@@ -29,7 +22,7 @@ public abstract class AbstractNPC {
 	}
 
 	public boolean isTalkable() {
-		return isTalkable;
+		return isTalkable; 
 	}
 
 	public void setName(String name) {

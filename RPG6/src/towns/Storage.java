@@ -3,13 +3,6 @@ package towns;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-/**
- * 
- * @author Jeffrey Lei
- *
- */
-
-
 public class Storage extends AbstractNPC {
 
 	public Storage(String nm, String gen, String des, boolean talkable) {
@@ -21,7 +14,7 @@ public class Storage extends AbstractNPC {
 	static boolean storable;
 	
 	@Override
-	public void npcMovement() {
+	public void npcMovement() {  
 		// TODO Auto-generated method stub
 		
 	}

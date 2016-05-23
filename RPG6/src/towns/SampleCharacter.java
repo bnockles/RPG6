@@ -1,4 +1,4 @@
-package towns;
+package towns; 
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -10,17 +10,11 @@ import javax.imageio.ImageIO;
 
 public class SampleCharacter {
 	
-	/**
-	 * 
-	 * @author Khandaker Shayel, Jeffrey Lei
-	 *
-	 */
-	
-	public ArrayList<String> getItems() {
+	public ArrayList<Equipment> getEquipments() {
 		return items;
 	}
 
-	public void setItems(ArrayList<String> items) {
+	public void setEquipments(ArrayList<Equipment> items) {
 		this.items = items;
 	}
 
@@ -73,9 +67,9 @@ public class SampleCharacter {
 	String name;
 	int x ;
 	int y;
-	ArrayList<String> items;
+	ArrayList<Equipment> items;
 	
-	public SampleCharacter(int cur, String nm, String imageLocation, int locationX, int locationY, ArrayList<String> items){
+	public SampleCharacter(int cur, String nm, String imageLocation, int locationX, int locationY, ArrayList<Equipment> items){
 		this.currency = cur;
 		this.name = nm;
 		this.items = items;
@@ -102,9 +96,13 @@ public class SampleCharacter {
 		}
 	}
 	
-	public SampleCharacter(String imageLocation, int locationX, int locationY){
+	public SampleCharacter(String imageLocation, int locationX, int locationY, String type){
 		int width = 150;
 		int height = 200;
+		if (type == "town"){
+			width = 350;
+			height = 250;
+		}
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		x = locationX;
 		y = locationY;

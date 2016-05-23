@@ -1,13 +1,10 @@
-package towns;
-
+package towns;  
 /**
  * 
  */
 
 import directors.Game;
 import directors.Screen;
-import towns.TownScreen;
-
 
 public class NpcDemo extends Game{
 

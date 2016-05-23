@@ -1,11 +1,4 @@
-package towns;
-
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Random;
+package towns; 
 
 /**
  * 
@@ -13,6 +6,12 @@ import java.util.Random;
  *
  */
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
 
 public class Minigame extends AbstractNPC {
 
@@ -52,6 +51,22 @@ public class Minigame extends AbstractNPC {
 	    else if (computerInt == 3){ 
 	       computerPlay = "S"; 
 	       System.out.println("Computer: S");
+	    }
+	}
+	
+	public void flipCoin(){
+		Random generator = new Random(); 
+		 //Generate computer's play (0,1,2) 
+	    int computerInt = generator.nextInt(2)+1; 
+	    //Translate computer's randomly generated play to 
+	    //string using if //statements 
+	    if (computerInt == 1){ 
+	       computerPlay = "H";
+	       System.out.println("Computer: H");
+	    }
+	    else if (computerInt == 2){ 
+	       computerPlay = "T"; 
+	       System.out.println("Computer: T");
 	    }
 	}
 	
