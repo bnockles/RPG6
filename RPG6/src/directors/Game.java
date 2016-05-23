@@ -17,10 +17,14 @@ public class Game extends JFrame{
 	public final int HEIGHT = 800;
 	protected Screen activeScreen;//whatever Screen we are currently on
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
 
 >>>>>>> refs/remotes/origin/battles
+=======
+
+>>>>>>> refs/remotes/origin/cutscenes
 	/**
 	 * @param args
 	 */
@@ -41,6 +45,7 @@ public class Game extends JFrame{
 		});
 		timer.start();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	
 
@@ -53,6 +58,8 @@ public class Game extends JFrame{
 		
 =======
 >>>>>>> refs/remotes/origin/battles
+=======
+>>>>>>> refs/remotes/origin/cutscenes
 	}
 
 
@@ -72,10 +79,14 @@ public class Game extends JFrame{
 		repaint();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 =======
 
 >>>>>>> refs/remotes/origin/battles
+=======
+
+>>>>>>> refs/remotes/origin/cutscenes
 	protected void applySettings(){
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int monitorWidth = (int)screenSize.getWidth();
