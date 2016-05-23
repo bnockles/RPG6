@@ -26,7 +26,12 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
 import directors.Game;
 import directors.Screen;
+<<<<<<< HEAD
 import directors.UtilityMethods;
+=======
+import saving.SaveUtility;
+import saving.Saving;
+>>>>>>> refs/remotes/origin/saving
 
 
 public class CharacterScreen extends Screen implements KeyListener{
@@ -113,6 +118,15 @@ public class CharacterScreen extends Screen implements KeyListener{
 		list.addCharacter(npc);
 		selectedHero = player;
 		name = selectedHero.getName();
+<<<<<<< HEAD
+=======
+		stats = selectedHero.getAllStats();
+		sword = new SampleWeapon("Sword", 10);
+		armor = new SampleArmor("Armor", 50);
+		armor = new SampleArmor("Armor", 50);
+		potion = new SamplePotion("Potion", 10);
+		maxHeath = selectedHero.getHealth();
+>>>>>>> refs/remotes/origin/saving
 		pressedKeys = new ArrayList<Integer>();
 		dialogue = "";
 		
@@ -223,7 +237,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 			
 			update();
 			game.repaint();
-		}
+			Saving.write("HP", String.valueOf((Double.parseDouble(Saving.read("HP")) - 10)));
+            System.out.println("took damage" + game.getCurrentSave().readField("HP"));
+        }
 		
 		if(e.getKeyCode()==KeyEvent.VK_G){
 			selectedHero.setCurrMana(selectedHero.getCurrMana() - 10);
@@ -377,6 +393,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		g2.setColor(Color.black);
 		g2.draw(new RoundRectangle2D.Double(25, 50, 120, 500, 10, 10));
 		
+<<<<<<< HEAD
 //		g2.drawString("Press 'Q' to toggle stat menu", 30, 75);
 //		g2.drawString("Press 'F' to take damage", 30, 90);
 //		g2.drawString("Press 'G' to consume mana", 30, 105);
@@ -413,6 +430,24 @@ public class CharacterScreen extends Screen implements KeyListener{
 		for(int i = 0; i < player.getInventory().size(); i++){
 			displayY += 15;
 			g2.drawString(i+ ": " + player.getInventory().get(i).getName(), 30, displayY);
+=======
+		//Stat menu
+		if(on){
+			int x = 50;
+			int y = 200;
+
+            g2.drawString("THESE ARE ACTUALLY ALL WRONG SINCE THEY DONT USE SAVE FILE.... :)",x, y-12);
+			g2.setColor(Color.black);	
+			g2.drawString(name, x, y);
+			stats = selectedHero.getAllStats();
+
+			for(int i = 0; i < stats.length; i++){
+				y += 15;
+				g2.drawString(statNames[i] + ": "+ stats[i], x, y);
+			}
+            g2.drawString("ACTUAL HEALTH USING SAVE",600-10,600-12);
+            g2.drawString(Saving.read("HP"),600,600);
+>>>>>>> refs/remotes/origin/saving
 		}
 
 		

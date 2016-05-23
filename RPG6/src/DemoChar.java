@@ -1,4 +1,3 @@
-
 public class DemoChar {
 	public String Title;
 	public int healthStat;

@@ -12,8 +12,13 @@ public class CharacterDemo extends Game{
 		new CharacterDemo();
 	}
 
+<<<<<<< HEAD
 	protected void reset() {
 		demoScreen = new CharacterScreen(this);
+=======
+	public void reset() {
+		Screen demoScreen = new CharacterScreen(this);
+>>>>>>> refs/remotes/origin/saving
 		setScreen(demoScreen);
 		repaint();
 	}
