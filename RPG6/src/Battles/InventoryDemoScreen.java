@@ -12,7 +12,7 @@ import items.Consumable;
 import items.Items;
 import directors.Game;
 
-public abstract class InventoryDemoScreen extends Screen implements KeyListener{
+public class InventoryDemoScreen extends Screen implements KeyListener{
 
 ArrayList<String>playerMoves = new ArrayList<String>();
 
