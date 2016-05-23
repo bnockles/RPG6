@@ -1,6 +1,9 @@
 package characters;
 
-import static characters.Character.CHAR_HEIGHT;
+
+import items.Equipment;
+import items.Item;
+import items.Stats;
 
 import java.awt.image.BufferedImage;
 
@@ -8,31 +11,19 @@ import java.awt.image.BufferedImage;
 public abstract class Character {
 	public static final int CHAR_HEIGHT = 200;
 	public String name;
-	public double health;
+	public int level;
 	public double currHealth;
-	public double mana;
 	public double currMana;
-	public double attack;
-	public double defense;
-	public double speed;
-	public double dropRate;
-	public double critHitChance;
-	public double currentExp;
+	public Stats stats;
 	int x;
 	int y;
 	
-	public Character(String name, double health, double currHealth,  double attack, double defense, double mana, double currMana,double speed, double dropRate, double critHitChance, double currentExp){
+	public Character(String name, int level, double currHealth, double currMana, Stats stats){
+		this.level = level;
 		this.name = name;
-		this.health = health;
 		this.currHealth = currHealth;
-		this.mana = mana;
 		this.currMana = currMana;
-		this.attack = attack;
-		this.defense = defense;
-		this.speed = speed;
-		this.dropRate = dropRate;
-		this.critHitChance = critHitChance;
-		this.currentExp = currentExp;
+		this.stats = stats;
 		x = 200;
 		y = 200;
 	}
@@ -53,10 +44,6 @@ public abstract class Character {
 		this.name = name;
 	}
 
-	public double getHealth() {
-		return health;
-	}
-
 	public double getCurrHealth() {
 		return currHealth;
 	}
@@ -65,72 +52,12 @@ public abstract class Character {
 		this.currHealth = currHealth;
 	}
 
-	public void setHealth(double health) {
-		this.health = health;
-	}
-
-	public double getAttack() {
-		return attack;
-	}
-
-	public void setAttack(double attack) {
-		this.attack = attack;
-	}
-
-	public double getDefense() {
-		return defense;
-	}
-
-	public void setDefense(double defense) {
-		this.defense = defense;
-	}
-
-	public double getMana() {
-		return mana;
-	}
-
-	public void setMana(double mana) {
-		this.mana = mana;
-	}
-	
 	public double getCurrMana() {
 		return currMana;
 	}
 	
 	public void setCurrMana(double currMana) {
 		this.currMana = currMana;
-	}
-
-	public double getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(double speed) {
-		this.speed = speed;
-	}
-
-	public double getDropRate() {
-		return dropRate;
-	}
-
-	public void setDropRate(double dropRate) {
-		this.dropRate = dropRate;
-	}
-
-	public double getCritHitChance() {
-		return critHitChance;
-	}
-
-	public void setCritHitChance(double critHitChance) {
-		this.critHitChance = critHitChance;
-	}
-
-	public double getCurrentExp() {
-		return currentExp;
-	}
-
-	public void setCurrentExp(double currentExp) {
-		this.currentExp = currentExp;
 	}
 
 	public int getX() {
@@ -149,8 +76,42 @@ public abstract class Character {
 		this.y = y;
 	}
 	
-	public double[] getAllStats(){
-		double[] stats = {currHealth, attack, defense, currMana, speed, dropRate, critHitChance, currentExp};
-		return stats;		
+	public Stats getStats(){
+		return stats;
 	}
+	
+	public int getLevel() {
+		return level;
+	}
+	
+	public void addEquipStats(Item sword){
+		Stats eStats = ((Equipment) sword).getStats();
+		this.stats.setHealth(this.stats.getHealth() + eStats.getHealth());
+		this.stats.setMana(this.stats.getMana() + eStats.getMana());
+		this.stats.setAttack(this.stats.getAttack() + eStats.getAttack());
+		this.stats.setDefense(this.stats.getDefense() + eStats.getDefense());
+		this.stats.setSpeed(this.stats.getSpeed() + eStats.getSpeed());
+		this.stats.setStrength(this.stats.getStrength() + eStats.getStrength());
+		this.stats.setDexterity(this.stats.getDexterity() + eStats.getDexterity());
+		this.stats.setIntelligence(this.stats.getIntelligence() + eStats.getIntelligence());
+		this.stats.setWisdom(this.stats.getWisdom() + eStats.getWisdom());
+		this.stats.setLuck(this.stats.getLuck() + eStats.getLuck());
+		
+	}
+	
+	public void removeEquipStats(Item sword){
+		Stats eStats = ((Equipment) sword).getStats();
+		this.stats.setHealth(this.stats.getHealth() - eStats.getHealth());
+		this.stats.setMana(this.stats.getMana() - eStats.getMana());
+		this.stats.setAttack(this.stats.getAttack() - eStats.getAttack());
+		this.stats.setDefense(this.stats.getDefense() - eStats.getDefense());
+		this.stats.setSpeed(this.stats.getSpeed() - eStats.getSpeed());
+		this.stats.setStrength(this.stats.getStrength() - eStats.getStrength());
+		this.stats.setDexterity(this.stats.getDexterity() - eStats.getDexterity());
+		this.stats.setIntelligence(this.stats.getIntelligence() - eStats.getIntelligence());
+		this.stats.setWisdom(this.stats.getWisdom() - eStats.getWisdom());
+		this.stats.setLuck(this.stats.getLuck() - eStats.getLuck());
+		
+	}
+	
 }

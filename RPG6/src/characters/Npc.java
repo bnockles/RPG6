@@ -1,5 +1,7 @@
 package characters;
 
+import items.Stats;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -9,11 +11,8 @@ public class Npc extends Character {
 	BufferedImage image;
 	String dialogue;
 	boolean inDialogue;
-	public Npc(String name, double health, double currHealth, double attack,
-			double defense, double mana, double currMana, double speed,
-			double dropRate, double critHitChance, double currentExp) {
-		super(name, health, currHealth, attack, defense, mana, currMana, speed,
-				dropRate, critHitChance, currentExp);
+	public Npc(String name, int level, double currHealth, double currMana, Stats stats){
+		super(name, level, currHealth, currMana, stats);
 		try {
 			BufferedImage origimage0 = UtilityMethods.getImageFromFile(this, "/character/sample/" + name.toLowerCase() + ".png");
 			image=UtilityMethods.getScaledImage(origimage0,50,this.getCharHeight());

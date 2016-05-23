@@ -1,5 +1,10 @@
 package characters;
 
+import items.CharacterInterface;
+import items.Equipment;
+import items.Item;
+import items.Stats;
+
 import java.util.ArrayList;
 
 public class Player extends Hero implements CharacterInterface {
@@ -7,15 +12,11 @@ public class Player extends Hero implements CharacterInterface {
 	Party party;
 	int gold;
 	
-	public Player(String name, double health, double currHealth, double attack,
-			double defense, double mana, double currMana, double speed,
-			double dropRate, double critHitChance, double currentExp) {
-		super(name, health, currHealth, attack, defense, mana, currMana, speed,
-				dropRate, critHitChance, currentExp);
+	public Player(String name, int level, double currHealth, double currMana, Stats stats){
+		super(name, level, currHealth, currMana, stats);
 		gold = 1000;
 		party = new Party(this);
 		inventory = new ArrayList<Item>();
-		
 	}
 	
 	public ArrayList getInvList(){

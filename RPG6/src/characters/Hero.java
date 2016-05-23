@@ -1,6 +1,10 @@
 
 package characters;
 
+import items.Equipment;
+import items.Item;
+import items.Stats;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,31 +21,16 @@ public class Hero extends Character {
 	boolean left = false;
 	boolean hasWeapon = false;
 	boolean hasArmor = false;
-	ArrayList<SampleItem> inventory;
-	/*inventory.add(weapon); adds weapon
-	 * inventory.get(0).addStats(); does not work since inventory at 0 not guaranteed to be a weapon
-	 * if(inventory.get(0) instanceof Weapon){
-	 * 		Weapon aWeapon  = (Weapon)inventory.get(0).addStats(); works since inventory at 0 is guaranteed to be a weapon.
-	 * }
-	 * 
-	 * */
-	
-	ArrayList<SampleItem> equiped;
+	ArrayList<Item> equipped;
 	BufferedImage image;
 	BufferedImage[] frames;
 	String name;
 	
-	public Hero(String name,
-			double health, double currHealth, double attack, double defense, double mana,
-			double currMana,double speed, double dropRate, double critHitChance,
-			double currentExp) {
-		super(name, health, currHealth, attack, defense, mana, currMana,
-				speed, dropRate, critHitChance, currentExp);
-		
-			
-			equiped = new ArrayList<SampleItem>();
+	public Hero(String name, int level, double currHealth, double currMana, Stats stats){
+		super(name, level, currHealth, currMana, stats);
 
 			this.name = name;
+			equipped = new ArrayList<Item>();
 			
 			BufferedImage image0=null;
 			BufferedImage image1=null;
@@ -103,42 +92,8 @@ public class Hero extends Character {
 			
 	}
 
-
-	
-	public String[] getEquiped(){
-		String[] eq;
-		try{
-			eq = new String[equiped.size()];
-			for(int i = 0; i < equiped.size(); i++){
-				eq[i] = equiped.get(i).getName();
-			}
-		}catch(Exception e){
-			String[] eq1 = {" "};
-			return eq1; 
-		}
-		return eq;
-	}
-	
-	
-	
-	public void equipItem(SampleItem item){
-		try{
-			equiped.add(item);
-		}catch(Exception e){
-			return;
-		}
-	}
-	
 	public void setWalking(boolean walking) {
 		this.walking = walking;
-	}
-
-	public void dequipItem(SampleItem item){
-		try{
-			equiped.remove(item);
-		}catch(Exception e){
-			return;
-		}
 	}
 
 	public BufferedImage getImage(){
@@ -246,5 +201,17 @@ public class Hero extends Character {
 
 	public void setHasArmor(boolean hasArmor) {
 		this.hasArmor = hasArmor;
+	}
+	
+	public ArrayList<Item> getEquipped(){
+		return equipped;
+	}
+	
+	public void equip(Equipment equipment){
+		equipped.add(equipment);
+	}
+	
+	public void unequip(Equipment equipment){
+		equipped.remove(equipment);
 	}
 }

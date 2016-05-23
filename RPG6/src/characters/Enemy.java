@@ -1,5 +1,7 @@
 package characters;
 
+import items.Stats;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -12,11 +14,8 @@ public class Enemy extends Character {
 	BufferedImage image;
 	BufferedImage enemyImage;
 	BufferedImage tomb;
-	public Enemy(String name, double health, double currHealth, double attack,
-			double defense, double mana, double currMana, double speed,
-			double dropRate, double critHitChance, double currentExp) {
-		super(name, health, currHealth, attack, defense, mana, currMana, speed,
-				dropRate, critHitChance, currentExp);
+	public Enemy(String name, int level, double currHealth, double currMana, Stats stats){
+		super(name, level, currHealth, currMana, stats);
 		// TODO Auto-generated constructor stub
 		try {
 			BufferedImage origimage0 = UtilityMethods.getImageFromFile(this, "/character/sample/" + name.toLowerCase() + ".png");
