@@ -7,7 +7,9 @@ import java.awt.*;
  */
 public class SaveContainer {
 
-    public SaveContainer(Graphics2D g, int x, int y, Save save){
+    public SaveContainer(Save save, Graphics2D g,int y){
+        g.drawString(save.getSaveName(),50,y);
+        g.drawString("HP: " + save.readField("HP"),55,y+12);
 
     }
 

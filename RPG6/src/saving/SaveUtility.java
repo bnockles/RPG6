@@ -2,7 +2,8 @@ package saving;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Properties;
 
 /**
  * Created by pjuda on 5/19/2016.
@@ -10,59 +11,56 @@ import java.util.Scanner;
 public class SaveUtility {
 
     public static void main(String[] args){
-        try {
-            addTag(new File("RPG6\\resources\\saves\\Save1.txt"),"HP", 101);
-            System.out.println("added");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
-    private File[] allSaveFiles(){
+    public String pathToFolder(String directory){
         ClassLoader cl = getClass().getClassLoader();
-        return new File(cl.getResource("saves").getFile()).listFiles();
+        return new File(cl.getResource(directory).getFile()).getAbsolutePath();
     }
 
-    private static File[] savesInResources(){
-        File f = new File("hello");
-        return null;
+    public File[] filesInResourcesFolder(String directory){
+        ClassLoader cl = getClass().getClassLoader();
+        return new File(cl.getResource(directory).getFile()).listFiles();
     }
 
-
-    private static Save[] getAllSaves(){
+    public static ArrayList<Save> getAllSaves() throws IOException {
         SaveUtility util = new SaveUtility();
-        File[] files = util.allSaveFiles();
+        File[] files = util.filesInResourcesFolder("saves");
         ArrayList<Save> saves = new ArrayList<>();
         for (File f :
                 files) {
-            saves.add(new Save(1));
-            System.out.println(f.getName());
+            saves.add(new Save(f.getName(),f));
         }
+        return saves;
     }
 
+    public static HashMap<String, String> retrieveSave(Save save) throws IOException {
+        HashMap<String,String> tags = new HashMap<>();
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(save.getFile()));
+        for (String key : properties.stringPropertyNames()) {
+            tags.put(key, properties.getProperty(key));
+        }
+        return tags;
+    }
 
-    public static String[] getAllTagsFromFile(File f){
-        Scanner in = null;
+    public static Save createNewSave(String saveName){
+        SaveUtility util = new SaveUtility();
+        File f = new File(util.pathToFolder("saves") + "/" + saveName);
         try {
-            in = new Scanner(f);
-        } catch (FileNotFoundException e) {
+            f.createNewFile();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<String> tags = new ArrayList<String>();
-        while(in.hasNext()) {
-            String line = in.nextLine();
-
-            //Relocate to a function
-            String tag = line.substring(line.indexOf("<")+1,line.indexOf(">"));
-
+        try {
+            Save s = new Save(saveName,f);
+            s.initNewSave();
+            return s;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
-    public static void addTag(File f,String tag,int value) throws IOException {
-        FileWriter fw = new FileWriter(f,true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fw);
-        bufferedWriter.append("<" + tag + ">" + value + "</" + tag + ">"+System.getProperty("line.separator"));
-        bufferedWriter.close();
-    }
 }

@@ -13,6 +13,8 @@ import javax.print.DocFlavor.URL;
 
 import directors.Game;
 import directors.Screen;
+import saving.SaveUtility;
+import saving.Saving;
 
 
 public class CharacterScreen extends Screen implements KeyListener{
@@ -184,7 +186,9 @@ public class CharacterScreen extends Screen implements KeyListener{
 			stats = selectedHero.getAllStats();
 			update();
 			game.repaint();
-		}
+			Saving.write("HP", String.valueOf((Double.parseDouble(Saving.read("HP")) - 10)));
+            System.out.println("took damage" + game.getCurrentSave().readField("HP"));
+        }
 		
 		
 		
@@ -318,6 +322,8 @@ public class CharacterScreen extends Screen implements KeyListener{
 		if(on){
 			int x = 50;
 			int y = 200;
+
+            g2.drawString("THESE ARE ACTUALLY ALL WRONG SINCE THEY DONT USE SAVE FILE.... :)",x, y-12);
 			g2.setColor(Color.black);	
 			g2.drawString(name, x, y);
 			stats = selectedHero.getAllStats();
@@ -326,6 +332,8 @@ public class CharacterScreen extends Screen implements KeyListener{
 				y += 15;
 				g2.drawString(statNames[i] + ": "+ stats[i], x, y);
 			}
+            g2.drawString("ACTUAL HEALTH USING SAVE",600-10,600-12);
+            g2.drawString(Saving.read("HP"),600,600);
 		}
 		
 		//Inventory

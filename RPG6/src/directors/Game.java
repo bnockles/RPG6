@@ -1,12 +1,13 @@
 package directors;
 
 import saving.Save;
+import saving.SaveScreen;
+import saving.SaveUtility;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -67,9 +68,16 @@ public class Game extends JFrame{
 		setLocation((monitorWidth-WIDTH)/2,(monitorHeight-HEIGHT)/2);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(false);
+		saveBeforeClose();
 	}
-	
-	
+
+	private void saveBeforeClose(){
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            currentSave.updateSave();
+        }));
+	}
+
+
 	public void paint(Graphics g){
 		g.drawImage(activeScreen.getScreenImage(),0,0,null);
 	}

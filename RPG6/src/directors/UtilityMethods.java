@@ -28,7 +28,6 @@ public class UtilityMethods {
 	
 	
 	public static BufferedImage getImageFromFile(Object requestingObject, String addressInResourcesFolder) throws IOException{
-		System.out.println("Attempting to take image from "+addressInResourcesFolder);
 		URL url = requestingObject.getClass().getResource(addressInResourcesFolder);
 		BufferedImage image = ImageIO.read(url);
 		return image;
