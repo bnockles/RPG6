@@ -7,6 +7,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import directors.Screen;
+import items.potionStock;
+import items.Consumable;
+import items.Items;
 import directors.Game;
 
 public abstract class InventoryDemoScreen extends Screen implements KeyListener{
