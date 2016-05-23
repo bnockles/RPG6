@@ -342,7 +342,7 @@ public class TownScreen extends Screen implements KeyListener{
 			}
 			Merchant.buyable = true;
 			storedItems = "";
-			Storage.storable = false;
+			//Storage.storable = false;
 			update();
 			game.repaint();
 		}
@@ -519,7 +519,7 @@ public class TownScreen extends Screen implements KeyListener{
 			actionMessage = "Press  6 for Healing Potions (300 Gems), 7 for Mana Potion (400 Gems), and 8 for Stats Potion (500 Gems)";
 			Merchant.buyable = true;
 			storedItems = "";
-			Storage.storable = false;
+			//Storage.storable = false;
 			update();
 			game.repaint();
 		}
@@ -541,7 +541,7 @@ public class TownScreen extends Screen implements KeyListener{
 			actionMessage = "Press  6 for Shuriken (600 Gems), 7 for Katana (700 Gems), and 8 for Pistol (800 Gems)";
 			Merchant.buyable = true;
 			storedItems = "";
-			Storage.storable = false;
+			//Storage.storable = false;
 			update();
 			game.repaint();
 		}
@@ -757,7 +757,7 @@ public class TownScreen extends Screen implements KeyListener{
 			displayNpc = new SampleCharacter("/images/minigame.jpg",810,400,"npc");
 			actionMessage = "";
 			storedItems = "";
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -777,7 +777,7 @@ public class TownScreen extends Screen implements KeyListener{
 			displayNpc = new SampleCharacter("/images/minigame2.jpg",810,400,"npc");
 			actionMessage = "";
 			storedItems = "";
-			Storage.storable = false;
+			//Storage.storable = false;
 			inRepair = false;
 			inCrafting = false;
 			Merchant.buyable = false;
@@ -793,7 +793,7 @@ public class TownScreen extends Screen implements KeyListener{
 			inCrafting = false;
 			actionMessage = "";
 			storedItems = "";
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -887,16 +887,16 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==talkNpc3){
 			System.out.println("3 was pressed");
-			Storage.storable = true;
+			//Storage.storable = true;
 			message = "Have you seen my cousins? They look exactly like me! We store your goods! Store something (Press '4') or take out something out (Press '5'). Press 'K' to quit.";
 			actionMessage = "";
 			inRepair = false;
 			inCrafting = false;
 			displayNpc = new SampleCharacter("/images/storage.png",810,400,"npc");
 			storedItems = "The items you have stored are: ";
-			for(int i=0;i < Storage.storedItems.size();i++){
-				storedItems += Storage.storedItems.get(i)+ " ";
-			}
+			//for(int i=0;i < Storage.storedItems.size();i++){
+			//	storedItems += Storage.storedItems.get(i)+ " ";
+			//}
 			miniGame1.setComputerPlay("null");
 			Merchant.buyable = false;
 			update();
@@ -911,7 +911,7 @@ public class TownScreen extends Screen implements KeyListener{
 			storedItems = "";
 			inRepair = false;
 			inCrafting = false;
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -925,7 +925,7 @@ public class TownScreen extends Screen implements KeyListener{
 			storedItems = "";
 			inRepair = false;
 			inCrafting = false;
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -939,7 +939,7 @@ public class TownScreen extends Screen implements KeyListener{
 			storedItems = "";
 			inRepair = false;
 			inCrafting = false;
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -953,7 +953,7 @@ public class TownScreen extends Screen implements KeyListener{
 			storedItems = "";
 			inRepair = false;
 			inCrafting = false;
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -967,7 +967,7 @@ public class TownScreen extends Screen implements KeyListener{
 			storedItems = "";
 			inRepair = false;
 			inCrafting = false;
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -980,7 +980,7 @@ public class TownScreen extends Screen implements KeyListener{
 			storedItems = "";
 			inRepair = false;
 			inCrafting = false;
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -993,7 +993,7 @@ public class TownScreen extends Screen implements KeyListener{
 			storedItems = "";
 			inRepair = false;
 			inCrafting = false;
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -1007,7 +1007,7 @@ public class TownScreen extends Screen implements KeyListener{
 			storedItems = ""; 
 			inRepair = false;
 			inCrafting = false;
-			Storage.storable = false;
+			//Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -1027,32 +1027,32 @@ public class TownScreen extends Screen implements KeyListener{
 //			update();
 //			game.repaint();
 //		}
-		if(e.getKeyCode()==takeItem && Storage.storable == true){
-			System.out.println("5 was pressed");
-			if(Storage.storedItems.size() == 0){
-				actionMessage = "You have nothing stored here...";
-				storedItems = "The items you have stored are: ";
-			}
-			else{
-				actionMessage = "Taken out " + Storage.storedItems.get(0);
-				//inventory.add(Storage.storedItems.get(0));
-				Storage.storedItems.remove(0);
-			}
-			storedItems = "The items you have stored are: ";
-			for(int i=0;i < Storage.storedItems.size();i++){
-				storedItems += Storage.storedItems.get(i)+ " ";
-			}
-			miniGame1.setComputerPlay("null");
-			update();
-			game.repaint();
-		}
+////		if(e.getKeyCode()==takeItem && Storage.storable == true){
+//			System.out.println("5 was pressed");
+////			if(Storage.storedItems.size() == 0){
+////				actionMessage = "You have nothing stored here...";
+////				storedItems = "The items you have stored are: ";
+////			}
+////			else{
+//				//actionMessage = "Taken out " + Storage.storedItems.get(0);
+//				//inventory.add(Storage.storedItems.get(0));
+//				//Storage.storedItems.remove(0);
+//			}
+//			storedItems = "The items you have stored are: ";
+////			for(int i=0;i < Storage.storedItems.size();i++){
+////				storedItems += Storage.storedItems.get(i)+ " ";
+////			}
+//			miniGame1.setComputerPlay("null");
+//			update();
+//			game.repaint();
+//		}
 		if(e.getKeyCode()==goToPellet && currentTown.getTownName() != "Pellet Town"){
 			System.out.println("B was pressed");
 			this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
 			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 			actionMessage = "";
 			storedItems = "";
-			Storage.storable = false;
+//			Storage.storable = false;
 			Merchant.buyable = false;
 			currentTown = townStock.getTown(townStock.PelletTown);
 			town1 = true;
@@ -1072,7 +1072,7 @@ public class TownScreen extends Screen implements KeyListener{
 			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 			actionMessage = "";
 			storedItems = "";
-			Storage.storable = false;
+//			Storage.storable = false;
 			Merchant.buyable = false;
 			currentTown = townStock.getTown(townStock.BigRootTown);
 			town1 = false;
@@ -1092,7 +1092,7 @@ public class TownScreen extends Screen implements KeyListener{
 			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 			actionMessage = "";
 			storedItems = "";
-			Storage.storable = false;
+//			Storage.storable = false;
 			Merchant.buyable = false;
 			currentTown = townStock.getTown(townStock.OldYelpTown);
 			town1 = false;
