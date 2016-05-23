@@ -240,8 +240,8 @@ public class CharacterScreen extends Screen implements KeyListener{
 			 if(!pressedKeys.contains(keyCode))pressedKeys.add(keyCode);
 			 if(keyCode == KeyEvent.VK_UP){
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 3) &&
-						player.getParty().party.get(i-1).getY() >= player.getParty().party.get(i).getY() - player.getCharHeight()){
+					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 5) &&
+						player.getParty().party.get(i-1).getY() <= player.getParty().party.get(i).getY() - player.getCharHeight()){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
 							player.getParty().party.get(i).setRight(player.getParty().party.get(i-1).isRight());
@@ -254,8 +254,8 @@ public class CharacterScreen extends Screen implements KeyListener{
 				 player.getParty().party.get(0).setLeft(false);		
 			 }else if(keyCode == KeyEvent.VK_DOWN){
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 3) &&		 
-						player.getParty().party.get(i-1).getY() <= player.getParty().party.get(i).getY() + player.getCharHeight()){
+					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 5) &&		 
+						player.getParty().party.get(i-1).getY() >= player.getParty().party.get(i).getY() + player.getCharHeight()){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
 							player.getParty().party.get(i).setRight(player.getParty().party.get(i-1).isRight());
