@@ -510,7 +510,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		BufferedImage image = new BufferedImage(width, height,BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = image.createGraphics();
 		//Color c = new Color(0, 102, 51, 200);
-		g2.drawImage(list.characters.get(i).getImage(),0,0,null);
+		g2.drawImage(bg,0,0,null);
 		//g2.setColor(c);
 		//g2.fillRect(0, 0, width, height);
 		g2.setColor(Color.black);
