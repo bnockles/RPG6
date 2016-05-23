@@ -16,7 +16,11 @@ public class Game extends JFrame{
 	public final int WIDTH = 1000;
 	public final int HEIGHT = 800;
 	protected Screen activeScreen;//whatever Screen we are currently on
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> refs/remotes/origin/battles
 	/**
 	 * @param args
 	 */
@@ -36,6 +40,7 @@ public class Game extends JFrame{
 			}
 		});
 		timer.start();
+<<<<<<< HEAD
 	}
 	
 
@@ -46,16 +51,31 @@ public class Game extends JFrame{
 
 			repaint();	
 		
+=======
+>>>>>>> refs/remotes/origin/battles
 	}
 
-	
+
+	protected void reset() {
+		Screen startScreen = new StartScreen(this);
+		setScreen(startScreen);
+
+		repaint();	
+
+	}
+
+
 	public void setScreen(Screen newScreen){
 		activeScreen=newScreen;
 		//Question: how does the following line of code work?
 		addKeyListener(activeScreen.getKeyListener());
 		repaint();
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> refs/remotes/origin/battles
 	protected void applySettings(){
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int monitorWidth = (int)screenSize.getWidth();
@@ -65,21 +85,10 @@ public class Game extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(false);
 	}
-	
-	
+
+
 	public void paint(Graphics g){
 		g.drawImage(activeScreen.getScreenImage(),0,0,null);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
