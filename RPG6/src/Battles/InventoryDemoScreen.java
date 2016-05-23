@@ -134,10 +134,12 @@ ArrayList<String>playerMoves = new ArrayList<String>();
 	public void displayItemsFirst(){
 		displayitems = switchTabs(items,index);
 	}
+	
 	public static int loopIndex(ArrayList<Consumable> stuff, int index){
 		return (((index*4)%stuff.size())/4);//fix it later experiment
 	}
-	public static ArrayList<Consumable> switchTabs(ArrayList<Consumable> stuff, int index){
+	
+	public static ArrayList<Consumable> switchItems(ArrayList<Consumable> stuff, int index){
 		ArrayList<Consumable> display = new ArrayList<Consumable>();
 		index*=4;
 		int count = 0;
