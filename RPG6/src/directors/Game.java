@@ -19,19 +19,11 @@ public class Game extends JFrame{
 	public final int WIDTH = 1000;
 	public final int HEIGHT = 800;
 	protected Screen activeScreen;//whatever Screen we are currently on
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 	private static Save currentSave = null;
->>>>>>> refs/remotes/origin/saving
-	
-=======
 
->>>>>>> refs/remotes/origin/battles
-=======
 
->>>>>>> refs/remotes/origin/cutscenes
+
 	/**
 	 * @param args
 	 */
@@ -51,8 +43,7 @@ public class Game extends JFrame{
 			}
 		});
 		timer.start();
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	}
 	
 
@@ -63,20 +54,8 @@ public class Game extends JFrame{
 
 			repaint();	
 		
-=======
->>>>>>> refs/remotes/origin/battles
-=======
->>>>>>> refs/remotes/origin/cutscenes
 	}
 
-
-	protected void reset() {
-		Screen startScreen = new StartScreen(this);
-		setScreen(startScreen);
-
-		repaint();	
-
-	}
 
 
 	public void setScreen(Screen newScreen){
@@ -85,15 +64,8 @@ public class Game extends JFrame{
 		addKeyListener(activeScreen.getKeyListener());
 		repaint();
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> refs/remotes/origin/battles
-=======
 
->>>>>>> refs/remotes/origin/cutscenes
 	protected void applySettings(){
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int monitorWidth = (int)screenSize.getWidth();
@@ -105,8 +77,7 @@ public class Game extends JFrame{
 		saveBeforeClose();
 	}
 
-<<<<<<< HEAD
-=======
+
 	private void saveBeforeClose(){
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			public void run() {
@@ -115,14 +86,12 @@ public class Game extends JFrame{
 		}));
 	}
 
->>>>>>> refs/remotes/origin/saving
 
 	public void paint(Graphics g){
 		g.drawImage(activeScreen.getScreenImage(),0,0,null);
 	}
 
-<<<<<<< HEAD
-=======
+
 	public static void setCurrentSave(Save save){
         currentSave = save;
     }
@@ -134,7 +103,5 @@ public class Game extends JFrame{
 	
 	
 	
-	
-	
->>>>>>> refs/remotes/origin/saving
+
 }

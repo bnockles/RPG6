@@ -7,20 +7,11 @@ import java.awt.image.BufferedImage;
 
 public abstract class Screen{
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	protected BufferedImage screenImage;
-	protected Game game;
-=======
-	protected BufferedImage screenImage;
-	protected Game game;
->>>>>>> refs/remotes/origin/battles
-
-=======
 
 	protected BufferedImage screenImage;
 	protected Game game;
->>>>>>> refs/remotes/origin/cutscenes
+
+
 	public int width;
 	public int height;
 	
@@ -50,12 +41,9 @@ public abstract class Screen{
 	
 	
 	public abstract KeyListener getKeyListener();
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
 
->>>>>>> refs/remotes/origin/battles
+
 	public void update(){
 		Graphics2D g2 = (Graphics2D) screenImage.getGraphics();
 		g2.setColor(Color.white);
@@ -64,28 +52,6 @@ public abstract class Screen{
 		paintScreen(g2);
 	}
 
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/cutscenes
 
-<<<<<<< HEAD
-	
-	
-	
-	
-	
-	
-=======
 
->>>>>>> refs/remotes/origin/battles
-=======
-	public void update(){
-		Graphics2D g2 = (Graphics2D) screenImage.getGraphics();
-		g2.setColor(Color.white);
-		g2.fillRect(0, 0, width, height);
-		g2.setColor(Color.black);
-		paintScreen(g2);
-	}
-
->>>>>>> refs/remotes/origin/cutscenes
 }
