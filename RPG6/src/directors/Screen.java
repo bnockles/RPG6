@@ -6,10 +6,9 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 public abstract class Screen{
-
-
+	
 	protected BufferedImage screenImage;
-	protected Game game;
+	protected static Game game;
 	public int width;
 	public int height;
 	
@@ -29,7 +28,7 @@ public abstract class Screen{
 		}
 	}
 
-	//this method cannot be overriden
+	//this method cannot be overridden
 	public final BufferedImage getScreenImage(){
 		return screenImage;
 	}

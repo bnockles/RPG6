@@ -22,6 +22,4 @@ public class ItemsComponent implements BattleComponent {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
 }
