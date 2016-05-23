@@ -7,7 +7,7 @@ import items.Stats;
 
 import java.util.ArrayList;
 
-public class Player extends Hero implements CharacterInterface {
+public class Player extends Hero implements CharacterInterface, PlayerInfo {
 	ArrayList<Item> inventory;
 	Party party;
 	int gold;
@@ -60,6 +60,14 @@ public class Player extends Hero implements CharacterInterface {
 	}
 
 	public ArrayList<Item> getInventory() {
+		return inventory;
+	}
+
+	public int playerInventoryLength() {
+		return inventory.size();
+	}
+
+	public ArrayList<Item> getPlayerInventory() {
 		return inventory;
 	}
 }
