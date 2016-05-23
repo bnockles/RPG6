@@ -68,7 +68,7 @@ public class equipStock {
 		}
 		if (type == S_DR){
 			return new Equipment("Silver Dagger", "REQ: LVL7, 18 STR", "This silver dagger is good for quick kills.", "None", 0, 0, 5, new Stats(20, 18, 3, 0, 0, 3), 100);
-		}
+		} 
 		if (type == G_DR){
 			return new Equipment("Gold Dagger", "REQ: LVL16, 40 STR", "This golden dagger has been used on many assassination missions.", "None", 0, 0, 5, new Stats(50, 40, 5, 0, 0, 5), 100);
 		}
