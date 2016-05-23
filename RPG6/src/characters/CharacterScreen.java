@@ -375,8 +375,8 @@ public class CharacterScreen extends Screen implements KeyListener{
 			 if(!pressedKeys.contains(keyCode))pressedKeys.add(keyCode);
 			 if(keyCode == KeyEvent.VK_UP){
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 5) &&
-						player.getParty().party.get(i-1).getY() <= player.getParty().party.get(i).getY() - player.getCharHeight()){
+					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 3) &&
+						player.getParty().party.get(i-1).getY() >= player.getParty().party.get(i).getY() - player.getCharHeight()){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
 							player.getParty().party.get(i).setRight(player.getParty().party.get(i-1).isRight());
@@ -389,8 +389,8 @@ public class CharacterScreen extends Screen implements KeyListener{
 				 player.getParty().party.get(0).setLeft(false);		
 			 }else if(keyCode == KeyEvent.VK_DOWN){
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 5) &&		 
-						player.getParty().party.get(i-1).getY() >= player.getParty().party.get(i).getY() + player.getCharHeight()){
+					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 3) &&		 
+						player.getParty().party.get(i-1).getY() <= player.getParty().party.get(i).getY() + player.getCharHeight()){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
 							player.getParty().party.get(i).setRight(player.getParty().party.get(i-1).isRight());
@@ -403,7 +403,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 				 player.getParty().party.get(0).setLeft(false);
 			 }else if(keyCode == KeyEvent.VK_RIGHT){
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((Math.abs(player.getParty().party.get(i).getY() - player.getParty().party.get(i-1).getY()) <= 5) &&
+					 if((Math.abs(player.getParty().party.get(i).getY() - player.getParty().party.get(i-1).getY()) <= 3) &&
 						player.getParty().party.get(i-1).getX() >= player.getParty().party.get(i).getX() + 60){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
@@ -418,7 +418,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 				 
 			 }else{ 
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((Math.abs(player.getParty().party.get(i).getY() - player.getParty().party.get(i-1).getY()) <= 5) &&
+					 if((Math.abs(player.getParty().party.get(i).getY() - player.getParty().party.get(i-1).getY()) <= 3) &&
 						player.getParty().party.get(i-1).getX() <= player.getParty().party.get(i).getX() - 60){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
@@ -513,6 +513,10 @@ public class CharacterScreen extends Screen implements KeyListener{
 		g2.drawImage(bg,0,0,null);
 		//g2.setColor(c);
 		//g2.fillRect(0, 0, width, height);
+		g2.setColor(Color.white);
+		g2.fillRect(25, 50, 240, 240);
+		g2.setColor(Color.black);
+		g2.draw(new RoundRectangle2D.Double(25, 50, 240, 240, 10, 10));
 		g2.setColor(Color.black);
 		g2.drawString("Press 'Q' to toggle stat menu", 30, 75);
 		g2.drawString("Press 'F' to take damage", 30, 90);
