@@ -36,7 +36,6 @@ public abstract class Screen{
 	//abstract makes this a required method for classes that extend this one
 	public abstract void paintScreen(Graphics2D g2);
 	
-	
 	public abstract KeyListener getKeyListener();
 
 	public void update(){
