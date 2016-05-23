@@ -9,7 +9,10 @@ public class SaveContainer {
 
     public SaveContainer(Save save, Graphics2D g,int y){
         g.drawString(save.getSaveName(),50,y);
-        g.drawString("HP: " + save.readField("HP"),55,y+12);
+        int field = 1;
+        g.drawString("Name: " + save.readField("NAME"),55,y+field*12);
+        field++;
+        g.drawString("HP: " + save.readField("HP"),55,y+field*12);
 
     }
 
