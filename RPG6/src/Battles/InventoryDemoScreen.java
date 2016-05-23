@@ -132,7 +132,7 @@ ArrayList<String>playerMoves = new ArrayList<String>();
 	}
 	
 	public void displayItemsFirst(){
-		displayitems = switchTabs(items,index);
+		displayitems = switchItems(items,index);
 	}
 	
 	public static int loopIndex(ArrayList<Consumable> stuff, int index){
