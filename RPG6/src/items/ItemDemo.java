@@ -11,7 +11,7 @@ public final class ItemDemo extends Game {
 	}
 
 	public ItemDemo(){
-		Screen demoScreen = new ItemScreen2(this);
+		Screen demoScreen = new ItemScreen3(this);
 		setScreen(demoScreen);
 		repaint();
 

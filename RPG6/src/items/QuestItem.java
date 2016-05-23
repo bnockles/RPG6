@@ -15,7 +15,7 @@ public abstract class QuestItem extends Item {
 	}
 
 	public QuestItem(String name, String description, String req, int amount) {
-		super(name, description, req);
+		super(name, description, req, req, amount, amount);
 		this.amount = amount;
 		
 	}

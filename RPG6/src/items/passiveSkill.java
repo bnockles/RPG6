@@ -12,6 +12,7 @@ public class passiveSkill extends Spell {
 	public int boostInt;
 	public int boostWis;
 	public int boostLuk;
+	public int boostSPD;
 
 	public int getFinalDamage() {
 		return finalDamage;
@@ -53,8 +54,8 @@ public class passiveSkill extends Spell {
 		return boostLuk;
 	}
 
-	public passiveSkill(String name, String description, int cost, String effect, int damage, Stats statBoost) {
-		super(name, description, cost, effect, damage);
+	public passiveSkill(String name, String description, int cost, int damage, Stats statBoost) {
+		super(name, description, cost, damage);
 		this.stats = statBoost;
 	}
 	
@@ -69,7 +70,7 @@ public class passiveSkill extends Spell {
 	}
 
 	@Override
-	public int cast(Character caster, activeSkill skill, Character target) {
+	public int cast(Character caster, ActiveSkill skill, Character target) {
 		if (canCast(caster, target)){
 			finalDamage = (caster.getTrueStats().getAttack() + skill.getDamage()) - target.getTrueStats().getDefense();
 		}
@@ -81,10 +82,27 @@ public class passiveSkill extends Spell {
 		boostDef = user.getTrueStats().getDefense() + skill.getStats().getDefense();
 		boostHP = user.getTrueStats().getHealth() + skill.getStats().getHealth();
 		boostMP = user.getTrueStats().getHealth() + skill.getStats().getHealth();
+		boostSPD = user.getTrueStats().getSpeed() + skill.getStats().getSpeed();
 		boostStr = user.getTrueStats().getStrength() + skill.getStats().getStrength();
 		boostDex = user.getTrueStats().getDexterity() + skill.getStats().getDexterity();
 		boostInt = user.getTrueStats().getIntelligence() + skill.getStats().getIntelligence();
 		boostWis = user.getTrueStats().getWisdom() + skill.getStats().getWisdom();
 		boostLuk = user.getTrueStats().getLuck() + skill.getStats().getLuck();
+	}
+
+	public String getSkillInfo() {
+		return "Name: " + this.getName() + " Description: " + this.getDescription();
+	}
+
+	public int getSkillDamage() {
+		return 0;
+	}
+
+	public int getSkillCost() {
+		return 0;
+	}
+
+	public boolean isUsable() {
+		return false;
 	}
 }

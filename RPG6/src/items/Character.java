@@ -1,10 +1,16 @@
 package items;
 
-public class Character {
+import java.util.ArrayList;
+
+public class Character implements CharacterInterface{
 
 		private Stats trueStats;
+//		private int currentHP;
+//		private int currentMP; //for further implementations later on
 		public String name;
 		public String type;
+		private ArrayList<Item> inventory;
+		private int money;
 		
 		private Equipment helmet;
 		private Equipment chest;
@@ -12,13 +18,17 @@ public class Character {
 		public Equipment shoes;
 		public Equipment weapon;
 		
-		public Character(int level, int exp, Stats stats, String name, String type){
+		public Character(int level, int exp, Stats stats, String name, String type, ArrayList<Item> inventory, int money){
 			this.trueStats = stats;
 			this.name = name;
 			this.type = type;
+			this.inventory = inventory;
+			this.money = money;
 		}
 		
-		
+		public ArrayList<Item> getInventory(){
+			return this.inventory;
+		}
 		public Stats getTrueStats(){
 			return this.trueStats;
 		}
@@ -45,6 +55,11 @@ public class Character {
 			else if (armor.getTypeOf() == Equipment.WEAPON){
 				weapon = armor;
 			}
+		}
+
+
+		public int getPlayerCurrency() {
+			return this.money;
 		}
 
 }

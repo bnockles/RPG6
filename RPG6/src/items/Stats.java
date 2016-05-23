@@ -1,7 +1,37 @@
 package items;
 
 public class Stats {
-	//direct stats
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
+	public void setDefense(int defense) {
+		this.defense = defense;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+	public void setDexterity(int dexterity) {
+		this.dexterity = dexterity;
+	}
+	public void setIntelligence(int intelligence) {
+		this.intelligence = intelligence;
+	}
+	public void setWisdom(int wisdom) {
+		this.wisdom = wisdom;
+	}
+	public void setLuck(int luck) {
+		this.luck = luck;
+	}
+	//direct statss
 	private int health;
 	private int mana;
 	private int attack;

@@ -1,6 +1,6 @@
 package items;
 
-public class Consumable extends Item {
+public class Consumable extends Item implements ConsumeInterface {
 	int amount;
 	int value;
 	public Consumable(String name, String description, String req, String type, int shopTag, int enemyTag, int amount, int value) {
@@ -50,6 +50,15 @@ public class Consumable extends Item {
 
 	public int getChangeValue() {
 		return this.getValue();
+	}
+
+	public boolean isStorable(Item i) {
+		return true;
+	}
+
+	public int getRarity(Item i) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
