@@ -108,21 +108,31 @@ public class Equipment extends Item{
 	public int getRarity(Equipment item) {
 		if(item.getName() == "Bronze Sword")
 		{
-			return bronze;
+			return 1;
 		}
 		if(item.getName() == "Wooden Bow")
 		{
-			return bronze;
+			return 2;
 		}
 		if(item.getName() == "Mithril Wand")
 		{
-			return mithril;
+			return 3;
 		}
 		if(item.getName() == "Poppy's Hammer")
 		{
-			return bronze;
+			return 4;
 		}
 		return 5;
 		
+	}
+
+	public boolean isStorable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public int getRarity(Item i) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
