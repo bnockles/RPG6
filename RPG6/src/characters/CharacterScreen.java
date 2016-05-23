@@ -3,10 +3,13 @@ package characters;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.Font;
 
 import javax.imageio.ImageIO;
 import javax.print.DocFlavor.URL;
@@ -14,13 +17,14 @@ import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
 
 import directors.Game;
 import directors.Screen;
+import directors.UtilityMethods;
 
 
 public class CharacterScreen extends Screen implements KeyListener{
-	private static final int MOVE_UNIT = 3;
+	private static final int MOVE_UNIT = 5;
 	String[] statNames = {"Health", "Attack", "Defense", "Mana", "Speed", "Drop Rate", "Crit Hit Chance", "CurrentExp"};
 	String name;
-	boolean battle;
+	boolean npcDialogue;
 	double[] stats;
 	Player player;
 	/*Hero player = new Hero(); <-- player
@@ -38,8 +42,13 @@ public class CharacterScreen extends Screen implements KeyListener{
 	*	declared type = player
 	*	actual type = player
 	*/
+	BufferedImage bg;
 	CharacterList list;
+	Npc npc;
 	Enemy enemy;
+	Enemy enemy1;
+	Enemy enemy2;
+	Enemy enemy3;
 	Hero hero2;
 	Hero hero3;
 	Hero selectedHero;
@@ -60,22 +69,45 @@ public class CharacterScreen extends Screen implements KeyListener{
 	BufferedImage icon;
 	ArrayList<Integer> pressedKeys;
 	int heroNum = 1;
+	String dialogue;
 	
 	public CharacterScreen(Game game) {
 		super(game);
+		try {
+			bg = UtilityMethods.getImageFromFile(this, "/character/sample/bg.png");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		player = new Player("Link", 100.0, 100.0, 10.0, 10.0, 190.0, 190.0, 5.0, 0, 0, 5.0);
 		hero2 = HeroTeam.getHero(HeroTeam.KNIGHT);
 		hero3 = HeroTeam.getHero(HeroTeam.ADVENTURER);
 		enemy = new Enemy("Reaper", 100.0, 100.0, 10.0, 10.0, 190.0, 190.0, 5.0, 0, 0, 5.0);
+		enemy1 = new Enemy("Reaper", 100.0, 100.0, 10.0, 10.0, 190.0, 190.0, 5.0, 0, 0, 5.0);
+		enemy2 = new Enemy("Reaper", 100.0, 100.0, 10.0, 10.0, 190.0, 190.0, 5.0, 0, 0, 5.0);
+		enemy3 = new Enemy("Reaper", 100.0, 100.0, 10.0, 10.0, 190.0, 190.0, 5.0, 0, 0, 5.0);
+		npc = new Npc("Billy", 100.0, 100.0, 10.0, 10.0, 190.0, 190.0, 5.0, 0, 0, 5.0);
 		list = new CharacterList();
+		npc.setX(600);
+		npc.setY(450);
 		hero2.setX(200);
 		hero3.setY(500);
-		enemy.setY(300);
-		battle = false;
+		enemy.setX(600);
+		enemy.setY(100);
+		enemy1.setX(400);
+		enemy1.setY(400);
+		enemy2.setX(800);
+		enemy2.setY(500);
+		enemy3.setX(500);
+		enemy3.setY(200);
+		npcDialogue = false;
 		list.addCharacter(player);
 		list.addCharacter(hero2);
 		list.addCharacter(hero3);
 		list.addCharacter(enemy);
+		list.addCharacter(enemy1);
+		list.addCharacter(enemy2);
+		list.addCharacter(enemy3);
+		list.addCharacter(npc);
 		selectedHero = player;
 		name = selectedHero.getName();
 		stats = selectedHero.getAllStats();
@@ -88,6 +120,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 		maxHeath = selectedHero.getHealth();
 		maxMana = selectedHero.getMana();
 		pressedKeys = new ArrayList<Integer>();
+		dialogue = "";
 		
 //		player.addItem(sword);
 //		player.addItem(sword2);
@@ -126,9 +159,14 @@ public class CharacterScreen extends Screen implements KeyListener{
 							Math.abs(list.characters.get(i).getY() - player.getY()) < 100){
 						System.out.println(list.characters.get(i).getName());
 						list.characters.get(i).interaction(player);
+						if(list.characters.get(i).getClass() == Npc.class){
+								npcDialogue = ((Npc) list.characters.get(i)).isDialogue();
+								dialogue = ((Npc) list.characters.get(i)).getDialogue();
+						}
 					}
 				}
 			}
+			
 		}
 		
 		
@@ -337,7 +375,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 			 if(!pressedKeys.contains(keyCode))pressedKeys.add(keyCode);
 			 if(keyCode == KeyEvent.VK_UP){
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) >= 2) &&
+					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 5) &&
 						player.getParty().party.get(i-1).getY() <= player.getParty().party.get(i).getY() - player.getCharHeight()){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
@@ -351,7 +389,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 				 player.getParty().party.get(0).setLeft(false);		
 			 }else if(keyCode == KeyEvent.VK_DOWN){
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) >= 2) &&		 
+					 if((Math.abs(player.getParty().party.get(i).getX() - player.getParty().party.get(i-1).getX()) <= 5) &&		 
 						player.getParty().party.get(i-1).getY() >= player.getParty().party.get(i).getY() + player.getCharHeight()){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
@@ -365,8 +403,7 @@ public class CharacterScreen extends Screen implements KeyListener{
 				 player.getParty().party.get(0).setLeft(false);
 			 }else if(keyCode == KeyEvent.VK_RIGHT){
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((player.getParty().party.get(i).getY() >= (player.getParty().party.get(i-1).getY() - 3) &&		 
-						player.getParty().party.get(i).getY() <= Math.abs(player.getParty().party.get(i-1).getY() + 3)) &&
+					 if((Math.abs(player.getParty().party.get(i).getY() - player.getParty().party.get(i-1).getY()) <= 5) &&
 						player.getParty().party.get(i-1).getX() >= player.getParty().party.get(i).getX() + 60){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
@@ -381,10 +418,8 @@ public class CharacterScreen extends Screen implements KeyListener{
 				 
 			 }else{ 
 				 for(int i = 1; i < player.getParty().party.size(); i++){
-					 if((player.getParty().party.get(i).getY() >= Math.abs(player.getParty().party.get(i-1).getY() - 3) &&		 
-						player.getParty().party.get(i).getY() <= Math.abs(player.getParty().party.get(i-1).getY() + 3)) &&
-						player.getParty().party.get(i-1).getX() <= player.getParty().party.get(i).getX() - 6
-){
+					 if((Math.abs(player.getParty().party.get(i).getY() - player.getParty().party.get(i-1).getY()) <= 5) &&
+						player.getParty().party.get(i-1).getX() <= player.getParty().party.get(i).getX() - 60){
 							player.getParty().party.get(i).setFront(player.getParty().party.get(i-1).isFront());
 							player.getParty().party.get(i).setBack(player.getParty().party.get(i-1).isBack());
 							player.getParty().party.get(i).setRight(player.getParty().party.get(i-1).isRight());
@@ -474,9 +509,10 @@ public class CharacterScreen extends Screen implements KeyListener{
 	public void paintScreen(Graphics2D g2){
 		BufferedImage image = new BufferedImage(width, height,BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = image.createGraphics();
-		Color c = new Color(0, 102, 51, 200);
-		g2.setColor(c);
-		g2.fillRect(0, 0, width, height);
+		//Color c = new Color(0, 102, 51, 200);
+		g2.drawImage(list.characters.get(i).getImage(),0,0,null);
+		//g2.setColor(c);
+		//g2.fillRect(0, 0, width, height);
 		g2.setColor(Color.black);
 		g2.drawString("Press 'Q' to toggle stat menu", 30, 75);
 		g2.drawString("Press 'F' to take damage", 30, 90);
@@ -530,17 +566,25 @@ public class CharacterScreen extends Screen implements KeyListener{
 //			g2.drawString(selectedHero.getEquiped()[l] + "", eqX, eqY);
 //		}
 //		
-		
 		//display character
 		
 		for(int k = 0; k < player.getParty().party.size(); k++){
 			player.getParty().party.get(k).increaseCount();
 		}
 
-		for(int i = 0; i < list.characters.size(); i++){
+		for(int i = list.characters.size() - 1; i >= 0 ; i--){
 			g2.drawImage(list.characters.get(i).getImage(),list.characters.get(i).getX(),list.characters.get(i).getY(),null);
 		}
 
+		//dialogue
+		if(npcDialogue){
+			g2.setColor(Color.white);
+			g2.fillRect(100, 650, 500, 125);
+			g2.setColor(Color.black);
+			g2.draw(new RoundRectangle2D.Double(100, 650, 500, 125, 10, 10));
+			g2.setFont(new Font("TimesRoman", Font.PLAIN, 30)); 
+			g2.drawString(dialogue, 150, 700);
+		}
 	}
 	
 }

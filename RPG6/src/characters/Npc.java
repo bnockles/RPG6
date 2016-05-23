@@ -3,36 +3,33 @@ package characters;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import directors.Game;
-import directors.Screen;
 import directors.UtilityMethods;
 
-
-public class Enemy extends Character {
+public class Npc extends Character {
 	BufferedImage image;
-	BufferedImage enemyImage;
-	BufferedImage tomb;
-	public Enemy(String name, double health, double currHealth, double attack,
+	String dialogue;
+	boolean inDialogue;
+	public Npc(String name, double health, double currHealth, double attack,
 			double defense, double mana, double currMana, double speed,
 			double dropRate, double critHitChance, double currentExp) {
 		super(name, health, currHealth, attack, defense, mana, currMana, speed,
 				dropRate, critHitChance, currentExp);
-		// TODO Auto-generated constructor stub
 		try {
 			BufferedImage origimage0 = UtilityMethods.getImageFromFile(this, "/character/sample/" + name.toLowerCase() + ".png");
-			BufferedImage origimage1 = UtilityMethods.getImageFromFile(this, "/character/sample/tomb.png");
-			enemyImage=UtilityMethods.getScaledImage(origimage0,50,this.getCharHeight());
-			tomb=UtilityMethods.getScaledImage(origimage1,50,this.getCharHeight());
-			image = enemyImage;
+			image=UtilityMethods.getScaledImage(origimage0,50,this.getCharHeight());
 		} catch (IOException e) {
 			//will throw Exception when files cannot be found
 			e.printStackTrace();
 		}
+		dialogue = "";
+		inDialogue = false;
 	}
 
+	
 	@Override
 	public void interaction(Player player) {
-		image = changeImage(0);
+		inDialogue = !inDialogue;
+		dialogue = "Hi "+ player.getName() + ", I'm Billy.";
 	}
 
 	@Override
@@ -41,11 +38,12 @@ public class Enemy extends Character {
 		return sprite;
 	}
 
-	public BufferedImage changeImage(int num){
-		if(num == 1){
-			return enemyImage;
-		}else{
-			return tomb;
-		}
+
+	public String getDialogue() {
+		return dialogue;
+	}
+
+	public boolean isDialogue(){
+		return inDialogue;
 	}
 }
