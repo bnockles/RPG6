@@ -118,7 +118,6 @@ public class HfengScreen extends Screen implements KeyListener {
 				g2.drawString("Press [I] to open your inventory", x, y);
 				y-= 200;
 				g2.setFont(new Font("Comic Sans", Font.BOLD, 20));
-				System.out.println(storeInventory_Kathy.get(0).getItemBuyPrice());
 			}
 			// Opening Kathy's Potion Shop.
 			if(SHOP_1_OPEN == true){
