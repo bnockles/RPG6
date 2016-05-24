@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class enemy extends Character implements EnemyTeam{ 
 	private String name;
-	private double currHealth;
 	private int level;
+	private double currHealth;
 	private Stats stats;
 	
 	private double health;
