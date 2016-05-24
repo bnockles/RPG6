@@ -26,7 +26,7 @@ public abstract class Character {
 		this.stats = stats;
 		x = 200;
 		y = 200;
-	}
+	} 
 
 	public abstract void interaction(Player player);
 	
