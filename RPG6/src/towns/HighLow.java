@@ -28,9 +28,9 @@ public class HighLow {
 	   
 	      DeckTwo deckTwo = new DeckTwo();
 	      
-	      Card currentCard; 
+	      CardTwo currentCard; 
 
-	      Card nextCard;
+	      CardTwo nextCard;
 
 	      int correctGuesses;
 	      char guess;
