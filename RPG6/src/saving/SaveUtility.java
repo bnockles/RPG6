@@ -27,7 +27,7 @@ public class SaveUtility {
     public static ArrayList<Save> getAllSaves() throws IOException {
         SaveUtility util = new SaveUtility();
         File[] files = util.filesInResourcesFolder("saves");
-        ArrayList<Save> saves = new ArrayList<>();
+        ArrayList<Save> saves = new ArrayList<Save>();
         for (File f :
                 files) {
             saves.add(new Save(f.getName(),f));
@@ -36,7 +36,7 @@ public class SaveUtility {
     }
 
     public static HashMap<String, String> retrieveSave(Save save) throws IOException {
-        HashMap<String,String> tags = new HashMap<>();
+        HashMap<String,String> tags = new HashMap<String,String>();
         Properties properties = new Properties();
         properties.load(new FileInputStream(save.getFile()));
         for (String key : properties.stringPropertyNames()) {
