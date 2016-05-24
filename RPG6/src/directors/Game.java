@@ -1,10 +1,13 @@
 package directors;
 
+import saving.Save;
+import saving.SaveScreen;
+import saving.SaveUtility;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -16,6 +19,10 @@ public class Game extends JFrame{
 	public final int WIDTH = 1000;
 	public final int HEIGHT = 800;
 	protected Screen activeScreen;//whatever Screen we are currently on
+
+	private static Save currentSave = null;
+
+
 
 	/**
 	 * @param args
@@ -36,16 +43,19 @@ public class Game extends JFrame{
 			}
 		});
 		timer.start();
+
 	}
+	
 
+	public void reset() {
 
-	protected void reset() {
 		Screen startScreen = new StartScreen(this);
 		setScreen(startScreen);
 
-		repaint();	
-
+			repaint();	
+		
 	}
+
 
 
 	public void setScreen(Screen newScreen){
@@ -55,6 +65,7 @@ public class Game extends JFrame{
 		repaint();
 	}
 
+
 	protected void applySettings(){
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int monitorWidth = (int)screenSize.getWidth();
@@ -63,11 +74,34 @@ public class Game extends JFrame{
 		setLocation((monitorWidth-WIDTH)/2,(monitorHeight-HEIGHT)/2);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(false);
+		saveBeforeClose();
+	}
+
+
+	private void saveBeforeClose(){
+		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+			public void run() {
+				currentSave.updateSave();
+			}
+		}));
 	}
 
 
 	public void paint(Graphics g){
 		g.drawImage(activeScreen.getScreenImage(),0,0,null);
 	}
+
+
+	public static void setCurrentSave(Save save){
+        currentSave = save;
+    }
+
+    public static Save getCurrentSave(){
+        return currentSave;
+    }
+	
+	
+	
+	
 
 }
