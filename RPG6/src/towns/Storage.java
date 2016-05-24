@@ -9,6 +9,7 @@ public class Storage extends AbstractNPC {
 		super(nm, gen, des, talkable);
 		storage = new Item[3][3];
 	}
+	//test
 
 	/**
 	 * Moves item(s) from player inventory to storage
