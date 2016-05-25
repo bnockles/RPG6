@@ -9,14 +9,14 @@ import java.awt.image.BufferedImage;
 
 
 public abstract class Character {
-	public static final int CHAR_HEIGHT = 200;
-	public String name;
-	public int level;
-	public double currHealth;
-	public double currMana;
-	public Stats stats;
-	int x;
-	int y;
+	private static final int CHAR_HEIGHT = 200;
+	private String name;
+	private int level;
+	private double currHealth;
+	private double currMana;
+	private Stats stats;
+	private int x;
+	private int y;
 	
 	public Character(String name, int level, double currHealth, double currMana, Stats stats){
 		this.level = level;
