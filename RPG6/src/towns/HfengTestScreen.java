@@ -671,8 +671,8 @@ public class HfengTestScreen extends Screen implements KeyListener {
 				game.repaint();
 			}
 			ITEM_NUMBER = START;
-//			update();
-//			game.repaint();
+			update();
+			game.repaint();
 		}
 		
 		if(e.getKeyCode() == TOP_CENTER_ITEM && RUN_NUMBERS == true){
@@ -785,8 +785,11 @@ public class HfengTestScreen extends Screen implements KeyListener {
 			if(BUY_MENU == true && BUY_WARNING == true){
 				if(listOfStore.get(SHOP_NUMBER).getStoreInventory().size() > 0){
 					if(listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemBuyPrice() < PLAYER_WEALTH){
-						PLAYER_WEALTH = PLAYER_WEALTH - listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemBuyPrice();
-						listOfStore.get(SHOP_NUMBER).buyItem(playerInventory, listOfStore.get(SHOP_NUMBER).getStoreInventory(), ITEM_NUMBER - 1, PLAYER_WEALTH);
+//						PLAYER_WEALTH = PLAYER_WEALTH - listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemBuyPrice();
+//						listOfStore.get(SHOP_NUMBER).buyItem(playerInventory, listOfStore.get(SHOP_NUMBER).getStoreInventory(), ITEM_NUMBER - 1, PLAYER_WEALTH);
+						playerInventory.add(listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1));
+						PLAYER_WEALTH -= playerInventory.get(ITEM_NUMBER-1).getItemSellPrice();
+						listOfStore.get(SHOP_NUMBER).getStoreInventory().remove(ITEM_NUMBER-1);
 						if(END % 9 != 0){
 							END--;
 						}
@@ -808,13 +811,15 @@ public class HfengTestScreen extends Screen implements KeyListener {
 					START -= 9;
 					END = START + 8;
 				}
-//				update();
-//				game.repaint();
+				update();
+				game.repaint();
 			}
 			if(SELL_MENU == true && SELL_WARNING == true){
-				System.out.println(listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemSellPrice());
+				listOfStore.get(SHOP_NUMBER).getStoreInventory().add(playerInventory.get(ITEM_NUMBER-1));
 				PLAYER_WEALTH = PLAYER_WEALTH + playerInventory.get(ITEM_NUMBER-1).getItemSellPrice();
-				listOfStore.get(SHOP_NUMBER).sellItem(playerInventory, listOfStore.get(SHOP_NUMBER).getStoreInventory(), (ITEM_NUMBER - 1), PLAYER_WEALTH);
+				playerInventory.remove(ITEM_NUMBER-1);
+//				PLAYER_WEALTH = PLAYER_WEALTH + playerInventory.get(ITEM_NUMBER-1).getItemSellPrice();
+//				listOfStore.get(SHOP_NUMBER).sellItem(playerInventory, listOfStore.get(SHOP_NUMBER).getStoreInventory(), (ITEM_NUMBER - 1), PLAYER_WEALTH);
 				if(END % 9 != 0){
 					END--;
 				}
