@@ -2,9 +2,8 @@ package items;
 
 import java.util.ArrayList;
 
-import characters.GetStats;
 
-public class Equipment extends Item implements EquipInterface, GetStats, Craftable, Repairable {
+public class Equipment extends Item implements EquipInterface, GetItemStats, Craftable, Repairable {
 	public ArrayList<Item> yo = new ArrayList<Item>();
 	public static final int NONE 	= 0;
 	public static final int HELMET 	= 1;

@@ -1,6 +1,6 @@
-package characters;
+package items;
 
-public interface GetStats{
+public interface GetItemStats {
 	public int getHealth();
 	public int getMana();
 	public int getAttack();
