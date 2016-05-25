@@ -1,37 +1,42 @@
 package towns;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Storage extends AbstractNPC {
-	private Item[][] storage;
+	private static Equipment[] storage;
 
 	public Storage(String nm, String gen, String des, boolean talkable) {
 		super(nm, gen, des, talkable);
-		storage = new Item[3][3];
+		storage = new Equipment[3];
 	}
 
 	/**
 	 * Moves item(s) from player inventory to storage
 	 * 
-	 * @param playerInventory 	Where item is being taken out of
-	 * @param storage			New location of item
+	 * @param toBeStored 	Item that is going to be stored
+	 * @param storage		New location of item
 	 */
-	public static void storeItem(Item[][] playerInventory, Item[][] storage, 
-			Item toBeStored, Storable s){
-		if(s.isStorable()){
-			int count = 0;
-			for(int r = 0; r < storage.length; r++){
-				for(int c = 0; c < storage[0].length; c++){
-					if(storage[r][c] != null){
-						count++;
-						if(count >= (storage.length*storage[0].length))
-							System.out.println("Your storage is full!!!");
-					}else{
-						storage[r][c] = toBeStored;
-					}
+	public static void storeItem(int index, Equipment toBeStored){
+		int count = 0;
+		for(int r = 0; r < storage.length; r++){
+				if(storage[index] != null){
+					count++;
+					if(count >= (storage.length))
+						System.out.println("Your storage is full!!!");
+				}else{
+					storage[index] = toBeStored;
+					System.out.println("Item has been stored!");
 				}
-			}
 		}
+	}
+	
+	public static ArrayList<Equipment> convertToList(Equipment[] array){
+		ArrayList<Equipment> list = new ArrayList<Equipment>();
+			for(Equipment e : array){
+				list.add(e);
+		}
+		return list;
 	}
 
 	/**
@@ -70,7 +75,7 @@ public class Storage extends AbstractNPC {
 		}
 	}
 
-	public Item[][] getStorage(){
+	public static Equipment[] getStorage(){
 		return storage;
 	}
 
