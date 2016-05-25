@@ -16,10 +16,10 @@ public class CardTwo {
 	   private final int value;
 	   public CardTwo(int theValue, int theSuit) {
 	      if (theSuit != SPADES && theSuit != HEARTS && theSuit != DIAMONDS && theSuit != CLUBS){
-	         System.out.println("Improper card suit");
+	    	  throw new IllegalArgumentException("Illegal playing card suit");
 	      }
 	      if ((theValue < 1 || theValue > 13)){
-	    	  System.out.println("Improper card value");
+	    	  throw new IllegalArgumentException("Illegal playing card value");
 	      }
 	      value = theValue;
 	      suit = theSuit;

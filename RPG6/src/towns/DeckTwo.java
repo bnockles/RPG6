@@ -31,9 +31,9 @@ public class DeckTwo {
     }
     public Card dealCard() {
         if (cardsUsed == deck.length)
-            System.out.println("No cards are left in the deck.");
+            throw new IllegalStateException("No cards are left in the deck.");
         cardsUsed++;
-        return deck[cardsUsed-1];
+        return deck[cardsUsed - 1];
     }
     public boolean hasJokers() {
         return (deck.length == 54);
