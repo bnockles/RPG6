@@ -1,9 +1,8 @@
 package towns;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class Storage extends AbstractNPC {
+public class Storage extends AbstractNPC{
 	private static Equipment[] storage;
 
 	public Storage(String nm, String gen, String des, boolean talkable) {
