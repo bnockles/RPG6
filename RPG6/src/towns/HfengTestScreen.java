@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+
 import directors.Game;
 import directors.Screen;
 
@@ -44,7 +45,7 @@ public class HfengTestScreen extends Screen implements KeyListener {
 	public static final int YES = KeyEvent.VK_Y;
 	
 	//
-	public static final int NUMBER_OF_POTIONS = (int) (Math.random()*10)+7;
+	public static final int NUMBER_OF_POTIONS = (int) (Math.random()*7)+10;
 	public static final int NUMBER_OF_WEAPONS = (int) (Math.random()*10)+15;
 	public static final int NUMBER_OF_ARMOR = (int) (Math.random()*5)+10;
 		
@@ -68,10 +69,10 @@ public class HfengTestScreen extends Screen implements KeyListener {
 	//
 	public static boolean ERROR_MONEY = false;
 	public static int PLAYER_WEALTH = 5000;
-	public static int SHOP_NUMBER = 0;
 	
 	// Item Display Variables
 	public static int ITEM_NUMBER = 0;
+	public static int SHOP_NUMBER = 0;
 	public static int CURRENT_PAGE = 1;
 	public static int START = 1;
 	public static int END = 9;
@@ -153,12 +154,17 @@ public class HfengTestScreen extends Screen implements KeyListener {
 					g2.drawString("Press [ESC] to leave the store", x, y);
 					y+= 450;
 					g2.setFont(new Font("Comic Sans", Font.PLAIN, 17));
-					if(listOfStore.get(SHOP_NUMBER).getStoreInventory().size() % 9 !=0){
-						g2.drawString("Currently displaying page " + CURRENT_PAGE + " of " + (listOfStore.get(SHOP_NUMBER).getStoreInventory().size() / 9 + 1), x, y);
+					if(listOfStore.get(SHOP_NUMBER).getStoreInventory().size() == 0){
+						g2.drawString("Currently displaying page 0 of 0", x, y);	
 					}
 					else{
-						g2.drawString("Currently displaying page " + CURRENT_PAGE + " of " + (listOfStore.get(SHOP_NUMBER).getStoreInventory().size() / 9), x, y);
-					}
+						if(listOfStore.get(SHOP_NUMBER).getStoreInventory().size() % 9 !=0){
+							g2.drawString("Currently displaying page " + CURRENT_PAGE + " of " + (listOfStore.get(SHOP_NUMBER).getStoreInventory().size() / 9 + 1), x, y);
+						}
+						else{
+							g2.drawString("Currently displaying page " + CURRENT_PAGE + " of " + (listOfStore.get(SHOP_NUMBER).getStoreInventory().size() / 9), x, y);
+						}		
+					}			
 					g2.setFont(new Font("Comic Sans", Font.BOLD, 20));
 					y+= 50;
 					g2.drawString("You have " + NumberFormat.getIntegerInstance().format(PLAYER_WEALTH) + " gold coins.", x, y);
@@ -659,7 +665,7 @@ public class HfengTestScreen extends Screen implements KeyListener {
 //			game.repaint();
 		}
 		
-		if(e.getKeyCode() == TOP_LEFT_ITEM && RUN_NUMBERS == true){
+		if(e.getKeyCode() == TOP_LEFT_ITEM && RUN_NUMBERS == true){	
 			if(BUY_MENU == true){
 				BUY_WARNING = true;
 //				update();
@@ -667,10 +673,11 @@ public class HfengTestScreen extends Screen implements KeyListener {
 			}
 			if(SELL_MENU == true){
 				SELL_WARNING = true;
-				update();
-				game.repaint();
+//				update();
+//				game.repaint();
 			}
 			ITEM_NUMBER = START;
+			System.out.println(BUY_WARNING);
 //			update();
 //			game.repaint();
 		}
@@ -781,15 +788,19 @@ public class HfengTestScreen extends Screen implements KeyListener {
 //			game.repaint();
 		}
 		
-		if(e.getKeyCode() == YES ){
+		if(e.getKeyCode() == YES){
 			if(BUY_MENU == true && BUY_WARNING == true){
 				if(listOfStore.get(SHOP_NUMBER).getStoreInventory().size() > 0){
 					if(listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemBuyPrice() < PLAYER_WEALTH){
-						PLAYER_WEALTH = PLAYER_WEALTH - listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemBuyPrice();
-						listOfStore.get(SHOP_NUMBER).buyItem(playerInventory, listOfStore.get(SHOP_NUMBER).getStoreInventory(), ITEM_NUMBER - 1, PLAYER_WEALTH);
+//						PLAYER_WEALTH = PLAYER_WEALTH - listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemBuyPrice();
+//						listOfStore.get(SHOP_NUMBER).buyItem(playerInventory, listOfStore.get(SHOP_NUMBER).getStoreInventory(), ITEM_NUMBER - 1, PLAYER_WEALTH);
+						playerInventory.add(listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1));
+						PLAYER_WEALTH -= listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemBuyPrice();
+						listOfStore.get(SHOP_NUMBER).getStoreInventory().remove(ITEM_NUMBER-1);
 						if(END % 9 != 0){
 							END--;
 						}
+					    RUN_NUMBERS = true;
 						BUY_WARNING = false;
 						RUN_ARROW_KEYS = true;
 //						update();
@@ -812,14 +823,17 @@ public class HfengTestScreen extends Screen implements KeyListener {
 //				game.repaint();
 			}
 			if(SELL_MENU == true && SELL_WARNING == true){
-				System.out.println(listOfStore.get(SHOP_NUMBER).getStoreInventory().get(ITEM_NUMBER-1).getItemSellPrice());
+				listOfStore.get(SHOP_NUMBER).getStoreInventory().add(playerInventory.get(ITEM_NUMBER-1));
 				PLAYER_WEALTH = PLAYER_WEALTH + playerInventory.get(ITEM_NUMBER-1).getItemSellPrice();
-				listOfStore.get(SHOP_NUMBER).sellItem(playerInventory, listOfStore.get(SHOP_NUMBER).getStoreInventory(), (ITEM_NUMBER - 1), PLAYER_WEALTH);
+				playerInventory.remove(ITEM_NUMBER-1);
+//				PLAYER_WEALTH = PLAYER_WEALTH + playerInventory.get(ITEM_NUMBER-1).getItemSellPrice();
+//				listOfStore.get(SHOP_NUMBER).sellItem(playerInventory, listOfStore.get(SHOP_NUMBER).getStoreInventory(), (ITEM_NUMBER - 1), PLAYER_WEALTH);
 				if(END % 9 != 0){
 					END--;
 				}
-				SELL_WARNING = false;
+			    RUN_NUMBERS = true;
 				RUN_ARROW_KEYS = true;
+				SELL_WARNING = false;
 				if(CURRENT_PAGE * 9 - 8 > playerInventory.size()){
 					CURRENT_PAGE--;
 					START -= 9;
