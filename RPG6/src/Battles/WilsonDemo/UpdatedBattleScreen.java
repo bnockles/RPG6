@@ -40,12 +40,12 @@ public class UpdatedBattleScreen extends Screen implements KeyListener {
 	public void paintScreen(Graphics2D g2) {
 		g2.setColor(Color.BLACK);
 		g2.fillRect(0, 0, this.width, this.height);
-//		RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(120, 579, 693, 200, 10, 10);
-//		Color tmp = new Color(65,105,225);
-//		g2.setColor(Color.WHITE);
-//		g2.draw(roundedRectangle);
-//		g2.setColor(tmp);
-//		g2.fillRoundRect(121, 581, 692, 198, 10, 10);
+		RoundRectangle2D roundedRectangle = new RoundRectangle2D.Float(120, 579, 693, 200, 10, 10);
+		Color tmp = new Color(65,105,225);
+		g2.setColor(Color.WHITE);
+		g2.draw(roundedRectangle);
+		g2.setColor(tmp);
+		g2.fillRoundRect(121, 581, 692, 198, 10, 10);
 		for(BattleComponent x:potatoes){
 			//System.out.println("Drawing Something");
 			g2.drawImage(x.getImage(), x.getX(), x.getY(), null);
