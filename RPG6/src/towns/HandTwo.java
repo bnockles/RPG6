@@ -14,7 +14,7 @@ public class HandTwo {
         if (c == null)
         	hand.add(c);
     }
-    public void removeCard(Card c) {
+    public void removeCard(CardTwo c) {
         hand.remove(c);
     }
     public void removeCard(int position) {

@@ -9,7 +9,7 @@ public class HfengDemo extends Game{
 	}
 	
 	public void reset(){
-		Screen demoScreen = new HfengScreen(this);
+		Screen demoScreen = new HfengTestScreen(this);
 		setScreen(demoScreen);
 	}
 }

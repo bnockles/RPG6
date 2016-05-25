@@ -57,8 +57,16 @@ public class TownScreen extends Screen implements KeyListener{
 	public static final int right = KeyEvent.VK_RIGHT;
 	public static final int craft = KeyEvent.VK_C;
 	public static final int crafting = KeyEvent.VK_X;
-	
-	
+	public static final int storeItem1 = KeyEvent.VK_A;
+	public static final int storeItem2 = KeyEvent.VK_S;
+	public static final int storeItem3 = KeyEvent.VK_D;
+	public static final int storeItem4 = KeyEvent.VK_F;
+	public static final int slot1 = KeyEvent.VK_J;
+	public static final int slot2 = KeyEvent.VK_K;
+	public static final int slot3 = KeyEvent.VK_L;
+
+
+
 	static SampleCharacter character;
 	SampleCharacter displayNpc;
 	Merchant merchant1;
@@ -81,8 +89,8 @@ public class TownScreen extends Screen implements KeyListener{
 	int craftIndex = 0;
 	ArrayList<Equipment> items;
 	ArrayList<String> craftableThings;
-	
-	
+
+
 	//Sounds and music
 	static AudioPlayer MGP = AudioPlayer.player;
 	static AudioStream BGM;
@@ -92,15 +100,15 @@ public class TownScreen extends Screen implements KeyListener{
 	static InputStream town2Music; 
 	static InputStream town3Music;
 	String selected;
-	
-	
+
+
 	static ArrayList<Equipment> inventory = new ArrayList<Equipment>();
 	static ArrayList<Equipment> repairItems = new ArrayList<Equipment>();
 	public static ArrayList<AbstractNPC> town1Npc = new ArrayList<AbstractNPC>();
 	public static ArrayList<AbstractNPC> town2Npc = new ArrayList<AbstractNPC>();
 	public static ArrayList<AbstractNPC> town3Npc = new ArrayList<AbstractNPC>();
 	ArrayList<towns> Towns = new ArrayList<towns>();
-	
+
 	static towns currentTown;
 
 	public static String welcomeMessage = "Welcome to Pellet Town!";
@@ -108,77 +116,77 @@ public class TownScreen extends Screen implements KeyListener{
 	public static String message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 	public static String actionMessage = "";
 	public static String storedItems = "";
-	
-	
+
+
 	private BufferedImage img;
-	
-	
+
+
 	/**
 	 * @param game
 	 */
-	
-	
-	
+
+
+
 	public TownScreen(Game game) {
 		super(game);		
-		
+
 		Sound.audio("src/towns/images/town1.wav");
-		
+
 		currentTown = townStock.getTown(townStock.PelletTown);
-		
+
 		town1Npc.add(merchant1);
 		town1Npc.add(miniGame1);
 		town1Npc.add(storageDude);
-		
+
 		town2Npc.add(merchant2);
 		town2Npc.add(miniGame2);
 		town2Npc.add(storageDude);
-		
+
 		town3Npc.add(merchant3);
 		town3Npc.add(dummy);
 		town3Npc.add(storageDude);
-		
+
 		Towns.add(townStock.getTown(townStock.PelletTown));
 		Towns.add(townStock.getTown(townStock.BigRootTown));
 		Towns.add(townStock.getTown(townStock.OldYelpTown));
-		
+
 		inventory.add(equipStock.equipStocks(equipStock.B_SD));
 		inventory.add(equipStock.equipStocks(equipStock.W_BW));
 		inventory.add(equipStock.equipStocks(equipStock.M_WD));
 		inventory.add(equipStock.equipStocks(equipStock.P_HR));
-		
+
 		this.character = new SampleCharacter(69420, "Con Duh Kurr","/images/character.png",9,590, inventory);
 		this.displayNpc = new SampleCharacter("/images/white.png",600,590, "npc");
 		this.town = new SampleCharacter("/images/town1.png",600,100, "town");
-		
+
 		//Npcs in Town 1
 		this.merchant1 = new Merchant("Kathy","Female","Kathy is a merchant, merchants sell specific items based on what town you are in, Kathy sells potions." , true);
 		this.miniGame1 = new Minigame("Bob","Male","Bob triggers a minigame, there are different minigames in each town that will help you earn money in the game, Bob lets you play rock, paper, scissors in this demo." , true);
-		
+
 		//Npcs in Town 2
 		this.merchant2 = new Merchant("Rebecca", "Female", "Rebecca is the merchant for Big Root Town, she sells wepaons!", true);
 		this.miniGame2 = new Minigame("Shrek","Male", "Shrek is a mini game NPC, in this town shrek well let you play 'Hot or cold', a number guessing game.", true);
-		
+
 		//Npcs in Town 3
 		inRepair = true;
 		repairItems = new ArrayList<Equipment>();
 		this.merchant3 = new Merchant("Karmen", "Female", "Karmen is the black smith for Old Yelelr Town, she will repair your equipment!", true);
 		this.dummy = new dummy("Omar", "Male", "This is a dummy npc, they don't do much in terms of actual gameplay but rather they give you small hints and tips on what to do in the game.",true);
 
-		
+
 		//Storage is in Every Town
 		this.storageDude = new Storage("Greg","Male","He is your storage guy, him and his cousins (who look exactly like him) are in every town in case you want to store items and then take them back for later.", true);
-		
+
 		update();
 	}
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
-		
+
 		g2.setColor(Color.white);
 		g2.fillRect(0, 0, width, height);
 		g2.setColor(Color.black);
-		
+
 		try{
 			g2.drawImage(character.getImage(),character.getX(),character.getY(),null);
 			g2.drawImage(displayNpc.getImage(),displayNpc.getX(),displayNpc.getY(),null);
@@ -193,7 +201,7 @@ public class TownScreen extends Screen implements KeyListener{
 				g2.drawString(inventory.get(i).getName() + "     " + (inventory.get(i).getDurability()), x,740);
 				x += 150;
 			}
-			
+
 			if(inRepair == true){
 				for(int i=0; i<repairItems.size();i++){
 					if(i == repairIndex){
@@ -223,8 +231,8 @@ public class TownScreen extends Screen implements KeyListener{
 					y += 30;
 				}
 			}
-			
-			
+
+
 			if(inCrafting == true){
 				for(int i=0; i<craftableThings.size();i++)
 				{
@@ -239,23 +247,23 @@ public class TownScreen extends Screen implements KeyListener{
 					y += 30;
 				}
 			}
-			
-			
+
+
 			g2.setColor(Color.black);
 			g2.drawString("Available NPCs", 50, 75);
 			g2.drawString(welcomeMessage, 450, 50);
 			g2.drawString(message, 50, 375);
 			g2.drawString(actionMessage, 50, 400);
 			g2.drawString(storedItems, 50, 425);
-			
-			
+
+
 			//Gui for first town
 			if(currentTown.getTownName() == "Pellet Town"){
-				
+
 				welcomeMessage = "Welcome to Pellet Town";
 				this.town = new SampleCharacter("/images/town1.png",600,100, "town");
 				g2.drawString("Press 'N' to go to Big Root Town, or 'M' to go to Old Yelp Town.", 350, 75);
-				
+
 				g2.drawString(merchant1.getName(), 50, 100);
 				g2.drawString(miniGame1.getName(), 50, 200);
 				g2.drawString(storageDude.getName(), 50, 300);
@@ -263,20 +271,20 @@ public class TownScreen extends Screen implements KeyListener{
 				g2.drawString("Press '1' to talk to the merchant or 'Q' for information.", 160, 100);
 				g2.drawString("Press '2' to talk to the mini game NPC or 'W' for information.", 160, 200);
 				g2.drawString("Press '3' to talk to to the storage NPC or 'E' for information.", 160, 300);
-				
-				
-				
+
+
+
 			}
-			
-			
-			
-			
+
+
+
+
 			//Gui for Second town
 			if(currentTown.getTownName() == "Big Root Town"){
 				welcomeMessage = "Welcome to Big Root Town!";
 				this.town = new SampleCharacter("/images/town2.png",600,100, "town");
 				g2.drawString("Press 'B' to go to Pellet Town, or 'M' to go to Old Yelp Town.", 350, 75);
-				
+
 				g2.drawString(merchant2.getName(), 50, 100);
 				g2.drawString(miniGame2.getName(), 50, 200);
 				g2.drawString("Samuel", 50, 300);
@@ -284,18 +292,18 @@ public class TownScreen extends Screen implements KeyListener{
 				g2.drawString("Press '1' to talk to the merchant or 'Q' for information.", 160, 100);
 				g2.drawString("Press '2' to talk to the mini game NPC or 'W' for information.", 160, 200);
 				g2.drawString("Press '3' to talk to to the storage NPC or 'E' for information.", 160, 300);
-				
+
 			}
-			
-			
-			
-			
+
+
+
+
 			//Gui for third town
 			if(currentTown.getTownName() == "Old Yelp Town"){
 				welcomeMessage = "Welcome to Old Yelp Town!";
 				this.town = new SampleCharacter("/images/town3.png",600,100, "town");
 				g2.drawString("Press 'B' to go to Pellet Town, or 'N' to go to Big Root Town.", 350, 75);
-				
+
 				g2.drawString(merchant3.getName(), 50, 100);
 				g2.drawString(dummy.getName(), 50, 200);
 				g2.drawString("Damon", 50, 300);
@@ -303,18 +311,18 @@ public class TownScreen extends Screen implements KeyListener{
 				g2.drawString("Press '1' to talk to the merchant or 'Q' for information.", 160, 100);
 				g2.drawString("Press '2' to talk to the dummy NPC or 'W' for information.", 160, 200);
 				g2.drawString("Press '3' to talk to to the storage NPC or 'E' for information.", 160, 300);
-				
+
 			}
 		}
-		
+
 		catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
-		
+
 	}
-	
+
 	@Override
-	
+
 	public KeyListener getKeyListener() {
 		return this;
 	}
@@ -327,7 +335,7 @@ public class TownScreen extends Screen implements KeyListener{
 			inRepair = true;
 			inCrafting = false;
 			message = "Welcome to the black smith shop! We will repair what you need! You can also press 'C' to craft! Press 'K' to quit.";
-			
+
 			displayNpc = new SampleCharacter("/images/merchant3.png",810,400,"npc");
 			miniGame1.setComputerPlay("null");
 			if(BlackSmith.needRepairs(inventory) == false)
@@ -368,7 +376,7 @@ public class TownScreen extends Screen implements KeyListener{
 			}		
 			update();
 			game.repaint();
-			
+
 		}
 		if(e.getKeyCode()==craft && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town")
 		{
@@ -509,11 +517,11 @@ public class TownScreen extends Screen implements KeyListener{
 				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You need more gems!";
 			}
-			
+
 			else{
 				message = "Welcome to the market! Feel free to buy what we have or sell what you have! Press 'K' to quit.";
 			}
-			
+
 			displayNpc = new SampleCharacter("/images/merchant.png",810,400,"npc");
 			miniGame1.setComputerPlay("null");
 			actionMessage = "Press  6 for Healing Potions (300 Gems), 7 for Mana Potion (400 Gems), and 8 for Stats Potion (500 Gems)";
@@ -531,11 +539,11 @@ public class TownScreen extends Screen implements KeyListener{
 				message = "Oops! Seems like you don't have enough to buy anything! You need at least 600 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You need more gems!";
 			}
-			
+
 			else{
 				message = "Welcome to the market! Feel free to buy what we have or sell what you have! Press 'K' to quit.";
 			}
-			
+
 			displayNpc = new SampleCharacter("/images/merchant2.png",810,400,"npc");
 			miniGame1.setComputerPlay("null");
 			actionMessage = "Press  6 for Shuriken (600 Gems), 7 for Katana (700 Gems), and 8 for Pistol (800 Gems)";
@@ -546,94 +554,94 @@ public class TownScreen extends Screen implements KeyListener{
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem1 && Merchant.buyable == true && currentTown.getTownName() == "Pellet Town"){
-			
+
 			System.out.println("6 was pressed");
-			
+
 			if(character.getCurrency() < 300){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 400 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
+
 			else{
 				character.setCurrency(character.getCurrency()-300);
 				//inventory.add("Health Potion");
 			}
-			
+
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem1 && Merchant.buyable == true && currentTown.getTownName() == "Big Root Town"){
-			
+
 			System.out.println("6 was pressed");
-			
+
 			if(character.getCurrency() < 600){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 600 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
+
 			else{
 				character.setCurrency(character.getCurrency()-600);
 				//inventory.add("Shuriken");
 			}
-			
+
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem1 && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town"){
-			
+
 			System.out.println("6 was pressed");
-			
+
 			if(character.getCurrency() < 400){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 400 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
+
 			else{
 				character.setCurrency(character.getCurrency()-400);
 				//inventory.add("Leather Armor");
 			}
-			
+
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem2 && Merchant.buyable == true && currentTown.getTownName() == "Pellet Town"){
-			
+
 			System.out.println("7 was pressed");
-			
+
 			if(character.getCurrency() < 400){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 400 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
+
 			else{
 				character.setCurrency(character.getCurrency()-400);
 				//inventory.add("Mana Potion");
 			}
-			
+
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem2 && Merchant.buyable == true && currentTown.getTownName() == "Big Root Town"){
-			
+
 			System.out.println("7 was pressed");
-			
+
 			if(character.getCurrency() < 700){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 700 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
+
 			else{
 				character.setCurrency(character.getCurrency()-700);
 				//inventory.add("Katana");
 			}
-			
+
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem2 && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town"){
-			
+
 			System.out.println("7 was pressed");
-			
+
 			if(character.getCurrency() < 500){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 500 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
@@ -646,7 +654,7 @@ public class TownScreen extends Screen implements KeyListener{
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Pellet Town"){
-			
+
 			System.out.println("8 was pressed");
 			inRepair = false;
 			inCrafting = false;
@@ -654,17 +662,17 @@ public class TownScreen extends Screen implements KeyListener{
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
+
 			else{
 				character.setCurrency(character.getCurrency()-500);
 				//inventory.add("Stats Potion");
 			}
-			
+
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Big Root Town"){
-			
+
 			System.out.println("8 was pressed");
 			inRepair = false;
 			inCrafting = false;
@@ -672,17 +680,17 @@ public class TownScreen extends Screen implements KeyListener{
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 800 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
+
 			else{
 				character.setCurrency(character.getCurrency()-800);
 				//inventory.add("Pistol");
 			}
-			
+
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town"){
-			
+
 			System.out.println("8 was pressed");
 			inRepair = false;
 			inCrafting = false;
@@ -690,59 +698,59 @@ public class TownScreen extends Screen implements KeyListener{
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 600 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
+
 			else{
 				character.setCurrency(character.getCurrency()-600);
 				//inventory.add("Diamond Armor");
 			}
-			
+
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==sellItem && Merchant.buyable == true){
 			System.out.println("9 was pressed");
-//			if(character.getItems().size() == 0){
-//				actionMessage = "You have nothing to sell!";
-//			}
-//			else{
-//				actionMessage = "Soled " + inventory.get(0);
-//				if(inventory.get(0) == "Health Potion"){
-//					character.setCurrency(character.getCurrency()+200);
-//				}
-//				if(inventory.get(0) == "Mana Potion"){
-//					character.setCurrency(character.getCurrency()+300);				
-//				}
-//				if(inventory.get(0) == "Stats Potion"){
-//					character.setCurrency(character.getCurrency()+400);
-//				}
-//				if(inventory.get(0) == "Broad Sword"){
-//					character.setCurrency(character.getCurrency()+500);
-//				}
-//				if(inventory.get(0) == "Long Bow"){
-//					character.setCurrency(character.getCurrency()+600);
-//				}
-//				if(inventory.get(0) == "Leather Armor"){
-//					character.setCurrency(character.getCurrency()+300);
-//				}
-//				if(inventory.get(0) == "Iron Armor"){
-//					character.setCurrency(character.getCurrency()+400);
-//				}
-//				if(inventory.get(0) == "Diamond Armor"){
-//					character.setCurrency(character.getCurrency()+500);
-//				}
-//				if(inventory.get(0) == "Shuriken"){
-//					character.setCurrency(character.getCurrency()+500);
-//				}
-//				if(inventory.get(0) == "Katana"){
-//					character.setCurrency(character.getCurrency()+600);
-//				}
-//				if(inventory.get(0) == "Pistol"){
-//					character.setCurrency(character.getCurrency()+700);
-//				}
-//				inventory.remove(0);
-//			}
-//			update();
-	//		game.repaint();
+			//			if(character.getItems().size() == 0){
+			//				actionMessage = "You have nothing to sell!";
+			//			}
+			//			else{
+			//				actionMessage = "Soled " + inventory.get(0);
+			//				if(inventory.get(0) == "Health Potion"){
+			//					character.setCurrency(character.getCurrency()+200);
+			//				}
+			//				if(inventory.get(0) == "Mana Potion"){
+			//					character.setCurrency(character.getCurrency()+300);				
+			//				}
+			//				if(inventory.get(0) == "Stats Potion"){
+			//					character.setCurrency(character.getCurrency()+400);
+			//				}
+			//				if(inventory.get(0) == "Broad Sword"){
+			//					character.setCurrency(character.getCurrency()+500);
+			//				}
+			//				if(inventory.get(0) == "Long Bow"){
+			//					character.setCurrency(character.getCurrency()+600);
+			//				}
+			//				if(inventory.get(0) == "Leather Armor"){
+			//					character.setCurrency(character.getCurrency()+300);
+			//				}
+			//				if(inventory.get(0) == "Iron Armor"){
+			//					character.setCurrency(character.getCurrency()+400);
+			//				}
+			//				if(inventory.get(0) == "Diamond Armor"){
+			//					character.setCurrency(character.getCurrency()+500);
+			//				}
+			//				if(inventory.get(0) == "Shuriken"){
+			//					character.setCurrency(character.getCurrency()+500);
+			//				}
+			//				if(inventory.get(0) == "Katana"){
+			//					character.setCurrency(character.getCurrency()+600);
+			//				}
+			//				if(inventory.get(0) == "Pistol"){
+			//					character.setCurrency(character.getCurrency()+700);
+			//				}
+			//				inventory.remove(0);
+			//			}
+			//			update();
+			//		game.repaint();
 		}
 		if(e.getKeyCode()==talkNpc2 && currentTown.getTownName() == "Pellet Town"){
 			System.out.println("2 was pressed");
@@ -762,7 +770,7 @@ public class TownScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-		
+
 		//EDIT MINI GAME 2
 		if(e.getKeyCode()==talkNpc2 && currentTown.getTownName() == "Big Root Town"){
 			System.out.println("2 was pressed");
@@ -894,9 +902,9 @@ public class TownScreen extends Screen implements KeyListener{
 			inCrafting = false;
 			displayNpc = new SampleCharacter("/images/storage.png",810,400,"npc");
 			storedItems = "The items you have stored are: ";
-			//for(int i=0;i < Storage.storedItems.size();i++){
-			//	storedItems += Storage.storedItems.get(i)+ " ";
-			//}
+			for(int i=0;i < Storage.convertToList(Storage.getStorage()).size();i++){
+				storedItems += Storage.convertToList(Storage.getStorage()).get(i)+ " ";
+			}
 			miniGame1.setComputerPlay("null");
 			Merchant.buyable = false;
 			update();
@@ -1012,99 +1020,113 @@ public class TownScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-//		if(e.getKeyCode()==storeItem && Storage.storable == true){
-//			System.out.println("4 was pressed");
-//			if(character.getItems().size() == 0){
-//			actionMessage = "You have nothing else we can store...";
-//			}
-//			else{
-//				actionMessage = "Stored " + inventory.get(0);
-//				storedItems = storedItems + inventory.get(0) + " ";
-//				//Storage.storedItems.add(inventory.get(0));
-//				inventory.remove(0);				
-//			}
-//			miniGame1.setComputerPlay("null");
-//			update();
-//			game.repaint();
-//		}
-////		if(e.getKeyCode()==takeItem && Storage.storable == true){
-//			System.out.println("5 was pressed");
-////			if(Storage.storedItems.size() == 0){
-////				actionMessage = "You have nothing stored here...";
-////				storedItems = "The items you have stored are: ";
-////			}
-////			else{
-//				//actionMessage = "Taken out " + Storage.storedItems.get(0);
-//				//inventory.add(Storage.storedItems.get(0));
-//				//Storage.storedItems.remove(0);
-//			}
-//			storedItems = "The items you have stored are: ";
-////			for(int i=0;i < Storage.storedItems.size();i++){
-////				storedItems += Storage.storedItems.get(i)+ " ";
-////			}
-//			miniGame1.setComputerPlay("null");
-//			update();
-//			game.repaint();
-//		}
-		if(e.getKeyCode()==goToPellet && currentTown.getTownName() != "Pellet Town"){
-			System.out.println("B was pressed");
-			this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
-			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
-			actionMessage = "";
-			storedItems = "";
-//			Storage.storable = false;
-			Merchant.buyable = false;
-			currentTown = townStock.getTown(townStock.PelletTown);
-			town1 = true;
-			town2 = false;
-			town3 = false;
-			inRepair = false;
-			inCrafting = false;
-			Sound.stopaudio();
-			Sound.audio("src/towns/images/town1.wav");;
-			welcomeMessage = "Welcome to Pellet Town!";
-			update();
-			game.repaint();
-		}
-		if(e.getKeyCode()==goToBigRoot && currentTown.getTownName() != "Big Root Town"){
-			System.out.println("N was pressed");
-			this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
-			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
-			actionMessage = "";
-			storedItems = "";
-//			Storage.storable = false;
-			Merchant.buyable = false;
-			currentTown = townStock.getTown(townStock.BigRootTown);
-			town1 = false;
-			town2 = true;
-			town3 = false;
-			inRepair = false;
-			inCrafting = false;
-			Sound.stopaudio();
-			Sound.audio("src/towns/images/town2.wav");
-			welcomeMessage = "Welcome to Big Root Town!";
-			update();
-			game.repaint();
-		}
-		if(e.getKeyCode()==goToOldYelp && currentTown.getTownName() != "Old Yelp Town"){
-			System.out.println("M was pressed");
-			this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
-			message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
-			actionMessage = "";
-			storedItems = "";
-//			Storage.storable = false;
-			Merchant.buyable = false;
-			currentTown = townStock.getTown(townStock.OldYelpTown);
-			town1 = false;
-			town2 = false;
-			town3 = true;
-			inRepair = false;
-			inCrafting = false;
-			Sound.stopaudio();
-			Sound.audio("src/towns/images/town3.wav");
-			welcomeMessage = "Welcome to Old Yelp Town!";
-			update();
-			game.repaint();
+		if(e.getKeyCode()==storeItem){
+			System.out.println("4 was pressed");
+			if(character.getEquipments().size() == 0){
+				actionMessage = "You have nothing else we can store...";
+			}
+			else{
+				actionMessage = "Press A to store the first item, S to store the second item, D to store the third item, F to store the fourth item";
+				if(e.getKeyCode() == storeItem1){
+					System.out.println("A was pressed");
+					actionMessage = "Press J to store in slot 1, K to store in slot 2 and L to store in slot 3";
+					update();
+					game.repaint();
+					if(e.getKeyCode() == slot1){
+						System.out.println("J was pressed");
+						actionMessage = "Stored " + inventory.get(0);
+						storedItems = storedItems + inventory.get(0) + " ";
+						Storage.storeItem(1, inventory.get(0));
+						inventory.remove(0);
+					}
+
+				}
+
+			}
+			//			}
+			//			miniGame1.setComputerPlay("null");
+			//			update();
+			//			game.repaint();
+			//		}
+			////		if(e.getKeyCode()==takeItem && Storage.storable == true){
+			//			System.out.println("5 was pressed");
+			////			if(Storage.storedItems.size() == 0){
+			////				actionMessage = "You have nothing stored here...";
+			////				storedItems = "The items you have stored are: ";
+			////			}
+			////			else{
+			//				//actionMessage = "Taken out " + Storage.storedItems.get(0);
+			//				//inventory.add(Storage.storedItems.get(0));
+			//				//Storage.storedItems.remove(0);
+			//			}
+			//			storedItems = "The items you have stored are: ";
+			////			for(int i=0;i < Storage.storedItems.size();i++){
+			////				storedItems += Storage.storedItems.get(i)+ " ";
+			////			}
+			//			miniGame1.setComputerPlay("null");
+			//			update();
+			//			game.repaint();
+			//		}
+			if(e.getKeyCode()==goToPellet && currentTown.getTownName() != "Pellet Town"){
+				System.out.println("B was pressed");
+				this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
+				message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
+				actionMessage = "";
+				storedItems = "";
+				//			Storage.storable = false;
+				Merchant.buyable = false;
+				currentTown = townStock.getTown(townStock.PelletTown);
+				town1 = true;
+				town2 = false;
+				town3 = false;
+				inRepair = false;
+				inCrafting = false;
+				Sound.stopaudio();
+				Sound.audio("src/towns/images/town1.wav");;
+				welcomeMessage = "Welcome to Pellet Town!";
+				update();
+				game.repaint();
+			}
+			if(e.getKeyCode()==goToBigRoot && currentTown.getTownName() != "Big Root Town"){
+				System.out.println("N was pressed");
+				this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
+				message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
+				actionMessage = "";
+				storedItems = "";
+				//			Storage.storable = false;
+				Merchant.buyable = false;
+				currentTown = townStock.getTown(townStock.BigRootTown);
+				town1 = false;
+				town2 = true;
+				town3 = false;
+				inRepair = false;
+				inCrafting = false;
+				Sound.stopaudio();
+				Sound.audio("src/towns/images/town2.wav");
+				welcomeMessage = "Welcome to Big Root Town!";
+				update();
+				game.repaint();
+			}
+			if(e.getKeyCode()==goToOldYelp && currentTown.getTownName() != "Old Yelp Town"){
+				System.out.println("M was pressed");
+				this.displayNpc = new SampleCharacter("/images/white.png",810,400,"npc");
+				message = "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
+				actionMessage = "";
+				storedItems = "";
+				//			Storage.storable = false;
+				Merchant.buyable = false;
+				currentTown = townStock.getTown(townStock.OldYelpTown);
+				town1 = false;
+				town2 = false;
+				town3 = true;
+				inRepair = false;
+				inCrafting = false;
+				Sound.stopaudio();
+				Sound.audio("src/towns/images/town3.wav");
+				welcomeMessage = "Welcome to Old Yelp Town!";
+				update();
+				game.repaint();
+			}
 		}
 	}
 

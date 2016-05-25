@@ -2,15 +2,21 @@ package towns;
 
 import java.util.ArrayList;
 
-public class Store {
+public class Store extends AbstractStore{
 
-	/**
-	 * @param args
-	 */
+	public Store(String name, String description, ArrayList<Item> storeInventory) {
+		super(name, description, storeInventory);
+		// TODO Auto-generated constructor stub
+	}
 
-	public Store(String storeName, String storeDesc, ArrayList Inventory){
-		
+	public void buyItem(ArrayList<Item> playerInventory, ArrayList<Item> storeInventory, int itemNumber, int playerWealth){
+		playerInventory.add(storeInventory.get(itemNumber));
+		storeInventory.remove(itemNumber);
 	}
 	
+	public void sellItem(ArrayList<Item> playerInventory, ArrayList<Item> storeInventory, int itemNumber, int playerWealth){
+		storeInventory.add(playerInventory.get(itemNumber));
+		playerInventory.remove(itemNumber);
+	}
 	
 }
