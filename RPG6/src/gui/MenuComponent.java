@@ -54,6 +54,11 @@ public abstract class MenuComponent implements Drawable, KeyListener
 		this.width = width;
 		this.height = height;
 	}
+
+	public void scale(double widthMultiplier, double heightMultiplier){
+		this.width *= widthMultiplier;
+		this.height *= heightMultiplier;
+	}
 	
 	public void setColor(Color color){
 		this.color = color;
@@ -77,7 +82,15 @@ public abstract class MenuComponent implements Drawable, KeyListener
 	}
 	
 	public Coord getCoord() {
-		return coord;
+		return this.coord;
+	}
+	
+	public int getWidth(){
+		return this.width;
+	}
+	
+	public int getHeight(){
+		return this.height;
 	}
 	
 	//shorthand method for getCoord().getGlobal();

@@ -14,8 +14,6 @@ public final class _MenuDemo extends Game {
 	
 	public _MenuDemo(){
 		super();
-		
-		
 	}
 
 	@Override

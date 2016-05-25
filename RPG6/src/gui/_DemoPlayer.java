@@ -6,11 +6,18 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 
 public class _DemoPlayer extends MenuComponent {
+	private int speed;
 
 	public _DemoPlayer(Menu menu, int x, int y) {
 		super(menu, x, y);
 		this.setColor(Color.BLUE);
-		this.setDimensions(100, 200);
+		this.setDimensions(50, 100);
+		
+		this.speed = 3;
+	}
+	
+	public void setSpeed(int speed){
+		this.speed = speed;
 	}
 
 	public void draw(Graphics2D g2) {
@@ -21,34 +28,32 @@ public class _DemoPlayer extends MenuComponent {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		Point player = getCoord().getGlobal();
+		Coord player = getCoord();
 		
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_UP:
-			player.translate(0,-1);
+			player.translate(0,-speed);
 			break;
 			
 		case KeyEvent.VK_DOWN:
-			player.translate(0,+1);
+			player.translate(0,+speed);
 			break;
 			
 		case KeyEvent.VK_LEFT:
-			player.translate(-1,0);
+			player.translate(-speed,0);
 			break;
 		
 		case KeyEvent.VK_RIGHT:
-			player.translate(+1,0);
+			player.translate(+speed,0);
 			break;
 		}
 	}
 
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 

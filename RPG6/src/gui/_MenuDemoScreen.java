@@ -9,7 +9,7 @@ import java.awt.event.KeyListener;
 public final class _MenuDemoScreen extends MenuScreen implements KeyListener {
 	private static final int 	MODE_ANIMATION = 1<<0,
 								MODE_INVENTORY = 1<<1,
-								MODE_CUTSCENE  = 1<<2;
+								MODE_BATTLE  = 1<<2;
 	
 	private static final int 	DEFAULT_MODE = MODE_ANIMATION;
 	private int currentMode;
@@ -29,7 +29,6 @@ public final class _MenuDemoScreen extends MenuScreen implements KeyListener {
 	private void setUpAnimation(){
 		menu.removeAllComponents();
 
-		_DemoPlayer dp = new _DemoPlayer(menu, 100, 100);
 		
 		DialogBox db = new DialogBox(menu, "GeT A FRee SWORD TODAY"
 				+ "                                            "
@@ -46,9 +45,22 @@ public final class _MenuDemoScreen extends MenuScreen implements KeyListener {
 						}
 						
 						int s = (int)(.02 * dt);
-						c.getCoord().translate(s+1, s);
+						c.getCoord().translate(s+2, s);
 					}
 				});
+				
+		DialogBox mb = new DialogBox(menu, "I scale!", 10, this.width/2, this.height/2);
+				mb.setDimensions(10, 10);
+				mb.setFill(true);
+				mb.setTextPosition(50, 50);
+				mb.setOnUpdate(new Updatable(){
+					public void update(long dt, MenuComponent c){
+						c.scale(1.1, 1.1);
+					}
+				});
+
+		_DemoPlayer dp = new _DemoPlayer(menu, this.width/2 - 250, this.height/2);
+					dp.setSpeed(7);
 	}
 
 	private void setUpInventory(){
@@ -62,7 +74,7 @@ public final class _MenuDemoScreen extends MenuScreen implements KeyListener {
 				mb2.setDimensions(this.width/2 - 15, this.height - 49);
 				mb2.setColor(Color.WHITE);
 				mb2.setFill(false);
-//		
+
 		MenuBox mb3 = new MenuBox(menu, this.width/2 + 2, 33);
 				mb3.setDimensions(this.width/2 - 13, this.height - 44);
 				mb3.setFill(true);
@@ -78,16 +90,61 @@ public final class _MenuDemoScreen extends MenuScreen implements KeyListener {
 				mb5.setFill(false);
 	}
 
-	private void setUpCutscene(){
+	private void setUpBattle(){
 		menu.removeAllComponents();
 		
 		
+		MenuBox mb = new MenuBox(menu, 250, this.height - 180);
+				mb.setDimensions(500, 146);
+				mb.setColor(Color.BLACK);
+				mb.setFill(true);
+				
+		MenuBox mb2 = new MenuBox(menu, 253, this.height - 177);
+				mb2.setDimensions(493, 139);
+				mb2.setColor(Color.WHITE);
+				mb2.setFill(false);
+				
+		_BattleCursor bc = new _BattleCursor(menu, 256, this.height - 174);
+		
+		DialogBox fight = new DialogBox(menu, "FIGHT", 10, 285, this.height - 159);
+				fight.setDimensions(40, 30);
+				
+
+		DialogBox items = new DialogBox(menu, "ITEMS", 10, 285, this.height - 102);
+				items.setDimensions(40, 30);
+
+
+		DialogBox run = new DialogBox(menu, "RUN", 10, 395, this.height - 159);
+				run.setDimensions(40, 30);
+		
+				
+		MenuBox hp = new MenuBox(menu, 600, this.height - 150);
+				hp.setDimensions(100, 20);
+				hp.setColor(Color.RED);
+				hp.setFill(true);
+
+		DialogBox hps = new DialogBox(menu, "100/100", 100, 600, this.height - 150);
+				hps.setDimensions(0, 0);
+				
+		MenuBox mp = new MenuBox(menu, 600, this.height - 100);
+				mp.setDimensions(100, 20);
+				mp.setColor(Color.BLUE);
+				mp.setFill(true);
+		
+		DialogBox mps = new DialogBox(menu, "999/999", 100, 600, this.height - 100);
+				mps.setDimensions(0, 0);
 	}
 	
+	public void drawBackground(Graphics2D g2){
+		g2.setColor(Color.CYAN);
+		g2.fillRect(0, 0, this.width, this.height);
+	}
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
 		updateMenus();
+		
+		drawBackground(g2);
 		drawMenus(g2);
 		
 		if(this.menu != null){
@@ -124,9 +181,9 @@ public final class _MenuDemoScreen extends MenuScreen implements KeyListener {
 			break;
 			
 		case KeyEvent.VK_3:
-			System.out.println("SWITCHING TO CUTSCENE");
-			currentMode = MODE_CUTSCENE;
-			setUpCutscene();
+			System.out.println("SWITCHING TO BATTLE");
+			currentMode = MODE_BATTLE;
+			setUpBattle();
 			break;
 		}
 	}

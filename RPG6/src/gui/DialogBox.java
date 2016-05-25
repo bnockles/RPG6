@@ -44,7 +44,7 @@ public final class DialogBox extends MenuBox {
 		this.textPositionX = 4;
 		this.textPositionY = 14;
 		this.lineGap = 16;
-		this.textColor = Color.BLACK;
+		this.textColor = Color.WHITE;
 		
 		this.last = System.currentTimeMillis();
 		this.interval = -1;
