@@ -182,7 +182,7 @@ public class ItemScreen3 extends Screen implements KeyListener{
 
 		public ArrayList<Integer> attackOneEnemy(ArrayList<ActiveSkill> skillList, int skillNumber, Character ally, Character enemy, int AllyHPTarget, int HPTarget, int MPTarget){
 		battleMessage = "You have selected to use " + skillList.get(skillNumber).getName() + " on " + enemy.getName() + ".";
-		finalDamage = skillList.get(skillNumber).getDamage() + ally.getTrueStats().getAttack();
+		finalDamage = (skillList.get(skillNumber).getDamage() + ally.getTrueStats().getAttack()) - enemy.getTrueStats().getDefense();
 		resultsMessage = skillList.get(skillNumber).getName() + " has done " + finalDamage + " damage on " + enemy.getName() + " and used " + skillList.get(skillNumber).getManaCost() + " MP! The enemy attacked back! Press Z to continue";
 		AllyHPTarget -= (enemy.getTrueStats().getAttack() - ally.getTrueStats().getDefense());
 		if ((HPTarget - finalDamage) < 0){
