@@ -44,7 +44,7 @@ public class HfengTestScreen extends Screen implements KeyListener {
 	public static final int YES = KeyEvent.VK_Y;
 	
 	//
-	public static final int NUMBER_OF_POTIONS = (int) (Math.random()*10)+7;
+	public static final int NUMBER_OF_POTIONS = (int) (Math.random()*7)+10;
 	public static final int NUMBER_OF_WEAPONS = (int) (Math.random()*10)+15;
 	public static final int NUMBER_OF_ARMOR = (int) (Math.random()*5)+10;
 		
