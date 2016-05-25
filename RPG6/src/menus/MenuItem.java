@@ -51,7 +51,7 @@ public class MenuItem {
 		BufferedImage img = null;
 		BufferedImage canvas = null;
 		try{
-			URL imageURL = this.getClass().getResource("/images/Icons/"+path+".png");
+			URL imageURL = this.getClass().getResource(path+".png");
 			img = ImageIO.read(imageURL);
 			canvas = new BufferedImage(imgWidth, imgHeight, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g = (Graphics2D) canvas.getGraphics();
