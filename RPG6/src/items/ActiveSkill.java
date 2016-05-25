@@ -3,7 +3,7 @@ package items;
 import java.util.ArrayList;
 
 public class ActiveSkill extends Spell {
-
+	//s
 	public int finalDamage;
 	public int exp;
 	public String name;
