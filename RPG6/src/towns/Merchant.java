@@ -9,6 +9,7 @@ public class Merchant extends AbstractNPC {
 	}
 	static boolean buyable;
 	
+	
 	@Override
 	public void npcMovement() {
 		// TODO Auto-generated method stub
