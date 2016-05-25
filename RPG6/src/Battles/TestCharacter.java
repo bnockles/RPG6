@@ -26,9 +26,8 @@
 	    }
 	    
 	    
-	    public TestCharacter(String name,ArrayList<String>giveMovesM){
+	    public TestCharacter(String name){
 	   	 this.title = name;
-	   	 this.meleeMoves.addAll(giveMovesM);
 	   	 image = new BufferedImage(300, 300, BufferedImage.TYPE_INT_ARGB);
 	   	 URL url = getClass().getResource("/images/"+name+".png");
 	   	 try {
