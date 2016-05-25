@@ -2,7 +2,7 @@ package items;
 
 //From Character's Team Jason
 
-public interface getStats {
+public interface getItemStats {
 	public int getHealth();
 	public int getMana();
 	public int getAttack();

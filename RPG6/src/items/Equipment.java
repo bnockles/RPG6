@@ -2,7 +2,7 @@ package items;
 
 import java.util.ArrayList;
 
-public class Equipment extends Item implements EquipInterface, getStats, Craftable, Repairable {
+public class Equipment extends Item implements EquipInterface, getItemStats, Craftable, Repairable {
 	public ArrayList<Item> yo = new ArrayList<Item>();
 	public static final int NONE 	= 0;
 	public static final int HELMET 	= 1;

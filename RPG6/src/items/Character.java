@@ -2,7 +2,7 @@ package items;
 
 import java.util.ArrayList;
 
-public class Character implements CharacterInterface{
+public class Character implements CharacterInterface, getCharacterStats{
 
 		private Stats trueStats;
 //		private int currentHP;
@@ -60,6 +60,10 @@ public class Character implements CharacterInterface{
 
 		public int getPlayerCurrency() {
 			return this.money;
+		}
+
+		public Stats getAllStats() {
+			return this.trueStats;
 		}
 
 }
