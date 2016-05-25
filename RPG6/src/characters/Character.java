@@ -2,21 +2,22 @@ package characters;
 
 
 import items.Equipment;
+import items.GetCharacterStats;
 import items.Item;
 import items.Stats;
 
 import java.awt.image.BufferedImage;
 
 
-public abstract class Character {
-	public static final int CHAR_HEIGHT = 200;
-	public String name;
-	public int level;
-	public double currHealth;
-	public double currMana;
-	public Stats stats;
-	int x;
-	int y;
+public abstract class Character implements GetCharacterStats{
+	private static final int CHAR_HEIGHT = 200;
+	private String name;
+	private int level;
+	private double currHealth;
+	private double currMana;
+	private Stats stats;
+	private int x;
+	private int y;
 	
 	public Character(String name, int level, double currHealth, double currMana, Stats stats){
 		this.level = level;
@@ -82,6 +83,10 @@ public abstract class Character {
 	
 	public int getLevel() {
 		return level;
+	}
+	
+	public Stats getAllStats(){
+		return stats;
 	}
 	
 	public void addEquipStats(Item sword){

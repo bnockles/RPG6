@@ -23,21 +23,6 @@ public class Player extends Hero implements CharacterInterface, PlayerInfo {
 		return inventory;
 	}
 	
-	
-//	public String[] getInventory(){
-//		String[] inv;
-//		try{
-//			inv = new String[inventory.size()];
-//			for(int i = 0; i < inventory.size(); i++){
-//				inv[i] = inventory.get(i).getName();
-//			}
-//		}catch(Exception e){
-//			String[] inv1 = {" "};
-//			return inv1; 
-//		}
-//		return inv;
-//	}
-
 	public void addItem(Item item){		
 			inventory.add(item);
 
