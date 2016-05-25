@@ -14,8 +14,8 @@ import javax.imageio.ImageIO;
 public class CharacterBattleComponent implements BattleComponent {
 	
 	private final BufferedImage WilsonBattleComponent = new BufferedImage(97, 201, BufferedImage.TYPE_INT_ARGB);;
-	private int x = 20;
-	private int y = 580;
+	private int x = 200;
+	private int y = 200;
 	private BattleCharacters stats;
 	private boolean ifStats;
     
