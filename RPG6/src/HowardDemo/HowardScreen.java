@@ -7,18 +7,18 @@ import java.util.ArrayList;
 
 public class HowardScreen extends Screen implements KeyListener {
 
-	ExampleClass thing;
-	String theMessage;
-	static ArrayList<enemy> enemyList = new ArrayList<enemy>();
+	ExampleClass list;
+	boolean on;
+//	static ArrayList<enemy> enemyList = new ArrayList<enemy>();
 	
 	public HowardScreen(Game game){
 		super(game);
-		thing = new ExampleClass();
-		theMessage = "";
+		list = new ExampleClass();
+		on = false;
 		allEnemies();
 	}
 	
-	public static void allEnemies(){
+	public void allEnemies(){
     	enemy rat = new enemy("Rat", 1, 30, 0, new Stats(30, 8, 3, 1), 30, 3, 1);
     	enemy cat = new enemy("Cat", 6, 55, 0, new Stats(55, 15, 5, 2), 29, 5, 3);
     	enemy slime = new enemy("Slime", 11, 105, 0, new Stats(105, 32, 10, 3), 27, 7, 5);    
@@ -40,26 +40,26 @@ public class HowardScreen extends Screen implements KeyListener {
     	enemy homunculus = new enemy("Homunculus", 91, 3390, 0, new Stats(3390, 2373, 836, 250), 5, 95, 109);
     	enemy spider = new enemy("Spider", 100, 4011, 0, new Stats(4011, 3008, 1000, 300), 5, 100, 110);
    	 
-    	enemyList.add(rat);
-    	enemyList.add(cat);
-    	enemyList.add(slime);
-    	enemyList.add(wraith);
-    	enemyList.add(zombie);
-    	enemyList.add(berserkStump);
-    	enemyList.add(fireBoar);
-    	enemyList.add(golem);
-    	enemyList.add(werewolf);
-    	enemyList.add(centaur);
-    	enemyList.add(griffin);
-    	enemyList.add(gargoyle);
-    	enemyList.add(rogue);
-    	enemyList.add(mage);
-    	enemyList.add(spartan);
-    	enemyList.add(spearman);
-    	enemyList.add(wyvern);
-    	enemyList.add(reaper);
-    	enemyList.add(homunculus);
-    	enemyList.add(spider);
+    	list.addEnemy(rat);
+    	list.addEnemy(cat);
+    	list.addEnemy(slime);
+    	list.addEnemy(wraith);
+    	list.addEnemy(zombie);
+    	list.addEnemy(berserkStump);
+    	list.addEnemy(fireBoar);
+    	list.addEnemy(golem);
+    	list.addEnemy(werewolf);
+    	list.addEnemy(centaur);
+    	list.addEnemy(griffin);
+    	list.addEnemy(gargoyle);
+    	list.addEnemy(rogue);
+    	list.addEnemy(mage);
+    	list.addEnemy(spartan);
+    	list.addEnemy(spearman);
+    	list.addEnemy(wyvern);
+    	list.addEnemy(reaper);
+    	list.addEnemy(homunculus);
+    	list.addEnemy(spider);
    
 	}
 	
@@ -69,8 +69,9 @@ public class HowardScreen extends Screen implements KeyListener {
 
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_SPACE){
-			//theMessage = thing.doTheThing();
-			theMessage = thing.showEnemy(0);
+//			//theMessage = thing.doTheThing();
+//			theMessage = thing.showEnemy(0);
+			on = !on;
 		}
 	}
 
@@ -82,11 +83,16 @@ public class HowardScreen extends Screen implements KeyListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		
 	}
 	
 	public void paintScreen(Graphics2D g2){
-		g2.drawString(theMessage, 50, 100);
+		if(on){
+			int showY = 100;
+			for(int i = 0; i < list.getEnemyList().size(); i++){
+				g2.drawString(list.getEnemyList().get(i).getName(), 50, showY += 15);
+			}
+		}
 	}
 
 	public KeyListener getKeyListener() {
