@@ -1,4 +1,4 @@
-package items;
+package characters;
 
 public interface GetItemStats {
 	public int getHealth();
