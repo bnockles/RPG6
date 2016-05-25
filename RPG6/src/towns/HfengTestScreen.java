@@ -69,10 +69,10 @@ public class HfengTestScreen extends Screen implements KeyListener {
 	//
 	public static boolean ERROR_MONEY = false;
 	public static int PLAYER_WEALTH = 5000;
-	public static int SHOP_NUMBER = 0;
 	
 	// Item Display Variables
 	public static int ITEM_NUMBER = 0;
+	public static int SHOP_NUMBER = 0;
 	public static int CURRENT_PAGE = 1;
 	public static int START = 1;
 	public static int END = 9;
