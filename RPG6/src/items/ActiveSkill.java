@@ -24,6 +24,10 @@ public class ActiveSkill extends Spell {
 
 	public ActiveSkill(String name, String description, int cost, int damage) {
 		super(name,description,cost,damage);
+		this.name = name;
+		this.description = description;
+		this.cost = cost;
+		this.damage = damage;
 	}
 
 	public int multiAttack(Character c, ActiveSkill a, int times){
