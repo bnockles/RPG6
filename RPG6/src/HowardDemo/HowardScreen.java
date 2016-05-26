@@ -3,7 +3,6 @@ package HowardDemo;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 public class HowardScreen extends Screen implements KeyListener {
 
@@ -88,9 +87,13 @@ public class HowardScreen extends Screen implements KeyListener {
 	
 	public void paintScreen(Graphics2D g2){
 		if(on){
-			int showY = 100;
+			int Yname = 100,Ylevel = 100, YcurrentHp = 100, YcurrentMana = 100;
+			int increment = 15;
 			for(int i = 0; i < list.getEnemyList().size(); i++){
-				g2.drawString(list.getEnemyList().get(i).getName(), 50, showY += 15);
+				g2.drawString(list.getEnemyList().get(i).getName(), 50, Yname += increment);
+				g2.drawString("Level: " + list.getEnemyList().get(i).getLevel(), 140, Ylevel += increment);
+				g2.drawString("currentHp: " + list.getEnemyList().get(i).getCurrHealth(), 225, YcurrentHp += increment);
+				g2.drawString("currentMp: " + list.getEnemyList().get(i).getCurrMana(), 350, YcurrentMana += increment);
 			}
 		}
 	}
