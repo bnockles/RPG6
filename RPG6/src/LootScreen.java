@@ -35,15 +35,15 @@ public class LootScreen extends Screen implements KeyListener{
 		for(int i=0;i<boxes.length;i++){
 			int y = (int)(Math.random()*15)+1;
 			if(y>0&&y<10){
-				Treasure x = new Treasure(Treasure.COMMON,(int)(Math.random()*300),"This box has a small amount of money.");
+				RegularTreasure x = new RegularTreasure(Treasure.COMMON,level,"This box contains a small amount of money.");
 				boxes[i]=x;
 			}
 			else if(y>=10&&y<15){
-				Treasure x = new Treasure(Treasure.UNCOMMON,(int)(Math.random()*3000),"This box has a decent amount of money.");
+				RegularTreasure x = new RegularTreasure(Treasure.UNCOMMON,level,"This box has a decent amount of money.");
 				boxes[i]=x;
 			}
-			else{
-				Treasure x = new Treasure(Treasure.RARE,(int)(Math.random()*30000),"This box has a large amount of money.");
+			else if(y==20){
+				RareTreasure x = new RareTreasure(Treasure.RARE,level,"This is a valuable box which contains many things.");
 				boxes[i]=x;
 			}
 		}
@@ -81,6 +81,10 @@ public class LootScreen extends Screen implements KeyListener{
 				g2.setColor(Color.BLACK);
 				g2.drawString(boxes[chosenBox].getDescription(),400,300);
 				g2.drawString("You got $"+ x + " from the box.",400,320);
+				if(boxes[chosenBox].getRarity() == "Rare"){
+					g2.setColor(Color.BLUE);
+					g2.drawString("You have also recieved a "+((RareTreasure)boxes[chosenBox]).getEquip() +" from the box.",400,340);
+				}
 			}
 		}
 		else{
@@ -109,17 +113,32 @@ public class LootScreen extends Screen implements KeyListener{
 		}
 		if(!haveBox){
 			if(keyCode == KeyEvent.VK_1){
-				money+=boxes[0].getMoney();
-				chosenBox = 0;
-				haveBox=true;
+				if(boxes[0].getRarity() == "Common"||boxes[0].getRarity() == "Uncommon"){
+					money+=((RegularTreasure) boxes[0]).getNumMoney();
+				}
+				else{
+					money+=((RareTreasure) boxes[0]).getNumMoney();
+				}
+					chosenBox = 0;
+					haveBox=true;
 			}
 			if(keyCode == KeyEvent.VK_2){
-				money+=boxes[1].getMoney();
+				if(boxes[1].getRarity() == "Common"||boxes[1].getRarity() == "Uncommon"){
+					money+=((RegularTreasure) boxes[0]).getNumMoney();
+				}
+				else{
+					money+=((RareTreasure) boxes[0]).getNumMoney();
+				}
 				chosenBox = 1;
 				haveBox=true;
 			}
 			if(keyCode == KeyEvent.VK_3){
-				money+=boxes[2].getMoney();
+				if(boxes[2].getRarity() == "Common"||boxes[2].getRarity() == "Uncommon"){
+					money+=((RegularTreasure) boxes[0]).getNumMoney();
+				}
+				else{
+					money+=((RareTreasure) boxes[0]).getNumMoney();
+				}
 				chosenBox = 2;
 				haveBox=true;
 			}

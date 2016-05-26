@@ -1,14 +1,14 @@
 
-public class Treasure {
+public abstract class Treasure {
 	String rarity;
-	int money;
+	int level;
 	String description;
 	int type;
 	public static final int COMMON = 0;
 	public static final int UNCOMMON = 1;
 	public static final int RARE = 2;
-	public Treasure(int type,int money,String description){
-		this.money = money;
+	public Treasure(int type,int level,String description){
+		this.level = level;
 		this.type = type;
 		this.description = description;
 	}
@@ -34,16 +34,11 @@ public class Treasure {
 		return rarity;
 	}
 	
+	public abstract void getItems();
+	
 	public void setRarity(String rarity) {
 		this.rarity = rarity;
 	}
 	
-	public int getMoney() {
-		return money;
-	}
-	
-	public void setMoney(int money) {
-		this.money = money;
-	}
 
 }
