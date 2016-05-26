@@ -10,9 +10,7 @@ public interface EnemyTeam {
 //	public ArrayList<Skills> getSkills();
 	public double getSpeed();
 	public void setSpeed(double speed);
-	public String getImageFilePath();
 	public double getDefense();
 	public void setDefense(double defense);
-	public String getImgFileName();
 	public void updateEnemyInfo(double health, double speed, double defense);
 }
