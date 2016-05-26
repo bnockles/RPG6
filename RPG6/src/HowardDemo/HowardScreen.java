@@ -88,12 +88,21 @@ public class HowardScreen extends Screen implements KeyListener {
 	public void paintScreen(Graphics2D g2){
 		if(on){
 			int Yname = 100,Ylevel = 100, YcurrentHp = 100, YcurrentMana = 100;
-			int increment = 15;
+			int Yhealth = 100, Yattack = 100, Ydefense = 100, Yspeed = 100;
+			int Ydrop = 100, Yexp = 100, Ygold = 100;
+			int increment = 20;
 			for(int i = 0; i < list.getEnemyList().size(); i++){
 				g2.drawString(list.getEnemyList().get(i).getName(), 50, Yname += increment);
 				g2.drawString("Level: " + list.getEnemyList().get(i).getLevel(), 140, Ylevel += increment);
 				g2.drawString("currentHp: " + list.getEnemyList().get(i).getCurrHealth(), 225, YcurrentHp += increment);
 				g2.drawString("currentMp: " + list.getEnemyList().get(i).getCurrMana(), 350, YcurrentMana += increment);
+				g2.drawString("Hp: " + list.getEnemyList().get(i).getStats().getHealth(), 450, Yhealth += increment);
+				g2.drawString("Attack: " + list.getEnemyList().get(i).getStats().getAttack(), 525, Yattack += increment);
+				g2.drawString("Defense: " + list.getEnemyList().get(i).getStats().getAttack(), 625, Ydefense += increment);
+				g2.drawString("Speed: " + list.getEnemyList().get(i).getStats().getSpeed(), 725, Yspeed += increment);
+				g2.drawString("Drop_Rate: " + list.getEnemyList().get(i).getDropRate(), 825, Ydrop += increment);
+				g2.drawString("Exp: " + list.getEnemyList().get(i).getExp(), 925, Yexp += increment);
+			
 			}
 		}
 	}

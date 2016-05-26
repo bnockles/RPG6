@@ -82,7 +82,7 @@ public class enemy extends Character{//implements EnemyTeam{
 	}
 
 	public Stats getStats(){
-    	return this.getStats();
+    	return this.stats;
 	}
 
 	public int getDropRate(){
