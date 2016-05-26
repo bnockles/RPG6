@@ -20,35 +20,65 @@ public class StorageScreen extends Screen implements KeyListener{
 	public static final int slot3 = KeyEvent.VK_3;
 	public static final int store = KeyEvent.VK_4;
 	public static final int retrieve = KeyEvent.VK_5;
+	public static final int left = KeyEvent.VK_LEFT;
+	public static final int right = KeyEvent.VK_RIGHT;
+	public static final int enter = KeyEvent.VK_ENTER;
+	public static final int quit = KeyEvent.VK_Q;
 			
 	public static String welcomeMessage = "Welcome to your wares!";
 	public static String actionMessage = "What would you like to do today? " +
-			"4 to Store Items and 5 to Retrieve Items";
+			"Press 4 to Store Items and 5 to Retrieve Items";
 	public static String storedItems = "";
+	
+	Storage storageNPC;
+	SampleCharacter sNPC;
+	
 	Item e1;
 	Item e2;
 	Item e3;
 	Item e4;
 	
-	public ArrayList<Item> list;
+	int counter = 0;
+	
+	public ArrayList<Item> playerInventory;
 	
 	public StorageScreen(Game game) {
 		super(game);
+		
+		sNPC = new SampleCharacter("/images/storage.png",50,50,"npc");
+		
+		storageNPC = new Storage("Greg","Male","He is your storage guy, him and his cousins (who look exactly like him) "
+				+ "are in every town in case you want to store items and then take them back for later.", true);
 	
-		list = new ArrayList<Item>(); 
+		playerInventory = new ArrayList<Item>(); 
 		e1 = equipStock.equipStocks(0);
 		e2 = equipStock.equipStocks(1);
 		e3 = equipStock.equipStocks(2);
 		e4 = equipStock.equipStocks(3);
 		
-		list.add(e1);
-		list.add(e2);
-		list.add(e3);
-		list.add(e4);
+		playerInventory.add(e1);
+		playerInventory.add(e2);
+		playerInventory.add(e3);
+		playerInventory.add(e4);
 	}
 
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == quit){
+			actionMessage = "What would you like to do today?" +
+					"Press 4 to Store Items and 5 to Retrieve Items";
+		}
+		if(e.getKeyCode() == store){
+			actionMessage = "Move the left or right arrow keys to choose what to store! Press k to quit.";
+			System.out.println("4 was pressed");
+			if(e.getKeyCode() == left && counter != 0){
+				System.out.println("Left arrow key was pressed");
+				counter--;
+			}
+			if(e.getKeyCode() == right && counter != playerInventory.size()){
+				System.out.println("Right arrow key was pressed");
+				counter++;
+			}
+		}
 		
 	}
 
@@ -64,21 +94,38 @@ public class StorageScreen extends Screen implements KeyListener{
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
-		// TODO Auto-generated method stub
-		int yAxis = 100;
+		
+		g2.drawImage(sNPC.getImage(), sNPC.getX(), sNPC.getY(), null);
+		
+		//displays greetings
+		g2.drawString(welcomeMessage, 200, 100);
+		
+		//displays commands
+		g2.drawString(actionMessage, 200, 150);
+		
+		//displays storage inventory
+		g2.drawString("Storage Inventory: ",200, 200);
+		int xAx = 300;
+		for(Item s:Storage.getStorage()){
+			if(s != null){
+				g2.drawString(s.getItemName(), xAx, 200);
+				xAx += 100;				
+			}
+		}
 		
 		//displays player inventory
-		for(Item i:list){
-			g2.drawString(i.getItemName(),100, yAxis);
-			yAxis += 100;
+		g2.drawString("Player Inventory: ", 200, 300);
+		int xAxis = 300;
+		for(Item i:playerInventory){
+			g2.drawString(i.getItemName(),xAxis, 300);
+			xAxis += 100;
 		}
 		
 	}
 
 	@Override
 	public KeyListener getKeyListener() {
-		// TODO Auto-generated method stub
-		return null;
+		return this;
 	}
 
 }
