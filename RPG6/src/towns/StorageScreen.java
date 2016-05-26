@@ -20,7 +20,8 @@ public class StorageScreen extends Screen implements KeyListener{
 	public static final int slot3 = KeyEvent.VK_3;
 	public static final int store = KeyEvent.VK_4;
 	public static final int retrieve = KeyEvent.VK_5;
-			
+		
+	//test
 	public static String welcomeMessage = "Welcome to your wares!";
 	public static String actionMessage = "What would you like to do today? " +
 			"4 to Store Items and 5 to Retrieve Items";
