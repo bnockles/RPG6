@@ -16,7 +16,10 @@ public class ItemScreen2 extends Screen implements KeyListener{
 	static ArrayList<Item> inventory = new ArrayList<Item>();
 	static ArrayList<Item> cInventory = new ArrayList<Item>();
 	static ArrayList<Item> qInventory = new ArrayList<Item>();
+<<<<<<< HEAD
 	static ArrayList<ActiveSkill> skillList = new ArrayList<ActiveSkill>();
+=======
+>>>>>>> refs/remotes/origin/characters
 	public static boolean currentFirst = false;
 	public static boolean currentSecond = false;
 	public static boolean currentThird = false;

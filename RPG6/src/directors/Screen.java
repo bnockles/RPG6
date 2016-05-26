@@ -7,8 +7,10 @@ import java.awt.image.BufferedImage;
 
 public abstract class Screen{
 
+
 	protected BufferedImage screenImage;
 	protected Game game;
+
 
 	public int width;
 	public int height;
@@ -40,6 +42,8 @@ public abstract class Screen{
 	
 	public abstract KeyListener getKeyListener();
 
+
+
 	public void update(){
 		Graphics2D g2 = (Graphics2D) screenImage.getGraphics();
 		g2.setColor(Color.white);
@@ -47,6 +51,7 @@ public abstract class Screen{
 		g2.setColor(Color.black);
 		paintScreen(g2);
 	}
+
 
 
 }

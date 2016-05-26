@@ -3,6 +3,7 @@ package items;
 import java.util.ArrayList;
 
 public interface Craftable {
+<<<<<<< HEAD
 	
 	//craftItem necessaryItem = new craftItem("Gem");
 
@@ -12,5 +13,9 @@ public interface Craftable {
 	//	playerCurrency -= item.getCraftPrice();
 	//	inventory.remove(necessaryItem);
 	// }
+=======
+
+	public boolean canCraft(Character hero, ArrayList<Item> items);
+>>>>>>> refs/remotes/origin/characters
 	
 }

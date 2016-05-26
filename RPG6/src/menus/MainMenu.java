@@ -10,6 +10,7 @@ import directors.UtilityMethods;
 
 public class MainMenu extends Screen {
 
+	
 	public MainMenu(Game game) {
 		super(game);
 	}

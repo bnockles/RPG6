@@ -1,13 +1,16 @@
 package directors;
 
+import saving.SaveScreen;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
-import menus.MainMenu;
+//import menus.MainMenu;
 
-public class StartScreen extends Screen implements KeyListener{
+public class 	StartScreen extends Screen implements KeyListener{
 
 	public StartScreen(Game game) {
 		super(game);
@@ -29,7 +32,10 @@ public class StartScreen extends Screen implements KeyListener{
 	public void keyPressed(KeyEvent arg) {
 		int k = arg.getKeyCode();
 		if(k==KeyEvent.VK_SPACE){
-			Screen mainMenu = new MainMenu(game);
+			Screen mainMenu = null;
+			try {
+				mainMenu = new SaveScreen(game);
+			} catch (IOException e) {}
 			game.setScreen(mainMenu);
 		}
 	}

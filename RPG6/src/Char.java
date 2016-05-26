@@ -1,4 +1,5 @@
 
+
 public class Char{
     
   String name;
@@ -9,7 +10,9 @@ public class Char{
 	int speed;
 	int exp;
     
-  public Char(String name, int level, int heatlh int speed){
+  public Char(String name, 
+		  int level, 
+		  int heatlh, int speed){
       this.name = name;
       this.health = health;
       this.speed = speed;

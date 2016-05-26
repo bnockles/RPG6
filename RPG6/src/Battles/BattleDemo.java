@@ -7,8 +7,8 @@ public class BattleDemo extends Game{
 		new BattleDemo();
 
 	}
-	protected void reset() {
-		Screen demoScreen = new battleScreen(this);
+	public void reset() {
+		Screen demoScreen = new TestBattleScreen(this);
 		setScreen(demoScreen); 
 		repaint(); 
 	}
