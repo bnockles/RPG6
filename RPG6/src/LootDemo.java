@@ -12,7 +12,7 @@ public class LootDemo extends Game{
 		// TODO Auto-generated method stub
 		new LootDemo();
 	}
-	protected void reset() {
+	public void reset() {
 		Screen startScreen = new LootScreen(this,17);
 		setScreen(startScreen);
 		repaint();	

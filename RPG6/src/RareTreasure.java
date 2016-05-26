@@ -17,7 +17,7 @@ public class RareTreasure extends Treasure{
 		equip = x.equipStocks((int)(Math.random()*level));
 	}
 
-	public Equipment getEquip() {
+	public Equipment getEquip(){
 		return equip;
 	}
 

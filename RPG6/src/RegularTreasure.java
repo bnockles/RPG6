@@ -15,5 +15,4 @@ public class RegularTreasure extends Treasure{
 	public int getNumMoney() {
 		return numMoney;
 	}
-
 }

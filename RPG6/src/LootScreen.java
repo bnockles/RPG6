@@ -24,7 +24,7 @@ public class LootScreen extends Screen implements KeyListener{
 	equipStock y;
 	int equipLevel;
 	boolean seenDrop;
-	public LootScreen(Game game,int level) {
+	public LootScreen(Game game,int level){
 		super(game);
 		update();
 		y = new equipStock();
