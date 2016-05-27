@@ -246,15 +246,6 @@ public class StorageScreen extends Screen implements KeyListener{
 			g2.setColor(Color.black);
 			xAx += 100;
 		}
-//		for(Item s:Storage.getStorage()){
-//			if(s != null){
-//				g2.drawString(s.getItemName(), xAx, 250);
-//				xAx += 100;				
-//			}else{
-//				g2.drawString(" _____" , xAx, 250);
-//				xAx += 100;
-//			}
-//		}
 
 		//displays player inventory
 		g2.drawString("Player Inventory: ", 200, 300);	
