@@ -207,6 +207,7 @@ public class StorageScreen extends Screen implements KeyListener{
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
+		//j
 		//displays npc
 		g2.drawImage(sNPC.getImage(), sNPC.getX(), sNPC.getY(), null);
 
