@@ -1,6 +1,6 @@
 package items;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 public class equipStock {
 	public static final int B_SD = 0;
 	public static final int S_SD = 1;
@@ -198,13 +198,13 @@ public class equipStock {
 		}
 		return null;
 	}
+}
 	
 	
 	
 	
 	
-	
-=======
+/*=======
 import java.util.ArrayList;
 
 public class equipStock {
@@ -409,3 +409,4 @@ public class equipStock {
 >>>>>>> refs/remotes/origin/characters
 
 }
+*/

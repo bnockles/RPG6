@@ -1,7 +1,7 @@
 package items;
 
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 public abstract class Item {
 	private String name;
 	private String description;
@@ -28,7 +28,8 @@ public abstract class Item {
 	public abstract void use(Character user);
 	
 	public void draw(){}
-=======
+}
+/*=======
 public abstract class Item implements ItemTeam, GetItem, Storable {
 	private String name;
 	private String description;
@@ -95,3 +96,4 @@ public abstract class Item implements ItemTeam, GetItem, Storable {
 	}
 >>>>>>> refs/remotes/origin/characters
 }
+*/

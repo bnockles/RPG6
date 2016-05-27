@@ -1,6 +1,6 @@
 package items;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 public class Equipment extends Item {
 	public static final int NONE 	= 0;
 	public static final int HELMET 	= 1;
@@ -53,8 +53,9 @@ public class Equipment extends Item {
 
 	public boolean canUse(Character user){ return true; }
 	public void use(Character user){ user.equip(this); }
-=======
-import java.util.ArrayList;
+}
+//=======
+/*import java.util.ArrayList;
 
 public class Equipment extends Item implements EquipInterface, getStats, Craftable, Repairable {
 	public ArrayList<Item> yo = new ArrayList<Item>();
@@ -247,7 +248,7 @@ public class Equipment extends Item implements EquipInterface, getStats, Craftab
 	}
 >>>>>>> refs/remotes/origin/characters
 }
-
+*/
 
 
 

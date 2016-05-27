@@ -1,6 +1,6 @@
 package items;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 public final class Stats {
 	//direct statss
 	private int health;
@@ -87,7 +87,7 @@ public final class Stats {
 	}
 }
 
-=======
+/*=======
 public class Stats {
 	//direct statss
 	private int health;
@@ -213,3 +213,4 @@ public class Stats {
 	}
 }
 >>>>>>> refs/remotes/origin/characters
+*/
