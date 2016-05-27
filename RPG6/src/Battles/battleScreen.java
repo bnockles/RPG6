@@ -45,50 +45,41 @@ public class battleScreen extends Screen implements KeyListener {
 	static int displayHPEnemy;
 	static int displayHPPlayer;
 
+	public final int BUTTONWIDTH = 283;
+	public final int BUTTONHEIGHT = 75;
+	public final int STARTX = 50;
+	public final int STARTY = 600;
+	public final int BUTTONXDISTANCE = 308;
+	public final int BUTTONYDISTANCE = 90;
+	public final int PLAYERPLACEMENTX = 100;
+	public final int ENEMYPLACEMENTX = 500;
+	public final int PLAYERPLACEMENTY =350;
 
 	public static int enemyCurrentHP;
 	public static int playerCurrentHP;
 	private BufferedImage img;
 
+	MapLoader battleMaps;
 
 	private String keyStored;
 	
 	public battleScreen(Game game) {
 		super(game);
+		//arList.addAll(Arrays.asList(1, 2, 3, 4, 5));
 		buttonHome();
 		mapSelect = 0;
 		action = "home";
-		maps.add("/images/sewerFloor.png");
-		maps.add("/images/modernsewer.png"); 
-		maps.add("/images/DemonCastleFloor.png");
-		maps.add("/images/DemonCastleBackground.png");
-		maps.add("/images/LavaCaveFloor.png");
-		maps.add("/images/LavaCave.png");
-		playerMoves.add("Slash");
-		playerMoves.add("Punch");
-		playerMoves.add("Kick");
-		playerMoves.add("CombatCombo");
-		playerMoves.add("Back");
-		playerMoves.add("More");
-		playerMovesSpells.add("FireBall");
-		playerMovesSpells.add("IceBlast");
-		playerMovesSpells.add("AtomicBlast");
-		playerMovesSpells.add("WindSlash");
-		playerMovesSpells.add("Back");
-		playerMovesSpells.add("More");
-		playerBag.add("HP Potion");
-		playerBag.add("MP Potion");
-		playerBag.add("Pokeball");
-		playerBag.add("OP Item Here");
-		playerBag.add("Back");
-		playerBag.add("More");
+		maps.addAll(Arrays.asList("/images/sewerFloor.png","/images/modernsewer.png","/images/DemonCastleFloor.png","/images/DemonCastleBackground.png","/images/LavaCaveFloor.png","/images/LavaCave.png"));
+		playerMoves.addAll(Arrays.asList("Slash","Punch","Kick","CombatCombo","Back","More"));
+		playerMovesSpells.addAll(Arrays.asList("FireBall","IceBlast","AtomicBlast","WindSlash","Back","More"));
+		playerBag.addAll(Arrays.asList("HP Potion","MP Potion","Pokeball","OP Item Here","Back","More"));
 		playerStats.add(100);
 		playerStats.add(10);
 		select = false;
 		selectX=0;
 		selectY=0;
-		this.player = new DemoCharacter("/images/ArchAngel.png",100,350,playerStats,playerMoves,playerMovesSpells,"Charles");//stats,MeleeMoves,Spells,Name
-		this.enemy = new DemoCharacter("/images/Lich.png",500,350,playerStats,playerMoves,playerMovesSpells,"Evil Dude");
+		this.player = new DemoCharacter("/images/ArchAngel.png",PLAYERPLACEMENTX,PLAYERPLACEMENTY,playerStats,playerMoves,playerMovesSpells,"Charles");//stats,MeleeMoves,Spells,Name
+		this.enemy = new DemoCharacter("/images/Lich.png",ENEMYPLACEMENTX,PLAYERPLACEMENTY,playerStats,playerMoves,playerMovesSpells,"Evil Dude");
 		displayHPEnemy=100;
 		displayHPPlayer=100;
 		enemyCurrentHP=100;
@@ -108,7 +99,7 @@ public class battleScreen extends Screen implements KeyListener {
 			g2.drawImage(background(maps.get(mapSelect+1),1000,800),0,0,null);
 			g2.drawImage(player.getImage(),player.getX(),player.getY(),null);
 			g2.drawImage(enemy.getImage(),enemy.getX(),enemy.getY(),null);
-			drawButtons(select,selectX,selectY,stringFont,g2,buttonNames.get(0),buttonNames.get(1),buttonNames.get(2),buttonNames.get(3),buttonNames.get(4),buttonNames.get(5));
+			drawButtons(select,selectX,selectY,stringFont,g2,buttonNames);
 //			g2.drawString("NAME: " + player.getTitle(), 170, 620);
 			g2.drawImage(background("/images/HPBar.png",175,20), 600, 320, null);
 			g2.drawImage(background("/images/HPBar.png",175,20),200,320,null);
@@ -121,46 +112,50 @@ public class battleScreen extends Screen implements KeyListener {
 		catch(Exception e){
 			//there will only ever be one error when the Screen first prints (since enemies have not been initialized)
 		}
+		System.out.println("hi");
 
 	}
-	public void drawButtons(boolean selector, int x, int y, Font fontString, Graphics2D g, String string, String string2, String string3, String string4, String string5, String string6) {
+	public void drawButtons(boolean selector, int x, int y, Font fontString, Graphics2D g, ArrayList<String>nameOfButtons) {
 			AffineTransform affinetransform = new AffineTransform();
 			FontRenderContext frc = new FontRenderContext(affinetransform ,true,true); 
-	
-//			g.drawImage(background("/images/boxSelect.png",300,158),40,560,null);
+			int counter = 0;
+
 			if(selector){
 				g.drawImage(background("/images/boxSelect.png",300,158),40+(308*x),560+(90*y),null);
 			}
-			g.drawImage(background("/images/bluebutton.png",283,75),50,600,null);
-			int textwidth = (int)(fontString.getStringBounds(string, frc).getWidth());
-			int textheight = (int)(fontString.getStringBounds(string, frc).getHeight());
-			g.drawString(string, (50+(283-textwidth)/2),(600+(75-textheight)/2));
-			
-			g.drawImage(background("/images/bluebutton.png",283,75),50,690,null);
-			textwidth = (int)(fontString.getStringBounds(string2, frc).getWidth());
-			textheight = (int)(fontString.getStringBounds(string2, frc).getHeight());
-			g.drawString(string2, (50+(283-textwidth)/2),(690+(75-textheight)/2));
-			
-			g.drawImage(background("/images/bluebutton.png",283,75),358,600,null);
-			textwidth = (int)(fontString.getStringBounds(string3, frc).getWidth());
-			textheight = (int)(fontString.getStringBounds(string3, frc).getHeight());
-			g.drawString(string3, (358+(283-textwidth)/2),(600+(75-textheight)/2));
-			
-			g.drawImage(background("/images/bluebutton.png",283,75),358,690,null);
-			textwidth = (int)(fontString.getStringBounds(string4, frc).getWidth());
-			textheight = (int)(fontString.getStringBounds(string4, frc).getHeight());
-			g.drawString(string4, (358+(283-textwidth)/2),(690+(75-textheight)/2));
-			
-			g.drawImage(background("/images/bluebutton.png",283,75),666,600,null);
-			textwidth = (int)(fontString.getStringBounds(string5, frc).getWidth());
-			textheight = (int)(fontString.getStringBounds(string5, frc).getHeight());
-			g.drawString(string5, (666+(283-textwidth)/2),(600+(75-textheight)/2));
-			
-			g.drawImage(background("/images/bluebutton.png",283,75),666,690,null);
-			textwidth = (int)(fontString.getStringBounds(string6, frc).getWidth());
-			textheight = (int)(fontString.getStringBounds(string6, frc).getHeight());
-			g.drawString(string6, (666+(283-textwidth)/2),(690+(75-textheight)/2));
+
+			for(int i = 0;i<3;i++){
+				for(int j=0;j<2;j++){
+					g.drawImage(background("/images/bluebutton.png", BUTTONWIDTH, BUTTONHEIGHT),STARTX + i*BUTTONXDISTANCE,STARTY+j*BUTTONYDISTANCE,null);
+					int textwidth = (int)(fontString.getStringBounds(nameOfButtons.get(counter), frc).getWidth());
+					int textheight = (int)(fontString.getStringBounds(nameOfButtons.get(counter), frc).getHeight());
+					g.drawString(nameOfButtons.get(counter), ((STARTX + i*BUTTONXDISTANCE)+(283-textwidth)/2),((STARTY+j*BUTTONYDISTANCE)+(75-textheight)/2));
+					counter++;
+				}
+			}
 	}
+	/*
+	 *public void drawButtons(boolean selector, int x, int y, Font fontString, Graphics2D g, ArrayList<String>nameOfButtons) {
+			AffineTransform affinetransform = new AffineTransform();
+			FontRenderContext frc = new FontRenderContext(affinetransform ,true,true); 
+			int counter = 0;
+
+			if(selector){
+				g.drawImage(background("/images/boxSelect.png",300,158),40+(308*x),560+(90*y),null);
+			}
+
+			for(int i = 0;i<3;i++){
+				for(int j=0;j<2;j++){
+					g.drawImage(background("/images/bluebutton.png", BUTTONWIDTH, BUTTONHEIGHT),STARTX + i*BUTTONXDISTANCE,STARTY+j*BUTTONYDISTANCE,null);
+					int textwidth = (int)(fontString.getStringBounds(nameOfButtons.get(counter), frc).getWidth());
+					int textheight = (int)(fontString.getStringBounds(nameOfButtons.get(counter), frc).getHeight());
+					g.drawString(nameOfButtons.get(counter), ((STARTX + i*BUTTONXDISTANCE)+(283-textwidth)/2),((STARTY+j*BUTTONYDISTANCE)+(75-textheight)/2));
+					counter++;
+				}
+			}
+	}
+	 * */
+	 
 
 	public BufferedImage background(String imagePath,int x1,int y1){
 		BufferedImage bImg = new BufferedImage(x1, y1, BufferedImage.TYPE_INT_ARGB);
@@ -191,7 +186,7 @@ public class battleScreen extends Screen implements KeyListener {
 		buttonNames.add("Run[Press D]");
 	}
 	public static void buttonMaker(ArrayList<String> keyPressAction){
-			buttonNames.clear(); 
+			buttonNames.clear();
 			buttonNames.addAll(keyPressAction);
 	}
 
@@ -213,8 +208,6 @@ public class battleScreen extends Screen implements KeyListener {
 				selectX = 0;
 				selectY = 0;
 				keyStored = "q";
-				update();
-				game.repaint();
 				
 			}
 			else{
@@ -227,8 +220,6 @@ public class battleScreen extends Screen implements KeyListener {
 					attackedEnemy();
 				}
 				select = false;
-				update();
-				game.repaint();
 			}
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_A){
@@ -237,8 +228,6 @@ public class battleScreen extends Screen implements KeyListener {
 				selectX = 0;
 				selectY = 1;
 				keyStored = "a";
-				update();
-				game.repaint();
 				
 			}
 			else{
@@ -251,8 +240,6 @@ public class battleScreen extends Screen implements KeyListener {
 					attackedEnemy();
 				}
 				select = false;
-				update();
-				game.repaint();
 			}
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_W){
@@ -261,9 +248,6 @@ public class battleScreen extends Screen implements KeyListener {
 				selectX = 1;
 				selectY = 0;
 				keyStored = "w";
-				update();
-				game.repaint();
-				
 			}
 			else{
 				if(action.equals("home")){
@@ -275,8 +259,6 @@ public class battleScreen extends Screen implements KeyListener {
 					attackedEnemy();
 				}
 				select = false;
-				update();
-				game.repaint();
 			}
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_S){
@@ -285,8 +267,6 @@ public class battleScreen extends Screen implements KeyListener {
 				selectX = 1;
 				selectY = 1;
 				keyStored = "s";
-				update();
-				game.repaint();
 				
 			}
 			else{
@@ -299,8 +279,6 @@ public class battleScreen extends Screen implements KeyListener {
 					attackedEnemy();
 				}
 				select = false;
-				update();
-				game.repaint();
 			}
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_E){
@@ -309,9 +287,6 @@ public class battleScreen extends Screen implements KeyListener {
 				selectX = 2;
 				selectY = 0;
 				keyStored = "e";
-				update();
-				game.repaint();
-				
 			}
 			else{
 				if(action.equals("home")){
@@ -323,8 +298,6 @@ public class battleScreen extends Screen implements KeyListener {
 					action="home";
 				}
 				select = false;
-				update();
-				game.repaint();
 			}
 		}
 		else if(e.getKeyCode()==KeyEvent.VK_D){
@@ -333,8 +306,6 @@ public class battleScreen extends Screen implements KeyListener {
 				selectX = 2;
 				selectY = 1;
 				keyStored = "d";
-				update();
-				game.repaint();
 				
 			}
 			
@@ -344,25 +315,21 @@ public class battleScreen extends Screen implements KeyListener {
 			this.enemy = new DemoCharacter("/images/GreatDevil.png",500,350,playerStats,playerMoves,playerMovesSpells,"You");
 			this.player = new DemoCharacter("/images/Goliath.png",100,350,playerStats,playerMoves,playerMovesSpells,"Evil Dude");
 			resetGameValues();
-			update();
-			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_2){
 			mapSelect=4;
 			this.enemy = new DemoCharacter("/images/BlackDragon.png",500,350,playerStats,playerMoves,playerMovesSpells,"something");
 			this.player = new DemoCharacter("/images/Infantry.png",100,350,playerStats,playerMoves,playerMovesSpells,"Evil Dude");
 			resetGameValues();
-			update();
-			game.repaint();
 		}
 		if(e.getKeyCode()==KeyEvent.VK_3){
 			mapSelect=0;
 			this.player = new DemoCharacter("/images/ArchAngel.png",100,350,playerStats,playerMoves,playerMovesSpells,"Charles");//stats,MeleeMoves,Spells,Name
 			this.enemy = new DemoCharacter("/images/Lich.png",500,350,playerStats,playerMoves,playerMovesSpells,"Evil Dude");
 			resetGameValues();
-			update();
-			game.repaint();
 		}
+		update();
+		game.repaint();
 		
 	}
 
@@ -374,7 +341,6 @@ public class battleScreen extends Screen implements KeyListener {
 
 	private void attackedEnemy() {
 		enemy.stats.set(0,(int) (enemy.stats.get(0)-(1.5*player.stats.get(1)*Math.random())));
-//		enemyCurrentHP = enemy.stats.get(0);
 		displayHPEnemy = enemy.stats.get(0);
 		System.out.println("EnemyHP:"+displayHPEnemy);
 		player.stats.set(0,(int) (player.stats.get(0)-enemy.stats.get(1)*Math.random()));
