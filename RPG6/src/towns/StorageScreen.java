@@ -30,6 +30,7 @@ public class StorageScreen extends Screen implements KeyListener{
 	public static String actionMessage = "What would you like to do today? " +
 			" Press 4 to Store Items and 5 to Retrieve Items";
 	public static String storedItems = "";
+	public static int selectedIndex = 0;
 
 	Storage storageNPC;
 	SampleCharacter sNPC;
@@ -69,27 +70,49 @@ public class StorageScreen extends Screen implements KeyListener{
 			System.out.println("Q was pressed");
 			actionMessage = "What would you like to do today?" +
 					"Press 4 to Store Items and 5 to Retrieve Items";
+			storing = false;
 			update();
 		}
 		if(e.getKeyCode() == store){
-			actionMessage = "Move the left or right arrow keys to choose what to store! Press k to quit.";
+			actionMessage = "Move the left or right arrow keys to choose what to store! Press Q to quit.";
 			System.out.println("4 was pressed");
 			storing = true;
 			update();
 		}
-		
+
 		if(storing){
-			if(e.getKeyCode() == left && counter != 0){
+			if(e.getKeyCode() == left){
 				System.out.println("Left arrow key was pressed");
 				counter--;
+				if(counter < 0){
+					counter = playerInventory.size() - 1;
+				}
 				update();
 				game.repaint();
 			}
-			if(e.getKeyCode() == right && counter != playerInventory.size()){
+			if(e.getKeyCode() == right){
 				System.out.println("Right arrow key was pressed");
 				counter++;
+				if(counter > playerInventory.size() - 1){
+					counter = 0;
+				}
 				update();
 				game.repaint();
+			}
+			selectedIndex = counter;
+			if(e.getKeyCode() == enter){
+				System.out.println("Enter was pressed");
+				actionMessage = "Press 1 to store in slot 1, 2 to store in slot 2 and 3 to store in slot 3.";
+				if(e.getKeyCode() == slot1){
+					System.out.println("Picking slot 1");
+				}
+				if(e.getKeyCode() == slot2){
+					System.out.println("Picking slot 1");
+				}
+				if(e.getKeyCode() == slot3){
+					System.out.println("Picking slot 1");
+				}
+
 			}
 		}
 
@@ -127,17 +150,17 @@ public class StorageScreen extends Screen implements KeyListener{
 		}
 
 		//displays player inventory
-		g2.drawString("Player Inventory: ", 200, 300);
+		g2.drawString("Player Inventory: ", 200, 300);	
 		int xAxis = 300;
-		for(Item i:playerInventory){
-			g2.drawString(i.getItemName(),xAxis, 300);
-			xAxis += 100;
-		}
-		
-		if(storing == true){
-			for(Item g:playerInventory){
+		for(int i = 0; i < playerInventory.size(); i++){
+			if(i == selectedIndex && storing){
 				g2.setColor(Color.blue);
+				g2.drawString(playerInventory.get(i).getItemName(),xAxis, 300);
+			}else{
+				g2.setColor(Color.black);
+				g2.drawString(playerInventory.get(i).getItemName(),xAxis, 300);
 			}
+			xAxis += 100;
 		}
 
 	}
