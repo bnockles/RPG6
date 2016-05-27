@@ -23,10 +23,8 @@ public class MinigameScreen extends Screen implements KeyListener {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 	}
 
-/*	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_SPACE){
@@ -34,13 +32,11 @@ public class MinigameScreen extends Screen implements KeyListener {
 		}
 	}
 
-	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
@@ -49,14 +45,16 @@ public class MinigameScreen extends Screen implements KeyListener {
 	@Override
 	public void paintScreen(Graphics2D g2) {
 		// TODO Auto-generated method stub
-		g2.drawString(theMessage,50,100);
+		g2.drawString("Welcome to a Basic Game of Poker! If you win, you will receive an item "
+				+ "as a reward totally free of cost! Press space bar to start game",100,100);
+		g2.drawString(theMessage,100,200);
 	}
 
 	@Override
 	public KeyListener getKeyListener() {
 		// TODO Auto-generated method stub
 		return this;
-	}*/
+	}
 
 }
 
