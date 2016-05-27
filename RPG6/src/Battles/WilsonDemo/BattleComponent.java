@@ -13,3 +13,4 @@ public interface BattleComponent {
 	public void keyAction(int keyCode);
 	
 }
+

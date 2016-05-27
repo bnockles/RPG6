@@ -1,5 +1,6 @@
 package Battles.WilsonDemo;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public interface BattleCharacters {
@@ -38,10 +39,8 @@ public interface BattleCharacters {
 	
 	public ArrayList<Skill> getSkills();
 	
-	public void flee();
+	public BufferedImage getImageFilepath();
 	
-	public String getImageFilepath();
-	
-	public void updateCharacterInfo(int currHp, int currMp, int exp);
+	public void updateCharacterHPandMP(int currHp, int currMp);
 	
 }

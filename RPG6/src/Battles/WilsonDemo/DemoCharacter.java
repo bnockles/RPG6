@@ -1,6 +1,16 @@
 package Battles.WilsonDemo;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 
 public class DemoCharacter implements BattleCharacters {
@@ -23,6 +33,7 @@ public class DemoCharacter implements BattleCharacters {
 	private ArrayList<Item> inventory;
 	private ArrayList<Skill> skills;
 	private String imageFilepath;
+	private BufferedImage portrait;
 	
 	
 	
@@ -43,7 +54,20 @@ public class DemoCharacter implements BattleCharacters {
 		this.luck = luck;
 		this.currExp = 0;
 		this.expNeededToLevel = 1000;
-		this.imageFilepath = imageFilepath;
+		
+		this.portrait = new BufferedImage(96, 96, BufferedImage.TYPE_INT_ARGB);
+		URL url = getClass().getResource(imageFilepath);
+		try {
+			BufferedImage original = ImageIO.read(url);
+			
+			Graphics2D g = (Graphics2D) portrait.getGraphics();
+			int w = original.getWidth();
+			int h = original.getHeight();
+			g.drawImage(original,0,0,96,96,0,0,w,h,null);
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 	}
 
 	public String getName() {
@@ -114,25 +138,18 @@ public class DemoCharacter implements BattleCharacters {
 		return skills;
 	}
 
-	public String getImageFilepath() {
-		return imageFilepath;
-	}
-	
-	public void flee() {
-		
+	public BufferedImage getImageFilepath() {
+		return portrait;
 	}
 
-	public void updateCharacterInfo(int currHp, int currMp, int exp) {
-		this.currHp = currHp;
-		this.currMp = currMp;
-		this.currExp += exp;
-		if(currExp > expNeededToLevel){
-			levelUp();
-		}
-	}
 	
 	public void levelUp(){
 		
+	}
+
+	public void updateCharacterHPandMP(int currHp, int currMp) {
+		this.currHp = currHp;
+		this.currMp = currMp;
 	}
 	
 }

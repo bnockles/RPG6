@@ -24,7 +24,7 @@ public class CharacterBattleComponent implements BattleComponent {
 		ifStats = false;
 	}
 	
-	public void drawBattleComponent(String name,int hp, int currHp,int mp, int currMp, int atk,int def, int spd, String image){
+	public void drawBattleComponent(String name,int hp, int currHp,int mp, int currMp, int atk,int def, int spd, BufferedImage image){
 		Graphics2D g2 = (Graphics2D)this.WilsonBattleComponent.getGraphics();
 		
 		//box
@@ -39,7 +39,7 @@ public class CharacterBattleComponent implements BattleComponent {
 			//image
 			g2.setColor(Color.WHITE);
 			g2.drawRect(1, 104, 96, 96);
-			g2.drawImage(createImage(image, 96,96),1,104,null);
+			g2.drawImage(image ,1,104,null);
 			
 			//name
 			g2.setColor(Color.WHITE);
