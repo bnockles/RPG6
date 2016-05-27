@@ -153,18 +153,34 @@ public class StorageScreen extends Screen implements KeyListener{
 		if(retrieving){
 			if(e.getKeyCode() == left){
 				System.out.println("Left arrow key was pressed");
-				storageCounter--;
-				if(storageCounter < 0){
-					storageCounter = Storage.getStorage().length - 1;
+				if(storageCounter == 0){
+					if(Storage.getStorage()[Storage.getStorage().length - 1] != null){
+						storageCounter = Storage.getStorage().length - 1;
+					}
+				}else{		
+					for(int i = storageCounter - 1; i >= 0; i--){
+						if(Storage.getStorage()[i] != null){
+							storageCounter = i;
+							break;
+						}
+					}
 				}
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == right){
 				System.out.println("Right arrow key was pressed");
-				storageCounter++;
-				if(storageCounter > Storage.getStorage().length - 1){
-					storageCounter = 0;
+				if(storageCounter == Storage.getStorage().length - 1){
+					if(Storage.getStorage()[0] != null){
+						storageCounter = 0;
+					}
+				}else{	
+					for(int i = storageCounter + 1; i < Storage.getStorage().length; i++){
+						if(Storage.getStorage()[i] != null){
+							storageCounter = i;
+							break;
+						}
+					}
 				}
 				update();
 				game.repaint();
@@ -208,7 +224,7 @@ public class StorageScreen extends Screen implements KeyListener{
 		for(int i = 0; i < Storage.getStorage().length; i++){
 			if(i == selectedStorageIndex && retrieving){
 				if(Storage.getStorage()[i] != null && i == selectedStorageIndex){
-					g2.setColor(Color.blue);
+					g2.setColor(Color.red);
 					g2.drawString(Storage.getStorage()[i].getItemName(), xAx, 250);
 				}else if(Storage.getStorage()[i] != null){
 					g2.setColor(Color.black);
