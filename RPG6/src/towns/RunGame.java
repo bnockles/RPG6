@@ -12,7 +12,9 @@ public class RunGame {
 	}
 	public String displayCard(){
 		String print="";
-		print=Card.rank[0].toString();
-		return print;
+		for(int i=0;i<5;i++){
+			print+=Deck.cards.get(i).toString();
+		}
+		  return print;
 	}
 }
