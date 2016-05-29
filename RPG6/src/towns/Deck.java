@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Deck {
      static ArrayList<Card> cards;
     
-    private Deck() {
+    public Deck() {
 	        cards = new ArrayList<Card>();
 	        int index_1, index_2;
 	        Random generator = new Random();
@@ -20,6 +20,7 @@ public class Deck {
 	        {
 	            for(int j=0; j<=12; j++){
 	               cards.add(new Card(i,j));
+	             //  System.out.println(cards.get(i).toString());
 	               count++;
 	             }
 	        }

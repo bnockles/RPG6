@@ -15,7 +15,7 @@ public class MinigameScreen extends Screen implements KeyListener {
 	public MinigameScreen(Game game) {
 		super(game);
 		// TODO Auto-generated constructor stub
-		thing=new RunGame();
+		thing=new RunGame(); 
 		theMessage=" ";
 	    displayTheCard = " ";
 	}

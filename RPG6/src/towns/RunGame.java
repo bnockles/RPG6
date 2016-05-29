@@ -1,7 +1,5 @@
 package towns;
 
-import java.util.ArrayList;
-
 public class RunGame {
 	public RunGame(){
 		
