@@ -7,18 +7,20 @@ import java.util.ArrayList;
  *
  */
 public class Deck {
-    private ArrayList<Card> cards;
+     static ArrayList<Card> cards;
     
     private Deck() {
 	        cards = new ArrayList<Card>();
 	        int index_1, index_2;
 	        Random generator = new Random();
 	        Card temp;
+	        int count=0;
+	        while(count<5){
 	        for(int i=0; i<=3; i++)
 	        {
 	            for(int j=0; j<=12; j++){
-	             
 	               cards.add(new Card(i,j));
+	               count++;
 	             }
 	        }
 	        int size = cards.size()-1;
@@ -30,6 +32,7 @@ public class Deck {
 	            cards.set( index_2 , cards.get( index_1 ) );
 	            cards.set( index_1, temp );
 	        }
+	       }
 	    }
     public Card drawFromDeck()
     {     

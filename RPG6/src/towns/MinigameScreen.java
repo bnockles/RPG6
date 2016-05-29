@@ -11,14 +11,16 @@ import directors.Screen;
 public class MinigameScreen extends Screen implements KeyListener {
 	RunGame thing;
 	String theMessage;
+	String displayTheCard;
 	public MinigameScreen(Game game) {
 		super(game);
 		// TODO Auto-generated constructor stub
 		thing=new RunGame();
 		theMessage=" ";
+	    displayTheCard = " ";
 	}
 
-	/**
+	/** 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -28,7 +30,8 @@ public class MinigameScreen extends Screen implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()==KeyEvent.VK_SPACE){
-			theMessage=thing.doTheThing();
+			//theMessage=thing.doTheThing();
+			displayTheCard=thing.displayCard();
 		}
 	}
 
