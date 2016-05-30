@@ -25,23 +25,15 @@ public class StorageScreen extends Screen implements KeyListener{
 	public static final int right = KeyEvent.VK_RIGHT;
 	public static final int enter = KeyEvent.VK_ENTER;
 	public static final int quit = KeyEvent.VK_Q;
-<<<<<<< HEAD
-=======
 	public static final int retrieveItem = KeyEvent.VK_G;
->>>>>>> branch 'towns' of https://github.com/bnockles/RPG6.git
 
 	public static String welcomeMessage = "Welcome to your wares!";
 	public static String actionMessage = "What would you like to do today? " +
 			" Press 4 to Store Items and 5 to Retrieve Items";
-<<<<<<< HEAD
-	public static String storedItems = "";
-	public static int selectedIndex = 0;
-=======
 	public static String quitMessage = "Press Q to quit interaction at anytime.";
 
 	public static int selectedIndex = 0;
 	public static int selectedStorageIndex = 0;
->>>>>>> branch 'towns' of https://github.com/bnockles/RPG6.git
 
 	Storage storageNPC;
 	SampleCharacter sNPC;
@@ -50,11 +42,6 @@ public class StorageScreen extends Screen implements KeyListener{
 	Item e2;
 	Item e3;
 	Item e4;
-<<<<<<< HEAD
-
-	int counter = 0;
-	boolean storing = false;
-=======
 	
 	int counter = 0;
 	int storageCounter = 0;
@@ -62,7 +49,6 @@ public class StorageScreen extends Screen implements KeyListener{
 	boolean storing = false;
 	boolean retrieving = false;
 	boolean selectingSlot = false;
->>>>>>> branch 'towns' of https://github.com/bnockles/RPG6.git
 
 	public ArrayList<Item> playerInventory;
 
@@ -90,54 +76,6 @@ public class StorageScreen extends Screen implements KeyListener{
 		if(e.getKeyCode() == quit){
 			System.out.println("Q was pressed");
 			actionMessage = "What would you like to do today?" +
-<<<<<<< HEAD
-					"Press 4 to Store Items and 5 to Retrieve Items";
-			storing = false;
-			update();
-		}
-		if(e.getKeyCode() == store){
-			actionMessage = "Move the left or right arrow keys to choose what to store! Press Q to quit.";
-			System.out.println("4 was pressed");
-			storing = true;
-			update();
-		}
-
-		if(storing){
-			if(e.getKeyCode() == left){
-				System.out.println("Left arrow key was pressed");
-				counter--;
-				if(counter < 0){
-					counter = playerInventory.size() - 1;
-				}
-				update();
-				game.repaint();
-			}
-			if(e.getKeyCode() == right){
-				System.out.println("Right arrow key was pressed");
-				counter++;
-				if(counter > playerInventory.size() - 1){
-					counter = 0;
-				}
-				update();
-				game.repaint();
-			}
-			selectedIndex = counter;
-			if(e.getKeyCode() == enter){
-				System.out.println("Enter was pressed");
-				actionMessage = "Press 1 to store in slot 1, 2 to store in slot 2 and 3 to store in slot 3.";
-				if(e.getKeyCode() == slot1){
-					System.out.println("Picking slot 1");
-				}
-				if(e.getKeyCode() == slot2){
-					System.out.println("Picking slot 1");
-				}
-				if(e.getKeyCode() == slot3){
-					System.out.println("Picking slot 1");
-				}
-
-			}
-		}
-=======
 					" Press 4 to Store Items and 5 to Retrieve Items";
 			storing = false;
 			retrieving = false;
@@ -253,9 +191,6 @@ public class StorageScreen extends Screen implements KeyListener{
 				playerInventory = Storage.retrieveItem(selectedStorageIndex, Storage.getStorage()[selectedStorageIndex], playerInventory);
 			}
 		}
-		
->>>>>>> branch 'towns' of https://github.com/bnockles/RPG6.git
-
 	}
 
 	public void keyReleased(KeyEvent arg0) {
@@ -270,26 +205,6 @@ public class StorageScreen extends Screen implements KeyListener{
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
-<<<<<<< HEAD
-
-		g2.drawImage(sNPC.getImage(), sNPC.getX(), sNPC.getY(), null);
-
-		//displays greetings
-		g2.drawString(welcomeMessage, 200, 100);
-
-		//displays commands
-		g2.drawString(actionMessage, 200, 150);
-
-		//displays storage inventory
-		g2.drawString("Storage Inventory: ",200, 200);
-		int xAx = 300;
-		for(Item s:Storage.getStorage()){
-			if(s != null){
-				g2.drawString(s.getItemName(), xAx, 200);
-				xAx += 100;				
-			}
-=======
-		//j
 		//displays npc
 		g2.drawImage(sNPC.getImage(), sNPC.getX(), sNPC.getY(), null);
 
@@ -327,7 +242,6 @@ public class StorageScreen extends Screen implements KeyListener{
 			}
 			g2.setColor(Color.black);
 			xAx += 100;
->>>>>>> branch 'towns' of https://github.com/bnockles/RPG6.git
 		}
 
 		//displays player inventory

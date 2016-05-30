@@ -20,7 +20,7 @@ public class Storage extends AbstractNPC{
 		System.out.println("Item has been stored!");
 		return inventory;
 	}
-	
+
 	//retrieves items
 	public static ArrayList<Item> retrieveItem(int index, Item item, ArrayList<Item> inventory){
 		if(storage[index] != null){
@@ -32,13 +32,14 @@ public class Storage extends AbstractNPC{
 	}
 
 	//calculates fee
-	public static int storageFee(Item[][] storage, Storable j){
+	public static int storageFee(Item[] storage){
 		int fee = 0;
-		for(Item[] r : storage){
-			for(Item i : r)
-				fee += j.getRarity(i);
+		int rarity = 0;
+		for(Item i : storage){
+			rarity += 0;
 		}
-		return fee/(storage.length);
+		fee = rarity * 200;
+		return fee;
 	}
 
 

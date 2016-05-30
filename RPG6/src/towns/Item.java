@@ -66,4 +66,8 @@ public abstract class Item implements ItemTeam, GetItem, Storable {
 		return true;
 	}
 	
+	public int getRarity(){
+		return 4;
+	}
+	
 }
