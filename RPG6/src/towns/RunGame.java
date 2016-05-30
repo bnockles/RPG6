@@ -1,5 +1,7 @@
 package towns;
 
+import java.util.Arrays;
+
 public class RunGame {
 	public RunGame(){
 		
@@ -9,10 +11,8 @@ public class RunGame {
 				+ "straight or a flush, then you win the game meaning that you won a free item!";
 	}
 	public String displayCard(){
-		String print="";
-		for(int i=0;i<5;i++){
-			print+=Deck.cards.get(i).toString();
-		}
+		  String print="Player's Cards: ";
+		  print+=Arrays.toString(Deck.randomSuits);
 		  return print;
 	}
 }

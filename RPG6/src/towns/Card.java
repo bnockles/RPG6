@@ -5,13 +5,13 @@ package towns;
  *
  */
 public class Card {
-	private int rank, suit;
+	public int rank, suit;
 
-	    private static String[] suits = { "hearts", "spades", "diamonds", "clubs" };
-	    private static String[] ranks  = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
+	    public static String[] suits = { "hearts", "spades", "diamonds", "clubs" };
+	    public static String[] ranks  = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
 	    
-	    public static String rankAsString(int __rank) {
-	        return ranks[__rank];
+	    public static String rankAsString(int rank) {
+	        return ranks[rank];
 	    }
 	    
 	    Card(int suit, int rank) {
@@ -19,9 +19,9 @@ public class Card {
 	        this.suit=suit;
 	    }
 	    
-	    public @Override String toString() {
-	          return ranks[rank] + " of " + suits[suit];
-	    }
+//	    public @Override String toString() {
+//	          return ranks[rank] + " of " + suits[suit];
+//	    }
 	    
 	    public int getRank() {
 	         return rank;
