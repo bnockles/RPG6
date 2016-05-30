@@ -37,6 +37,7 @@ public class StorageScreen extends Screen implements KeyListener{
 
 	Storage storageNPC;
 	SampleCharacter sNPC;
+	SampleCharacter player;
 
 	Item e1;
 	Item e2;
@@ -54,8 +55,10 @@ public class StorageScreen extends Screen implements KeyListener{
 
 	public StorageScreen(Game game) {
 		super(game);
+		
+		player = new SampleCharacter(69696969,"Khan the Preacher","/images/character.png",40,300,playerInventory);
 
-		sNPC = new SampleCharacter("/images/storage.png",50,50,"npc");
+		sNPC = new SampleCharacter("/images/storage.png",60,70,"npc");
 
 		storageNPC = new Storage("Greg","Male","He is your storage guy, him and his cousins (who look exactly like him) "
 				+ "are in every town in case you want to store items and then take them back for later.", true);
@@ -207,53 +210,59 @@ public class StorageScreen extends Screen implements KeyListener{
 	public void paintScreen(Graphics2D g2) {
 		//displays npc
 		g2.drawImage(sNPC.getImage(), sNPC.getX(), sNPC.getY(), null);
-
+		
 		//displays greetings
 		g2.drawString(welcomeMessage, 200, 100);
 
 		//displays quit
 		g2.drawString(quitMessage, 200, 150);
+		
 		//displays commands
 		g2.drawString(actionMessage, 200, 200);
 
 		//displays storage inventory
-		g2.drawString("Storage Inventory: ",200, 250);
+		g2.drawString("Storage Inventory: ",200,250);
 		int xAx = 300;
+		int yAx = 250;
 		for(int i = 0; i < Storage.getStorage().length; i++){
 			if(i == selectedStorageIndex && retrieving){
 				if(Storage.getStorage()[i] != null && i == selectedStorageIndex){
 					g2.setColor(Color.red);
-					g2.drawString(Storage.getStorage()[i].getItemName(), xAx, 250);
+					g2.drawString(Storage.getStorage()[i].getItemName(), xAx, yAx);
 				}else if(Storage.getStorage()[i] != null){
 					g2.setColor(Color.black);
-					g2.drawString(Storage.getStorage()[i].getItemName(), xAx, 250);
+					g2.drawString(Storage.getStorage()[i].getItemName(), xAx, yAx);
 				}else{
 					g2.setColor(Color.black);
-					g2.drawString(" _____" , xAx, 250);
+					g2.drawString(" _____" , xAx, yAx);
 				}
 			}else{
 				if(Storage.getStorage()[i] != null){
 					g2.setColor(Color.black);
-					g2.drawString(Storage.getStorage()[i].getItemName(), xAx, 250);
+					g2.drawString(Storage.getStorage()[i].getItemName(), xAx, yAx);
 				}else{
 					g2.setColor(Color.black);
-					g2.drawString(" _____" , xAx, 250);
+					g2.drawString(" _____" , xAx, yAx);
 				}
 			}
 			g2.setColor(Color.black);
 			xAx += 100;
 		}
+		g2.drawImage(player.getImage(),player.getX(),player.getY(),null);
+		g2.drawString("NAME: " + player.getName(),200,310);
+		g2.drawString("BALANCE: " + player.getCurrency() + " Gems",200,340);
 
 		//displays player inventory
-		g2.drawString("Player Inventory: ", 200, 300);	
+		g2.drawString("Player Inventory: ", 200, 370);	
 		int xAxis = 300;
+		int yAxis = 370;
 		for(int i = 0; i < playerInventory.size(); i++){
 			if(i == selectedIndex && storing){
 				g2.setColor(Color.blue);
-				g2.drawString(playerInventory.get(i).getItemName(),xAxis, 300);
+				g2.drawString(playerInventory.get(i).getItemName(),xAxis, yAxis);
 			}else{
 				g2.setColor(Color.black);
-				g2.drawString(playerInventory.get(i).getItemName(),xAxis, 300);
+				g2.drawString(playerInventory.get(i).getItemName(),xAxis, yAxis);
 			}
 			xAxis += 100;
 		}

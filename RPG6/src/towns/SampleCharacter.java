@@ -10,11 +10,11 @@ import javax.imageio.ImageIO;
 
 public class SampleCharacter {
 	
-	public ArrayList<Equipment> getEquipments() {
+	public ArrayList<Item> getEquipments() {
 		return items;
 	}
 
-	public void setEquipments(ArrayList<Equipment> items) {
+	public void setEquipments(ArrayList<Item> items) {
 		this.items = items;
 	}
 
@@ -67,12 +67,12 @@ public class SampleCharacter {
 	String name;
 	int x ;
 	int y;
-	ArrayList<Equipment> items;
+	ArrayList<Item> items;
 	
-	public SampleCharacter(int cur, String nm, String imageLocation, int locationX, int locationY, ArrayList<Equipment> items){
+	public SampleCharacter(int cur, String nm, String imageLocation, int locationX, int locationY, ArrayList<Item> playerInventory){
 		this.currency = cur;
 		this.name = nm;
-		this.items = items;
+		this.items = playerInventory;
 		int width = 150;
 		int height = 200;
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
