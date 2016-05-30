@@ -1,46 +1,31 @@
 package towns;
-import java.util.Random;
-import java.util.ArrayList;
 /**
  * 
  * @author Yash Patel
  *
  */
 public class Deck {
-     static ArrayList<Card> cards;
-    
+	public static Card[] cards = new Card[5];
+    public static String[] randomSuits=new String[5];
+    public static String[] randomRanks=new String[5];
     public Deck() {
-	        cards = new ArrayList<Card>();
-	        int index_1, index_2;
-	        Random generator = new Random();
-	        Card temp;
-	        int count=0;
-	        while(count<5){
-	        for(int i=0; i<=3; i++)
-	        {
-	            for(int j=0; j<=12; j++){
-	               cards.add(new Card(i,j));
-	             //  System.out.println(cards.get(i).toString());
-	               count++;
-	             }
+	        int x=0;
+	        for(int i=0; i<cards.length; i++){
+	            for(int j=0; j<cards.length; j++){
+	            	int randomRank=(int) (Math.random()*12);
+	            	int randomSuit=(int) (Math.random()*3);
+	            		for(int k=0;k<cards.length;k++){
+	            			if(!cards[k].equals(new Card(randomSuit,randomRank))){
+	            				cards[x]=new Card(randomSuit,randomRank);;
+	            				randomSuits[x]=Card.suits[randomSuit];
+	            				randomRanks[x]=Card.ranks[randomRank];
+	            				x++;
+	            			}
+	            			else{
+	            				continue;
+	            			}
+	            		}
+	             	}
 	        }
-	        int size = cards.size()-1;
-	        for (int i=0; i<100; i++)
-	        {
-	            index_1 = generator.nextInt(size);
-	            index_2 = generator.nextInt(size);
-	            temp = (Card) cards.get(index_2);
-	            cards.set( index_2 , cards.get( index_1 ) );
-	            cards.set( index_1, temp );
-	        }
-	       }
-	    }
-    public Card drawFromDeck()
-    {     
-        return cards.remove( cards.size()-1 );
-    }
-    public int getTotalCards()
-    {
-        return cards.size();
-    }
+	 }
 }
