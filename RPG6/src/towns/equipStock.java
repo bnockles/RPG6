@@ -56,16 +56,16 @@ public class equipStock {
 	
 	public static Equipment equipStocks(int type) {
 		if (type == B_SD){
-			return new Equipment("Bronze Sword", "REQ: LVL1, 5 STR", "This bronze sword is as useless as wood.", "None", 10, 0, 5, new Stats(5, 5, 1, 0, 0, 1), 100, new CraftHelper(true, recipe));
+			return new Equipment("Bronze Sword", "REQ: LVL1, 5 STR", "This bronze sword is as useless as wood.", "None", 10, 0, 1, new Stats(5, 5, 1, 0, 0, 1), 100, new CraftHelper(true, recipe));
 		}
 		if (type == S_SD){
-			return new Equipment("Silver Sword", "REQ: LVL8, 15 STR", "This silver sword is a little better. It can cut flesh.", "None", 50, 0, 5, new Stats(20, 15, 3, 0, 0, 3),100, new CraftHelper(true, recipe));
+			return new Equipment("Silver Sword", "REQ: LVL8, 15 STR", "This silver sword is a little better. It can cut flesh.", "None", 50, 0, 2, new Stats(20, 15, 3, 0, 0, 3),100, new CraftHelper(true, recipe));
 		}
 		if (type == G_SD){
-			return new Equipment("Gold Sword", "REQ: LVL19, 35 STR", "This golden sword forged with passion. It can slice through any armor", "None", 100, 0, 5, new Stats(50, 35, 5, 0, 0, 5), 100, new CraftHelper(true, recipe));
+			return new Equipment("Gold Sword", "REQ: LVL19, 35 STR", "This golden sword forged with passion. It can slice through any armor", "None", 100, 0, 3, new Stats(50, 35, 5, 0, 0, 5), 100, new CraftHelper(true, recipe));
 		}
 		if (type == P_SD){
-			return new Equipment("Plat Sword", "REQ: LVL30, 75 STR", "Unbreakable platinum. This sword is the best of its class.", "None", 200, 0, 5, new Stats(80, 75, 10, 1, 1, 10), 100, new CraftHelper(true, recipe));
+			return new Equipment("Plat Sword", "REQ: LVL30, 75 STR", "Unbreakable platinum. This sword is the best of its class.", "None", 200, 0, 4, new Stats(80, 75, 10, 1, 1, 10), 100, new CraftHelper(true, recipe));
 		}
 		if (type == B_DR){
 			return new Equipment("Bronze Dagger", "REQ: LVL1, 6 STR", "This bronze dagger can cut vegetables.", "None", 10, 0, 5, new Stats(5, 6, 1, 0, 0, 1), 100, new CraftHelper(true, recipe));

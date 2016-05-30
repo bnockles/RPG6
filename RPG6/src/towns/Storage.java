@@ -31,11 +31,6 @@ public class Storage extends AbstractNPC{
 		return inventory;
 	}
 
-	//calculates fee
-	public int storageFee(Item item){	
-		return item.getRarity() * 200;
-	}
-
 	public static Item[] getStorage(){
 		return storage;
 	}

@@ -39,14 +39,14 @@ public class StorageScreen extends Screen implements KeyListener{
 	SampleCharacter sNPC;
 	SampleCharacter player;
 
-	Item e1;
-	Item e2;
-	Item e3;
-	Item e4;
-	
+	Equipment e1;
+	Equipment e2;
+	Equipment e3;
+	Equipment e4;
+
 	int counter = 0;
 	int storageCounter = 0;
-	
+
 	boolean storing = false;
 	boolean retrieving = false;
 	boolean selectingSlot = false;
@@ -55,7 +55,7 @@ public class StorageScreen extends Screen implements KeyListener{
 
 	public StorageScreen(Game game) {
 		super(game);
-		
+
 		player = new SampleCharacter(69696969,"Khan the Preacher","/images/character.png",40,300,playerInventory);
 
 		sNPC = new SampleCharacter("/images/storage.png",60,70,"npc");
@@ -156,67 +156,61 @@ public class StorageScreen extends Screen implements KeyListener{
 		if(retrieving){
 			if(e.getKeyCode() == left){
 				System.out.println("Left arrow key was pressed");
-				if(storageCounter == 0){
-					if(Storage.getStorage()[Storage.getStorage().length - 1] != null){
-						storageCounter = Storage.getStorage().length - 1;
-					}
-				}else{		
-					for(int i = storageCounter - 1; i >= 0; i--){
-						if(Storage.getStorage()[i] != null){
-							storageCounter = i;
-							break;
-						}
+				int tempCount = storageCounter;
+				for(int i = storageCounter - 1; i >= 0; i--){
+					if(Storage.getStorage()[i] != null){
+						storageCounter = i;
+						break;
 					}
 				}
+				if(tempCount == storageCounter)storageCounter = Storage.getStorage().length - 1;
 				update();
 				game.repaint();
 			}
 			if(e.getKeyCode() == right){
 				System.out.println("Right arrow key was pressed");
-				if(storageCounter == Storage.getStorage().length - 1){
-					if(Storage.getStorage()[0] != null){
-						storageCounter = 0;
-					}
-				}else{	
-					for(int i = storageCounter + 1; i < Storage.getStorage().length; i++){
-						if(Storage.getStorage()[i] != null){
-							storageCounter = i;
-							break;
-						}
+				int tempCount = storageCounter;
+				for(int i = storageCounter + 1; i < Storage.getStorage().length; i++){
+					if(Storage.getStorage()[i] != null){
+						storageCounter = i;
+						break;
 					}
 				}
+				if(tempCount == storageCounter)storageCounter = 0;
 				update();
 				game.repaint();
 			}
 			selectedStorageIndex = storageCounter;
-			
+
 			if(e.getKeyCode() == retrieveItem){
-				playerInventory = Storage.retrieveItem(selectedStorageIndex, Storage.getStorage()[selectedStorageIndex], playerInventory);
+				if(Storage.getStorage()[selectedStorageIndex] != null){
+					player.setCurrency(player.getCurrency() - storageFee((Equipment) Storage.getStorage()[selectedStorageIndex]));
+					playerInventory = Storage.retrieveItem(selectedStorageIndex, Storage.getStorage()[selectedStorageIndex], playerInventory);
+					System.out.println(storageFee((Equipment) Storage.getStorage()[selectedStorageIndex]));
+				}
 			}
 		}
 	}
 
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void paintScreen(Graphics2D g2) {
 		//displays npc
 		g2.drawImage(sNPC.getImage(), sNPC.getX(), sNPC.getY(), null);
-		
+
 		//displays greetings
 		g2.drawString(welcomeMessage, 200, 100);
 
 		//displays quit
 		g2.drawString(quitMessage, 200, 150);
-		
+
 		//displays commands
 		g2.drawString(actionMessage, 200, 200);
 
@@ -248,7 +242,11 @@ public class StorageScreen extends Screen implements KeyListener{
 			g2.setColor(Color.black);
 			xAx += 100;
 		}
+
+		//displays player
 		g2.drawImage(player.getImage(),player.getX(),player.getY(),null);
+
+		//displays player info
 		g2.drawString("NAME: " + player.getName(),200,310);
 		g2.drawString("BALANCE: " + player.getCurrency() + " Gems",200,340);
 
@@ -266,7 +264,6 @@ public class StorageScreen extends Screen implements KeyListener{
 			}
 			xAxis += 100;
 		}
-
 	}
 
 	@Override
@@ -274,4 +271,8 @@ public class StorageScreen extends Screen implements KeyListener{
 		return this;
 	}
 
+	//calculates fee
+	public int storageFee(Equipment item){	
+		return item.getRarity() * 200;
+	}
 }

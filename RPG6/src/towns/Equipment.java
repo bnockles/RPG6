@@ -150,7 +150,7 @@ public class Equipment extends Item implements EquipInterface, getStats, Craftab
 		return true;
 	}
 
-	public int getRarity(Item i) {
+	public int getRarity() {
 		return this.typeOf;
 	}
 
@@ -179,11 +179,7 @@ public class Equipment extends Item implements EquipInterface, getStats, Craftab
 	public int getRarity(Equipment item) {		
 		return typeOf;
 	}
-
-	public boolean isStorable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 }
 
 
