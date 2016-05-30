@@ -186,7 +186,6 @@ public class StorageScreen extends Screen implements KeyListener{
 				if(Storage.getStorage()[selectedStorageIndex] != null){
 					player.setCurrency(player.getCurrency() - storageFee((Equipment) Storage.getStorage()[selectedStorageIndex]));
 					playerInventory = Storage.retrieveItem(selectedStorageIndex, Storage.getStorage()[selectedStorageIndex], playerInventory);
-					System.out.println(storageFee((Equipment) Storage.getStorage()[selectedStorageIndex]));
 				}
 			}
 		}
@@ -264,6 +263,13 @@ public class StorageScreen extends Screen implements KeyListener{
 			}
 			xAxis += 100;
 		}
+		
+		if(retrieving){
+			if(Storage.getStorage()[selectedStorageIndex] != null){
+				g2.setColor(Color.black);
+				g2.drawString("Fee: " + storageFee((Equipment) Storage.getStorage()[selectedStorageIndex]), 200, yAxis + 50);
+			}
+		}
 	}
 
 	@Override
@@ -275,4 +281,6 @@ public class StorageScreen extends Screen implements KeyListener{
 	public int storageFee(Equipment item){	
 		return item.getRarity() * 200;
 	}
+	
+	
 }
