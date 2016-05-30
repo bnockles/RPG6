@@ -11,10 +11,8 @@ public class RunGame {
 				+ "straight or a flush, then you win the game meaning that you won a free item!";
 	}
 	public String displayCard(){
-		//String print="Player's Cards: ";
-		//for(int i=0;i<5;i++){
-			String print=Arrays.toString(Deck.randomSuits);
-		//}
+		  String print="Player's Cards: ";
+		  print+=Arrays.toString(Deck.randomSuits);
 		  return print;
 	}
 }
