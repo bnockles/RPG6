@@ -79,11 +79,11 @@ public class Game extends JFrame{
 
 
 	private void saveBeforeClose(){
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-			public void run() {
-				currentSave.updateSave();
-			}
-		}));
+//		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+//			public void run() {
+//				currentSave.updateSave();
+//			}
+//		}));
 	}
 
 

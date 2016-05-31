@@ -21,9 +21,11 @@ public class UpdatedBattleScreen extends Screen implements KeyListener {
 		super(game);
 		players = new ArrayList<BattleCharacters>();
 		opponents = new ArrayList<EnemyTeam>();
-		DemoCharacter playerOne = new DemoCharacter("Insert Name",500,250,25,25,45,10,20,"/images/PlayerFace.png");
+		DemoCharacter playerOne = new DemoCharacter("Insert Name",500,250,25,25,45,10,20,"/images/BioBird.png");
+		DemoCharacter playerTwo = new DemoCharacter("Bob",500,250,25,25,45,10,20,"/images/BioBird.png");
 		DemoEnemy khan = new DemoEnemy("Khan", 100, 10, 10, 10, 10, "???");
 		players.add(playerOne);
+		players.add(playerTwo);
 		opponents.add(khan);
 		turns = new TurnOrder(players,opponents);
 		potatoes = new ArrayList<BattleComponent>();
@@ -34,8 +36,6 @@ public class UpdatedBattleScreen extends Screen implements KeyListener {
 
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		potatoes.get(0).keyAction(arg0.getKeyCode());
-		potatoes.get(1).keyAction(arg0.getKeyCode());
 		for(BattleComponent x:potatoes){
 			//System.out.println("Drawing Something");
 			x.keyAction(arg0.getKeyCode());

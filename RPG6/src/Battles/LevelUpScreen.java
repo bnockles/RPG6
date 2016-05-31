@@ -21,9 +21,11 @@ public class LevelUpScreen implements BattleComponent {
 	private int counter = 0;
 	private int lvlPoints = 5;
 	private int[] points = {0,0,0};
-	private ArrayList<BattleCharacters> characters = new ArrayList<BattleCharacters>();
-	private ArrayList<BattleCharacters> needToLvlUp = new ArrayList<BattleCharacters>();
+	private ArrayList<BattleCharacters> characters;
+	private ArrayList<BattleCharacters> needToLvlUp;
 	public LevelUpScreen(ArrayList<BattleCharacters> players){
+		this.needToLvlUp = new ArrayList<BattleCharacters>();
+		this.characters = new ArrayList<BattleCharacters>();
 		for(BattleCharacters x:players){
 			this.characters.add(x);
 		}
@@ -38,9 +40,12 @@ public class LevelUpScreen implements BattleComponent {
 		g2.setColor(blueBack);
 		g2.fillRect(1, 1, 398, 398);
 		//Displaying Stats
-		for (BattleCharacters x:characters){
-			if(x.getCurrExp()>=x.getExpNeededToLevel()){
-				this.needToLvlUp.add(x);
+		if(this.needToLvlUp.size()==0){
+			for (BattleCharacters x:this.characters){
+				if(x.getCurrExp()>=x.getExpNeededToLevel()){
+					this.needToLvlUp.add(x);
+					System.out.println(this.needToLvlUp.get(0).getName());
+				}
 			}
 		}
 		if(this.needToLvlUp.size()>0){
@@ -67,9 +72,6 @@ public class LevelUpScreen implements BattleComponent {
 				g2.setColor(Color.WHITE);
 				g2.drawString(" - "+statName[i] + ": " + statArray[i]+" + ", 155, 20+((i+1)*27)+99);
 			}
-			if(this.needToLvlUp.get(0).getCurrExp()>=this.needToLvlUp.get(0).getExpNeededToLevel()){
-				this.needToLvlUp.remove(this.needToLvlUp.get(0));
-			}
 			
 		}
 		
@@ -94,6 +96,7 @@ public class LevelUpScreen implements BattleComponent {
 		switch(keyCode){
 			case KeyEvent.VK_UP:
 				this.counter--;
+				if(this.counter<0) this.counter = 2;
 				this.counter%=3;
 				break;
 			case KeyEvent.VK_DOWN:
@@ -116,6 +119,12 @@ public class LevelUpScreen implements BattleComponent {
 				if(this.lvlPoints==0){
 					this.characters.get(0).setExp(this.characters.get(0).getCurrExp()-this.characters.get(0).getExpNeededToLevel());
 					this.characters.get(0).setStats(this.characters.get(0).getAttack()+this.points[0], this.characters.get(0).getAttack()+this.points[1], this.characters.get(0).getAttack()+this.points[2]);
+					this.lvlPoints = 5;
+					this.counter = 0;
+					
+					this.needToLvlUp.remove(this.needToLvlUp.get(0));
+					
+					for(int i=0;i<this.points.length;i++)this.points[i]=0;
 				}
 				break;
 		}
