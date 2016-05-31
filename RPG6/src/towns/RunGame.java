@@ -1,6 +1,7 @@
 package towns;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class RunGame {
 	public RunGame(){
@@ -12,7 +13,20 @@ public class RunGame {
 	}
 	public String displayCard(){
 		  String print="Player's Cards: ";
-		  print+=Arrays.toString(Deck.randomSuits);
+		  print+=Arrays.toString(Deck.deck);
 		  return print;
 	}
+	public static Card[] randomizeArray(Card[] array){
+		Random rgen = new Random();	
+ 
+		for (int i=0; i<array.length; i++) {
+		    int randomPosition = rgen.nextInt(array.length);
+		    Card temp = array[i];
+		    array[i] = array[randomPosition];
+		    array[randomPosition] = temp;
+		}
+ 
+		return array;
+	}
+	
 }

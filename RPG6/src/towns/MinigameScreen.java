@@ -12,6 +12,7 @@ public class MinigameScreen extends Screen implements KeyListener {
 	RunGame thing;
 	String theMessage;
 	String displayTheCard;
+    Deck deck = new Deck();
 	public MinigameScreen(Game game) {
 		super(game);
 		thing=new RunGame(); 
