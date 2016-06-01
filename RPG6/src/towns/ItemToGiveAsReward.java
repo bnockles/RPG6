@@ -16,7 +16,4 @@ public interface ItemToGiveAsReward {
 	
 	//Checks whether the player has the item already or not so player does not get the same item again
 	boolean playerHasItem();
-	
-	//Gives an ArrayList of items the player already has
-	arrayList<Item> getPlayerInventory();
 }

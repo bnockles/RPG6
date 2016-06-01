@@ -3,7 +3,7 @@ package towns;
 import java.util.ArrayList;
 
 public class Equipment extends Item implements EquipInterface, getStats, Craftable, Repairable {
-	public ArrayList<Item> yo = new ArrayList<Item>();
+	public static ArrayList<Item> ItemArrayList = new ArrayList<Item>();
 	public static final int NONE 	= 0;
 	public static final int HELMET 	= 1;
 	public static final int CHEST 	= 2;
@@ -51,7 +51,7 @@ public class Equipment extends Item implements EquipInterface, getStats, Craftab
 		return WEAPON;
 	}
 
-	public int getDurability() {
+	public static int getDurability() {
 		return durability;
 	}
 
@@ -150,7 +150,7 @@ public class Equipment extends Item implements EquipInterface, getStats, Craftab
 		return true;
 	}
 
-	public int getRarity() {
+	public static int getRarity() {
 		return this.typeOf;
 	}
 
@@ -178,6 +178,16 @@ public class Equipment extends Item implements EquipInterface, getStats, Craftab
 
 	public int getRarity(Equipment item) {		
 		return typeOf;
+	}
+
+	public static int priceOfItem() {
+		// TODO Auto-generated method stub
+		return 1000;
+	}
+
+	public static boolean playerHasItem() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }
