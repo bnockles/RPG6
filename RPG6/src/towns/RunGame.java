@@ -1,7 +1,6 @@
 package towns;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class RunGame {
 	public RunGame(){
@@ -13,20 +12,36 @@ public class RunGame {
 	}
 	public String displayCard(){
 		  String print="Player's Cards: ";
-		  print+=Arrays.toString(Deck.deck);
+		  print+=Arrays.toString(Deck.fiveCards);
 		  return print;
 	}
-	public static Card[] randomizeArray(Card[] array){
-		Random rgen = new Random();	
- 
-		for (int i=0; i<array.length; i++) {
-		    int randomPosition = rgen.nextInt(array.length);
-		    Card temp = array[i];
-		    array[i] = array[randomPosition];
-		    array[randomPosition] = temp;
-		}
- 
-		return array;
+	public boolean isStraight(int[] hand) {
+
+	    if(hand == null || hand.length != 5) {
+	        return false;
+	    }
+	    else {
+	        // Automatically sort the hand
+	        Arrays.sort(hand);
+
+	        // Set the "previous" variable to a theoretically impossible value
+	        int prev = -1;
+
+	        // Iterate through the hand and see if the next card is exactly one more than
+	        //    the previous one.
+	        for(int i = 0; i < hand.length; i++) {
+
+	            // If prev is -1, then this is the first time through the for-loop
+	            // If the card that we're on has a value of the previous card + 1,
+	            //     we still have the possibility of a straight.
+	            if(prev == -1 || (prev + 1) == hand[i]) {
+	                prev = hand[i];
+	            }
+	            else {
+	                return false;
+	            }
+	        }
+	        return true;
+	    }
 	}
-	
 }
