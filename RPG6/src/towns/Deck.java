@@ -8,7 +8,7 @@ import java.util.Arrays;
  *
  */
 public class Deck {
-		//Cration of Arrays
+		//Creation of Arrays
 		static String[] suits = { "Clubs", "Diamonds", "Hearts", "Spades" };
 		static String[] ranks = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace" };
 		static String[] deck = new String[52];
@@ -34,7 +34,12 @@ public class Deck {
 	        for(int h=0;h<fiveCards.length;h++){
 	        	fiveCards[h]=deck[h];
 	        }
-	        
-	        System.out.println("Player's Cards: "+Arrays.toString(fiveCards));
+	        getTheRightString(fiveCards);
 	    }
+	    public static String getTheRightString(String[] array){
+	        String print="Player's Cards: ";
+        	print+=Arrays.toString(array);
+        	System.out.println(print);
+        	return print;
+        }
 }
