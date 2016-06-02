@@ -1,0 +1,7 @@
+
+TEXT1: You are a young knight, wandering through the forest in search for adventure. ;  
+TEXT2: All you have with you are the clothes on your back and a simple sword in your sheath. ;
+TEXT3: Suddenly, you hear a cry for help. ;
+TEXT4: [Maiden] Help! ;
+TEXT5: Your instincts kick in. You want to help her, but you're also very aware that this could be too much to handle. What would you like to do? ;
+TEXT6: SAVE HER  OR  RETREAT ;
