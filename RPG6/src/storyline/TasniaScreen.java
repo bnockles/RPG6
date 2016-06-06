@@ -1,4 +1,4 @@
-
+package storyline;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -22,7 +22,6 @@ public class TasniaScreen extends Screen implements KeyListener {
 
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode()== KeyEvent.VK_SPACE){
@@ -35,25 +34,24 @@ public class TasniaScreen extends Screen implements KeyListener {
 		}
 	}
 
-	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+
 	public void paintScreen(Graphics2D g2) {
 		// TODO Auto-generated method stub
 		g2.drawString(myOutput, 100, 100);
 	}
 
-	@Override
+
 	public KeyListener getKeyListener() {
 		// TODO Auto-generated method stub
 		return this;

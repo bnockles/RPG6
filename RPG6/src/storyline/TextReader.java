@@ -1,14 +1,16 @@
+package storyline;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public final class TextReader {
+public class TextReader {
 	public static void main(String[] args) {
 	}
 	static InputStream res;
 	
 	public TextReader(String text){
-		res = TextReader.class.getResourceAsStream("/"+text+".txt");
+		res = TextReader.class.getResourceAsStream("C:\\Users\\Teacher\\git\\RPG6\\RPG6\\src\\storyline\\"+text+".txt");
 		
 	}
 	
