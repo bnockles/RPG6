@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import directors.Game;
 import directors.Screen;
 import sun.audio.AudioData;
@@ -22,9 +24,10 @@ import javax.sound.sampled.Clip;
 
 /**
  * 
- * @author Khandaker Shayel & Yash Patel  
+ * @author Khandaker Shayel
  *
  */
+
 public class TownScreen extends Screen implements KeyListener{
 
 	public static final int talkNpc1 = KeyEvent.VK_1;
@@ -36,7 +39,7 @@ public class TownScreen extends Screen implements KeyListener{
 	public static final int buyItem2 = KeyEvent.VK_7;
 	public static final int buyItem3 = KeyEvent.VK_8;
 	public static final int sellItem = KeyEvent.VK_9;
-	public static final int rock = KeyEvent.VK_R;
+	public static final int repairItem = KeyEvent.VK_R;
 	public static final int paper = KeyEvent.VK_R;
 	public static final int heads = KeyEvent.VK_H;
 	public static final int tails = KeyEvent.VK_T;
@@ -48,8 +51,15 @@ public class TownScreen extends Screen implements KeyListener{
 	public static final int goToPellet = KeyEvent.VK_B;
 	public static final int goToBigRoot = KeyEvent.VK_N;
 	public static final int goToOldYelp = KeyEvent.VK_M;
+	public static final int up = KeyEvent.VK_UP;
+	public static final int down = KeyEvent.VK_DOWN;
+	public static final int left = KeyEvent.VK_LEFT;
+	public static final int right = KeyEvent.VK_RIGHT;
+	public static final int craft = KeyEvent.VK_C;
+	public static final int crafting = KeyEvent.VK_X;
 	
-	SampleCharacter character;
+	
+	static SampleCharacter character;
 	SampleCharacter displayNpc;
 	Merchant merchant1;
 	Merchant merchant2;
@@ -64,6 +74,13 @@ public class TownScreen extends Screen implements KeyListener{
 	static boolean town1 = true;
 	static boolean town2 = false;
 	static boolean town3 = false;
+	boolean repairing;
+	boolean inRepair;
+	boolean inCrafting;
+	int repairIndex = 0;
+	int craftIndex = 0;
+	ArrayList<Equipment> items;
+	ArrayList<String> craftableThings;
 	
 	
 	//Sounds and music
@@ -73,10 +90,12 @@ public class TownScreen extends Screen implements KeyListener{
 	static ContinuousAudioDataStream loop = null;
 	static InputStream town1Music;  
 	static InputStream town2Music; 
-	static InputStream town3Music; 
+	static InputStream town3Music;
+	String selected;
 	
 	
-	ArrayList<String> inventory = new ArrayList<String>();
+	static ArrayList<Equipment> inventory = new ArrayList<Equipment>();
+	static ArrayList<Equipment> repairItems = new ArrayList<Equipment>();
 	public static ArrayList<AbstractNPC> town1Npc = new ArrayList<AbstractNPC>();
 	public static ArrayList<AbstractNPC> town2Npc = new ArrayList<AbstractNPC>();
 	public static ArrayList<AbstractNPC> town3Npc = new ArrayList<AbstractNPC>();
@@ -103,7 +122,7 @@ public class TownScreen extends Screen implements KeyListener{
 	public TownScreen(Game game) {
 		super(game);		
 		
-		music();
+		Sound.audio("src/towns/images/town1.wav");
 		
 		currentTown = townStock.getTown(townStock.PelletTown);
 		
@@ -123,12 +142,12 @@ public class TownScreen extends Screen implements KeyListener{
 		Towns.add(townStock.getTown(townStock.BigRootTown));
 		Towns.add(townStock.getTown(townStock.OldYelpTown));
 		
-		inventory.add("Health Potion");
-		inventory.add("Mana Potion");
-		inventory.add("Broad Sword");
-		inventory.add("Long Bow");
+		inventory.add(equipStock.equipStocks(equipStock.B_SD));
+		inventory.add(equipStock.equipStocks(equipStock.W_BW));
+		inventory.add(equipStock.equipStocks(equipStock.M_WD));
+		inventory.add(equipStock.equipStocks(equipStock.P_HR));
 		
-		this.character = new SampleCharacter(400, "Con Duh Kurr","/images/character.png",9,590, inventory);
+		this.character = new SampleCharacter(69420, "Con Duh Kurr","/images/character.png",9,590, inventory);
 		this.displayNpc = new SampleCharacter("/images/white.png",600,590, "npc");
 		this.town = new SampleCharacter("/images/town1.png",600,100, "town");
 		
@@ -141,7 +160,9 @@ public class TownScreen extends Screen implements KeyListener{
 		this.miniGame2 = new Minigame("Shrek","Male", "Shrek is a mini game NPC, in this town shrek well let you play 'Hot or cold', a number guessing game.", true);
 		
 		//Npcs in Town 3
-		this.merchant3 = new Merchant("Karmen", "Female", "Karmen is the merchant for Old Yelelr Town, she sells armor!", true);
+		inRepair = true;
+		repairItems = new ArrayList<Equipment>();
+		this.merchant3 = new Merchant("Karmen", "Female", "Karmen is the black smith for Old Yelelr Town, she will repair your equipment!", true);
 		this.dummy = new dummy("Omar", "Male", "This is a dummy npc, they don't do much in terms of actual gameplay but rather they give you small hints and tips on what to do in the game.",true);
 
 		
@@ -167,10 +188,60 @@ public class TownScreen extends Screen implements KeyListener{
 			g2.drawString("Current Inventory: ", 170, 720);
 
 			int x = 170;
+			int y = 425;
 			for(int i=0; i<inventory.size();i++){
-				g2.drawString(inventory.get(i), x,740);
-				x += 100;
+				g2.drawString(inventory.get(i).getName() + "     " + (inventory.get(i).getDurability()), x,740);
+				x += 150;
 			}
+			
+			if(inRepair == true){
+				for(int i=0; i<repairItems.size();i++){
+					if(i == repairIndex){
+						selected = "[SELECTED]";
+					}
+					else{
+						selected = "";
+					}
+					if(inventory.get(i).getDurability() <= 100  && inventory.get(i).getDurability() >= 75)
+					{
+						g2.setColor(Color.blue);
+					}
+					if(inventory.get(i).getDurability() < 75  && inventory.get(i).getDurability() >= 50)
+					{
+						g2.setColor(Color.green);
+					}
+					if(inventory.get(i).getDurability() < 50  && inventory.get(i).getDurability() >= 25)
+					{
+						g2.setColor(Color.orange);
+					}
+					if(inventory.get(i).getDurability() < 25  && inventory.get(i).getDurability() >= 0)
+					{				
+						g2.setColor(Color.red);
+					}
+					items = repairItems;
+					g2.drawString(items.get(i).getName() + "     Durability: " + (items.get(i).getDurability()) +  "     Status: " + BlackSmith.durabilityMeter(items.get(i)) + "     Price: " + BlackSmith.getCostRepair(items.get(i)) + "     "+ selected, 50, y);
+					y += 30;
+				}
+			}
+			
+			
+			if(inCrafting == true){
+				for(int i=0; i<craftableThings.size();i++)
+				{
+					if(i == craftIndex){
+						selected = "[SELECTED]";
+					}
+					else{
+						selected = "";
+					}
+					g2.setColor(Color.magenta);
+					g2.drawString(craftableThings.get(i) + "     Things needed to craft it: " + Arrays.deepToString(BlackSmith.Recipe[BlackSmith.returnInt(craftableThings.get(i))])+ "     " +selected, 50, y);
+					y += 30;
+				}
+			}
+			
+			
+			g2.setColor(Color.black);
 			g2.drawString("Available NPCs", 50, 75);
 			g2.drawString(welcomeMessage, 450, 50);
 			g2.drawString(message, 50, 375);
@@ -242,68 +313,6 @@ public class TownScreen extends Screen implements KeyListener{
 		
 	}
 	
-
-	
-	public static void music(){
-		try {
-			town1Music = new FileInputStream("src/towns/images/town1.wav");
-			BGM = new AudioStream(town1Music);
-			AudioPlayer.player.start(BGM);
-			//MD = BGM.getData();
-			//loop = new ContinuousAudioDataStream(MD);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		MGP.start(loop);
-	}
-	
-	public static void music2(){
-		try {
-			town2Music = new FileInputStream("src/towns/images/town2.wav");
-			BGM = new AudioStream(town2Music);
-			AudioPlayer.player.start(BGM);
-			//MD = BGM.getData();
-			//loop = new ContinuousAudioDataStream(MD);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		MGP.start(loop);
-	}
-	
-	public static void music3(){		
-		try {
-			InputStream town3Music = new FileInputStream("src/towns/images/town3.wav");
-			BGM = new AudioStream(town3Music);
-			AudioPlayer.player.start(BGM);
-			//MD = BGM.getData();
-			//loop = new ContinuousAudioDataStream(MD);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		MGP.start(loop);
-	}
-	
-
-	
-	public static void stopMusic(){
-		AudioPlayer.player.stop(BGM);
-	}
-
-	/* (non-Javadoc)
-	 * @see directors.Screen#getKeyListener()
-	 */
 	@Override
 	
 	public KeyListener getKeyListener() {
@@ -311,10 +320,191 @@ public class TownScreen extends Screen implements KeyListener{
 	}
 
 	public void keyPressed(KeyEvent e) {
-		
+		//CODE FOR BLACK SMITH
+		if(e.getKeyCode()==talkNpc1 && currentTown.getTownName() == "Old Yelp Town")
+		{
+			System.out.println("1 was pressed");
+			inRepair = true;
+			inCrafting = false;
+			message = "Welcome to the black smith shop! We will repair what you need! You can also press 'C' to craft! Press 'K' to quit.";
+			
+			displayNpc = new SampleCharacter("/images/merchant3.png",810,400,"npc");
+			miniGame1.setComputerPlay("null");
+			if(BlackSmith.needRepairs(inventory) == false)
+			{
+				actionMessage = "You don't need anything repaired!";
+				repairItems.clear();
+			}
+			else
+			{
+				actionMessage = "Here are your list of things that need to be repaired: ";
+				repairItems = BlackSmith.addRepairList(inventory);
+			}
+			Merchant.buyable = true;
+			storedItems = "";
+			Storage.storable = false;
+			update();
+			game.repaint();
+		}
+
+		if(e.getKeyCode()==repairItem && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town" && inRepair == true)
+		{
+			if(character.getCurrency() < BlackSmith.getCostRepair(repairItems.get(repairIndex))){
+				actionMessage = "Oops! You do not have enough money to repair that at this time!";
+			}
+			if(repairIndex < repairItems.size() && character.getCurrency() >= BlackSmith.getCostRepair(repairItems.get(repairIndex))){
+				if(repairItems.get(repairIndex).getDurability()==100){
+					actionMessage = "This has already been repaired!";
+				}
+				System.out.println("R was pressed");
+				if(repairItems.get(repairIndex).getDurability() != 100){
+					actionMessage = "We repaired your " + repairItems.get(repairIndex) + "!";
+				}
+				character.setCurrency(character.getCurrency()-(BlackSmith.getCostRepair(repairItems.get(repairIndex))));
+				System.out.println("Price: " + BlackSmith.getCostRepair(repairItems.get(repairIndex)));
+				BlackSmith.repair(repairItems.get(repairIndex));
+				System.out.println(repairItems.get(0).getName());
+				System.out.println(repairItems.get(0).getDurability());
+			}		
+			update();
+			game.repaint();
+			
+		}
+		if(e.getKeyCode()==craft && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town")
+		{
+			message = "Welcome to the crafting station! Combine your items to make even better ones! Press 'K' to quit.";
+			ItemCraftable smith = new BlackSmith(selected, selected, selected, inRepair);
+			if(smith.matchesRecipe(inventory, BlackSmith.Recipe).size() == 0)
+			{
+				actionMessage = "You don't have the required combination of items to craft something or you may need to make repairs!";
+			}
+			else{
+				inCrafting = true;
+				actionMessage = "Here are your list of things that you are able to craft: ";
+				craftableThings = smith.matchesRecipe(inventory, BlackSmith.Recipe);
+			}
+			inRepair = false;	
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()==crafting && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town" && inRepair == false)
+		{
+			if(inCrafting){
+				String craftedItem = craftableThings.get(craftIndex);
+				System.out.println(craftedItem);
+				if(craftedItem.equals("Iron Bow")){
+					for(int i=0; i<BlackSmith.Recipe[BlackSmith.returnInt(craftableThings.get(craftIndex))].length;i++)
+					{	
+						for(int j=0; j<inventory.size();j++){
+							if(BlackSmith.Recipe[BlackSmith.returnInt("Iron Bow")][i].getName().equals(inventory.get(j).getName())){
+								System.out.println(BlackSmith.Recipe[BlackSmith.returnInt("Iron Bow")][i].getName());
+								inventory.remove(j);
+							}	
+						}				
+					}
+					inventory.add(equipStock.equipStocks(equipStock.I_BW));
+				}
+				if(craftedItem.equals("Mithril Hammer")){
+					for(int i=0; i<BlackSmith.Recipe[BlackSmith.returnInt(craftableThings.get(craftIndex))].length;i++)
+					{
+						for(int j=0; j<inventory.size();j++){
+							if(BlackSmith.Recipe[BlackSmith.returnInt("Mithril Hammer")][i].getName().equals(inventory.get(j).getName())){
+								System.out.println(BlackSmith.Recipe[BlackSmith.returnInt("Mithril Hammer")][i].getName());
+								inventory.remove(j);
+							}
+						}
+					}	
+					inventory.add(equipStock.equipStocks(equipStock.M_HR));
+				}
+				if(craftedItem.equals("Spear of Destruction")){
+					for(int i=0; i<BlackSmith.Recipe[BlackSmith.returnInt(craftableThings.get(craftIndex))].length;i++)
+					{
+						for(int j=0; j<inventory.size();j++){
+							if(BlackSmith.Recipe[BlackSmith.returnInt("Spear of Destruction")][i].getName().equals(inventory.get(j).getName())){
+								System.out.println(BlackSmith.Recipe[BlackSmith.returnInt("Spear of Destruction")][i].getName());
+								inventory.remove(j);
+							}	
+						}
+					}
+					inventory.add(equipStock.equipStocks(equipStock.SR_D));
+				}
+				if(craftedItem.equals("Diamond Bow")){
+					for(int i=0; i<BlackSmith.Recipe[BlackSmith.returnInt(craftableThings.get(craftIndex))].length;i++)
+					{
+						for(int j=0; j<inventory.size();j++){
+							if(BlackSmith.Recipe[BlackSmith.returnInt("Diamond Bow")][i].getName().equals(inventory.get(j).getName())){
+								System.out.println(BlackSmith.Recipe[BlackSmith.returnInt("Diamond Bow")][i].getName());
+								inventory.remove(j);
+							}
+						}
+					}
+					inventory.add(equipStock.equipStocks(equipStock.D_BW));
+				}
+				if(craftedItem.equals("Plat Sword")){
+					for(int i=0; i<BlackSmith.Recipe[BlackSmith.returnInt(craftableThings.get(craftIndex))].length;i++)
+					{
+						for(int j=0; j<inventory.size();j++){
+							if(BlackSmith.Recipe[BlackSmith.returnInt("Plat Sword")][i].getName().equals(inventory.get(j).getName())){
+								System.out.println(BlackSmith.Recipe[BlackSmith.returnInt("Plat Sword")][i].getName());
+								inventory.remove(j);
+							}
+						}
+					}
+					inventory.add(equipStock.equipStocks(equipStock.P_SD));
+				}
+			}
+			actionMessage = "You just crafted the " + craftableThings.get(craftIndex) + "!";
+			inCrafting = false;
+			inRepair = false;
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()== up)
+		{
+			if(inRepair){
+				if(repairIndex >= 0){
+					repairIndex--;
+				}
+				if(repairIndex < 0){
+					repairIndex = repairItems.size()-1;
+				}
+			}
+			if(inCrafting){
+				if(craftIndex >= 0){
+					craftIndex--;
+				}
+				if(craftIndex < 0){
+					craftIndex = craftableThings.size()-1;
+				}
+			}
+			update();
+			game.repaint();
+		}
+		if(e.getKeyCode()== down)
+		{
+			if(inRepair){
+				if(repairIndex < repairItems.size()){
+					repairIndex++;
+				}
+				if(repairIndex >= repairItems.size()){
+					repairIndex = 0;
+				}
+			}			
+			if(inCrafting){
+				if(craftIndex < craftableThings.size()){
+					craftIndex++;
+				}
+				if(craftIndex >= craftableThings.size()){
+					craftIndex = 0;
+				}
+			}
+			update();
+			game.repaint();			
+		}
 		if(e.getKeyCode()==talkNpc1 && currentTown.getTownName() == "Pellet Town"){
 			System.out.println("1 was pressed");
-			
+			inRepair = false;
+			inCrafting = false;
 			if(character.getCurrency() < 300){
 				message = "Oops! Seems like you don't have enough to buy anything! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You need more gems!";
@@ -335,7 +525,8 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==talkNpc1 && currentTown.getTownName() == "Big Root Town"){
 			System.out.println("1 was pressed");
-			
+			inRepair = false;
+			inCrafting = false;
 			if(character.getCurrency() < 600){
 				message = "Oops! Seems like you don't have enough to buy anything! You need at least 600 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You need more gems!";
@@ -354,27 +545,6 @@ public class TownScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-		if(e.getKeyCode()==talkNpc1 && currentTown.getTownName() == "Old Yelp Town"){
-			System.out.println("1 was pressed");
-			
-			if(character.getCurrency() < 400){
-				message = "Oops! Seems like you don't have enough to buy anything! You need at least 400 gems, go and see Bob to try and earn some money!";
-				actionMessage = "You need more gems!";
-			}
-			
-			else{
-				message = "Welcome to the market! Feel free to buy what we have or sell what you have! Press 'K' to quit.";
-			}
-			
-			displayNpc = new SampleCharacter("/images/merchant3.png",810,400,"npc");
-			miniGame1.setComputerPlay("null");
-			actionMessage = "Press  6 for Healing leather armor (400 Gems), 7 for Iron armor (500 Gems), and 8 for diamond armor (600 Gems)";
-			Merchant.buyable = true;
-			storedItems = "";
-			Storage.storable = false;
-			update();
-			game.repaint();
-		}
 		if(e.getKeyCode()==buyItem1 && Merchant.buyable == true && currentTown.getTownName() == "Pellet Town"){
 			
 			System.out.println("6 was pressed");
@@ -386,7 +556,7 @@ public class TownScreen extends Screen implements KeyListener{
 			
 			else{
 				character.setCurrency(character.getCurrency()-300);
-				inventory.add("Health Potion");
+				//inventory.add("Health Potion");
 			}
 			
 			update();
@@ -403,7 +573,7 @@ public class TownScreen extends Screen implements KeyListener{
 			
 			else{
 				character.setCurrency(character.getCurrency()-600);
-				inventory.add("Shuriken");
+				//inventory.add("Shuriken");
 			}
 			
 			update();
@@ -420,7 +590,7 @@ public class TownScreen extends Screen implements KeyListener{
 			
 			else{
 				character.setCurrency(character.getCurrency()-400);
-				inventory.add("Leather Armor");
+				//inventory.add("Leather Armor");
 			}
 			
 			update();
@@ -437,7 +607,7 @@ public class TownScreen extends Screen implements KeyListener{
 			
 			else{
 				character.setCurrency(character.getCurrency()-400);
-				inventory.add("Mana Potion");
+				//inventory.add("Mana Potion");
 			}
 			
 			update();
@@ -454,7 +624,7 @@ public class TownScreen extends Screen implements KeyListener{
 			
 			else{
 				character.setCurrency(character.getCurrency()-700);
-				inventory.add("Katana");
+				//inventory.add("Katana");
 			}
 			
 			update();
@@ -468,19 +638,18 @@ public class TownScreen extends Screen implements KeyListener{
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 500 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
 			}
-			
 			else{
 				character.setCurrency(character.getCurrency()-500);
-				inventory.add("Iron Armor");
+				//inventory.add("Iron Armor");
 			}
-			
 			update();
 			game.repaint();
 		}
 		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Pellet Town"){
 			
 			System.out.println("8 was pressed");
-			
+			inRepair = false;
+			inCrafting = false;
 			if(character.getCurrency() < 500){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 300 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
@@ -488,7 +657,7 @@ public class TownScreen extends Screen implements KeyListener{
 			
 			else{
 				character.setCurrency(character.getCurrency()-500);
-				inventory.add("Stats Potion");
+				//inventory.add("Stats Potion");
 			}
 			
 			update();
@@ -497,7 +666,8 @@ public class TownScreen extends Screen implements KeyListener{
 		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Big Root Town"){
 			
 			System.out.println("8 was pressed");
-			
+			inRepair = false;
+			inCrafting = false;
 			if(character.getCurrency() < 800){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 800 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
@@ -505,7 +675,7 @@ public class TownScreen extends Screen implements KeyListener{
 			
 			else{
 				character.setCurrency(character.getCurrency()-800);
-				inventory.add("Pistol");
+				//inventory.add("Pistol");
 			}
 			
 			update();
@@ -514,7 +684,8 @@ public class TownScreen extends Screen implements KeyListener{
 		if(e.getKeyCode()==buyItem3 && Merchant.buyable == true && currentTown.getTownName() == "Old Yelp Town"){
 			
 			System.out.println("8 was pressed");
-			
+			inRepair = false;
+			inCrafting = false;
 			if(character.getCurrency() < 600){
 				message = "Oops! Seems like you don't have enough to buy this! You need at least 600 gems, go and see Bob to try and earn some money!";
 				actionMessage = "You don't have any more gems!";
@@ -522,7 +693,7 @@ public class TownScreen extends Screen implements KeyListener{
 			
 			else{
 				character.setCurrency(character.getCurrency()-600);
-				inventory.add("Diamond Armor");
+				//inventory.add("Diamond Armor");
 			}
 			
 			update();
@@ -530,48 +701,48 @@ public class TownScreen extends Screen implements KeyListener{
 		}
 		if(e.getKeyCode()==sellItem && Merchant.buyable == true){
 			System.out.println("9 was pressed");
-			if(character.getItems().size() == 0){
-				actionMessage = "You have nothing to sell!";
-			}
-			else{
-				actionMessage = "Soled " + inventory.get(0);
-				if(inventory.get(0) == "Health Potion"){
-					character.setCurrency(character.getCurrency()+200);
-				}
-				if(inventory.get(0) == "Mana Potion"){
-					character.setCurrency(character.getCurrency()+300);				
-				}
-				if(inventory.get(0) == "Stats Potion"){
-					character.setCurrency(character.getCurrency()+400);
-				}
-				if(inventory.get(0) == "Broad Sword"){
-					character.setCurrency(character.getCurrency()+500);
-				}
-				if(inventory.get(0) == "Long Bow"){
-					character.setCurrency(character.getCurrency()+600);
-				}
-				if(inventory.get(0) == "Leather Armor"){
-					character.setCurrency(character.getCurrency()+300);
-				}
-				if(inventory.get(0) == "Iron Armor"){
-					character.setCurrency(character.getCurrency()+400);
-				}
-				if(inventory.get(0) == "Diamond Armor"){
-					character.setCurrency(character.getCurrency()+500);
-				}
-				if(inventory.get(0) == "Shuriken"){
-					character.setCurrency(character.getCurrency()+500);
-				}
-				if(inventory.get(0) == "Katana"){
-					character.setCurrency(character.getCurrency()+600);
-				}
-				if(inventory.get(0) == "Pistol"){
-					character.setCurrency(character.getCurrency()+700);
-				}
-				inventory.remove(0);
-			}
-			update();
-			game.repaint();
+//			if(character.getItems().size() == 0){
+//				actionMessage = "You have nothing to sell!";
+//			}
+//			else{
+//				actionMessage = "Soled " + inventory.get(0);
+//				if(inventory.get(0) == "Health Potion"){
+//					character.setCurrency(character.getCurrency()+200);
+//				}
+//				if(inventory.get(0) == "Mana Potion"){
+//					character.setCurrency(character.getCurrency()+300);				
+//				}
+//				if(inventory.get(0) == "Stats Potion"){
+//					character.setCurrency(character.getCurrency()+400);
+//				}
+//				if(inventory.get(0) == "Broad Sword"){
+//					character.setCurrency(character.getCurrency()+500);
+//				}
+//				if(inventory.get(0) == "Long Bow"){
+//					character.setCurrency(character.getCurrency()+600);
+//				}
+//				if(inventory.get(0) == "Leather Armor"){
+//					character.setCurrency(character.getCurrency()+300);
+//				}
+//				if(inventory.get(0) == "Iron Armor"){
+//					character.setCurrency(character.getCurrency()+400);
+//				}
+//				if(inventory.get(0) == "Diamond Armor"){
+//					character.setCurrency(character.getCurrency()+500);
+//				}
+//				if(inventory.get(0) == "Shuriken"){
+//					character.setCurrency(character.getCurrency()+500);
+//				}
+//				if(inventory.get(0) == "Katana"){
+//					character.setCurrency(character.getCurrency()+600);
+//				}
+//				if(inventory.get(0) == "Pistol"){
+//					character.setCurrency(character.getCurrency()+700);
+//				}
+//				inventory.remove(0);
+//			}
+//			update();
+	//		game.repaint();
 		}
 		if(e.getKeyCode()==talkNpc2 && currentTown.getTownName() == "Pellet Town"){
 			System.out.println("2 was pressed");
@@ -607,6 +778,8 @@ public class TownScreen extends Screen implements KeyListener{
 			actionMessage = "";
 			storedItems = "";
 			Storage.storable = false;
+			inRepair = false;
+			inCrafting = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
@@ -616,6 +789,8 @@ public class TownScreen extends Screen implements KeyListener{
 			displayNpc = new SampleCharacter("/images/dummy.jpg",810,400,"npc");
 			dummyCounter++;
 			message = dummy.getNpcMessages(dummyCounter);
+			inRepair = false;
+			inCrafting = false;
 			actionMessage = "";
 			storedItems = "";
 			Storage.storable = false;
@@ -653,7 +828,7 @@ public class TownScreen extends Screen implements KeyListener{
 			update();
 			game.repaint();
 		}
-		if(e.getKeyCode()==rock){
+		if(e.getKeyCode()==repairItem){
 			if(miniGame1.getComputerPlay()=="R"){
 				message = "You both picked Rock, it's a tie! Press 'K' to quit.";
 				miniGame1.setComputerPlay("null");
@@ -715,6 +890,8 @@ public class TownScreen extends Screen implements KeyListener{
 			Storage.storable = true;
 			message = "Have you seen my cousins? They look exactly like me! We store your goods! Store something (Press '4') or take out something out (Press '5'). Press 'K' to quit.";
 			actionMessage = "";
+			inRepair = false;
+			inCrafting = false;
 			displayNpc = new SampleCharacter("/images/storage.png",810,400,"npc");
 			storedItems = "The items you have stored are: ";
 			for(int i=0;i < Storage.storedItems.size();i++){
@@ -732,6 +909,8 @@ public class TownScreen extends Screen implements KeyListener{
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			inRepair = false;
+			inCrafting = false;
 			Storage.storable = false;
 			Merchant.buyable = false;
 			update();
@@ -744,6 +923,8 @@ public class TownScreen extends Screen implements KeyListener{
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			inRepair = false;
+			inCrafting = false;
 			Storage.storable = false;
 			Merchant.buyable = false;
 			update();
@@ -756,6 +937,8 @@ public class TownScreen extends Screen implements KeyListener{
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			inRepair = false;
+			inCrafting = false;
 			Storage.storable = false;
 			Merchant.buyable = false;
 			update();
@@ -768,6 +951,8 @@ public class TownScreen extends Screen implements KeyListener{
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			inRepair = false;
+			inCrafting = false;
 			Storage.storable = false;
 			Merchant.buyable = false;
 			update();
@@ -780,6 +965,8 @@ public class TownScreen extends Screen implements KeyListener{
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
 			storedItems = "";
+			inRepair = false;
+			inCrafting = false;
 			Storage.storable = false;
 			Merchant.buyable = false;
 			update();
@@ -791,6 +978,8 @@ public class TownScreen extends Screen implements KeyListener{
 			message = miniGame2.getDescription();
 			actionMessage = "";
 			storedItems = "";
+			inRepair = false;
+			inCrafting = false;
 			Storage.storable = false;
 			Merchant.buyable = false;
 			update();
@@ -802,6 +991,8 @@ public class TownScreen extends Screen implements KeyListener{
 			message = dummy.getDescription();
 			actionMessage = "";
 			storedItems = "";
+			inRepair = false;
+			inCrafting = false;
 			Storage.storable = false;
 			Merchant.buyable = false;
 			update();
@@ -813,27 +1004,29 @@ public class TownScreen extends Screen implements KeyListener{
 			message =  "Press 1, 2, or 3 to talk to different NPCs, or press Q, W, E for information about them!";
 			miniGame1.setComputerPlay("null");
 			actionMessage = "";
-			storedItems = "";
+			storedItems = ""; 
+			inRepair = false;
+			inCrafting = false;
 			Storage.storable = false;
 			Merchant.buyable = false;
 			update();
 			game.repaint();
 		}
-		if(e.getKeyCode()==storeItem && Storage.storable == true){
-			System.out.println("4 was pressed");
-			if(character.getItems().size() == 0){
-				actionMessage = "You have nothing else we can store...";
-			}
-			else{
-				actionMessage = "Stored " + inventory.get(0);
-				storedItems = storedItems + inventory.get(0) + " ";
-				Storage.storedItems.add(inventory.get(0));
-				inventory.remove(0);				
-			}
-			miniGame1.setComputerPlay("null");
-			update();
-			game.repaint();
-		}
+//		if(e.getKeyCode()==storeItem && Storage.storable == true){
+//			System.out.println("4 was pressed");
+//			if(character.getItems().size() == 0){
+//			actionMessage = "You have nothing else we can store...";
+//			}
+//			else{
+//				actionMessage = "Stored " + inventory.get(0);
+//				storedItems = storedItems + inventory.get(0) + " ";
+//				//Storage.storedItems.add(inventory.get(0));
+//				inventory.remove(0);				
+//			}
+//			miniGame1.setComputerPlay("null");
+//			update();
+//			game.repaint();
+//		}
 		if(e.getKeyCode()==takeItem && Storage.storable == true){
 			System.out.println("5 was pressed");
 			if(Storage.storedItems.size() == 0){
@@ -842,7 +1035,7 @@ public class TownScreen extends Screen implements KeyListener{
 			}
 			else{
 				actionMessage = "Taken out " + Storage.storedItems.get(0);
-				inventory.add(Storage.storedItems.get(0));
+				//inventory.add(Storage.storedItems.get(0));
 				Storage.storedItems.remove(0);
 			}
 			storedItems = "The items you have stored are: ";
@@ -865,8 +1058,10 @@ public class TownScreen extends Screen implements KeyListener{
 			town1 = true;
 			town2 = false;
 			town3 = false;
-			stopMusic();
-			music();
+			inRepair = false;
+			inCrafting = false;
+			Sound.stopaudio();
+			Sound.audio("src/towns/images/town1.wav");;
 			welcomeMessage = "Welcome to Pellet Town!";
 			update();
 			game.repaint();
@@ -883,8 +1078,10 @@ public class TownScreen extends Screen implements KeyListener{
 			town1 = false;
 			town2 = true;
 			town3 = false;
-			stopMusic();
-			music2();
+			inRepair = false;
+			inCrafting = false;
+			Sound.stopaudio();
+			Sound.audio("src/towns/images/town2.wav");
 			welcomeMessage = "Welcome to Big Root Town!";
 			update();
 			game.repaint();
@@ -901,8 +1098,10 @@ public class TownScreen extends Screen implements KeyListener{
 			town1 = false;
 			town2 = false;
 			town3 = true;
-			stopMusic();
-			music3();
+			inRepair = false;
+			inCrafting = false;
+			Sound.stopaudio();
+			Sound.audio("src/towns/images/town3.wav");
 			welcomeMessage = "Welcome to Old Yelp Town!";
 			update();
 			game.repaint();

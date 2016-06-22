@@ -1,5 +1,11 @@
 package towns;
 
+/**
+ * 
+ * @author Khandaker Shayel
+ *
+ */
+
 public interface Repairable 
 {
 	//durabilities 
@@ -13,14 +19,15 @@ public interface Repairable
 	public static final int silver = 2;
 	public static final int gold = 3;
 	public static final int diamond = 4;
+	public static final int mithril = 6;
 	
 	//checks to see if item can be repaired or not
-	boolean reparable(String item);
+	boolean reparable(Equipment item);
 	
 	//returns the value of how much durability the current item has left
 	//if durability is 0 the item is not reparable	
-	int getDurability(String item);
+	int getDurability();
 	
 	//sees how rare a certain item is in order to calculate a repair cost
-	int getRarity(String item);
+	int getRarity(Equipment item);
 }
